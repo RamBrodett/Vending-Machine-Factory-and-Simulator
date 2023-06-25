@@ -3,24 +3,23 @@ public class Product {
 
     private final double price;
 
-    private int quantity;
-
     private int calories;
 
-    public Product(String name, double price, int calories, int quantity){
+    public Product(){
+        this.name = "Empty";
+        this.price = -1;
+        this.calories = -1;
+    }
+
+    public Product(String name, double price, int calories){
         this.name = name;
         this.price = price;
         this.calories = calories;
-        this.quantity = quantity;
     }
 
     public String getName(){return this.name;}
     public double getPrice(){return this.price;}
     public int getCalories(){return this.calories;}
-
-    public int getQuantity(){return this.quantity;}
-
     public void setCalories(int calories){this.calories = calories;}
-    public void setQuantity(int quantity){this.quantity = quantity;}
 
 }
