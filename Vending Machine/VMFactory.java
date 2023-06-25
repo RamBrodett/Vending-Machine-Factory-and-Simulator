@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class VMFactory {
-    private static VendingMachine currMachine;
+    private VendingMachine currMachine;
 
     public static void main(String[] args) {
 
@@ -10,28 +10,45 @@ public class VMFactory {
         boolean terminateProgram = false;
 
         do{
-            factory.mainMenuDisplay();
+            factory.mainMenuDisplay(factory);
             int choice = scanner.nextInt();
+            scanner.nextLine();
             switch (choice){
                 case 1 -> {
-                    // create vending machine
+                    factory.createVendingMachine(); // create vending machine
                 }
                 case 2 -> {
                     // test vending mchine
                 }
                 case 3 -> {
                     terminateProgram = true;
+                    System.out.print("Terminating program");
+                    for(int i=0;i<30;i++) {
+                        for (int j = 0; j < 100000005; j++) {// loading effect
+                        }
+                        System.out.print(".");
+                    }
                 }
             }
             System.out.print("\033[H\033[2J"); // clear screen
             System.out.flush(); //clear screen
         }while(!terminateProgram);
+        scanner.close();
+        System.out.println("\nProgram termination successful");
+    }
 
+    // Vending Machine Production methods
+
+    private void createVendingMachine(){
+        this.currMachine = new VendingMachine();
+        System.out.println("[Regular] Vending Machine successfuly created.");
+    }
+    private void testVendingMachine(){
 
     }
 
-    private void mainMenuDisplay(){
-        VMFactory factory = new VMFactory();
+    // Display methods--------------------------------------------------
+    private void mainMenuDisplay(VMFactory factory){
 
         factory.bordersDisplay(1,31);
         System.out.printf("║    %s    ║\n","VENDING MACHINE FACTORY");
@@ -73,8 +90,6 @@ public class VMFactory {
                 System.out.println("║");
             }
         }
-
-
-
     }
+
 }
