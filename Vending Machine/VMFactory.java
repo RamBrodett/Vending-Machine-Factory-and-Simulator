@@ -17,7 +17,7 @@ public class VMFactory {
                 case 1 -> {
                     System.out.print("\033[H\033[2J"); // clear screen
                     System.out.flush(); //clear screen
-                    factory.createVendingMachine(scanner,factory); // create vending machine
+                    currMachine = factory.createVendingMachine(scanner,factory); // create vending machine
                     System.out.print("\033[H\033[2J"); // clear screen
                     System.out.flush(); //clear screen
                 }
@@ -40,8 +40,7 @@ public class VMFactory {
                     terminateProgram = true;
                     System.out.print("Terminating program");
                     for(int i=0;i<30;i++) {
-                        for (int j = 0; j < 100000005; j++) {// loading effect
-                        }
+                        for (int j = 0; j < 100000005; j++);// loading effect
                         System.out.print(".");
                     }
                 }
@@ -54,22 +53,29 @@ public class VMFactory {
 
     // Vending Machine Production methods
 
-    private void createVendingMachine(Scanner scanner,VMFactory factory){
+    private VendingMachine createVendingMachine(Scanner scanner,VMFactory factory){
         createVMmenuDisplay(factory);
         int choice = scanner.nextInt();
+        VendingMachine VMChoice = null;
         switch (choice){
             case 1 -> {
-                currMachine = new VendingMachine();
+                VMChoice = new VendingMachine();
+                consoleSysCom("cls");
+                System.out.println(" ");
+                factory.bordersDisplay(1,31);
+                System.out.printf("║    %s    ║\n","VENDING MACHINE FACTORY");
+                factory.bordersDisplay(3,31);
                 System.out.println("[Regular] Vending Machine successfuly created.");
                 System.out.println("Press any key to Continue...");
             }
             case 2 -> {
-                //currMachine = new SpecialVM();
+                //VMChoice = new SpecialVM();
                 System.out.println("[Special] Vending Machine is not yet available.");
                 System.out.println("Press any key to Continue...");
             }
         }
         consoleSysCom("fflush");
+        return VMChoice;
     }
     private void testVendingMachine(Scanner scanner){
 
