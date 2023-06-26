@@ -3,16 +3,13 @@ public class Slot {
 
     private ArrayList <Product> products;
     private int numProductsSold;
+    private int productQuantity;
     private Product baseProduct;
 
-    public Slot(){
+    public Slot(String name, double price, int calories,int capacity){
         this.numProductsSold = 0;
-        baseProduct = new Product();
+        baseProduct = new Product(name,price,calories);
     }
 
-    public void addProductToInventory(Product product){
-        if(products.size() < 10){
-            products.add(product);
-        }
-    }
+
 }

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class VMFactory {
-    private VendingMachine currMachine;
+    private static VendingMachine currMachine;
 
     public static void main(String[] args) {
 
@@ -15,12 +15,28 @@ public class VMFactory {
             scanner.nextLine();
             switch (choice){
                 case 1 -> {
-                    factory.createVendingMachine(); // create vending machine
+                    System.out.print("\033[H\033[2J"); // clear screen
+                    System.out.flush(); //clear screen
+                    factory.createVendingMachine(scanner,factory); // create vending machine
+                    System.out.print("\033[H\033[2J"); // clear screen
+                    System.out.flush(); //clear screen
                 }
                 case 2 -> {
-                    // test vending mchine
+                    System.out.print("\033[H\033[2J"); // clear screen
+                    System.out.flush(); //clear screen
+                    if(currMachine == null){
+                        System.out.println("There is no Vending Machine created");
+                        System.out.println("\tCREATE A MACHINE FIRST!");
+                    }
+                    else{
+                        factory.testVendingMachine(scanner);// test vending mchine
+                    }
+                    System.out.print("\033[H\033[2J"); // clear screen
+                    System.out.flush(); //clear screen
                 }
                 case 3 -> {
+                    System.out.print("\033[H\033[2J"); // clear screen
+                    System.out.flush(); //clear screen
                     terminateProgram = true;
                     System.out.print("Terminating program");
                     for(int i=0;i<30;i++) {
@@ -30,8 +46,7 @@ public class VMFactory {
                     }
                 }
             }
-            System.out.print("\033[H\033[2J"); // clear screen
-            System.out.flush(); //clear screen
+            factory.consoleSysCom("cls");
         }while(!terminateProgram);
         scanner.close();
         System.out.println("\nProgram termination successful");
@@ -39,12 +54,27 @@ public class VMFactory {
 
     // Vending Machine Production methods
 
-    private void createVendingMachine(){
-        this.currMachine = new VendingMachine();
-        System.out.println("[Regular] Vending Machine successfuly created.");
+    private void createVendingMachine(Scanner scanner,VMFactory factory){
+        createVMmenuDisplay(factory);
+        int choice = scanner.nextInt();
+        switch (choice){
+            case 1 -> {
+                currMachine = new VendingMachine();
+                System.out.println("[Regular] Vending Machine successfuly created.");
+                System.out.println("Press any key to Continue...");
+            }
+            case 2 -> {
+                //currMachine = new SpecialVM();
+                System.out.println("[Special] Vending Machine is not yet available.");
+                System.out.println("Press any key to Continue...");
+            }
+        }
+        consoleSysCom("fflush");
     }
-    private void testVendingMachine(){
+    private void testVendingMachine(Scanner scanner){
 
+        System.out.println("Press any key to Continue...");
+        consoleSysCom("fflush");
     }
 
     // Display methods--------------------------------------------------
@@ -60,6 +90,21 @@ public class VMFactory {
         factory.bordersDisplay(4,31);
         factory.bordersDisplay(2,31);
         System.out.print("Enter your choice: ");
+    }
+    private void createVMmenuDisplay(VMFactory factory){
+        factory.bordersDisplay(1,31);
+        System.out.printf("║     %-22s    ║\n","VENDING MACHINE TYPES");
+        factory.bordersDisplay(3,31);
+        factory.bordersDisplay(4,31);
+        System.out.printf("║  %-27s  ║\n","1. Regular Vending Machine");
+        System.out.printf("║  %-27s  ║\n","2. Special Vending Machine");
+        factory.bordersDisplay(4,31);
+        factory.bordersDisplay(2,31);
+        System.out.print("Enter your choice: ");
+
+
+
+
     }
 
     private void bordersDisplay(int part, int hlength){
@@ -89,6 +134,17 @@ public class VMFactory {
                     System.out.print(" ");
                 System.out.println("║");
             }
+        }
+    }
+
+    private void consoleSysCom(String command){
+        Scanner scanner = new Scanner(System.in);
+        switch(command){
+            case "cls" -> {
+                System.out.print("\033[H\033[2J"); // clear screen
+                System.out.flush(); //clear screen
+            }
+            case "fflush" -> scanner.nextLine();
         }
     }
 
