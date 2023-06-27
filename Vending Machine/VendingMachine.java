@@ -20,7 +20,7 @@ public class VendingMachine{
     private void vmPackageSelection(){
         Scanner scanner = new Scanner(System.in);
         consoleSysCom("cls");
-        System.out.println("ADD ITEMS ON SLOT [OPTIONAL PACKAGE]");
+        System.out.println("\nADD INITIAL ITEMS ON SLOT [OPTIONAL PACKAGE]");
         int selectedSlot, i;
         do {
             // Display every item slot
@@ -29,8 +29,8 @@ public class VendingMachine{
                 if ((i+1)%2==0)
                     System.out.println(" ");
             }
-            System.out.printf("[%d] Exit Selection.\n",i+1);
-            System.out.print("Select a slot to add an item:");
+            System.out.printf("[%d] Exit Selection.\n\n",i+1);
+            System.out.print("Select a slot to add an item: ");
             selectedSlot = scanner.nextInt();
             if((selectedSlot-1)!=productSlots.size()){
                 setProductOnSlot(selectedSlot-1);
@@ -45,21 +45,26 @@ public class VendingMachine{
                     System.out.println(" ");
                     for(int x=0; x<82;x++)
                         System.out.print("═");
-                    System.out.println("\nYou didn't added a product on any slot.");
-                    System.out.println("You opted for a bare Vending Machine Package with " +
-                            "initial zero products on slot.");
-                    System.out.println("Don't forget to add products on your Machine later!");
+                    System.out.println("""
+
+                            You did not add a product to any slot; instead, you chose a bare
+                            Vending Machine Package with zero products on slot.
+                            Remember to add things to your Machine later!""");
+
                     for(int x=0; x<82;x++)
                         System.out.print("═");
                     System.out.println("\n");
                 }
             }
         }while((selectedSlot-1)!= productSlots.size());
+        for(int x=0; x<52;x++) System.out.print("═");
+        System.out.println("""
+
+                You may like to place your initial money in your Vending Machine.
+                You may do so by selecting the denomination and quantity, or you may exit.""");
         vmSetMoney(denominationFeedinterface());
         double money = this.denomination.getTotalMoney();
-
         System.out.println("Total Money: "+money);
-
     }
     public void vmSetMoney(Denomination denomination){
         this.denomination = denomination;
