@@ -36,6 +36,10 @@ public class Slot {
         return numProductsSold;
     }
 
+    public void setNumProductsSold(int numProductsSold) {
+        this.numProductsSold += numProductsSold;
+    }
+
     public boolean setProductQuantity(int productQuantity) {
         boolean success = false;
         if(this.productQuantity + productQuantity <= 15) { //setting max capacity of 15;

@@ -29,6 +29,7 @@ public class VMFactory {
                         System.out.println("\tCREATE A MACHINE FIRST!");
                     }
                     else{
+                        factory.testVMmenuDisplay(factory);
                         factory.testVendingMachine(scanner);// test vending mchine
                     }
                     System.out.print("\033[H\033[2J"); // clear screen
@@ -64,7 +65,7 @@ public class VMFactory {
                     System.out.print("Number of slots you want: ");
                     slotCapacity = scanner.nextInt();
                     if(slotCapacity<8)
-                        System.out.println("Min number of slots is 8");
+                        System.out.println("Minimum number of slots is 8");
                 }while(slotCapacity < 8);
                 VMChoice = new VendingMachine(slotCapacity);
                 consoleSysCom("cls");
@@ -84,7 +85,14 @@ public class VMFactory {
         consoleSysCom("fflush");
         return VMChoice;
     }
-    private void testVendingMachine(Scanner scanner){
+    private void testVendingMachine(Scanner scanner) {
+        int choice;
+
+        choice = scanner.nextInt();
+        switch (choice) {
+            case 1 -> currMachine.testVendingMachine();
+//            case 2 -> maintenanceVM();                        //not yet implemented
+        }
 
         System.out.println("Press any key to Continue...");
         consoleSysCom("fflush");
@@ -104,22 +112,6 @@ public class VMFactory {
         factory.bordersDisplay(2,31);
         System.out.print("Enter your choice: ");
     }
-    private void createVMmenuDisplay(VMFactory factory){
-        factory.bordersDisplay(1,31);
-        System.out.printf("║     %-22s    ║\n","VENDING MACHINE TYPES");
-        factory.bordersDisplay(3,31);
-        factory.bordersDisplay(4,31);
-        System.out.printf("║  %-27s  ║\n","1. Regular Vending Machine");
-        System.out.printf("║  %-27s  ║\n","2. Special Vending Machine");
-        factory.bordersDisplay(4,31);
-        factory.bordersDisplay(2,31);
-        System.out.print("Enter your choice: ");
-
-
-
-
-    }
-
     private void bordersDisplay(int part, int hlength){
 
         switch (part) {
@@ -150,6 +142,31 @@ public class VMFactory {
         }
     }
 
+    private void createVMmenuDisplay(VMFactory factory){
+        factory.bordersDisplay(1,31);
+        System.out.printf("║     %-22s    ║\n","VENDING MACHINE TYPES");
+        factory.bordersDisplay(3,31);
+        factory.bordersDisplay(4,31);
+        System.out.printf("║  %-27s  ║\n","1. Regular Vending Machine");
+        System.out.printf("║  %-27s  ║\n","2. Special Vending Machine");
+        factory.bordersDisplay(4,31);
+        factory.bordersDisplay(2,31);
+        System.out.print("Enter your choice: ");
+    }
+
+    private void testVMmenuDisplay(VMFactory factory){
+        factory.bordersDisplay(1,31);
+        System.out.printf("║     %s    ║\n","TEST A VENDING MACHINE");
+        factory.bordersDisplay(3,31);
+        factory.bordersDisplay(4,31);
+        System.out.printf("║  %-27s  ║\n","1. Vending Features");
+        System.out.printf("║  %-27s  ║\n","2. Maintenance Features");
+        System.out.printf("║  %-27s  ║\n","3. Exit");
+        factory.bordersDisplay(4,31);
+        factory.bordersDisplay(2,31);
+        System.out.print("Enter your choice: ");
+    }
+
     private void consoleSysCom(String command){
         Scanner scanner = new Scanner(System.in);
         switch(command){
@@ -160,5 +177,6 @@ public class VMFactory {
             case "fflush" -> scanner.nextLine();
         }
     }
+
 
 }
