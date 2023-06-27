@@ -21,6 +21,12 @@ public class Slot {
     public String getBaseProductName() {
         return baseProduct.getName();
     }
+    public double getBaseProductPrice(){
+        return baseProduct.getPrice();
+    }
+    public double getBaseProductCal(){
+        return baseProduct.getCalories();
+    }
 
     public int getProductQuantity() {
         return productQuantity;
@@ -32,7 +38,7 @@ public class Slot {
 
     public boolean setProductQuantity(int productQuantity) {
         boolean success = false;
-        if(this.productQuantity + productQuantity <= 15) {
+        if(this.productQuantity + productQuantity <= 15) { //setting max capacity of 15;
             this.productQuantity += productQuantity;
             success = true;
         }
