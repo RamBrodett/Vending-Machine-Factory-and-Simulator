@@ -12,12 +12,30 @@ public class Slot {
         baseProduct = new Product();
     }
 
-    public Slot(String name, double price, int calories,int capacity){
+    public Slot(String name, double price, int calories,int qnty){
         this.numProductsSold = 0;
+        this.productQuantity = qnty;
         baseProduct = new Product(name,price,calories);
     }
 
     public String getBaseProductName() {
         return baseProduct.getName();
+    }
+
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
+    public int getNumProductsSold(){
+        return numProductsSold;
+    }
+
+    public boolean setProductQuantity(int productQuantity) {
+        boolean success = false;
+        if(this.productQuantity + productQuantity <= 15) {
+            this.productQuantity += productQuantity;
+            success = true;
+        }
+        return  success;
     }
 }

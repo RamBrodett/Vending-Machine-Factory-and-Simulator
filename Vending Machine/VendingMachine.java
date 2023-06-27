@@ -1,14 +1,16 @@
-import javax.swing.plaf.synth.SynthStyleFactory;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class VendingMachine{
     private Denomination denomination;
-    private Slot[] productSlots;
+    private ArrayList<Slot> productSlots;
     private double currSales;
     private double prevSales;
 
-    public VendingMachine(){
-        this.productSlots = new Slot[8]; //Create VENDING MACHINE PRODUCT SLOTS
+    public VendingMachine(int slotCapacity){
+        this.productSlots = new ArrayList<>(); //Create VENDING MACHINE PRODUCT SLOTS
+        for(int i=0; i<slotCapacity; i++)
+            productSlots.add(new Slot());
         this.denomination = new Denomination(); //Create MONEY
         addProductsToSlot();
     }
@@ -16,7 +18,44 @@ public class VendingMachine{
     private void addProductsToSlot(){
         Scanner scanner = new Scanner(System.in);
         consoleSysCom("cls");
-        int numSlot=1;
+        // Display every item slot
+        for(int i=0; i<productSlots.size();i++){
+            System.out.printf("[%d] %-15s",i+1,productSlots.get(i).getBaseProductName());
+            if ((i+1)%2==0)
+                System.out.println(" ");
+            /*
+            if(!isSlotEmpty(i))
+                System.out.printf("[%d] %-15s",i,productSlots.get(i).getBaseProductName());
+            else
+                System.out.printf("[%d] %-15s",i,productSlots.get(i).getBaseProductName());
+
+             */
+        }
+    }
+
+    public void setProductOnSlot(String name, double price, int calories, int quantity, int slotNo){
+        productSlots.set(slotNo, new Slot(name, price, calories, quantity));
+    }
+    public boolean isSlotEmpty(int slotNumber){
+        return (productSlots.get(slotNumber) == null);
+    }
+
+
+    private void consoleSysCom(String command){
+        Scanner scanner = new Scanner(System.in);
+        switch(command){
+            case "cls" -> {
+                System.out.print("\033[H\033[2J"); // clear screen
+                System.out.flush(); //clear screen
+            }
+            case "fflush" -> scanner.nextLine();
+        }
+    }
+
+}
+
+/*
+int numSlot=1;
         while(numSlot<=8){
             //display all slot
                 //...implement here
@@ -45,25 +84,4 @@ public class VendingMachine{
             consoleSysCom("cls");
             numSlot++;
         }
-    }
-
-    public void setProductOnSlot(String name, double price, int calories, int quantity, int slotNo){
-        productSlots[slotNo] = new Slot(name,price,calories,quantity);
-    }
-    public boolean isSlotEmpty(int slotNumber){
-        return (productSlots[slotNumber] == null);
-    }
-
-    private void consoleSysCom(String command){
-        Scanner scanner = new Scanner(System.in);
-        switch(command){
-            case "cls" -> {
-                System.out.print("\033[H\033[2J"); // clear screen
-                System.out.flush(); //clear screen
-            }
-            case "fflush" -> scanner.nextLine();
-        }
-    }
-
-
-}
+ */

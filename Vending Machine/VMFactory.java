@@ -59,12 +59,14 @@ public class VMFactory {
         VendingMachine VMChoice = null;
         switch (choice){
             case 1 -> {
-                VMChoice = new VendingMachine();
+                System.out.print("Number of slots you want: ");
+                int slotCapacity = scanner.nextInt();
+                VMChoice = new VendingMachine(slotCapacity);
                 consoleSysCom("cls");
                 System.out.println(" ");
                 factory.bordersDisplay(1,31);
                 System.out.printf("║    %s    ║\n","VENDING MACHINE FACTORY");
-                factory.bordersDisplay(3,31);
+                factory.bordersDisplay(2,31);
                 System.out.println("[Regular] Vending Machine successfuly created.");
                 System.out.println("Press any key to Continue...");
             }
