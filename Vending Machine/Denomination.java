@@ -26,15 +26,40 @@ public class Denomination {
     }
 
     /* create individual setters and getters
-     --
-     --
-     --
-     --
-     --
-     --
-     --
-     --
      */
+    public void setOnePesoCoin(int qty){
+        this.onePesoCoin += qty;
+    }
+    public void setFivePesoCoin(int qty){
+        this.fivePesoCoin += qty;
+    }
+    public void setTenPesoCoin(int qty){
+        this.tenPesoCoin+=qty;
+    }
+    public void setTwentyPesoCoin(int qty){
+        this.twentyPesoCoin +=qty;
+    }
+    public void setTwentyPesoBill(int qty){
+        this.twentyPesoBill +=qty;
+    }
+    public void setFiftyPesoBill(int qty){
+        this.fiftyPesoBill +=qty;
+    }
+    public void setOneHundredPesoBill(int qty){
+        this.oneHundredPesoBill +=qty;
+    }
+    public void setTwoHundredPesoBill(int qty){
+        this.twoHundredPesoBill +=qty;
+    }
+    public void setFiveHundredPesoBill(int qty){
+        this.fiveHundredPesoBill +=qty;
+    }
+    public void setThousandPesoBill(int qty){
+        this.thousandPesoBill+=qty;
+    }
+
+
+
 
     public double getTotalMoney(){
         return this.onePesoCoin + (this.fivePesoCoin * 5) + (this.tenPesoCoin * 10) +
