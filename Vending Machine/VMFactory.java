@@ -15,15 +15,12 @@ public class VMFactory {
             scanner.nextLine();
             switch (choice){
                 case 1 -> {
-                    System.out.print("\033[H\033[2J"); // clear screen
-                    System.out.flush(); //clear screen
+                    factory.consoleSysCom("cls"); // clear screen helper
                     currMachine = factory.createVendingMachine(scanner,factory); // create vending machine
-                    System.out.print("\033[H\033[2J"); // clear screen
-                    System.out.flush(); //clear screen
+                    factory.consoleSysCom("cls"); // clear screen helper
                 }
                 case 2 -> {
-                    System.out.print("\033[H\033[2J"); // clear screen
-                    System.out.flush(); //clear screen
+                    factory.consoleSysCom("cls"); // clear screen helper
                     if(currMachine == null){
                         System.out.println("There is no Vending Machine created");
                         System.out.println("\tCREATE A MACHINE FIRST!");
@@ -32,12 +29,10 @@ public class VMFactory {
                         factory.testVMmenuDisplay(factory);
                         factory.testVendingMachine(scanner);// test vending mchine
                     }
-                    System.out.print("\033[H\033[2J"); // clear screen
-                    System.out.flush(); //clear screen
+                    factory.consoleSysCom("cls"); // clear screen helper
                 }
                 case 3 -> {
-                    System.out.print("\033[H\033[2J"); // clear screen
-                    System.out.flush(); //clear screen
+                    factory.consoleSysCom("cls"); // clear screen helper
                     terminateProgram = true;
                     System.out.print("Terminating program");
                     for(int i=0;i<30;i++) {
@@ -87,11 +82,10 @@ public class VMFactory {
     }
     private void testVendingMachine(Scanner scanner) {
         int choice;
-
         choice = scanner.nextInt();
         switch (choice) {
-            case 1 -> currMachine.testVendingMachine();
-//            case 2 -> maintenanceVM();                        //not yet implemented
+            case 1 -> currMachine.vendingMachineUserTransaction();             //simulate transaction
+            case 2 -> simulateVMMaintenanceFeatures();                        //not yet implemented
         }
 
         System.out.println("Press any key to Continue...");
@@ -142,6 +136,10 @@ public class VMFactory {
         }
     }
 
+    private void simulateVMMaintenanceFeatures(){
+
+    }
+
     private void createVMmenuDisplay(VMFactory factory){
         factory.bordersDisplay(1,31);
         System.out.printf("║     %-22s    ║\n","VENDING MACHINE TYPES");
@@ -155,17 +153,18 @@ public class VMFactory {
     }
 
     private void testVMmenuDisplay(VMFactory factory){
-        factory.bordersDisplay(1,31);
-        System.out.printf("║     %s    ║\n","TEST A VENDING MACHINE");
-        factory.bordersDisplay(3,31);
-        factory.bordersDisplay(4,31);
-        System.out.printf("║  %-27s  ║\n","1. Vending Features");
-        System.out.printf("║  %-27s  ║\n","2. Maintenance Features");
-        System.out.printf("║  %-27s  ║\n","3. Exit");
-        factory.bordersDisplay(4,31);
-        factory.bordersDisplay(2,31);
+        factory.bordersDisplay(1,35);
+        System.out.printf("║       %-24s    ║\n","TEST A VENDING MACHINE");
+        factory.bordersDisplay(3,35);
+        factory.bordersDisplay(4,35);
+        System.out.printf("║  %-31s  ║\n","1. Simulate Vending Transaction");
+        System.out.printf("║  %-31s  ║\n","2. Maintenance Features");
+        System.out.printf("║  %-31s  ║\n","3. Exit");
+        factory.bordersDisplay(4,35);
+        factory.bordersDisplay(2,35);
         System.out.print("Enter your choice: ");
     }
+
 
     private void consoleSysCom(String command){
         Scanner scanner = new Scanner(System.in);
