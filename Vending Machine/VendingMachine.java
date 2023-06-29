@@ -104,44 +104,79 @@ public class VendingMachine{
             displayProducts(0); // 0 value since it is for display only not selection.
             insertedMoney = denominationFeedInterface();
             System.out.println("Total inserted money: " + insertedMoney.getTotalMoney());
-
+//START OF IMPLEMENTATION BASED ON COMMENTS-----------------------------------------------------------------------------
             displayProducts(1); // 1 value since it is selection of item already.
             int selected;
             do{
                 System.out.print("Selected item: ");
                 selected = scanner.nextInt();
+
+                if (selected != productSlots.size()+1){
+                    if (isSlotEmpty(selected - 1)){
+                        System.out.println("No item found. Select another slot");
+                        selected = 0;
+                    }
+
                 /*
                 if(selected);
                 // to do here is ilagay yung select item to buy
                  tapos naka loop hanggang walang pinipili na isa sa slots.
                  and if empy yung slot ask for another option or exit nalang user.
                  */
+                }
+            }while(!(selected > 0 && selected <= productSlots.size()+1));
 
-            }while( /* range maker */ || (selected-1)!= productSlots.size());
+            if (selected == productSlots.size()+1){
+                clearDenomination(insertedMoney);
+                break;
+            }
 
+            int change = insertedMoney.getTotalMoney() - (int)productSlots.get(selected-1).getBaseProductPrice(); //money of user - price
+            Denomination changeDenom = findDenomination(change, denomination);
+
+            if (changeDenom.getTotalMoney() - change != 0)   //if true, then change isn't possible
+                System.out.println("Unable to give change. Unsuccessful transaction.");
+
+            else if (insertedMoney.getTotalMoney() < productSlots.get(selected-1).getBaseProductPrice())
+                System.out.println("Insufficient balance. Unsuccessful transaction.");
+
+            else {
+                addToDenomination(denomination, insertedMoney);     //transfer money from inserted to VM
+                differenceDenomination(denomination,changeDenom);   //remove change from VM
+                insertedMoney = changeDenom;                        //money of user = change
+                productSlots.get(selected).setProductQuantity(-1);
+                productSlots.get(selected).setNumProductsSold(1);
+
+                System.out.printf("Purchase successful! Your change is %3.2f\n", (double) change);
+                displayDenominations(changeDenom);
+            }
+//END OF IMPLEMENTATION BASED ON COMMENTS-------------------------------------------------------------------------------
             /*
              to do here is once naka select ng product
                 assess if kaya mag change if hindi unsuccessful transaction
                 pag pwede proceed to the change calculation, dispensing change and product.
              */
 
-            System.out.println("Do you want to make transactions again?");
-            do {
-                System.out.print("Input: ");
-                decision = scanner.nextLine();
+                System.out.println("Do you want to make transactions again?");
+                do {
+                    System.out.print("Input: ");
+                    decision = scanner.nextLine();
 
-                if(!(decision.equalsIgnoreCase("yes"))&& // to continue asking while answer is
-                        !(decision.equalsIgnoreCase("no")))   // neither yes nor no.
-                    System.out.println("type yes or no only.");
+                    if(!(decision.equalsIgnoreCase("yes"))&& // to continue asking while answer is
+                            !(decision.equalsIgnoreCase("no")))   // neither yes nor no.
+                    {
+                        System.out.println("type yes or no only.");
+                    }
 
-            }while(!(decision.equalsIgnoreCase("yes"))&&
-                    !(decision.equalsIgnoreCase("no")));
+                }while(!(decision.equalsIgnoreCase("yes"))&&
+                        !(decision.equalsIgnoreCase("no")));
+
 
         }while(decision.equalsIgnoreCase("yes"));
 
-
         vmSimulationDisplay(2);
     }
+
 
 
     /*
@@ -238,8 +273,8 @@ public class VendingMachine{
                         System.out.printf("%-10s%.2f\n", productSlots.get(choice).getBaseProductName(),
                                 productSlots.get(choice).getBaseProductPrice());
                         System.out.print("""
-                                    Confirm purchase? 
-                                    [1] Yes 
+                                    Confirm purchase?
+                                    [1] Yes
                                     [2] No\n""");
                         System.out.print("Select: ");
                         confirm = scanner.nextInt();
@@ -351,102 +386,111 @@ public class VendingMachine{
         return money;
     }
 
-    private Denomination findDenomination(int money, Denomination inventory) {                  //give money in denominations based on available denoms
+    private Denomination findDenomination(float money, Denomination inventory) {                  //give money in denominations based on available denoms
         Denomination moneyDenom = new Denomination();                                           //will have denominations of the change
 
         if (money >= 1000) {                                                                     //makes sure variable change is above 1000
             if (inventory.getThousandPesoBill()*1000 >= money) {                                //if there is enough 1k bills in VM to supply 1k denoms of change
-                moneyDenom.setThousandPesoBill(money / 1000);
+                moneyDenom.setThousandPesoBill((int)money / 1000);
             }
             else {                                                                              //if there aren't enough 1k bills in VM
                 moneyDenom.setThousandPesoBill(inventory.getThousandPesoBill());
             }
-            money %= moneyDenom.getThousandPesoBill() * 1000;
+            if (moneyDenom.getThousandPesoBill() != 0)
+                money %= moneyDenom.getThousandPesoBill() * 1000;
         }
 
         if (money >= 500) {                                       //500
             if (inventory.getFiveHundredPesoBill()*500 >= money) {
-                moneyDenom.setFiveHundredPesoBill(money / 500);
+                moneyDenom.setFiveHundredPesoBill((int)money / 500);
             }
             else {
                 moneyDenom.setFiveHundredPesoBill(inventory.getFiveHundredPesoBill());
             }
-            money %= moneyDenom.getFiveHundredPesoBill() * 500;
+            if (moneyDenom.getFiveHundredPesoBill() != 0)
+                money %= moneyDenom.getFiveHundredPesoBill() * 500;
         }
 
         if (money >= 200) {                                       //200
             if (inventory.getTwoHundredPesoBill()*200 >= money) {
-                moneyDenom.setTwoHundredPesoBill(money / 200);
+                moneyDenom.setTwoHundredPesoBill((int)money / 200);
             }
             else {
                 moneyDenom.setTwoHundredPesoBill(inventory.getTwoHundredPesoBill());
             }
-            money %= moneyDenom.getTwoHundredPesoBill() * 200;
+            if (moneyDenom.getTwoHundredPesoBill() != 0)
+                money %= moneyDenom.getTwoHundredPesoBill() * 200;
         }
 
         if (money >= 100) {                                       //100
             if (inventory.getOneHundredPesoBill()*100 >= money) {
-                moneyDenom.setOneHundredPesoBill(money / 100);
+                moneyDenom.setOneHundredPesoBill((int)money / 100);
             }
             else {
                 moneyDenom.setOneHundredPesoBill(inventory.getOneHundredPesoBill());
             }
-            money %= moneyDenom.getOneHundredPesoBill() * 100;
+            if (moneyDenom.getOneHundredPesoBill() != 0)
+                money %= moneyDenom.getOneHundredPesoBill() * 100;
         }
 
         if (money >= 50) {                                       //50
             if (inventory.getFiftyPesoBill()*50 >= money) {
-                moneyDenom.setFiftyPesoBill(money / 50);
+                moneyDenom.setFiftyPesoBill((int)money / 50);
             }
             else {
                 moneyDenom.setFiftyPesoBill(inventory.getFiftyPesoBill());
             }
-            money %= moneyDenom.getFiftyPesoBill() * 50;
+            if (moneyDenom.getFiftyPesoBill() != 0)
+                money %= moneyDenom.getFiftyPesoBill() * 50;
         }
 
         if (money >= 20) {                                       //20bill
             if (inventory.getTwentyPesoBill()*20 >= money) {
-                moneyDenom.setTwentyPesoBill(money / 20);
+                moneyDenom.setTwentyPesoBill((int)money / 20);
             }
             else {
                 moneyDenom.setTwentyPesoBill(inventory.getTwentyPesoBill());
             }
-            money %= moneyDenom.getTwentyPesoBill() * 20;
+            if (moneyDenom.getTwentyPesoBill() != 0)
+                money %= moneyDenom.getTwentyPesoBill() * 20;
         }
 
         if (money >= 20) {                                       //20coin
             if (inventory.getTwentyPesoCoin()*20 >= money) {
-                moneyDenom.setTwentyPesoCoin(money / 20);
+                moneyDenom.setTwentyPesoCoin((int)money / 20);
             }
             else {
                 moneyDenom.setTwentyPesoCoin(inventory.getTwentyPesoCoin());
             }
-            money %= moneyDenom.getTwentyPesoCoin() * 20;
+            if (moneyDenom.getTwentyPesoCoin() != 0)
+                money %= moneyDenom.getTwentyPesoCoin() * 20;
         }
 
         if (money >= 10) {                                       //10
             if (inventory.getTenPesoCoin()*10 >= money) {
-                moneyDenom.setTenPesoCoin(money / 10);
+                moneyDenom.setTenPesoCoin((int)money / 10);
             }
             else {
                 moneyDenom.setTenPesoCoin(inventory.getTenPesoCoin());
             }
-            money %= moneyDenom.getTenPesoCoin() * 10;
+            if (moneyDenom.getTenPesoCoin() != 0)
+                money %= moneyDenom.getTenPesoCoin() * 10;
         }
 
         if (money >= 5) {                                       //5
             if (inventory.getFivePesoCoin()*5 >= money) {
-                moneyDenom.setFivePesoCoin(money / 5);
+                moneyDenom.setFivePesoCoin((int)money / 5);
             }
             else {
                 moneyDenom.setFivePesoCoin(inventory.getFivePesoCoin());
             }
-            money %= moneyDenom.getFivePesoCoin() * 5;
+            if (moneyDenom.getFivePesoCoin() != 0)
+                money %= moneyDenom.getFivePesoCoin() * 5;
         }
 
         if (money >= 1) {                                       //1
             if (inventory.getOnePesoCoin()*1 >= money) {
-                moneyDenom.setOnePesoCoin(money/1);
+                moneyDenom.setOnePesoCoin((int)money/1);
             }
             else {
                 moneyDenom.setOnePesoCoin(inventory.getOnePesoCoin());
@@ -470,16 +514,26 @@ public class VendingMachine{
             System.out.print("═");
         System.out.println();
         for(i=0; i<productSlots.size();i++){
-            System.out.printf("[%d] %-20s",i+1,productSlots.get(i).getBaseProductName());
+            System.out.printf("[%d] %-14s",i+1,productSlots.get(i).getBaseProductName());
+            if (typeOfDisplay == 0 && productSlots.get(i).getBaseProductPrice() != -1){
+                double price = productSlots.get(i).getBaseProductPrice();
+                System.out.printf("%6.2f ", price);
+            }
+            else {
+                System.out.printf("%6s ", "");
+            }
             if ((i+1)%2==0)
                 System.out.println(" ");
         }
+
         if(typeOfDisplay==1) // for display selection
-            System.out.printf("[%d] Exit Selection.\n",i+1);
+            System.out.printf("[%d] Exit Selection.",i+1);
+        System.out.println(" ");
         for(int x=0; x<50;x++)
             System.out.print("═");
         System.out.println(" ");
     }
+
 
     private void differenceDenomination(Denomination minuend, Denomination subtrahend){     //subtracts all values of subtrahend from minuend = minuend
         minuend.setThousandPesoBill     (-subtrahend.getThousandPesoBill());
@@ -507,6 +561,18 @@ public class VendingMachine{
         to.setOnePesoCoin          (from.getOnePesoCoin());
     }
 
+    private void clearDenomination(Denomination x){
+        x.setOnePesoCoin(-x.getOnePesoCoin());
+        x.setFivePesoCoin(-x.getFivePesoCoin());
+        x.setTenPesoCoin(-x.getTenPesoCoin());
+        x.setTwentyPesoCoin(-x.getTwentyPesoCoin());
+        x.setTwentyPesoBill(-x.getTwentyPesoBill());
+        x.setFiftyPesoBill(-x.getFiftyPesoBill());
+        x.setOneHundredPesoBill(-x.getOneHundredPesoBill());
+        x.setTwoHundredPesoBill(-x.getTwoHundredPesoBill());
+        x.setFiveHundredPesoBill(-x.getFiveHundredPesoBill());
+        x.setThousandPesoBill(-x.getThousandPesoBill());
+    }
 
 
     // display methods---------------------------------------------------------------------------------
@@ -540,37 +606,38 @@ public class VendingMachine{
     }
 
     private void displayDenominations(Denomination money){
+        System.out.printf("%-5s| %s\n", "Amt.", "Denomination");
         if (money.getThousandPesoBill() > 0){
-            System.out.printf("%d | %s\n", money.getThousandPesoBill(), "1000 PHP");
+            System.out.printf("%4d | %s\n", money.getThousandPesoBill(), "1000 PHP");
         }
         if (money.getFiveHundredPesoBill() > 0){
-            System.out.printf("%d | %s\n", money.getFiveHundredPesoBill(), "500 PHP");
+            System.out.printf("%4d | %s\n", money.getFiveHundredPesoBill(), "500 PHP");
         }
         if (money.getTwoHundredPesoBill() > 0){
-            System.out.printf("%d | %s\n", money.getTwoHundredPesoBill(), "200 PHP");
+            System.out.printf("%4d | %s\n", money.getTwoHundredPesoBill(), "200 PHP");
         }
         if (money.getOneHundredPesoBill() > 0){
-            System.out.printf("%d | %s\n", money.getOneHundredPesoBill(), "100 PHP");
+            System.out.printf("%4d | %s\n", money.getOneHundredPesoBill(), "100 PHP");
         }
         if (money.getFiftyPesoBill() > 0){
-            System.out.printf("%d | %s\n", money.getFiftyPesoBill(), "50 PHP");
+            System.out.printf("%4d | %s\n", money.getFiftyPesoBill(), "50 PHP");
         }
         if (money.getTwentyPesoBill() > 0){
-            System.out.printf("%d | %s\n", money.getTwentyPesoBill(), "20 PHP");
+            System.out.printf("%4d | %s\n", money.getTwentyPesoBill(), "20 PHP");
         }
         if (money.getTwentyPesoCoin() > 0){
-            System.out.printf("%d | %s\n", money.getTwentyPesoCoin(), "20 PHP");
+            System.out.printf("%4d | %s\n", money.getTwentyPesoCoin(), "20 PHP");
         }
         if (money.getTenPesoCoin() > 0){
-            System.out.printf("%d | %s\n", money.getTenPesoCoin(), "10 PHP");
+            System.out.printf("%4d | %s\n", money.getTenPesoCoin(), "10 PHP");
         }
         if (money.getFivePesoCoin() > 0){
-            System.out.printf("%d | %s\n", money.getFivePesoCoin(), "5 PHP");
+            System.out.printf("%4d | %s\n", money.getFivePesoCoin(), "5 PHP");
         }
         if (money.getOnePesoCoin() > 0){
-            System.out.printf("%d | %s\n", money.getOnePesoCoin(), "1 PHP");
+            System.out.printf("%4d | %s\n", money.getOnePesoCoin(), "1 PHP");
         }
-
+        System.out.println("");
     }
 
 
@@ -586,5 +653,4 @@ public class VendingMachine{
         }
     }
 }
-
 
