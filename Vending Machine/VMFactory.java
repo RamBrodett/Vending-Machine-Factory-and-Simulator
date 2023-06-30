@@ -27,7 +27,7 @@ public class VMFactory {
                     }
                     else{
                         factory.testVMmenuDisplay(factory);
-                        factory.testVendingMachine(scanner);// test vending mchine
+                        factory.testVendingMachine(scanner, factory);// test vending mchine
                     }
                     factory.consoleSysCom("cls"); // clear screen helper
                 }
@@ -68,7 +68,7 @@ public class VMFactory {
                 factory.bordersDisplay(1,31);
                 System.out.printf("║    %s    ║\n","VENDING MACHINE FACTORY");
                 factory.bordersDisplay(2,31);
-                System.out.println("[Regular] Vending Machine successfuly created.");
+                System.out.println("[Regular] Vending Machine successfully created.");
                 System.out.println("Press any key to Continue...");
             }
             case 2 -> {
@@ -80,12 +80,12 @@ public class VMFactory {
         consoleSysCom("fflush");
         return VMChoice;
     }
-    private void testVendingMachine(Scanner scanner) {
+    private void testVendingMachine(Scanner scanner, VMFactory factory) {
         int choice;
         choice = scanner.nextInt();
         switch (choice) {
             case 1 -> currMachine.vendingMachineUserTransaction();             //simulate transaction
-            case 2 -> simulateVMMaintenanceFeatures();                        //not yet implemented
+            case 2 -> simulateVMMaintenanceFeatures(scanner, factory);                        //not yet implemented
         }
 
         System.out.println("Press any key to Continue...");
@@ -136,7 +136,16 @@ public class VMFactory {
         }
     }
 
-    private void simulateVMMaintenanceFeatures(){
+    private void simulateVMMaintenanceFeatures(Scanner scanner, VMFactory factory){
+        maintenanceVMmenuDisplay(factory);
+        int choice = scanner.nextInt();
+
+        switch (choice){
+            case 1 -> currMachine.editItems();
+//            case 2 -> OPEN MONEY BOX - collect money/refill money;
+        }
+
+//        currMachine.displayProducts(3);
 
     }
 
@@ -159,6 +168,19 @@ public class VMFactory {
         factory.bordersDisplay(4,35);
         System.out.printf("║  %-31s  ║\n","1. Simulate Vending Transaction");
         System.out.printf("║  %-31s  ║\n","2. Maintenance Features");
+        System.out.printf("║  %-31s  ║\n","3. Exit");
+        factory.bordersDisplay(4,35);
+        factory.bordersDisplay(2,35);
+        System.out.print("Enter your choice: ");
+    }
+
+    private void maintenanceVMmenuDisplay(VMFactory factory){
+        factory.bordersDisplay(1,35);
+        System.out.printf("║        %-24s   ║\n","CONDUCT MAINTENANCE");
+        factory.bordersDisplay(3,35);
+        factory.bordersDisplay(4,35);
+        System.out.printf("║  %-31s  ║\n","1. Edit/Add Item");
+        System.out.printf("║  %-31s  ║\n","2. Open Money Box");
         System.out.printf("║  %-31s  ║\n","3. Exit");
         factory.bordersDisplay(4,35);
         factory.bordersDisplay(2,35);

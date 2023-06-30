@@ -32,7 +32,7 @@ public class VendingMachine{
             System.out.print("Select a slot to add an item: ");
             selectedSlot = scanner.nextInt();
             if((selectedSlot-1)!=productSlots.size()){
-                setProductOnSlot(selectedSlot-1);
+                setProductOnSlot(selectedSlot-1, true);
             }
             else if((selectedSlot-1)==productSlots.size()){
                 int emptySlots=0;
@@ -48,7 +48,7 @@ public class VendingMachine{
                             
                             You did not add a product to any slot; instead, you chose a bare
                             Vending Machine Package with zero products on slot.
-                            Remember to add things to your Machine later!""");
+                            Remember to add items to your Machine later!""");
 
                     for(int x=0; x<67;x++)
                         System.out.print("═");
@@ -75,22 +75,45 @@ public class VendingMachine{
         productSlots.set(slotNo, new Slot(name, price, calories, quantity));
     }
 
-    public void setProductOnSlot(int slotNumber){
+    public void setProductOnSlot(int slotNumber, boolean ifReplace){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Product name: ");
-        String name = scanner.nextLine();
+
+        String name;
+        if (ifReplace == true) {
+            System.out.print("Product name: ");
+            name = scanner.nextLine();
+        }
+
+        else {
+            System.out.printf("Product Slot: %s\n", productSlots.get(slotNumber).getBaseProductName());
+            name = productSlots.get(slotNumber).getBaseProductName();
+        }
+
         System.out.print("Product price : ");
         double price = scanner.nextDouble();
         System.out.print("Product calories : ");
         int calories = scanner.nextInt();
         int numofProducts;
-        do {
-            System.out.print("Enter product quantity (Max of 15pcs) : ");
-            numofProducts = scanner.nextInt();
-            scanner.nextLine();
-            if (numofProducts < 0 || numofProducts > 15)
-                System.out.println("Enter a valid quantity");
-        }while(numofProducts < 0 || numofProducts > 15);
+
+        if (ifReplace == true) {
+            do {
+                System.out.print("Enter product quantity (Max of 15pcs) : ");
+                numofProducts = scanner.nextInt();
+                scanner.nextLine();
+                if (numofProducts < 0 || numofProducts > 15)
+                    System.out.println("Enter a valid quantity");
+            } while (numofProducts < 0 || numofProducts > 15);
+        }
+
+        else {
+            do {
+                System.out.println("Enter quantity to restock (Max of 15pcs): ");
+                numofProducts = scanner.nextInt();
+                numofProducts += productSlots.get(slotNumber).getProductQuantity();
+                if (numofProducts < 0 || numofProducts > 15)
+                    System.out.println("Enter a valid quantity");
+            } while (numofProducts < 0 || numofProducts > 15);
+        }
         setProduct(name,price,calories,numofProducts,slotNumber);
     }
 
@@ -310,6 +333,36 @@ public class VendingMachine{
     }
 
      */
+    //maintenance methods-----------------------------------------------------------------------
+    public void editItems() {
+        Scanner scanner = new Scanner(System.in);
+        int selected;
+
+
+        do {
+            displayProducts(3);
+            System.out.print("Select a slot to edit: ");
+            selected = scanner.nextInt();
+
+            if (selected == productSlots.size()+1) {
+                break;
+            }
+
+            else if(isSlotEmpty(selected-1) || productSlots.get(selected-1).getProductQuantity() == 0){
+                if((selected)!=productSlots.size()+1){
+                    setProductOnSlot(selected-1, true);
+                }
+            }
+
+            else if (!(isSlotEmpty(selected-1))){
+                setProductOnSlot(selected-1, false);
+            }
+
+        } while (selected != productSlots.size()+1);
+
+
+    }
+
     // boolean methods for vmstatus-------------------------------------------------------------
 
     private boolean isSlotEmpty(int slotNumber){
@@ -503,6 +556,12 @@ public class VendingMachine{
 
     public void displayProducts(int typeOfDisplay){
         int i;
+
+//        typeOfDisplay (equivalent)
+//        1       display to customer
+//        2       selection
+//        3       maintenance
+
         if (typeOfDisplay == 0) { // for product display to customer
             for(int x=0; x<50;x++)
                 System.out.print("═");
@@ -510,24 +569,59 @@ public class VendingMachine{
             System.out.printf("%-4s %s%4s%s\n",
                     " ","P R O D U C T"," ","D I S P L A Y");
         }
+
+        else if (typeOfDisplay == 3){
+            for(int x=0; x<50;x++)
+                System.out.print("═");
+            System.out.println();
+            System.out.printf("%12s %s %s\n",
+                    " ","Conducting","Maintenance...");
+        }
         for(int x=0; x<50;x++)
             System.out.print("═");
         System.out.println();
+
+        if (typeOfDisplay == 3){
+            System.out.printf("%4s%-14s%6s %6s  %s  %s\n", "", "Item", "Stock", "Price", "Sold", "Calories");
+        }
+
         for(i=0; i<productSlots.size();i++){
             System.out.printf("[%d] %-14s",i+1,productSlots.get(i).getBaseProductName());
+
             if (typeOfDisplay == 0 && productSlots.get(i).getBaseProductPrice() != -1){
                 double price = productSlots.get(i).getBaseProductPrice();
                 System.out.printf("%6.2f ", price);
             }
+
+            else if (typeOfDisplay == 3){
+                if (i+1 < 10)
+                    System.out.print("  ");
+                else
+                    System.out.print(" ");
+
+                if (!isSlotEmpty(i)) {
+                    System.out.printf("%-5d %-6.2f  %-7d %-8d\n", productSlots.get(i).getProductQuantity(),
+                            productSlots.get(i).getBaseProductPrice(), productSlots.get(i).getNumProductsSold(),
+                            (int)productSlots.get(i).getBaseProductCal());
+                }
+                else {
+                    System.out.printf(" %s%6s%s%7s\n", "-", "", "-", "--");
+                }
+            }
+
             else {
                 System.out.printf("%6s ", "");
             }
-            if ((i+1)%2==0)
+
+
+
+            if ((i+1)%2==0 && typeOfDisplay != 3)
                 System.out.println(" ");
         }
 
-        if(typeOfDisplay==1) // for display selection
+        if(typeOfDisplay==1 || typeOfDisplay == 3) // for display selection
             System.out.printf("[%d] Exit Selection.",i+1);
+
         System.out.println(" ");
         for(int x=0; x<50;x++)
             System.out.print("═");
