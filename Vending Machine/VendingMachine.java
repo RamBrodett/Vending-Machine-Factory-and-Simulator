@@ -56,6 +56,7 @@ public class VendingMachine{
                 }
             }
         }while((selectedSlot-1)!= productSlots.size());
+
         for(int x=0; x<52;x++) System.out.print("═");
         System.out.println("""
                 
@@ -103,6 +104,8 @@ public class VendingMachine{
                 if (numofProducts < 0 || numofProducts > 15)
                     System.out.println("Enter a valid quantity");
             } while (numofProducts < 0 || numofProducts > 15);
+            if (numofProducts > 0)
+                productSlots.get(slotNumber).setNumProductsSold(-productSlots.get(slotNumber).getNumProductsSold());    //sets amount sold to 0 upon restocking
         }
 
         else {
@@ -159,8 +162,8 @@ public class VendingMachine{
                         addToDenomination(denomination, insertedMoney);     //transfer money from inserted to VM
                         differenceDenomination(denomination, changeDenom);   //remove change from VM
                         insertedMoney = changeDenom;                        //money of user = change
-                        productSlots.get(selected).setProductQuantity(-1);
-                        productSlots.get(selected).setNumProductsSold(1);
+                        productSlots.get(selected-1).setProductQuantity(-1);
+                        productSlots.get(selected-1).setNumProductsSold(1);
                         System.out.printf("Purchase successful! Your change is %3.2f\n", (double) change);
                         displayDenominations(changeDenom);
                     }
@@ -196,10 +199,13 @@ public class VendingMachine{
     public void editItems() {
         Scanner scanner = new Scanner(System.in);
         int selected;
+
+
         do {
             displayProducts(3);
             System.out.print("Select a slot to edit: ");
-            do{selected = scanner.nextInt();} while((selected-1)<1|| (selected-1)>productSlots.size());
+            selected = scanner.nextInt();
+
             if ((selected -1) != productSlots.size()) {
                 if (isSlotEmpty(selected - 1) || productSlots.get(selected - 1).getProductQuantity() == 0) {
                     if ((selected) != productSlots.size() + 1) {
@@ -209,7 +215,8 @@ public class VendingMachine{
                     setProductOnSlot(selected - 1, false);
                 }
             }
-        } while ((selected-1) != productSlots.size());
+        } while (selected != productSlots.size()+1);
+
 
     }
 
@@ -287,10 +294,6 @@ public class VendingMachine{
             }
         }while(choice != 88);
         return money;
-    }
-
-    public void moneyBox(){
-
     }
 
     private Denomination findDenomination(float money, Denomination inventory) {                  //give money in denominations based on available denoms
@@ -395,15 +398,14 @@ public class VendingMachine{
                 money %= moneyDenom.getFivePesoCoin() * 5;
         }
 
-        if (money >= 1) {
-            //1
-            if (inventory.getOnePesoCoin() >= money) { // * 1
-                moneyDenom.setOnePesoCoin((int) money); // /1
+        if (money >= 1) {                                       //1
+            if (inventory.getOnePesoCoin()*1 >= money) {
+                moneyDenom.setOnePesoCoin((int)money/1);
             }
             else {
                 moneyDenom.setOnePesoCoin(inventory.getOnePesoCoin());
             }
-            money %= moneyDenom.getOnePesoCoin(); // * 1
+            money %= moneyDenom.getOnePesoCoin() * 1;
         }
 
         return moneyDenom;
@@ -411,7 +413,7 @@ public class VendingMachine{
 
     public void displayProducts(int typeOfDisplay){
         int i;
-
+        int totalSales = 0;
 //        typeOfDisplay (equivalent)
 //        1       display to customer
 //        2       selection
@@ -439,7 +441,6 @@ public class VendingMachine{
         if (typeOfDisplay == 3){
             System.out.printf("%4s%-14s%6s %6s  %s  %s\n", "", "Item", "Stock", "Price", "Sold", "Calories");
         }
-
         for(i=0; i<productSlots.size();i++){
             System.out.printf("[%d] %-14s",i+1,productSlots.get(i).getBaseProductName());
 
@@ -449,6 +450,7 @@ public class VendingMachine{
             }
 
             else if (typeOfDisplay == 3){
+
                 if (i+1 < 10)
                     System.out.print("  ");
                 else
@@ -462,6 +464,7 @@ public class VendingMachine{
                 else {
                     System.out.printf(" %s%6s%s%7s\n", "-", "", "-", "--");
                 }
+
             }
 
             else {
@@ -476,6 +479,20 @@ public class VendingMachine{
 
         if(typeOfDisplay==1 || typeOfDisplay == 3) // for display selection
             System.out.printf("[%d] Exit Selection.",i+1);
+
+        if (typeOfDisplay == 3){
+            System.out.println("");
+            for (int x = 0; x < 50; x++){
+                System.out.print("_");
+            }
+
+            for (int x = 0; x < productSlots.size(); x++){
+                if (!(isSlotEmpty(x)));
+                totalSales += productSlots.get(x).getBaseProductPrice() * productSlots.get(x).getNumProductsSold();
+            }
+
+            System.out.printf("\nTotal Sales: %6.2f", (double) totalSales);
+        }
 
         System.out.println(" ");
         for(int x=0; x<50;x++)
@@ -586,7 +603,7 @@ public class VendingMachine{
         if (money.getOnePesoCoin() > 0){
             System.out.printf("%4d | %s\n", money.getOnePesoCoin(), "1 PHP");
         }
-        System.out.println();
+        System.out.println("");
     }
 
 
