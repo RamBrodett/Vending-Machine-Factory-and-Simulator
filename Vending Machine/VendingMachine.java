@@ -199,6 +199,7 @@ public class VendingMachine{
     public void editItems() {
         Scanner scanner = new Scanner(System.in);
         int selected;
+        int choice;
 
 
         do {
@@ -208,10 +209,10 @@ public class VendingMachine{
 
             if ((selected -1) != productSlots.size()) {
                 if (isSlotEmpty(selected - 1) || productSlots.get(selected - 1).getProductQuantity() == 0) {
-                    if ((selected) != productSlots.size() + 1) {
-                        setProductOnSlot(selected - 1, true);
-                    }
+                    setProductOnSlot(selected-1,true);
+                }
                 } else if (!(isSlotEmpty(selected - 1))) {
+
                     setProductOnSlot(selected - 1, false);
                 }
             }
