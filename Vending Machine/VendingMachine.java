@@ -8,7 +8,7 @@ public class VendingMachine{
     private final ArrayList<Slot> productSlots;
     private double currSales;
     private double prevSales;
-    private Denomination insertedMoney;
+    private final Denomination insertedMoney;
 
     public VendingMachine(int slotCapacity){
         this.productSlots = new ArrayList<>(); //Create VENDING MACHINE PRODUCT SLOTS
@@ -122,217 +122,76 @@ public class VendingMachine{
         Denomination insertedMoney = new Denomination();
         Scanner scanner = new Scanner(System.in);
         String decision;
+        boolean ongoingTransaction = true;
+
         vmSimulationDisplay(1);
+
         do{
-            displayProducts(0); // 0 value since it is for display only not selection.
-            insertedMoney = denominationFeedInterface();
-            System.out.println("Total inserted money: " + insertedMoney.getTotalMoney());
-//START OF IMPLEMENTATION BASED ON COMMENTS-----------------------------------------------------------------------------
-            displayProducts(1); // 1 value since it is selection of item already.
-            int selected;
-            do{
-                System.out.print("Selected item: ");
-                selected = scanner.nextInt();
+            while(ongoingTransaction){
+                displayProducts(0); // 0 value since it is for display only not selection.
+                insertedMoney = denominationFeedInterface();
+                System.out.println("Total inserted money: " + insertedMoney.getTotalMoney());
+                //START OF IMPLEMENTATION BASED ON COMMENTS-----------------------------------------------------------------------------
+                displayProducts(1); // 1 value since it is selection of item already.
+                int selected;
+                do {
+                    System.out.print("Selected item: ");
+                    selected = scanner.nextInt();
+                    scanner.nextLine();
+                    if ((selected < 1 || selected > productSlots.size())) System.out.println("Select a valid item");
+                } while ((selected < 1 || selected > productSlots.size()) && (selected - 1) != productSlots.size());
 
-                if (selected != productSlots.size()+1){
-                    if (isSlotEmpty(selected - 1)){
-                        System.out.println("No item found. Select another slot");
-                        selected = 0;
+                if ((selected-1) == productSlots.size()) {
+                    clearDenomination(insertedMoney);
+                    ongoingTransaction = false;
+                } else if (!isSlotEmpty(selected - 1)) {
+
+                    int change = insertedMoney.getTotalMoney() - (int) productSlots.get(selected - 1).getBaseProductPrice(); //money of user - price
+                    Denomination changeDenom = findDenomination(change, denomination);
+
+                    if (changeDenom.getTotalMoney() - change != 0) {  //if true, then change isn't possible
+                        System.out.println("Unable to give change. Unsuccessful transaction.");
                     }
-
-                /*
-                if(selected);
-                // to do here is ilagay yung select item to buy
-                 tapos naka loop hanggang walang pinipili na isa sa slots.
-                 and if empy yung slot ask for another option or exit nalang user.
-                 */
+                    else if (insertedMoney.getTotalMoney() < productSlots.get(selected - 1).getBaseProductPrice()) {
+                        System.out.println("Insufficient balance. Unsuccessful transaction.");
+                    }
+                    else {
+                        addToDenomination(denomination, insertedMoney);     //transfer money from inserted to VM
+                        differenceDenomination(denomination, changeDenom);   //remove change from VM
+                        insertedMoney = changeDenom;                        //money of user = change
+                        productSlots.get(selected).setProductQuantity(-1);
+                        productSlots.get(selected).setNumProductsSold(1);
+                        System.out.printf("Purchase successful! Your change is %3.2f\n", (double) change);
+                        displayDenominations(changeDenom);
+                    }
                 }
-            }while(!(selected > 0 && selected <= productSlots.size()+1));
-
-            if (selected == productSlots.size()+1){
-                clearDenomination(insertedMoney);
-                break;
+                ongoingTransaction = false;
             }
 
-            int change = insertedMoney.getTotalMoney() - (int)productSlots.get(selected-1).getBaseProductPrice(); //money of user - price
-            Denomination changeDenom = findDenomination(change, denomination);
-
-            if (changeDenom.getTotalMoney() - change != 0)   //if true, then change isn't possible
-                System.out.println("Unable to give change. Unsuccessful transaction.");
-
-            else if (insertedMoney.getTotalMoney() < productSlots.get(selected-1).getBaseProductPrice())
-                System.out.println("Insufficient balance. Unsuccessful transaction.");
-
-            else {
-                addToDenomination(denomination, insertedMoney);     //transfer money from inserted to VM
-                differenceDenomination(denomination,changeDenom);   //remove change from VM
-                insertedMoney = changeDenom;                        //money of user = change
-                productSlots.get(selected).setProductQuantity(-1);
-                productSlots.get(selected).setNumProductsSold(1);
-
-                System.out.printf("Purchase successful! Your change is %3.2f\n", (double) change);
-                displayDenominations(changeDenom);
-            }
-//END OF IMPLEMENTATION BASED ON COMMENTS-------------------------------------------------------------------------------
+             //END OF IMPLEMENTATION BASED ON COMMENTS-------------------------------------------------------------------------------
             /*
              to do here is once naka select ng product
                 assess if kaya mag change if hindi unsuccessful transaction
                 pag pwede proceed to the change calculation, dispensing change and product.
              */
 
-                System.out.println("Do you want to make transactions again?");
-                do {
-                    System.out.print("Input: ");
-                    decision = scanner.nextLine();
+            System.out.println("Do you want to make transactions again?");
+            do {
+                System.out.print("Input: ");
+                decision = scanner.nextLine();
 
-                    if(!(decision.equalsIgnoreCase("yes"))&& // to continue asking while answer is
-                            !(decision.equalsIgnoreCase("no")))   // neither yes nor no.
-                    {
-                        System.out.println("type yes or no only.");
-                    }
+                if(!(decision.equalsIgnoreCase("yes"))&& // to continue asking while answer is
+                   !(decision.equalsIgnoreCase("no")))   // neither yes nor no.
+                      System.out.println("type yes or no only.");
+                else if(decision.equalsIgnoreCase("yes"))
+                    ongoingTransaction = true;
 
-                }while(!(decision.equalsIgnoreCase("yes"))&&
-                        !(decision.equalsIgnoreCase("no")));
-
-
+            }while(!(decision.equalsIgnoreCase("yes"))&& !(decision.equalsIgnoreCase("no")));
         }while(decision.equalsIgnoreCase("yes"));
 
         vmSimulationDisplay(2);
     }
 
-
-
-    /*
-    public void testVendingMachine(){
-        Scanner scanner = new Scanner(System.in);
-        Denomination userMoney = new Denomination();
-        int choice;
-        int exit = productSlots.size() + 1;
-        moneyDisplay();
-        do{
-            do {
-                System.out.print("Select a denomination to insert into the machine: ");
-                choice = scanner.nextInt();
-            }while(choice<1||(choice>11&&choice!=88));
-            switch (choice){
-                case 1 -> {
-                    System.out.print("1 PHP coin qty: ");
-                    userMoney.setOnePesoCoin(scanner.nextInt());
-                }
-                case 2 -> {
-                    System.out.print("5 PHP coin qty: ");
-                    userMoney.setFivePesoCoin(scanner.nextInt());
-                }
-                case 3 -> {
-                    System.out.print("10 PHP coin qty: ");
-                    userMoney.setTenPesoCoin(scanner.nextInt());
-                }
-                case 4 -> {
-                    System.out.print("20 PHP coin qty: ");
-                    userMoney.setTwentyPesoCoin(scanner.nextInt());
-                }
-                case 5 -> {
-                    System.out.print("20 PHP bill qty: ");
-                    userMoney.setTwentyPesoBill(scanner.nextInt());
-
-                }
-                case 6 -> {
-                    System.out.print("50 PHP bill qty: ");
-                    userMoney.setFiftyPesoBill(scanner.nextInt());
-                }
-                case 7 -> {
-                    System.out.print("100 PHP bill qty: ");
-                    userMoney.setOneHundredPesoBill(scanner.nextInt());
-
-                }
-                case 8 -> {
-                    System.out.print("200 PHP bill qty: ");
-                    userMoney.setTwoHundredPesoBill(scanner.nextInt());
-
-                }
-                case 9 -> {
-                    System.out.print("500 PHP bill qty: ");
-                    userMoney.setFiveHundredPesoBill(scanner.nextInt());
-
-                }
-                case 10 -> {
-                    System.out.print("1000 PHP bill qty: ");
-                    userMoney.setThousandPesoBill(scanner.nextInt());
-                }
-            }
-        }while(choice != 88); // meron ng method for this so alisin ko tong part na to, to make it more less longer
-
-
-        do {
-            System.out.println("Total Money: " + userMoney.getTotalMoney());
-            for(int i=0; i<productSlots.size();i++) {                               //display items in VM
-                System.out.printf("[%d] %-15s", i + 1, productSlots.get(i).getBaseProductName());
-                if ((i + 1) % 2 == 0)
-                    System.out.println(" ");
-            }
-            System.out.printf("[%d] Exit\n", exit);
-
-            System.out.print("Select: ");
-            choice = scanner.nextInt();
-            if (choice != exit){
-
-                choice--;
-
-                if (isSlotEmpty(choice)){
-                    System.out.println("Invalid input! Slot is empty.");
-                }
-
-                else if (!(isSlotStocked(choice))) {
-                    System.out.println("Sorry! That product is out of stock...\n\n");
-                }
-
-                else if(userMoney.getTotalMoney() >= productSlots.get(choice).getBaseProductPrice()){
-                    Denomination temp;
-                    int confirm;
-                    int totChange = (int) (userMoney.getTotalMoney() - productSlots.get(choice).getBaseProductPrice());
-
-                    if (findDenomination(totChange, denomination).getTotalMoney() - totChange == 0){  //if true, then VMable to give enough denoms to supply change
-                        System.out.println("\nYou are buying:");
-                        System.out.printf("%-10s%.2f\n", productSlots.get(choice).getBaseProductName(),
-                                productSlots.get(choice).getBaseProductPrice());
-                        System.out.print("""
-                                    Confirm purchase?
-                                    [1] Yes
-                                    [2] No\n""");
-                        System.out.print("Select: ");
-                        confirm = scanner.nextInt();
-                        if (confirm == 1){
-                            productSlots.get(choice).setProductQuantity(-1);
-                            productSlots.get(choice).setNumProductsSold(1);
-                            temp = findDenomination(totChange, denomination);       //temp = change in denom
-                            addToDenomination(denomination, userMoney);             //transfer userMoney to denomination
-                            differenceDenomination(denomination, temp);             //denomination -= temp
-                            userMoney = temp;                                       //userMoney = change
-                            System.out.printf("\nSuccessfully purchased item! Your change is %.2f:\n", (double)totChange);
-                            displayDenominations(temp);
-                            System.out.println("\n\n");
-                        }
-                    }
-                    else {
-                        System.out.println("Sorry! The vending machine is unable to give change.");
-                        System.out.println("Cancelling Transaction...");
-                    }
-                }
-
-                else{
-                    System.out.println("Insufficient balance!");
-                }
-                choice = 0;
-            }
-
-        } while (!(choice >= 1 && choice <= exit));
-
-        System.out.printf("Returning %.2f", userMoney.getTotalMoney());
-        displayDenominations(userMoney);
-
-    }
-
-     */
     //maintenance methods-----------------------------------------------------------------------
     public void editItems() {
         Scanner scanner = new Scanner(System.in);
