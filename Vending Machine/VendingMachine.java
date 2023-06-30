@@ -211,8 +211,7 @@ public class VendingMachine{
                 if (isSlotEmpty(selected - 1) || productSlots.get(selected - 1).getProductQuantity() == 0) {
                     setProductOnSlot(selected-1,true);
                 }
-                } else if (!(isSlotEmpty(selected - 1))) {
-
+                else if (!(isSlotEmpty(selected - 1))) {
                     setProductOnSlot(selected - 1, false);
                 }
             }
