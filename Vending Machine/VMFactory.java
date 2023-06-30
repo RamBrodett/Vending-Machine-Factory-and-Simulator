@@ -137,16 +137,16 @@ public class VMFactory {
     }
 
     private void simulateVMMaintenanceFeatures(Scanner scanner, VMFactory factory){
-        maintenanceVMmenuDisplay(factory);
-        int choice = scanner.nextInt();
-
-        switch (choice){
-            case 1 -> currMachine.editItems();
-//            case 2 -> OPEN MONEY BOX - collect money/refill money;
-        }
-
+        int choice;
+       do{
+           maintenanceVMmenuDisplay(factory);
+           do{choice = scanner.nextInt();} while(choice<1||choice>3);
+           switch (choice){
+               case 1 -> currMachine.editItems();
+               case 2 -> currMachine.moneyBox();
+           }
+       }while(choice!=3);
 //        currMachine.displayProducts(3);
-
     }
 
     private void createVMmenuDisplay(VMFactory factory){

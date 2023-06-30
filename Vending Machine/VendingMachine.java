@@ -196,12 +196,10 @@ public class VendingMachine{
     public void editItems() {
         Scanner scanner = new Scanner(System.in);
         int selected;
-
         do {
             displayProducts(3);
             System.out.print("Select a slot to edit: ");
-            selected = scanner.nextInt();
-
+            do{selected = scanner.nextInt();} while((selected-1)<1|| (selected-1)>productSlots.size());
             if ((selected -1) != productSlots.size()) {
                 if (isSlotEmpty(selected - 1) || productSlots.get(selected - 1).getProductQuantity() == 0) {
                     if ((selected) != productSlots.size() + 1) {
@@ -211,8 +209,7 @@ public class VendingMachine{
                     setProductOnSlot(selected - 1, false);
                 }
             }
-        } while (selected != productSlots.size()+1);
-
+        } while ((selected-1) != productSlots.size());
 
     }
 
@@ -290,6 +287,10 @@ public class VendingMachine{
             }
         }while(choice != 88);
         return money;
+    }
+
+    public void moneyBox(){
+
     }
 
     private Denomination findDenomination(float money, Denomination inventory) {                  //give money in denominations based on available denoms
@@ -394,14 +395,15 @@ public class VendingMachine{
                 money %= moneyDenom.getFivePesoCoin() * 5;
         }
 
-        if (money >= 1) {                                       //1
-            if (inventory.getOnePesoCoin()*1 >= money) {
-                moneyDenom.setOnePesoCoin((int)money/1);
+        if (money >= 1) {
+            //1
+            if (inventory.getOnePesoCoin() >= money) { // * 1
+                moneyDenom.setOnePesoCoin((int) money); // /1
             }
             else {
                 moneyDenom.setOnePesoCoin(inventory.getOnePesoCoin());
             }
-            money %= moneyDenom.getOnePesoCoin() * 1;
+            money %= moneyDenom.getOnePesoCoin(); // * 1
         }
 
         return moneyDenom;
@@ -584,7 +586,7 @@ public class VendingMachine{
         if (money.getOnePesoCoin() > 0){
             System.out.printf("%4d | %s\n", money.getOnePesoCoin(), "1 PHP");
         }
-        System.out.println("");
+        System.out.println();
     }
 
 
