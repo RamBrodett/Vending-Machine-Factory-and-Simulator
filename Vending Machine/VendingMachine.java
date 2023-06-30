@@ -336,12 +336,27 @@ public class VendingMachine{
     }
 
     public void moneyBox(){
-        //collect payment
-            //print something like "collecting payment"
-            //clearDenomination(denomination)
-
-        //replenish money
-            //addToDenomination(denominationFeedInterface(),denomination)
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+        do{
+            System.out.print("Input: ");
+            choice=scanner.nextInt();
+        }while(choice<1||choice>3);
+        switch (choice){
+            case 1 ->{
+                System.out.println("Collecting payment...");
+                System.out.println("Payment collected");
+                System.out.println("Total Money Collected: " + denomination.getTotalMoney());
+                clearDenomination(denomination);
+            }
+            case 2 ->{
+                addToDenomination(denominationFeedInterface(), denomination);
+                System.out.println("Money replenished");
+            }
+            case 3 ->{
+                // exit case
+            }
+        }
     }
 
     private Denomination findDenomination(float money, Denomination inventory) {                  //give money in denominations based on available denoms
@@ -668,6 +683,18 @@ public class VendingMachine{
             System.out.printf("%4d | %s\n", money.getOnePesoCoin(), "1 PHP");
         }
         System.out.println("");
+    }
+
+    private void moneyBoxDisplay(){
+        for(int x=0; x<50;x++)
+            System.out.print("═");
+        System.out.println();
+        System.out.printf("%12s %s %s\n",
+                " ","CONDUCT","MAINTENANCE");
+        for(int x=0; x<50;x++)
+            System.out.print("═");
+        System.out.println("[1] Collect Payment\n[2] Replenish Money\n[3] Exit");
+
     }
 
 

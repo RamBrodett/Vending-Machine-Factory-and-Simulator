@@ -143,7 +143,8 @@ public class VMFactory {
             do{choice = scanner.nextInt();} while(choice<1||choice>3);
             switch (choice){
                 case 1 -> currMachine.editItems();
-                case 2 -> currMachine.moneyBox();
+                case 2 -> {moneyBoxVMmenuDisplay(factory);
+                            currMachine.moneyBox();}
             }
         }while(choice!=3);
 //        currMachine.displayProducts(3);
@@ -185,6 +186,17 @@ public class VMFactory {
         factory.bordersDisplay(4,35);
         factory.bordersDisplay(2,35);
         System.out.print("Enter your choice: ");
+    }
+    private void moneyBoxVMmenuDisplay(VMFactory factory){
+        factory.bordersDisplay(1,35);
+        System.out.printf("║        %-24s   ║\n","CONDUCT MAINTENANCE");
+        factory.bordersDisplay(3,35);
+        factory.bordersDisplay(4,35);
+        System.out.printf("║  %-31s  ║\n","1. Collect payments");
+        System.out.printf("║  %-31s  ║\n","2. Replenish money");
+        System.out.printf("║  %-31s  ║\n","3. Exit");
+        factory.bordersDisplay(4,35);
+        factory.bordersDisplay(2,35);
     }
 
 
