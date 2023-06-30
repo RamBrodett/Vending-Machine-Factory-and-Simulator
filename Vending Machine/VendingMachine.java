@@ -197,26 +197,20 @@ public class VendingMachine{
         Scanner scanner = new Scanner(System.in);
         int selected;
 
-
         do {
             displayProducts(3);
             System.out.print("Select a slot to edit: ");
             selected = scanner.nextInt();
 
-            if (selected == productSlots.size()+1) {
-                break;
-            }
-
-            else if(isSlotEmpty(selected-1) || productSlots.get(selected-1).getProductQuantity() == 0){
-                if((selected)!=productSlots.size()+1){
-                    setProductOnSlot(selected-1, true);
+            if ((selected -1) != productSlots.size()) {
+                if (isSlotEmpty(selected - 1) || productSlots.get(selected - 1).getProductQuantity() == 0) {
+                    if ((selected) != productSlots.size() + 1) {
+                        setProductOnSlot(selected - 1, true);
+                    }
+                } else if (!(isSlotEmpty(selected - 1))) {
+                    setProductOnSlot(selected - 1, false);
                 }
             }
-
-            else if (!(isSlotEmpty(selected-1))){
-                setProductOnSlot(selected-1, false);
-            }
-
         } while (selected != productSlots.size()+1);
 
 
