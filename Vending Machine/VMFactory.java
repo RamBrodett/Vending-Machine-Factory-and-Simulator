@@ -85,7 +85,7 @@ public class VMFactory {
         choice = scanner.nextInt();
         switch (choice) {
             case 1 -> currMachine.vendingMachineUserTransaction();             //simulate transaction
-            case 2 -> simulateVMMaintenanceFeatures(scanner, factory);                        //not yet implemented
+            case 2 -> simulateVMMaintenanceFeatures(scanner, factory);              //half implemented
         }
 
         System.out.println("Press any key to Continue...");
@@ -138,14 +138,14 @@ public class VMFactory {
 
     private void simulateVMMaintenanceFeatures(Scanner scanner, VMFactory factory){
         int choice;
-       do{
-           maintenanceVMmenuDisplay(factory);
-           do{choice = scanner.nextInt();} while(choice<1||choice>3);
-           switch (choice){
-               case 1 -> currMachine.editItems();
-               case 2 -> currMachine.moneyBox();
-           }
-       }while(choice!=3);
+        do{
+            maintenanceVMmenuDisplay(factory);
+            do{choice = scanner.nextInt();} while(choice<1||choice>3);
+            switch (choice){
+                case 1 -> currMachine.editItems();
+                case 2 -> currMachine.moneyBox();
+            }
+        }while(choice!=3);
 //        currMachine.displayProducts(3);
     }
 

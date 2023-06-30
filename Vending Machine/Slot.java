@@ -4,7 +4,10 @@ public class Slot {
     private ArrayList <Product> products;
     private int numProductsSold;
     private int productQuantity;
+    private int oldProductsSold;
+    private  int oldProductQuantity;
     private Product baseProduct;
+    private boolean isEdited;
 
     Slot(){
         this.productQuantity = 0;
@@ -24,8 +27,14 @@ public class Slot {
     public double getBaseProductPrice(){
         return baseProduct.getPrice();
     }
+    public double getBaseProductOldPrice(){
+        return baseProduct.getOldPrice();
+    }
     public double getBaseProductCal(){
         return baseProduct.getCalories();
+    }
+    public double getBaseProductOldCal(){
+        return baseProduct.getOldCalories();
     }
 
     public int getProductQuantity() {
@@ -36,8 +45,40 @@ public class Slot {
         return numProductsSold;
     }
 
+    public int getOldProductsSold() {
+        return oldProductsSold;
+    }
+
+    public int getOldProductQuantity() {
+        return oldProductQuantity;
+    }
+
+    public boolean isEdited() {
+        return isEdited;
+    }
+
+    public void setBaseProductOldPrice(double oldPrice) {
+        baseProduct.setOldPrice((int) oldPrice);
+    }
+
+    public void setBaseProductOldCalories(double oldCalories){
+        baseProduct.setOldCalories((int)oldCalories);
+    }
+
     public void setNumProductsSold(int numProductsSold) {
         this.numProductsSold += numProductsSold;
+    }
+
+    public void setOldProductsSold(int oldProductsSold) {
+        this.oldProductsSold = oldProductsSold;
+    }
+
+    public void setOldProductQuantity(int oldProductQuantity) {
+        this.oldProductQuantity = oldProductQuantity;
+    }
+
+    public void setEdited (boolean isEdited){
+        this.isEdited = isEdited;
     }
 
     public boolean setProductQuantity(int productQuantity) {
