@@ -1,3 +1,6 @@
+/**
+ * Special class to be implemented later on.
+ */
 public class SpecialVM extends VendingMachine {
     public SpecialVM(int slotCapacity){
         super(slotCapacity);

@@ -1,16 +1,19 @@
 import java.util.Scanner;
 
 /**
- * Vending Machine Factory.
- * <p>
- *     This is a simulator of a vending machine factory, where the creator can adjust
- *     the specification such as slots and initial items and denomination of a vending machine.
- *     and where we can test the vending machine features such as the User-Vending Machine
- *     Transaction, restock items and money, and print summary of transaction.
- * </p>
  * @author Ram Brodett
  * @author Luke Regalado
  * @version 07/1/2023
+ */
+
+/**
+ *  Vending Machine Factory.
+ *  <p>
+ *   This is a simulator of a vending machine factory, where the creator can adjust
+ *   the specification such as slots and initial items and denomination of a vending machine.
+ *   and where we can test the vending machine features such as the User-Vending Machine
+ *   Transaction, restock items and money, and print summary of transaction.
+ *  </p>
  */
 
 public class VMFactory {

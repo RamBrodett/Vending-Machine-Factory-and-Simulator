@@ -1,10 +1,12 @@
 /**
- * This class contains attributes, which are the denominations.
- * The values inside these attributes are the amount of 'bills'.
- *
  * @author BRODETT,Ram David
  * @author REGALADO, Luke M
  * @version 07/01/2023
+ */
+
+/**
+ * This class contains attributes, which are the denominations.
+ * The values inside these attributes are the amount of 'bills'.
  */
 public class Denomination {
     /**
