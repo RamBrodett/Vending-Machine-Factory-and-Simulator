@@ -121,7 +121,7 @@ public class VMFactory {
      *     "Initializes the cases for different tests."
      * </p>
      *
-     * @param used for accepting input.
+     * @param scanner used for accepting input.
      * @param factory used for calling the methods within VMFactory class.
      */
     private void testVendingMachine(Scanner scanner, VMFactory factory) {
@@ -292,7 +292,7 @@ public class VMFactory {
     /**
      * Execute console system commands.
      *
-     * @param cmd console system command to execute such as cls(clear screen).
+     * @param command console system command to execute such as cls(clear screen).
      */
     private void consoleSysCom(String command){
         Scanner scanner = new Scanner(System.in);
