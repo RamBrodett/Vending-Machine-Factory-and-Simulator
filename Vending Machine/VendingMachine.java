@@ -271,8 +271,6 @@ public class VendingMachine{
      *  This method allows the user to edit the items in the vending machine.
      *  It prompts the user to select a slot and either add new items or restock existing items.
      * </p>
-     * @var selected is choice of action.
-     * @var temp(num) are values temporary holder.
      */
     public void editItems() {
         Scanner scanner = new Scanner(System.in);
