@@ -99,6 +99,16 @@ public class VendingMachine{
     }
 
     // start of vending machine methods for overall features------------------------------------------------------------
+
+    /**
+     *  Sets the product on slot.
+     * @param name name of the product.
+     * @param price price of the product.
+     * @param calories calories of the product.
+     * @param quantity quantity of the product.
+     * @param slotNo slot no you will the assign the product to.
+     *
+     */
     public void setProduct(String name, double price, int calories, int quantity, int slotNo){
         productSlots.set(slotNo, new Slot(name, price, calories, quantity));
     }
@@ -174,7 +184,6 @@ public class VendingMachine{
                 displayProducts(0); // 0 value since it is for display only not selection.
                 insertedMoney = denominationFeedInterface();
                 System.out.println("Total inserted money: " + insertedMoney.getTotalMoney());
-                //START OF IMPLEMENTATION BASED ON COMMENTS-----------------------------------------------------------------------------
                 displayProducts(1); // 1 value since it is selection of item already.
                 int selected;
                 String confirm;
@@ -239,13 +248,6 @@ public class VendingMachine{
                 }
                 ongoingTransaction = false;
             }
-
-            //END OF IMPLEMENTATION BASED ON COMMENTS-------------------------------------------------------------------------------
-            /*
-             to do here is once naka select ng product
-                assess if kaya mag change if hindi unsuccessful transaction
-                pag pwede proceed to the change calculation, dispensing change and product.
-             */
 
             System.out.println("Do you want to make transactions again?");
             do {
