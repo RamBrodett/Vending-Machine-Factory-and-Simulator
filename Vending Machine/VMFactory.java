@@ -1,6 +1,29 @@
 import java.util.Scanner;
+
+/**
+ * Vending Machine Factory.
+ * <p>
+ *     This is a simulator of a vending machine factory, where the creator can adjust
+ *     the specification such as slots and initial items and denomination of a vending machine.
+ *     and where we can test the vending machine features such as the User-Vending Machine
+ *     Transaction, restock items and money, and print summary of transaction.
+ * </p>
+ * @author Ram Brodett
+ * @author Luke Regalado
+ * @version 07/1/2023
+ */
+
 public class VMFactory {
+    /**
+     *  Declaration of a type of Vending Machine called currMachine,
+     *  Vending machines created is stored here.
+     */
     private static VendingMachine currMachine;
+
+    /**
+     * Main method of the program. Provides the user interface for interacting with the vending machine factory.
+     * @param args command-line arguments
+     */
 
     public static void main(String[] args) {
 
@@ -49,6 +72,17 @@ public class VMFactory {
 
     // Vending Machine Production methods
 
+    /**
+     * Vening Machine creation.
+     * <p>
+     *     This method creates the vending machine base on the creator's preference,
+     *     such as supplying number of slots.
+     * </p>
+     *
+     * @param scanner used for accepting input.
+     * @param factory used for calling the methods within VMFactory class.
+     * @return VMChoice, Vending Machine object.
+     */
     private VendingMachine createVendingMachine(Scanner scanner,VMFactory factory){
         createVMmenuDisplay(factory);
         int choice = scanner.nextInt();
@@ -80,6 +114,16 @@ public class VMFactory {
         consoleSysCom("fflush");
         return VMChoice;
     }
+
+    /**
+     * VendingMachine Test.
+     * <p>
+     *     "Initializes the cases for different tests."
+     * </p>
+     *
+     * @param used for accepting input.
+     * @param factory used for calling the methods within VMFactory class.
+     */
     private void testVendingMachine(Scanner scanner, VMFactory factory) {
         int choice;
         choice = scanner.nextInt();
@@ -92,7 +136,13 @@ public class VMFactory {
         consoleSysCom("fflush");
     }
 
+
     // Display methods--------------------------------------------------
+
+    /**
+     * Display for the main menu.
+     * @param factory used for calling the methods within the VMFactory class.
+     */
     private void mainMenuDisplay(VMFactory factory){
 
         factory.bordersDisplay(1,31);
@@ -106,6 +156,13 @@ public class VMFactory {
         factory.bordersDisplay(2,31);
         System.out.print("Enter your choice: ");
     }
+
+    /**
+     * Display the borders for different parts of the menu.
+     *
+     * @param part    the portion of the border to be used.
+     * @param hlength the horizontal length of the border
+     */
     private void bordersDisplay(int part, int hlength){
 
         switch (part) {
@@ -136,11 +193,18 @@ public class VMFactory {
         }
     }
 
+    /**
+     * Simulates the maintenance features of the vending machine.
+     *
+     * @param scanner used for accepting input.
+     * @param factory used for calling the methods within the VMFactory class.
+     */
+
     private void simulateVMMaintenanceFeatures(Scanner scanner, VMFactory factory){
         int choice;
         do{
             maintenanceVMmenuDisplay(factory);
-            do{choice = scanner.nextInt();} while(choice<1||choice>3);
+            do{choice = scanner.nextInt();} while(choice<1||choice>4);
             switch (choice){
                 case 1 -> currMachine.editItems();
                 case 2 -> {moneyBoxVMmenuDisplay(factory);
@@ -155,6 +219,11 @@ public class VMFactory {
 
     }
 
+    /**
+     * Display for creating a vending machine menu.
+     * @param factory used for calling the methods within the VMFactory class.
+     */
+
     private void createVMmenuDisplay(VMFactory factory){
         factory.bordersDisplay(1,31);
         System.out.printf("║     %-22s    ║\n","VENDING MACHINE TYPES");
@@ -166,6 +235,11 @@ public class VMFactory {
         factory.bordersDisplay(2,31);
         System.out.print("Enter your choice: ");
     }
+
+    /**
+     * Display for testing a vending machine menu.
+     * @param factory used for calling the methods within the VMFactory class.
+     */
 
     private void testVMmenuDisplay(VMFactory factory){
         factory.bordersDisplay(1,35);
@@ -180,6 +254,11 @@ public class VMFactory {
         System.out.print("Enter your choice: ");
     }
 
+    /**
+     * Display for maintenance operations on a vending machine menu.
+     * @param factory used for calling the methods within the VMFactory class.
+     */
+
     private void maintenanceVMmenuDisplay(VMFactory factory){
         factory.bordersDisplay(1,35);
         System.out.printf("║        %-24s   ║\n","CONDUCT MAINTENANCE");
@@ -193,6 +272,11 @@ public class VMFactory {
         factory.bordersDisplay(2,35);
         System.out.print("Enter your choice: ");
     }
+
+    /**
+     * Display for money box operations on a vending machine menu.
+     * @param factory used for calling the methods within the VMFactory class.
+     */
     private void moneyBoxVMmenuDisplay(VMFactory factory){
         factory.bordersDisplay(1,35);
         System.out.printf("║        %-24s   ║\n","CONDUCT MAINTENANCE");
@@ -205,7 +289,11 @@ public class VMFactory {
         factory.bordersDisplay(2,35);
     }
 
-
+    /**
+     * Execute console system commands.
+     *
+     * @param cmd console system command to execute such as cls(clear screen).
+     */
     private void consoleSysCom(String command){
         Scanner scanner = new Scanner(System.in);
         switch(command){

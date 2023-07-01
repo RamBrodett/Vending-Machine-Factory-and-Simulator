@@ -57,21 +57,6 @@ public class Denomination {
      */
     private int thousandPesoBill;
 
-    //////////////////////////////////////IDK IF THIS IS USED - JUST DELETE IF IT ISN'T
-    public void refillMoney(int onePCoin, int fivePCoin, int tenPCoin,
-                            int twentyPCoin, int twentyPBill, int fiftyPBill,
-                            int oneHPBill, int twoHPBill, int fiveHPBill, int thousandPBill){
-        this.onePesoCoin += onePCoin;
-        this.fivePesoCoin += fivePCoin;
-        this.tenPesoCoin += tenPCoin;
-        this.twentyPesoCoin += twentyPCoin;
-        this.twentyPesoBill += twentyPBill;
-        this.fiftyPesoBill += fiftyPBill;
-        this.oneHundredPesoBill += oneHPBill;
-        this.twoHundredPesoBill += twoHPBill;
-        this.fiveHundredPesoBill += fiveHPBill;
-        this.thousandPesoBill += thousandPBill;
-    }
 
     /**
      * Setter for one peso coin. Assigns via increment.

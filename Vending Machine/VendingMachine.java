@@ -1,14 +1,26 @@
-//import org.w3c.dom.ls.LSOutput;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Vending Machine.
+ * <p>
+ *    Vending machine that is composed of slot with items and denominations, performs tasks
+ *    such as making transaction with user and maintenance mode such as Stocking/Restocking,
+ *    replenishing money, and printing transactions.
+ * </p>
+ * @author Ram Brodett
+ * @author Luke Regalado
+ * @version 07/1/2023
+ */
 public class VendingMachine{
     private Denomination denomination;
     private final ArrayList<Slot> productSlots;
-    private double currSales;
-    private double prevSales;
-    private final Denomination insertedMoney;
+    private Denomination insertedMoney;
+
+    /**
+     * Constructor for Vending Machine. Makes instances of the subclass it needs.
+     * @param slotCapacity for number of capacity it will inherit to be the max slots for products.
+     */
 
     public VendingMachine(int slotCapacity){
         this.productSlots = new ArrayList<>(); //Create VENDING MACHINE PRODUCT SLOTS
@@ -21,6 +33,15 @@ public class VendingMachine{
 
     // Vending Machine creation method---------------------------------------------------------
 
+    /**
+     * Selection of initial items and denomination to initialize inside vending machine.
+     *
+     * <p>
+     *     Utilizes different methods to interact with user to recieve and set necessary
+     *     informations.
+     * </p>
+     * @var money is total money provided to the machine.
+     */
     private void vmPackageSelection(){
         Scanner scanner = new Scanner(System.in);
         consoleSysCom("cls");
@@ -67,6 +88,12 @@ public class VendingMachine{
         double money = this.denomination.getTotalMoney();
         System.out.println("Total Money: " + money);
     }
+
+
+    /**
+     * Proving the machine a set of complete values for denomination.
+     * @param denomination a set of values of diff denomination.
+     */
     public void vmSetMoney(Denomination denomination){
         this.denomination = denomination;
     }
@@ -76,11 +103,17 @@ public class VendingMachine{
         productSlots.set(slotNo, new Slot(name, price, calories, quantity));
     }
 
+    /**
+     *  allows the authorized personel to set a product on a specific slot on vending machine.
+     * @param slotNumber specific location you want to store the product on.
+     * @param ifReplace is a boolean value to know if it is replacing an item or restocking.
+     */
+
     public void setProductOnSlot(int slotNumber, boolean ifReplace){
         Scanner scanner = new Scanner(System.in);
 
         String name;
-        if (ifReplace == true) {
+        if (ifReplace) {
             System.out.print("Product name: ");
             name = scanner.nextLine();
         }
@@ -96,14 +129,14 @@ public class VendingMachine{
         int calories = scanner.nextInt();
         int numofProducts;
 
-        if (ifReplace == true) {
+        if (ifReplace) {
             do {
                 System.out.print("Enter product quantity (Max of 15pcs) : ");
                 numofProducts = scanner.nextInt();
                 scanner.nextLine();
-                if (numofProducts < 0 || numofProducts > 15)
+                if (numofProducts < 1 || numofProducts > 15)
                     System.out.println("Enter a valid quantity");
-            } while (numofProducts < 0 || numofProducts > 15);
+            } while (numofProducts < 1 || numofProducts > 15);
             if (numofProducts > 0)
                 productSlots.get(slotNumber).setNumProductsSold(-productSlots.get(slotNumber).getNumProductsSold());    //sets amount sold to 0 upon restocking
         }
@@ -121,8 +154,15 @@ public class VendingMachine{
     }
 
     // user - vending transaction [simulation of using the vending machine]
+
+    /**
+     *<p>
+     *   Simulates Transaction method of the vending machine, utilizes method to receive money from user,
+     *  provide choice for the buyer along with the nutrition fact calories, calculate needed
+     *  denomination for change, dispensing items and change.
+     *</p>
+     */
     public void vendingMachineUserTransaction(){
-        Denomination insertedMoney = new Denomination();
         Scanner scanner = new Scanner(System.in);
         String decision;
         boolean ongoingTransaction = true;
@@ -167,6 +207,8 @@ public class VendingMachine{
                     }
                     else {
                         do {
+                            System.out.println(productSlots.get(selected-1).getBaseProductName() + " has " +
+                                    productSlots.get(selected-1).getBaseProductCal() + "Calories");
                             System.out.println("\nBuying \"" + productSlots.get(selected-1).getBaseProductName() +
                                     "\" for " + productSlots.get(selected-1).getBaseProductPrice() + "...");
                             System.out.print("Confirm purchase: ");
@@ -223,13 +265,20 @@ public class VendingMachine{
     }
 
     //maintenance methods-----------------------------------------------------------------------
+
+    /**
+     * <p>
+     *  This method allows the user to edit the items in the vending machine.
+     *  It prompts the user to select a slot and either add new items or restock existing items.
+     * </p>
+     * @var selected is choice of action.
+     * @var temp(num) are values temporary holder.
+     */
     public void editItems() {
         Scanner scanner = new Scanner(System.in);
         int selected;
         int temp1, temp2;
         double temp3, temp4;
-
-
         do {
             displayProducts(3);
             System.out.print("Select a slot to edit: ");
@@ -255,18 +304,26 @@ public class VendingMachine{
                 }
             }
         } while (selected != productSlots.size()+1);
-
-
     }
 
     // boolean methods for vmstatus-------------------------------------------------------------
 
+    /**
+     * Method that checks the availability of a slot.
+     * @param slotNumber specific location you want to check.
+     * @return boolean value, returned true relates that slot is empty, otherwise, it is not empty.
+     */
     private boolean isSlotEmpty(int slotNumber){
         return (productSlots.get(slotNumber).getBaseProductName().equals("Empty")&&
                 productSlots.get(slotNumber).getBaseProductPrice()==-1&&
                 productSlots.get(slotNumber).getBaseProductCal()==-1);
     }
 
+    /**
+     * Method that checks the slot if it is stocked with products.
+     * @param slotNumber specific location you want to check on.
+     * @return boolean value, returned true relates that slot is empty, otherwise, it is not empty.
+     */
     private boolean isSlotStocked(int slotNumber){
         return(productSlots.get(slotNumber).getProductQuantity() > 0);
     }
@@ -275,6 +332,14 @@ public class VendingMachine{
     // methods for money related calculations and processes and transaction subprocesses--------------------------------
 
     //interface for feeding the machine with money
+
+    /**
+     * <p>
+     *     This method prompts the user to supply money denominations.
+     * </p>
+     * @return a Denomination object representing the money fed into the vending machine.
+     */
+
     public Denomination denominationFeedInterface(){
         Scanner scanner = new Scanner(System.in);
         Denomination money = new Denomination();
@@ -335,6 +400,10 @@ public class VendingMachine{
         return money;
     }
 
+    /**
+     * Method to edit/collect the supply of money mounted on the machine.
+     */
+
     public void moneyBox(){
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -350,7 +419,7 @@ public class VendingMachine{
                 clearDenomination(denomination);
             }
             case 2 ->{
-                addToDenomination(denominationFeedInterface(), denomination);
+                addToDenomination(denomination,denominationFeedInterface());
                 System.out.println("Money replenished");
             }
             case 3 ->{
@@ -358,6 +427,13 @@ public class VendingMachine{
             }
         }
     }
+
+    /**
+     * This method looks for the appropriate denomination from the inventory.
+     * @param money is the reference of inserted money.
+     * @param inventory is the location of sets of money in machine
+     * @return a Denomination object representing the appropriate set of money the machine can produce for change.
+     */
 
     private Denomination findDenomination(float money, Denomination inventory) {                  //give money in denominations based on available denoms
         Denomination moneyDenom = new Denomination();                                           //will have denominations of the change
@@ -474,6 +550,11 @@ public class VendingMachine{
         return moneyDenom;
     }
 
+    /**
+     *  Product Displays
+     * @param typeOfDisplay is the kind it should be used for, either Selection, Menu, Maintenance.
+     */
+
     public void displayProducts(int typeOfDisplay){
         int i;
         int totalSales = 0;
@@ -579,10 +660,17 @@ public class VendingMachine{
         System.out.println(" ");
     }
 
+    /**
+     * <p>
+     * Subtracts the values of each denomination in the 'subtrahend' from the corresponding values in the 'minuend'.
+     * The result is stored in the 'minuend'.
+     * </p>
+     *
+     * @param minuend    The denomination object from which the subtrahend values will be subtracted.
+     * @param subtrahend The denomination object containing the values to be subtracted from the 'minuend'.
+     */
 
-
-
-    private void differenceDenomination(Denomination minuend, Denomination subtrahend){     //subtracts all values of subtrahend from minuend = minuend
+    private void differenceDenomination(Denomination minuend, Denomination subtrahend){
         minuend.setThousandPesoBill     (-subtrahend.getThousandPesoBill());
         minuend.setFiveHundredPesoBill  (-subtrahend.getFiveHundredPesoBill());
         minuend.setTwoHundredPesoBill   (-subtrahend.getTwoHundredPesoBill());
@@ -594,6 +682,16 @@ public class VendingMachine{
         minuend.setFivePesoCoin         (-subtrahend.getFivePesoCoin());
         minuend.setOnePesoCoin          (-subtrahend.getOnePesoCoin());
     }
+
+
+    /**
+     * <p>
+     * Adds the values of each denomination in the 'from' object to the corresponding values in the 'to' object.
+     * The result is stored in the 'to' object.
+     * </p>
+     * @param to   The denomination object where the values will be added.
+     * @param from The denomination object containing the values to be added.
+     */
 
     private void addToDenomination(Denomination to, Denomination from){                         //add all denoms; to = from + to
         to.setThousandPesoBill     (from.getThousandPesoBill());
@@ -608,6 +706,12 @@ public class VendingMachine{
         to.setOnePesoCoin          (from.getOnePesoCoin());
     }
 
+    /**
+     * <p>
+     * Clears the values of each denomination in the 'x' object by setting them to zero.
+     * The result is stored in the same 'x' object.</p>
+     * @param x The denomination object to be cleared.
+     */
     private void clearDenomination(Denomination x){
         x.setOnePesoCoin(-x.getOnePesoCoin());
         x.setFivePesoCoin(-x.getFivePesoCoin());
@@ -621,8 +725,12 @@ public class VendingMachine{
         x.setThousandPesoBill(-x.getThousandPesoBill());
     }
 
-
     // display methods---------------------------------------------------------------------------------
+    /**
+     * <p>
+     * Displays the representation of money in the console.
+     * Shows a table with coin and bill denominations, along with their corresponding codes.</p>
+     */
     public void moneyDisplay(){
         for(int i=0; i<52;i++)
             System.out.print("═");
@@ -638,6 +746,10 @@ public class VendingMachine{
         System.out.println();
     }
 
+    /**
+     * Displays the simulation status of the Vending Machine.
+     * @param type is the type of what you want to display.
+     */
     private void vmSimulationDisplay(int type){
         if(type==1)
         {
@@ -651,6 +763,11 @@ public class VendingMachine{
             System.out.println("Vending Machine terminated.\n");
         }
     }
+
+    /**
+     * Displays the denominations and amounts of money in the 'money' object .
+     * @param money The Denomination object representing the money to be displayed.
+     */
 
     private void displayDenominations(Denomination money){
         System.out.printf("%-5s| %s\n", "Amt.", "Denomination");
@@ -687,18 +804,13 @@ public class VendingMachine{
         System.out.println("");
     }
 
-    private void moneyBoxDisplay(){
-        for(int x=0; x<50;x++)
-            System.out.print("═");
-        System.out.println();
-        System.out.printf("%12s %s %s\n",
-                " ","CONDUCT","MAINTENANCE");
-        for(int x=0; x<50;x++)
-            System.out.print("═");
-        System.out.println("[1] Collect Payment\n[2] Replenish Money\n[3] Exit");
 
-    }
-
+    /**
+     * <p>
+     * Displays the transactions made in the Vending Machine.
+     * Shows the items sold, their prices, the quantity sold, and the corresponding profit.
+     * </p>
+     */
     public void displayTransactions(){
         double totalProfit = 0;
 
@@ -719,14 +831,22 @@ public class VendingMachine{
             System.out.print("=");
         }
 
-        System.out.print("\nTotal:");
-        System.out.printf("%43.2f", totalProfit);
+        System.out.print("\nTotal: ");
+        System.out.printf("%-33.2f\n", totalProfit);
         for (int i = 0; i < 37; i++){
             System.out.print("=");
         }
+        System.out.println(" ");
     }
 
     //helper methods-----------------------------------------------------------------------------
+
+    /**
+     * Executes a system command related to console control.
+     * @param command The command to be executed:
+     *                - "cls": Clears the console screen.
+     *                - "fflush": Flushes the console input buffer.
+     */
     private void consoleSysCom(String command){
         Scanner scanner = new Scanner(System.in);
         switch(command){
