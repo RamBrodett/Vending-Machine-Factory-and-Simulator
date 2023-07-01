@@ -580,6 +580,8 @@ public class VendingMachine{
     }
 
 
+
+
     private void differenceDenomination(Denomination minuend, Denomination subtrahend){     //subtracts all values of subtrahend from minuend = minuend
         minuend.setThousandPesoBill     (-subtrahend.getThousandPesoBill());
         minuend.setFiveHundredPesoBill  (-subtrahend.getFiveHundredPesoBill());
@@ -697,6 +699,32 @@ public class VendingMachine{
 
     }
 
+    public void displayTransactions(){
+        double totalProfit = 0;
+
+        System.out.printf("\n%-15s%s  %s %s\n", "Item", "Price", "Sold", "Profit");
+        for (int i = 0; i < 37; i++){
+            System.out.print("=");
+        }
+        System.out.println();
+        for (Slot productSlot : productSlots) {
+            if (productSlot.getNumProductsSold() > 0) {
+                System.out.printf("%-15s%-7.2f %-4d %-7.2f\n", productSlot.getBaseProductName(),
+                        productSlot.getBaseProductPrice(), productSlot.getNumProductsSold(),
+                        productSlot.getBaseProductPrice() * productSlot.getNumProductsSold());
+                totalProfit = productSlot.getBaseProductPrice() * productSlot.getNumProductsSold();
+            }
+        }
+        for (int i = 0; i < 37; i++){
+            System.out.print("=");
+        }
+
+        System.out.print("\nTotal:");
+        System.out.printf("%43.2f", totalProfit);
+        for (int i = 0; i < 37; i++){
+            System.out.print("=");
+        }
+    }
 
     //helper methods-----------------------------------------------------------------------------
     private void consoleSysCom(String command){

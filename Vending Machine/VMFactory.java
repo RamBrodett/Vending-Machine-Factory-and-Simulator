@@ -145,9 +145,14 @@ public class VMFactory {
                 case 1 -> currMachine.editItems();
                 case 2 -> {moneyBoxVMmenuDisplay(factory);
                             currMachine.moneyBox();}
+                case 3 -> {
+                    currMachine.displayTransactions();
+                    System.out.print("Press any key to Continue...");
+                    consoleSysCom("fflush");
+                }
             }
-        }while(choice!=3);
-//        currMachine.displayProducts(3);
+        }while(choice!=4);
+
     }
 
     private void createVMmenuDisplay(VMFactory factory){
@@ -182,7 +187,8 @@ public class VMFactory {
         factory.bordersDisplay(4,35);
         System.out.printf("║  %-31s  ║\n","1. Edit/Add Item");
         System.out.printf("║  %-31s  ║\n","2. Open Money Box");
-        System.out.printf("║  %-31s  ║\n","3. Exit");
+        System.out.printf("║  %-31s  ║\n","3. Display Transaction Summary");
+        System.out.printf("║  %-31s  ║\n","4. Exit");
         factory.bordersDisplay(4,35);
         factory.bordersDisplay(2,35);
         System.out.print("Enter your choice: ");
