@@ -92,14 +92,7 @@ public class VMFactory {
         VendingMachine VMChoice = null;
         switch (choice){
             case 1 -> {
-                int slotCapacity;
-                do {
-                    System.out.print("Number of slots you want: ");
-                    slotCapacity = scanner.nextInt();
-                    if(slotCapacity<8)
-                        System.out.println("Minimum number of slots is 8");
-                }while(slotCapacity < 8);
-                VMChoice = new VendingMachine(slotCapacity);
+                VMChoice = new VendingMachine();
                 consoleSysCom("cls");
                 System.out.println(" ");
                 factory.bordersDisplay(1,31);

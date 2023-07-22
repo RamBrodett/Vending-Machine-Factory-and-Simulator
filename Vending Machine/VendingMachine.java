@@ -22,13 +22,11 @@ public class VendingMachine{
      * @param slotCapacity for number of capacity it will inherit to be the max slots for products.
      */
 
-    public VendingMachine(int slotCapacity){
+    public VendingMachine(){
         this.productSlots = new ArrayList<>(); //Create VENDING MACHINE PRODUCT SLOTS
-        for(int i=0; i<slotCapacity; i++)
-            productSlots.add(new Slot());
         this.denomination = new Denomination(); //Create MONEY
         this.insertedMoney = new Denomination(); // create
-        vmPackageSelection();                   //call process prompts in vending machine creation
+        vmCreation();                   //call process prompts in vending machine creation
     }
 
     // Vending Machine creation method---------------------------------------------------------
@@ -42,41 +40,16 @@ public class VendingMachine{
      * </p>
      * @var money is total money provided to the machine.
      */
-    private void vmPackageSelection(){
-        Scanner scanner = new Scanner(System.in);
-        consoleSysCom("cls");
-        System.out.println("\nADD INITIAL ITEMS ON SLOT [OPTIONAL PACKAGE]");
-        int selectedSlot;
-        do {
-            // Display every item slot
-            displayProducts(1);
-            System.out.print("Select a slot to add an item: ");
-            selectedSlot = scanner.nextInt();
-            if((selectedSlot-1)!=productSlots.size()){
-                setProductOnSlot(selectedSlot-1, true);
-            }
-            else if((selectedSlot-1)==productSlots.size()){
-                int emptySlots=0;
-                for(int j=0; j<productSlots.size();j++) {
-                    if(isSlotEmpty(j))
-                        emptySlots++;
-                }
-                if(emptySlots==productSlots.size()){
-                    System.out.println(" ");
-                    for(int x=0; x<67;x++)
-                        System.out.print("═");
-                    System.out.println("""
-                            
-                            You did not add a product to any slot; instead, you chose a bare
-                            Vending Machine Package with zero products on slot.
-                            Remember to add items to your Machine later!""");
+    private void vmCreation(){
+        String[] products = {"Vanilla Yogurt","Chocolate Yogurt","Strawberry Yogurt",
+                "Matcha Yogurt", "Rasberry Yogurt","Mango Yoguort","Cold Mixed Fruit bits",
+                "Crunchy Cereals", "Belgian Choco bits"};
 
-                    for(int x=0; x<67;x++)
-                        System.out.print("═");
-                    System.out.println("\n");
-                }
-            }
-        }while((selectedSlot-1)!= productSlots.size());
+        for (int i = 0; i < products.length; i++){
+
+            if(i<6)productSlots.add(i,new Slot(products[i],100,90,15));
+            else productSlots.add(i,new Slot(products[i],45,40,15));
+        }
 
         for(int x=0; x<52;x++) System.out.print("═");
         System.out.println("""

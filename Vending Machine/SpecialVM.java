@@ -2,8 +2,8 @@
  * Special class to be implemented later on.
  */
 public class SpecialVM extends VendingMachine {
-    public SpecialVM(int slotCapacity){
-        super(slotCapacity);
+    public SpecialVM(){
+        super();
     }
     //methods specific to this file to be implemented later...
 
