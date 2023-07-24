@@ -4,9 +4,10 @@ import java.awt.*;
 
 public class VMFController {
 
+
     public static void main(String[] args) {
-         VMFactoryView vmfControl = new VMFactoryView();
-         vmfControl.initializeMenu();
+
+        VMFMainFrame mainFrame = new VMFMainFrame();
 
 
     }

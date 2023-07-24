@@ -102,8 +102,8 @@ public class VMFactory {
                 System.out.println("Press any key to Continue...");
             }
             case 2 -> {
-                //VMChoice = new SpecialVM();
-                System.out.println("[Special] Vending Machine is not yet available.");
+                VMChoice = new SpecialVM();
+                System.out.println("[Special] Vending Machine successfully created.");
                 System.out.println("Press any key to Continue...");
             }
         }
