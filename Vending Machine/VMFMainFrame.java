@@ -23,11 +23,10 @@ public class VMFMainFrame{
 
 
         menu.show(cardPanel,"mainMenu");
+        this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 
 
     }
-
-
 
 }

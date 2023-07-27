@@ -1,66 +1,86 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.Objects;
 
 public class VMFMainMenu extends JPanel {
-    private JLabel nameBranding = new JLabel();
-    private JLabel iconBranding = new JLabel();
-    private JPanel upperPanel = new JPanel(); //Logo and Name Panel
-    private JPanel lowerPanel = new JPanel(); // Buttons Panel
-    private JButton createVM = new JButton("Create Vending Machine");
-    private JButton testVM = new JButton("Test Vending Machine");
-    private JButton exitFactory = new JButton("Exit");
+    ImageIcon bgIMG= new ImageIcon("VMResources\\mainbg.png");
+    private final JPanel upperPanel = new JPanel();
+    private final JPanel lowerPanel = new JPanel(); // will contain button panel
+    private final JButton createVM = new JButton();
+    private final JButton testVM = new JButton();
+    private final JButton exitFactory = new JButton();
 
     VMFMainMenu(){
-        JPanel borderPanel = new JPanel(new GridLayout(2,1));
-        setBorder(new EmptyBorder(10, 10, 10, 10));
-        //setLayout(new GridLayout(2,1));
+        setLayout(new GridLayout(2,1));
 
-        upperPanel.setLayout(new GridLayout(2,1));
-        nameBranding.setText("YOU - G - ART VENDING MACHINE FACTORY");
-        nameBranding.setFont(new Font("Arial",Font.BOLD,36));
-        nameBranding.setHorizontalTextPosition(JLabel.CENTER);
-        nameBranding.setHorizontalAlignment(JLabel.CENTER);
-        nameBranding.setVerticalTextPosition(JLabel.CENTER);
-        iconBranding.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("mmLogo.png"))));
-        iconBranding.setHorizontalAlignment(SwingConstants.CENTER);
-        iconBranding.setVerticalAlignment(JLabel.BOTTOM);
-        upperPanel.setBackground(Color.LIGHT_GRAY);
-        upperPanel.add(iconBranding);
-        upperPanel.add(nameBranding);
-        borderPanel.add(upperPanel);
+        upperPanel.setOpaque(false);
+        lowerPanel.setOpaque(false);
+        lowerPanel.setLayout(new GridLayout(4,1));
+        JPanel panelFiller = new JPanel();
+        JPanel panelFiller2 = new JPanel();
+        JPanel panelFiller3 = new JPanel();
+        JPanel panelFiller4 = new JPanel();
+        JPanel panelFiller5 = new JPanel();
+        JPanel panelFiller6 = new JPanel();
+        JPanel panelFiller7 = new JPanel();
 
+        panelFiller.setOpaque(false);
+        panelFiller2.setOpaque(false);
+        panelFiller3.setOpaque(false);
+        panelFiller4.setOpaque(false);
+        panelFiller5.setOpaque(false);
+        panelFiller6.setOpaque(false);
+        panelFiller7.setOpaque(false);
 
-        lowerPanel.setLayout(new GridLayout(8,5));
-        lowerPanel.setBackground(new Color(44,69,85));
-        createVM.setHorizontalTextPosition(JLabel.CENTER);
-        createVM.setPreferredSize(new Dimension(300,25));
-        testVM.setHorizontalTextPosition(JLabel.CENTER);
-        createVM.setPreferredSize(new Dimension(300,25));
-        exitFactory.setHorizontalTextPosition(JLabel.CENTER);
-        exitFactory.setPreferredSize(new Dimension(300,25));
+        createVM.setIcon(scaleIMG("VMResources\\crtBTnorm.png",275,99));
+        createVM.setBorder(null);
+        createVM.setContentAreaFilled(false);
+        createVM.setOpaque(false);
 
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 5; j++) {
-                JPanel Panel = new JPanel();
-                Panel.setBackground(new Color(44,69,85));
+        testVM.setIcon(scaleIMG("VMResources\\testBTnorm.png",275,99));
+        testVM.setBorder(null);
+        testVM.setContentAreaFilled(false);
+        testVM.setOpaque(false);
 
-                if (i == 1 && j == 2)
-                    lowerPanel.add(createVM);
-                else if (i == 3 && j == 2)
-                    lowerPanel.add(testVM);
-                else if (i == 5 && j == 2)
-                    lowerPanel.add(exitFactory);
-                else
-                    lowerPanel.add(Panel);
-            }
-        }
+        exitFactory.setIcon(scaleIMG("VMResources\\exitBTnorm.png",275,99));
+        exitFactory.setBorder(null);
+        exitFactory.setContentAreaFilled(false);
+        exitFactory.setOpaque(false);
 
-        borderPanel.add(lowerPanel);
-        add(borderPanel);
-        setBackground(new Color(66,70,73));
+        panelFiller4.add(createVM);
+        panelFiller5.add(testVM);
+        panelFiller6.add(exitFactory);
 
+        lowerPanel.add(panelFiller);
+        JPanel buttonPanel = new JPanel();
+
+        buttonPanel.setLayout(new GridLayout(1,5));
+        buttonPanel.add(panelFiller3);
+        buttonPanel.add(panelFiller4);
+        buttonPanel.add(panelFiller5);
+        buttonPanel.add(panelFiller6);
+        buttonPanel.add(panelFiller7);
+        buttonPanel.setOpaque(false);
+
+        lowerPanel.add(buttonPanel);
+
+        lowerPanel.add(panelFiller2);
+
+        add(upperPanel);
+        add(lowerPanel);
+
+    }
+
+    @Override
+    protected void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(bgIMG.getImage(),0,0,getWidth(),getHeight(),null);
+    }
+
+    private ImageIcon scaleIMG(String strname, int width, int height) {
+        ImageIcon imageIcon = new ImageIcon(strname);
+        Image raw = imageIcon.getImage();
+        Image scaled = raw.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaled);
     }
 
     public JButton getCreateVMButton() {
