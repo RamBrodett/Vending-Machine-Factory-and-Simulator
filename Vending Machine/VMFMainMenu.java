@@ -3,14 +3,15 @@ import java.awt.*;
 
 public class VMFMainMenu extends JPanel {
     ImageIcon bgIMG= new ImageIcon("VMResources\\mainbg.png");
-    private final JPanel upperPanel = new JPanel();
-    private final JPanel lowerPanel = new JPanel(); // will contain button panel
     private final JButton createVM = new JButton();
     private final JButton testVM = new JButton();
     private final JButton exitFactory = new JButton();
 
     VMFMainMenu(){
         setLayout(new GridLayout(2,1));
+
+        JPanel upperPanel =  new JPanel();
+        JPanel lowerPanel = new JPanel();
 
         upperPanel.setOpaque(false);
         lowerPanel.setOpaque(false);
@@ -86,7 +87,6 @@ public class VMFMainMenu extends JPanel {
     public JButton getCreateVMButton() {
         return createVM;
     }
-
     public JButton getTestVMButton(){
         return testVM;
     }
