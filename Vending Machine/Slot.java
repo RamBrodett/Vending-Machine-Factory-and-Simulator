@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 public class Slot {
     private int numProductsSold;
-    private int productQuantity;
     private int oldProductsSold;
     private  int oldProductQuantity;
     private Product baseProduct;
+    private ArrayList<Product> products = new ArrayList<>();
     private boolean isEdited;
 
     /**
@@ -25,7 +25,6 @@ public class Slot {
      */
 
     Slot(){
-        this.productQuantity = 0;
         this.numProductsSold = 0;
         baseProduct = new Product();
     }
@@ -40,8 +39,10 @@ public class Slot {
 
     public Slot(String name, double price, int calories,int qnty){
         this.numProductsSold = 0;
-        this.productQuantity = qnty;
         baseProduct = new Product(name,price,calories);
+        for(int i = 0; i< qnty; i++){
+            products.add(i,baseProduct);
+        }
     }
 
     /**
@@ -90,7 +91,7 @@ public class Slot {
      * @return the quantity of products in the slot
      */
     public int getProductQuantity() {
-        return productQuantity;
+        return products.size();
     }
 
     /**
@@ -191,8 +192,10 @@ public class Slot {
 
     public boolean setProductQuantity(int productQuantity) {
         boolean success = false;
-        if(this.productQuantity + productQuantity <= 15) { //setting max capacity of 15;
-            this.productQuantity += productQuantity;
+        if(products.size() + productQuantity <= 15) { //setting max capacity of 15;
+            for(int i = products.size(); i<products.size()+productQuantity;i++ ){
+                products.add(i,baseProduct);
+            }
             success = true;
         }
         return  success;
