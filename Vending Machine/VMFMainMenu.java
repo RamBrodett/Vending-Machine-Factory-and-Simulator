@@ -33,16 +33,19 @@ public class VMFMainMenu extends JPanel {
         panelFiller7.setOpaque(false);
 
         createVM.setIcon(scaleIMG("VMResources\\crtBTnorm.png",275,99));
+        createVM.setRolloverIcon(scaleIMG("VMResources\\crtBThover.png",275,99));
         createVM.setBorder(null);
         createVM.setContentAreaFilled(false);
         createVM.setOpaque(false);
 
         testVM.setIcon(scaleIMG("VMResources\\testBTnorm.png",275,99));
+        testVM.setRolloverIcon(scaleIMG("VMResources\\testBThover.png",275,99));
         testVM.setBorder(null);
         testVM.setContentAreaFilled(false);
         testVM.setOpaque(false);
 
         exitFactory.setIcon(scaleIMG("VMResources\\exitBTnorm.png",275,99));
+        exitFactory.setRolloverIcon(scaleIMG("VMResources\\exitBThover.png",275,99));
         exitFactory.setBorder(null);
         exitFactory.setContentAreaFilled(false);
         exitFactory.setOpaque(false);
