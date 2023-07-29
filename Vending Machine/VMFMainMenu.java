@@ -6,7 +6,6 @@ public class VMFMainMenu extends JPanel {
     private final JButton createVM = new JButton();
     private final JButton testVM = new JButton();
     private final JButton exitFactory = new JButton();
-
     VMFMainMenu(){
         setLayout(new GridLayout(2,1));
 

@@ -22,12 +22,10 @@ public class VMFController{
         cardPanel.setLayout(menu);
         this.mainFrame.add(cardPanel);
 
-
         // To switch between displays
         cardPanel.add("mainMenu", mainMenu);
         cardPanel.add("VMGen", generatorMenu);
         cardPanel.add("VMTest",testMenu);
-
 
         menu.show(cardPanel,"mainMenu");
 
@@ -63,10 +61,6 @@ public class VMFController{
 
         ActionListener backBTListener = e -> menu.show(cardPanel,"mainMenu");
         generatorMenu.getBack().addActionListener(backBTListener);
-
-
-
-
 
     }
 
