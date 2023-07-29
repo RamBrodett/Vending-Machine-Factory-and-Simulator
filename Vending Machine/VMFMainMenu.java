@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VMFMainMenu extends JPanel {
-    ImageIcon bgIMG= new ImageIcon("Vending Machine\\VMResources\\mainbg.png");
+    ImageIcon bgIMG= new ImageIcon("./VMResources/mainbg.png");
     private final JButton createVM = new JButton();
     private final JButton testVM = new JButton();
     private final JButton exitFactory = new JButton();
@@ -32,23 +32,23 @@ public class VMFMainMenu extends JPanel {
         panelFiller6.setOpaque(false);
         panelFiller7.setOpaque(false);
 
-        createVM.setIcon(scaleIMG("Vending Machine\\VMResources\\crtBTnorm.png",275,99));
-        createVM.setRolloverIcon(scaleIMG("Vending Machine\\VMResources\\crtBThover.png",275,99));
-        createVM.setPressedIcon(scaleIMG("Vending Machine\\VMResources\\crtBTclicked.png",275,99));
+        createVM.setIcon(scaleIMG("./VMResources/crtBTnorm.png",275,99));
+        createVM.setRolloverIcon(scaleIMG("./VMResources/crtBThover.png",275,99));
+        createVM.setPressedIcon(scaleIMG("./VMResources/crtBTclicked.png",275,99));
         createVM.setBorder(null);
         createVM.setContentAreaFilled(false);
         createVM.setOpaque(false);
 
-        testVM.setIcon(scaleIMG("Vending Machine\\VMResources\\testBTnorm.png",275,99));
-        testVM.setRolloverIcon(scaleIMG("Vending Machine\\VMResources\\testBThover.png",275,99));
-        testVM.setPressedIcon(scaleIMG("Vending Machine\\VMResources\\testBTclicked.png",275,99));
+        testVM.setIcon(scaleIMG("./VMResources/testBTnorm.png",275,99));
+        testVM.setRolloverIcon(scaleIMG("./VMResources/testBThover.png",275,99));
+        testVM.setPressedIcon(scaleIMG("./VMResources/testBTclicked.png",275,99));
         testVM.setBorder(null);
         testVM.setContentAreaFilled(false);
         testVM.setOpaque(false);
 
-        exitFactory.setIcon(scaleIMG("Vending Machine\\VMResources\\exitBTnorm.png",275,99));
-        exitFactory.setRolloverIcon(scaleIMG("Vending Machine\\VMResources\\exitBThover.png",275,99));
-        exitFactory.setPressedIcon(scaleIMG("Vending Machine\\VMResources\\exitBTclicked.png",275,99));
+        exitFactory.setIcon(scaleIMG("./VMResources/exitBTnorm.png",275,99));
+        exitFactory.setRolloverIcon(scaleIMG("./VMResources/exitBThover.png",275,99));
+        exitFactory.setPressedIcon(scaleIMG("./VMResources/exitBTclicked.png",275,99));
         exitFactory.setBorder(null);
         exitFactory.setContentAreaFilled(false);
         exitFactory.setOpaque(false);
@@ -74,6 +74,7 @@ public class VMFMainMenu extends JPanel {
 
         add(upperPanel);
         add(lowerPanel);
+
 
     }
 
