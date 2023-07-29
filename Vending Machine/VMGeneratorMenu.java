@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class VMGeneratorMenu extends JPanel {
 
-    ImageIcon bgIMG_genMenu = new ImageIcon("VMResources\\genBg.png");
+    ImageIcon bgIMG_genMenu = new ImageIcon("Vending Machine\\VMResources\\genBg.png");
     private JButton regVM = new JButton();
     private JButton specVM = new JButton();
     private JButton back = new JButton();
@@ -21,23 +21,23 @@ public class VMGeneratorMenu extends JPanel {
         centerPanel.setOpaque(false);
         lowerPanel.setOpaque(false);
 
-        regVM.setIcon(scaleIMG("VMResources\\rvmBTnorm.png",391,91));
-        regVM.setRolloverIcon(scaleIMG("VMResources\\rvmBThover.png",391,91));
-        regVM.setPressedIcon(scaleIMG("VMResources\\rvmBTclicked.png",391,91));
+        regVM.setIcon(scaleIMG("Vending Machine\\VMResources\\rvmBTnorm.png",391,91));
+        regVM.setRolloverIcon(scaleIMG("Vending Machine\\VMResources\\rvmBThover.png",391,91));
+        regVM.setPressedIcon(scaleIMG("Vending Machine\\VMResources\\rvmBTclicked.png",391,91));
         regVM.setBorder(null);
         regVM.setContentAreaFilled(false);
         regVM.setOpaque(false);
 
-        specVM.setIcon(scaleIMG("VMResources\\svmBTnorm.png",391,91));
-        specVM.setRolloverIcon(scaleIMG("VMResources\\svmBThover.png",391,91));
-        specVM.setPressedIcon(scaleIMG("VMResources\\svmBTclicked.png",391,91));
+        specVM.setIcon(scaleIMG("Vending Machine\\VMResources\\svmBTnorm.png",391,91));
+        specVM.setRolloverIcon(scaleIMG("Vending Machine\\VMResources\\svmBThover.png",391,91));
+        specVM.setPressedIcon(scaleIMG("Vending Machine\\VMResources\\svmBTclicked.png",391,91));
         specVM.setBorder(null);
         specVM.setContentAreaFilled(false);
         specVM.setOpaque(false);
 
-        back.setIcon(scaleIMG("VMResources\\backBTnorm.png",391,91));
-        back.setRolloverIcon(scaleIMG("VMResources\\backBThover.png",391,91));
-        back.setPressedIcon(scaleIMG("VMResources\\backBTclicked.png",391,91));
+        back.setIcon(scaleIMG("Vending Machine\\VMResources\\backBTnorm.png",391,91));
+        back.setRolloverIcon(scaleIMG("Vending Machine\\VMResources\\backBThover.png",391,91));
+        back.setPressedIcon(scaleIMG("Vending Machine\\VMResources\\backBTclicked.png",391,91));
         back.setBorder(null);
         back.setContentAreaFilled(false);
         back.setOpaque(false);
