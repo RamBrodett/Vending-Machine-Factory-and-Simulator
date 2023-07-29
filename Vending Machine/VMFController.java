@@ -31,7 +31,7 @@ public class VMFController{
 
         //ACTION LISTENERS-----------------------
 
-            //mainmenu
+        //mainmenu
 
         ActionListener createVMListener = e -> menu.show(cardPanel,"VMGen");
         mainMenu.getCreateVMButton().addActionListener(createVMListener);
@@ -45,11 +45,11 @@ public class VMFController{
         };
         mainMenu.getExitFactoryButton().addActionListener(exitFacLister);
 
-           //create VM (not yet right it will hang cuz it's looking for money input) **only back is working right**
+        //create VM (not yet right it will hang cuz it's looking for money input) **only back is working right**
         ActionListener createRVMListener = e ->{
             currMachine = new VendingMachine();
             menu.show(cardPanel,"mainMenu");
-            
+
         };
         generatorMenu.getRegVM().addActionListener(createRVMListener);
 
@@ -61,6 +61,7 @@ public class VMFController{
 
         ActionListener backBTListener = e -> menu.show(cardPanel,"mainMenu");
         generatorMenu.getBack().addActionListener(backBTListener);
+        testMenu.getBackButton().addActionListener(backBTListener);
 
     }
 
