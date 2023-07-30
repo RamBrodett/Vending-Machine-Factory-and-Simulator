@@ -32,6 +32,9 @@ public class VMFController{
         mainView.generatorMenu.getRegVM().addActionListener(e -> {
             try{
                 currMachine = new VendingMachine();
+                // to do here:
+                //   set money pane for vending machine;
+                //  then when done go back to main menu
                 mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
                         "created Regular Vending Machine");
 
@@ -39,15 +42,23 @@ public class VMFController{
                 mainView.generatorMenu.optionPane.showMessageDialog(null,"An error " +
                         "occured: " + error.getMessage()+ " Error");
             }
-            // to do here:
-            //   set money pane for vending machine;
-            //  then when done go back to main menu
 
             mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
         });
 
         mainView.generatorMenu.getSpecVM().addActionListener(e -> {
-            currMachine = new SpecialVM();
+            try{
+                currMachine = new SpecialVM();
+                // to do here:
+                //   set money pane for vending machine;
+                //  then when done go back to main menu
+                mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
+                        "created Regular Vending Machine");
+
+            }catch (Exception error){
+                mainView.generatorMenu.optionPane.showMessageDialog(null,"An error " +
+                        "occured: " + error.getMessage()+ " Error");
+            }
             // to do here:
             //   set money pane for vending machine;
             //  then when done go back to main menu

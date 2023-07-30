@@ -4,6 +4,7 @@ import java.awt.*;
 public class VMGeneratorMenu extends JPanel {
 
     ImageIcon bgIMG_genMenu = new ImageIcon("./VMResources/genBg.png");
+    private JFrame moneyInputFrame = new JFrame();
     private JButton regVM = new JButton();
     private JButton specVM = new JButton();
     private JButton back = new JButton();
