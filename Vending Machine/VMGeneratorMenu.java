@@ -176,6 +176,10 @@ public class VMGeneratorMenu extends JPanel {
         return moneyInputFrame;
     }
     public void terminateMONEYINTERFACE(){
+        for (int i = 0; i < denominationButtons.length; i++) {
+            JSpinner spinner = denominationButtons[i];
+            spinner.setValue(0); // Reset each spinner to zero
+        }
         moneyInputFrame.setVisible(false);
         moneyInputFrame.dispose();
     }
@@ -183,5 +187,6 @@ public class VMGeneratorMenu extends JPanel {
         back.setEnabled(true);
         regVM.setEnabled(true);
         specVM.setEnabled(true);
+
     }
 }

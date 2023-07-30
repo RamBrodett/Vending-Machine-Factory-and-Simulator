@@ -1,11 +1,11 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VMFController{
 
     private VendingMachine currMachine;
     private final MainFrame mainView;
+    private Denomination initialMoney;
 
 
     VMFController(MainFrame mainFrame){
@@ -21,7 +21,18 @@ public class VMFController{
         mainView.testMenu.getBackButton().addActionListener(backtoMmListener);
         //--------------------------------------------------------------------
 
-        mainView.mainMenu.getCreateVMButton().addActionListener(e -> mainView.menu.show(mainView.cardPanel,"VMGen"));
+        mainView.mainMenu.getCreateVMButton().addActionListener(e -> {
+            if(currMachine != null){
+                int choice = mainView.optionPane.showConfirmDialog(null,"There is a vending machine" +
+                        " currently loaded, are you sure you want to overwrite it?","select an option",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
+                if(choice==0){
+                    currMachine = null; // delete the first mmachine first
+                    mainView.menu.show(mainView.cardPanel,"VMGen");
+                }
+            }
+            else mainView.menu.show(mainView.cardPanel,"VMGen");
+        });
 
         mainView.mainMenu.getTestVMButton().addActionListener(e -> {
             if(currMachine != null){
@@ -43,13 +54,12 @@ public class VMFController{
                 currMachine = new VendingMachine();
                 mainView.generatorMenu.moneyInterface();
                 mainView.generatorMenu.getExit().addActionListener(event->{
-                    Denomination initialMoney = new Denomination();
                     mainView.generatorMenu.terminateMONEYINTERFACE();
                     mainView.generatorMenu.re_setButton();
                     mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
                 });
                 mainView.generatorMenu.getSet().addActionListener(event ->{
-                    Denomination initialMoney = new Denomination(mainView.generatorMenu.getValue(0),
+                            initialMoney = new Denomination(mainView.generatorMenu.getValue(0),
                             mainView.generatorMenu.getValue(1),
                             mainView.generatorMenu.getValue(2),
                             mainView.generatorMenu.getValue(3),
@@ -59,12 +69,13 @@ public class VMFController{
                             mainView.generatorMenu.getValue(7),
                             mainView.generatorMenu.getValue(8),
                             mainView.generatorMenu.getValue(9));
-                    currMachine.vmSetMoney(initialMoney);
-                    mainView.generatorMenu.terminateMONEYINTERFACE();
-                    mainView.generatorMenu.re_setButton();
-                    mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
-                            "created Reular Vending Machine with initial money: "+ currMachine.getmoney());
-                    mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
+                            currMachine.vmSetMoney(initialMoney);
+                            mainView.generatorMenu.terminateMONEYINTERFACE();
+                            mainView.generatorMenu.re_setButton();
+                            mainView.generatorMenu.optionPane.showMessageDialog(null,
+                            "Successfully created Reular Vending Machine with initial" +
+                                    " money: "+ currMachine.getmoney());
+                            mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
                 });
 
             }catch (Exception error){
@@ -78,13 +89,12 @@ public class VMFController{
                 currMachine = new SpecialVM();
                 mainView.generatorMenu.moneyInterface();
                 mainView.generatorMenu.getExit().addActionListener(event->{
-                    Denomination initialMoney = new Denomination();
                     mainView.generatorMenu.terminateMONEYINTERFACE();
                     mainView.generatorMenu.re_setButton();
                     mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
                 });
                 mainView.generatorMenu.getSet().addActionListener(event ->{
-                    Denomination initialMoney = new Denomination(mainView.generatorMenu.getValue(0),
+                            initialMoney = new Denomination(mainView.generatorMenu.getValue(0),
                             mainView.generatorMenu.getValue(1),
                             mainView.generatorMenu.getValue(2),
                             mainView.generatorMenu.getValue(3),
@@ -94,12 +104,13 @@ public class VMFController{
                             mainView.generatorMenu.getValue(7),
                             mainView.generatorMenu.getValue(8),
                             mainView.generatorMenu.getValue(9));
-                    currMachine.vmSetMoney(initialMoney);
-                    mainView.generatorMenu.terminateMONEYINTERFACE();
-                    mainView.generatorMenu.re_setButton();
-                    mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
-                            "created Special Vending Machine with initial money: "+ currMachine.getmoney());
-                    mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
+                            currMachine.vmSetMoney(initialMoney);
+                            mainView.generatorMenu.terminateMONEYINTERFACE();
+                            mainView.generatorMenu.re_setButton();
+                            mainView.generatorMenu.optionPane.showMessageDialog(null,
+                            "Successfully created Special Vending Machine with initial" +
+                                    " money: "+ currMachine.getmoney());
+                            mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
                 });
             }catch (Exception error){
                 mainView.generatorMenu.optionPane.showMessageDialog(null,"An error " +
