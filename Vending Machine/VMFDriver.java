@@ -1,7 +1,7 @@
 public class VMFDriver {
     public static void main(String[] args) {
-
-        VMFController program = new VMFController();
+        MainFrame mainFrame = new MainFrame();
+        VMFController program = new VMFController(mainFrame);
     }
 
 }

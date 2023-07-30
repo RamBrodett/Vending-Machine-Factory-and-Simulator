@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class VMFTestMenu extends JPanel {
 
-    ImageIcon bgIMG_testMenu = new ImageIcon("./VMResources/mainMenuBg.png");
+    ImageIcon bgIMG_testMenu = new ImageIcon("./VMResources/testbg.png");
     private final JButton simVM = new JButton();
     private final JButton maintenanceVM = new JButton();
     private final JButton back = new JButton();
@@ -19,16 +19,16 @@ public class VMFTestMenu extends JPanel {
         lPanel.setOpaque(false);
         rPanel.setOpaque(false);
 
-        simVM.setIcon(scaleIMG("./VMResources/rvmBTnorm.png",391,91));
-        simVM.setRolloverIcon(scaleIMG("./VMResources/rvmBThover.png",391,91));
-        simVM.setPressedIcon(scaleIMG("./VMResources/rvmBTclicked.png",391,91));
+        simVM.setIcon(scaleIMG("./VMResources/simvmBTnorm.png",391,91));
+        simVM.setRolloverIcon(scaleIMG("./VMResources/simvmBThover.png",391,91));
+        simVM.setPressedIcon(scaleIMG("./VMResources/simvmBTclicked.png.png",391,91));
         simVM.setBorder(null);
         simVM.setContentAreaFilled(false);
         simVM.setOpaque(false);
 
-        maintenanceVM.setIcon(scaleIMG("./VMResources/svmBTnorm.png",391,91));
-        maintenanceVM.setRolloverIcon(scaleIMG("./VMResources/svmBThover.png",391,91));
-        maintenanceVM.setPressedIcon(scaleIMG("./VMResources/svmBTclicked.png",391,91));
+        maintenanceVM.setIcon(scaleIMG("./VMResources/maintenanceBTnorm.png",391,91));
+        maintenanceVM.setRolloverIcon(scaleIMG("./VMResources/maintenanceBThover.png",391,91));
+        maintenanceVM.setPressedIcon(scaleIMG("./VMResources/maintenanceBTclicked.png",391,91));
         maintenanceVM.setBorder(null);
         maintenanceVM.setContentAreaFilled(false);
         maintenanceVM.setOpaque(false);

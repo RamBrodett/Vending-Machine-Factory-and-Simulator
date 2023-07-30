@@ -1,67 +1,70 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VMFController{
-    private static VendingMachine currMachine;
-    JFrame mainFrame;
-    JPanel cardPanel = new JPanel();
-    CardLayout menu = new CardLayout();
-    VMFMainMenu mainMenu = new VMFMainMenu();
-    VMGeneratorMenu generatorMenu = new VMGeneratorMenu();
-    VMFTestMenu testMenu = new VMFTestMenu();
 
-    VMFController(){
-        this.mainFrame = new JFrame("YOU-G-ART FACTORY");
-        mainFrame.setSize(1920,1080);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        mainFrame.setVisible(true);
+    private VendingMachine currMachine;
+    private final MainFrame mainView;
 
-        cardPanel.setSize(1920,1080);
-        cardPanel.setLayout(menu);
-        this.mainFrame.add(cardPanel);
 
-        // To switch between displays
-        cardPanel.add("mainMenu", mainMenu);
-        cardPanel.add("VMGen", generatorMenu);
-        cardPanel.add("VMTest",testMenu);
+    VMFController(MainFrame mainFrame){
+        this.mainView = mainFrame;
 
-        menu.show(cardPanel,"mainMenu");
+        //initialize Main Menu first
+        mainView.menu.show(this.mainView.cardPanel,"mainMenu");
 
-        //ACTION LISTENERS-----------------------
+        // action to go back to main menu
+        ActionListener backtoMmListener = e-> mainView.menu.show(mainView.cardPanel, "mainMenu");
+        //back buttons ------------------------------------------------------
+        mainView.generatorMenu.getBack().addActionListener(backtoMmListener);
+        mainView.testMenu.getBackButton().addActionListener(backtoMmListener);
+        //--------------------------------------------------------------------
 
-        //mainmenu
+        mainView.mainMenu.getCreateVMButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainView.menu.show(mainView.cardPanel,"VMGen");
+            }
+        });
 
-        ActionListener createVMListener = e -> menu.show(cardPanel,"VMGen");
-        mainMenu.getCreateVMButton().addActionListener(createVMListener);
+        mainView.mainMenu.getTestVMButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainView.menu.show(mainView.cardPanel,"VMTest");
+            }
+        });
 
-        ActionListener testVMListener = e -> menu.show(cardPanel,"VMTest");
-        mainMenu.getTestVMButton().addActionListener(testVMListener);
+        mainView.mainMenu.getExitFactoryButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainView.mainFrame.setVisible(false);
+                System.exit(0);
+            }
+        });
 
-        ActionListener exitFacLister = e ->{
-            mainFrame.setVisible(false);
-            System.exit(0);
-        };
-        mainMenu.getExitFactoryButton().addActionListener(exitFacLister);
+        mainView.generatorMenu.getRegVM().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currMachine = new VendingMachine();
+                // to do here:
+                //   set money pane for vending machine;
+                //  then when done go back to main menu
+                mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
+            }
+        });
 
-        //create VM (not yet right it will hang cuz it's looking for money input) **only back is working right**
-        ActionListener createRVMListener = e ->{
-            currMachine = new VendingMachine();
-            menu.show(cardPanel,"mainMenu");
-
-        };
-        generatorMenu.getRegVM().addActionListener(createRVMListener);
-
-        ActionListener createSVMListener = e ->{
-            currMachine = new SpecialVM();
-            menu.show(cardPanel,"mainMenu");
-        };
-        generatorMenu.getSpecVM().addActionListener(createSVMListener);
-
-        ActionListener backBTListener = e -> menu.show(cardPanel,"mainMenu");
-        generatorMenu.getBack().addActionListener(backBTListener);
-        testMenu.getBackButton().addActionListener(backBTListener);
+        mainView.generatorMenu.getSpecVM().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currMachine = new SpecialVM();
+                // to do here:
+                //   set money pane for vending machine;
+                //  then when done go back to main menu
+                mainView.menu.show(mainView.cardPanel, "mainMenu");
+            }
+        });
 
     }
 

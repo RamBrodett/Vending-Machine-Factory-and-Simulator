@@ -72,13 +72,9 @@ public class VMGeneratorMenu extends JPanel {
         lowerPanel.add(specVM,gbc);
 
 
-
-
         add(upperPanel);
         add(centerPanel);
         add(lowerPanel);
-
-
 
     }
     @Override
