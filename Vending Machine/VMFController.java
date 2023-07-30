@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,7 +23,15 @@ public class VMFController{
 
         mainView.mainMenu.getCreateVMButton().addActionListener(e -> mainView.menu.show(mainView.cardPanel,"VMGen"));
 
-        mainView.mainMenu.getTestVMButton().addActionListener(e -> mainView.menu.show(mainView.cardPanel,"VMTest"));
+        mainView.mainMenu.getTestVMButton().addActionListener(e -> {
+            if(currMachine != null){
+                mainView.menu.show(mainView.cardPanel,"VMTest");
+            }
+            else{
+                mainView.optionPane.showMessageDialog(null,"Please create a Vending" +
+                        " Machine First.");
+            }
+        });
 
         mainView.mainMenu.getExitFactoryButton().addActionListener(e -> {
             mainView.mainFrame.setVisible(false);
@@ -32,29 +41,66 @@ public class VMFController{
         mainView.generatorMenu.getRegVM().addActionListener(e -> {
             try{
                 currMachine = new VendingMachine();
-                // to do here:
-                //   set money pane for vending machine;
-                //  then when done go back to main menu
-                mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
-                        "created Regular Vending Machine");
+                mainView.generatorMenu.moneyInterface();
+                mainView.generatorMenu.getExit().addActionListener(event->{
+                    Denomination initialMoney = new Denomination();
+                    mainView.generatorMenu.terminateMONEYINTERFACE();
+                    mainView.generatorMenu.re_setButton();
+                    mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
+                });
+                mainView.generatorMenu.getSet().addActionListener(event ->{
+                    Denomination initialMoney = new Denomination(mainView.generatorMenu.getValue(0),
+                            mainView.generatorMenu.getValue(1),
+                            mainView.generatorMenu.getValue(2),
+                            mainView.generatorMenu.getValue(3),
+                            mainView.generatorMenu.getValue(4),
+                            mainView.generatorMenu.getValue(5),
+                            mainView.generatorMenu.getValue(6),
+                            mainView.generatorMenu.getValue(7),
+                            mainView.generatorMenu.getValue(8),
+                            mainView.generatorMenu.getValue(9));
+                    currMachine.vmSetMoney(initialMoney);
+                    mainView.generatorMenu.terminateMONEYINTERFACE();
+                    mainView.generatorMenu.re_setButton();
+                    mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
+                            "created Reular Vending Machine with initial money: "+ currMachine.getmoney());
+                    mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
+                });
 
             }catch (Exception error){
                 mainView.generatorMenu.optionPane.showMessageDialog(null,"An error " +
                         "occured: " + error.getMessage()+ " Error");
             }
-
-            mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
         });
 
         mainView.generatorMenu.getSpecVM().addActionListener(e -> {
             try{
                 currMachine = new SpecialVM();
-                // to do here:
-                //   set money pane for vending machine;
-                //  then when done go back to main menu
-                mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
-                        "created Regular Vending Machine");
-
+                mainView.generatorMenu.moneyInterface();
+                mainView.generatorMenu.getExit().addActionListener(event->{
+                    Denomination initialMoney = new Denomination();
+                    mainView.generatorMenu.terminateMONEYINTERFACE();
+                    mainView.generatorMenu.re_setButton();
+                    mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
+                });
+                mainView.generatorMenu.getSet().addActionListener(event ->{
+                    Denomination initialMoney = new Denomination(mainView.generatorMenu.getValue(0),
+                            mainView.generatorMenu.getValue(1),
+                            mainView.generatorMenu.getValue(2),
+                            mainView.generatorMenu.getValue(3),
+                            mainView.generatorMenu.getValue(4),
+                            mainView.generatorMenu.getValue(5),
+                            mainView.generatorMenu.getValue(6),
+                            mainView.generatorMenu.getValue(7),
+                            mainView.generatorMenu.getValue(8),
+                            mainView.generatorMenu.getValue(9));
+                    currMachine.vmSetMoney(initialMoney);
+                    mainView.generatorMenu.terminateMONEYINTERFACE();
+                    mainView.generatorMenu.re_setButton();
+                    mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
+                            "created Special Vending Machine with initial money: "+ currMachine.getmoney());
+                    mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
+                });
             }catch (Exception error){
                 mainView.generatorMenu.optionPane.showMessageDialog(null,"An error " +
                         "occured: " + error.getMessage()+ " Error");
@@ -65,6 +111,10 @@ public class VMFController{
             mainView.menu.show(mainView.cardPanel, "mainMenu");
         });
 
-    }
+        mainView.testMenu.getSimulateVMButton().addActionListener(e -> {
+            mainView.mainFrame.setResizable(false);
+            mainView.menu.show(mainView.cardPanel, "vmSIM");
+        });
 
+    }
 }

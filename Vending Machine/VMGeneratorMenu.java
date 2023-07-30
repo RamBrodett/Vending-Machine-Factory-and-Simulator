@@ -3,11 +3,14 @@ import java.awt.*;
 
 public class VMGeneratorMenu extends JPanel {
 
-    ImageIcon bgIMG_genMenu = new ImageIcon("./VMResources/genBg.png");
+    private ImageIcon bgIMG_genMenu = new ImageIcon("./VMResources/genBg.png");
     private JFrame moneyInputFrame = new JFrame();
     private JButton regVM = new JButton();
     private JButton specVM = new JButton();
     private JButton back = new JButton();
+    private JSpinner[] denominationButtons = new JSpinner[10];
+    JButton exit = new JButton("EXIT");
+    JButton set = new JButton("SET DENOMINATION");
     public JOptionPane optionPane = new JOptionPane(); // for popup messages
 
 
@@ -79,6 +82,67 @@ public class VMGeneratorMenu extends JPanel {
         add(lowerPanel);
 
     }
+
+    public void moneyInterface(){
+        back.setEnabled(false);
+        regVM.setEnabled(false);
+        specVM.setEnabled(false);
+        moneyInputFrame.setSize(new Dimension(800,600));
+        //moneyInputFrame.setSize(new Dimension(1024,768));
+        moneyInputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        moneyInputFrame.setLayout(new BorderLayout());
+        moneyInputFrame.setLocation(450,50);
+        moneyInputFrame.setAlwaysOnTop(true);
+
+        JPanel namingPanel = new JPanel(new FlowLayout());
+        JPanel moneyPanel = new JPanel(new GridLayout(5,2));
+        JPanel buttonpanel = new JPanel(new GridLayout(1,2));
+        JPanel[] moneyTags = new JPanel[10];
+
+        JLabel label = new JLabel("Denomination Setter");
+        label.setFont(new Font("Arial", Font.PLAIN, 18));
+        namingPanel.add(label);
+
+        for(int i=0; i<10; i++){
+            SpinnerNumberModel moneyRoll = new SpinnerNumberModel();
+            moneyRoll.setMinimum(0);
+            moneyRoll.setValue(0);
+            denominationButtons[i] = new JSpinner(moneyRoll);
+            denominationButtons[i].setPreferredSize(new Dimension(80,60));
+            ((JSpinner.DefaultEditor) denominationButtons[i].getEditor()).getTextField().setEditable(false);
+            moneyTags[i] = new JPanel();
+            JLabel valueHolder = new JLabel();
+            moneyTags[i].setLayout(new FlowLayout());
+            moneyTags[i].add(denominationButtons[i]);
+            switch (i){
+                case 0 -> valueHolder.setText("PHP 1 coin");
+                case 1 -> valueHolder.setText("PHP 5 coin");
+                case 2 -> valueHolder.setText("PHP 10 coin");
+                case 3 -> valueHolder.setText("PHP 20 coin");
+                case 4 -> valueHolder.setText("PHP 20 bill");
+                case 5 -> valueHolder.setText("PHP 50 bill");
+                case 6 -> valueHolder.setText("PHP 100 bill");
+                case 7 -> valueHolder.setText("PHP 200 bill");
+                case 8 -> valueHolder.setText("PHP 500 bill");
+                case 9 -> valueHolder.setText("PHP 1000 bill");
+            }
+            moneyTags[i].add(valueHolder);
+            moneyPanel.add(moneyTags[i]);
+        }
+
+        buttonpanel.add(exit);
+        buttonpanel.add(set);
+
+
+        moneyInputFrame.add(namingPanel,BorderLayout.NORTH);
+        moneyInputFrame.add(moneyPanel,BorderLayout.CENTER);
+        moneyInputFrame.add(buttonpanel,BorderLayout.SOUTH);
+        moneyInputFrame.setUndecorated(true);
+        moneyInputFrame.setVisible(true);
+
+
+    }
+
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -100,5 +164,26 @@ public class VMGeneratorMenu extends JPanel {
     }
     public JButton getBack(){
         return back;
+    }
+    public int getValue(int index){
+        return (int) denominationButtons[index].getValue();
+    }
+    public JButton getSet(){
+        return set;
+    }
+    public JButton getExit(){
+        return exit;
+    }
+    public JFrame getMoneyInputFrame(){
+        return moneyInputFrame;
+    }
+    public void terminateMONEYINTERFACE(){
+        moneyInputFrame.setVisible(false);
+        moneyInputFrame.dispose();
+    }
+    public void re_setButton(){
+        back.setEnabled(true);
+        regVM.setEnabled(true);
+        specVM.setEnabled(true);
     }
 }

@@ -9,6 +9,8 @@ public class MainFrame {
     VMFMainMenu mainMenu = new VMFMainMenu();
     VMGeneratorMenu generatorMenu = new VMGeneratorMenu();
     VMFTestMenu testMenu = new VMFTestMenu();
+    VMInterface vmInterface = new VMInterface();
+    public JOptionPane optionPane = new JOptionPane(); // for popup messages
 
     MainFrame(){
         this.mainFrame = new JFrame("YOU-G-ART FACTORY");
@@ -24,5 +26,6 @@ public class MainFrame {
         cardPanel.add("mainMenu", mainMenu);
         cardPanel.add("VMGen", generatorMenu);
         cardPanel.add("VMTest",testMenu);
+        cardPanel.add("vmSIM", vmInterface);
     }
 }

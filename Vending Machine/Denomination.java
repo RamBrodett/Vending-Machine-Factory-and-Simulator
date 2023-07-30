@@ -59,7 +59,32 @@ public class Denomination {
      */
     private int thousandPesoBill;
 
+    Denomination(){
+        setOnePesoCoin(0);
+        setFivePesoCoin(0);
+        setTenPesoCoin(0);
+        setTwentyPesoCoin(0);
+        setTwentyPesoBill(0);
+        setFiftyPesoBill(0);
+        setOneHundredPesoBill(0);
+        setTwoHundredPesoBill(0);
+        setFiveHundredPesoBill(0);
+        setThousandPesoBill(0);
+    }
 
+    Denomination(int onePHP, int fivePHP, int tenPHP, int twentyCPHP, int twentyBPHP,
+                 int fiftyPHP, int oneHPHP, int twoHPHP, int fiveHPHP, int oneKPHP){
+        setOnePesoCoin(onePHP);
+        setFivePesoCoin(fivePHP);
+        setTenPesoCoin(tenPHP);
+        setTwentyPesoCoin(twentyCPHP);
+        setTwentyPesoBill(twentyBPHP);
+        setFiftyPesoBill(fiftyPHP);
+        setOneHundredPesoBill(oneHPHP);
+        setTwoHundredPesoBill(twoHPHP);
+        setFiveHundredPesoBill(fiveHPHP);
+        setThousandPesoBill(oneKPHP);
+    }
     /**
      * Setter for one peso coin. Assigns via increment.
      * @param qty Accepts amount to add to attribute.

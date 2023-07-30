@@ -92,6 +92,8 @@ public class VendingMachine{
      * @param ifReplace is a boolean value to know if it is replacing an item or restocking.
      */
 
+
+    // to do chnage to only restock and change price, and remove na yung dina need like scanner
     public void setProductOnSlot(int slotNumber, boolean ifReplace){
         Scanner scanner = new Scanner(System.in);
 
@@ -726,7 +728,6 @@ public class VendingMachine{
     private void vmSimulationDisplay(int type){
         if(type==1)
         {
-            consoleSysCom("cls");
             System.out.println("Starting emulation.....");
             System.out.println("Vending Machine ready for testing.\n");
         }
@@ -735,6 +736,10 @@ public class VendingMachine{
             System.out.println("Terminating emulation.....");
             System.out.println("Vending Machine terminated.\n");
         }
+    }
+
+    public int getmoney(){
+        return this.denomination.getTotalMoney();
     }
 
     /**
@@ -784,6 +789,9 @@ public class VendingMachine{
      * Shows the items sold, their prices, the quantity sold, and the corresponding profit.
      * </p>
      */
+
+    //to do dapat lumalabas to sa text area yung blue na gilid ng vm
+
     public void displayTransactions(){
         double totalProfit = 0;
 
@@ -812,22 +820,4 @@ public class VendingMachine{
         System.out.println(" ");
     }
 
-    //helper methods-----------------------------------------------------------------------------
-
-    /**
-     * Executes a system command related to console control.
-     * @param command The command to be executed:
-     *                - "cls": Clears the console screen.
-     *                - "fflush": Flushes the console input buffer.
-     */
-    private void consoleSysCom(String command){
-        Scanner scanner = new Scanner(System.in);
-        switch(command){
-            case "cls" -> {
-                System.out.print("\033[H\033[2J"); // clear screen
-                System.out.flush(); //clear screen
-            }
-            case "fflush" -> scanner.nextLine();
-        }
-    }
 }

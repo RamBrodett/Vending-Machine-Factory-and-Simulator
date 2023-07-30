@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class VMFTestMenu extends JPanel {
 
-    ImageIcon bgIMG_testMenu = new ImageIcon("./VMResources/testbg.png");
+    private ImageIcon bgIMG_testMenu = new ImageIcon("./VMResources/testbg.png");
     private final JButton simVM = new JButton();
     private final JButton maintenanceVM = new JButton();
     private final JButton back = new JButton();

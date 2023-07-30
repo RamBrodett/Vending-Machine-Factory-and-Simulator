@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VMFMainMenu extends JPanel {
-    ImageIcon bgIMG= new ImageIcon("./VMResources/mainbg.png");
+    private ImageIcon bgIMG= new ImageIcon("./VMResources/mainbg.png");
     private final JButton createVM = new JButton();
     private final JButton testVM = new JButton();
     private final JButton exitFactory = new JButton();
