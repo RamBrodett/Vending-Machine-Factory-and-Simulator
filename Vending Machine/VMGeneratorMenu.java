@@ -7,7 +7,7 @@ public class VMGeneratorMenu extends JPanel {
     private JButton regVM = new JButton();
     private JButton specVM = new JButton();
     private JButton back = new JButton();
-    public JOptionPane optionPane = new JOptionPane();
+    public JOptionPane optionPane = new JOptionPane(); // for popup messages
 
 
     VMGeneratorMenu(){
