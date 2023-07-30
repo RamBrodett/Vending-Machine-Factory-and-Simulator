@@ -19,7 +19,6 @@ public class VendingMachine{
 
     /**
      * Constructor for Vending Machine. Makes instances of the subclass it needs.
-     * @param slotCapacity for number of capacity it will inherit to be the max slots for products.
      */
 
     public VendingMachine(){
@@ -38,7 +37,6 @@ public class VendingMachine{
      *     Utilizes different methods to interact with user to recieve and set necessary
      *     informations.
      * </p>
-     * @var money is total money provided to the machine.
      */
     private void vmCreation(){
         String[] products = {"Vanilla Yogurt","Chocolate Yogurt","Strawberry Yogurt",
@@ -50,16 +48,18 @@ public class VendingMachine{
             if(i<6)productSlots.add(i,new Slot(products[i],100,90,15));
             else productSlots.add(i,new Slot(products[i],45,40,15));
         }
+        /* to be removed
 
-        for(int x=0; x<52;x++) System.out.print("═");
+          for(int x=0; x<52;x++) System.out.print("═");
         System.out.println("""
-                
+
                 You may like to place your initial money in your
                 Vending Machine. You may do so by selecting the
                 denomination and quantity, or you may exit.""");
         vmSetMoney(denominationFeedInterface());
         double money = this.denomination.getTotalMoney();
         System.out.println("Total Money: " + money);
+         */
     }
 
 

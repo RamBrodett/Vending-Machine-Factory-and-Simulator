@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,48 +20,38 @@ public class VMFController{
         mainView.testMenu.getBackButton().addActionListener(backtoMmListener);
         //--------------------------------------------------------------------
 
-        mainView.mainMenu.getCreateVMButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainView.menu.show(mainView.cardPanel,"VMGen");
-            }
+        mainView.mainMenu.getCreateVMButton().addActionListener(e -> mainView.menu.show(mainView.cardPanel,"VMGen"));
+
+        mainView.mainMenu.getTestVMButton().addActionListener(e -> mainView.menu.show(mainView.cardPanel,"VMTest"));
+
+        mainView.mainMenu.getExitFactoryButton().addActionListener(e -> {
+            mainView.mainFrame.setVisible(false);
+            System.exit(0);
         });
 
-        mainView.mainMenu.getTestVMButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainView.menu.show(mainView.cardPanel,"VMTest");
-            }
-        });
-
-        mainView.mainMenu.getExitFactoryButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainView.mainFrame.setVisible(false);
-                System.exit(0);
-            }
-        });
-
-        mainView.generatorMenu.getRegVM().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        mainView.generatorMenu.getRegVM().addActionListener(e -> {
+            try{
                 currMachine = new VendingMachine();
-                // to do here:
-                //   set money pane for vending machine;
-                //  then when done go back to main menu
-                mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
+                mainView.generatorMenu.optionPane.showMessageDialog(null, "Successfully " +
+                        "created Regular Vending Machine");
+
+            }catch (Exception error){
+                mainView.generatorMenu.optionPane.showMessageDialog(null,"An error " +
+                        "occured: " + error.getMessage()+ " Error");
             }
+            // to do here:
+            //   set money pane for vending machine;
+            //  then when done go back to main menu
+
+            mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
         });
 
-        mainView.generatorMenu.getSpecVM().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currMachine = new SpecialVM();
-                // to do here:
-                //   set money pane for vending machine;
-                //  then when done go back to main menu
-                mainView.menu.show(mainView.cardPanel, "mainMenu");
-            }
+        mainView.generatorMenu.getSpecVM().addActionListener(e -> {
+            currMachine = new SpecialVM();
+            // to do here:
+            //   set money pane for vending machine;
+            //  then when done go back to main menu
+            mainView.menu.show(mainView.cardPanel, "mainMenu");
         });
 
     }

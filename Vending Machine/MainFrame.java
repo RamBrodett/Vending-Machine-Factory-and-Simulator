@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class MainFrame {
     JFrame mainFrame;
+    JFrame moneyInputFrame;
     JPanel cardPanel = new JPanel();
     CardLayout menu = new CardLayout();
     VMFMainMenu mainMenu = new VMFMainMenu();
