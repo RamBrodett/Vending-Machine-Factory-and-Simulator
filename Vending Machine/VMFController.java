@@ -105,10 +105,6 @@ public class VMFController{
                 mainView.generatorMenu.optionPane.showMessageDialog(null,"An error " +
                         "occured: " + error.getMessage()+ " Error");
             }
-            // to do here:
-            //   set money pane for vending machine;
-            //  then when done go back to main menu
-            mainView.menu.show(mainView.cardPanel, "mainMenu");
         });
 
         mainView.testMenu.getSimulateVMButton().addActionListener(e -> {

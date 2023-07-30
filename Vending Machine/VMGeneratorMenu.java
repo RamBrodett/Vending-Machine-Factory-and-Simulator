@@ -88,7 +88,6 @@ public class VMGeneratorMenu extends JPanel {
         regVM.setEnabled(false);
         specVM.setEnabled(false);
         moneyInputFrame.setSize(new Dimension(800,600));
-        //moneyInputFrame.setSize(new Dimension(1024,768));
         moneyInputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         moneyInputFrame.setLayout(new BorderLayout());
         moneyInputFrame.setLocation(450,50);
@@ -139,7 +138,6 @@ public class VMGeneratorMenu extends JPanel {
         moneyInputFrame.add(buttonpanel,BorderLayout.SOUTH);
         moneyInputFrame.setUndecorated(true);
         moneyInputFrame.setVisible(true);
-
 
     }
 
