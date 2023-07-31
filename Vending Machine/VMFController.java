@@ -83,10 +83,9 @@ public class VMFController {
 
         this.frame.generatorMenu.getExit().addActionListener(e ->{
             this.frame.generatorMenu.terminateMONEYINTERFACE();
-            this.frame.menu.show(this.frame.cardPanel, "mainMenu");
             JOptionPane.showMessageDialog(null,
-                    "Successfully created "+ machineType +" Vending Machine with initial" +
-                            " money: "+ currMachine.getmoney());
+                    "Aborted creation of "+ machineType +" Vending Machine");
+            currMachine = null;
             this.frame.menu.show(this.frame.cardPanel, "mainMenu");
         });
 
@@ -116,8 +115,19 @@ public class VMFController {
             this.frame.menu.show(this.frame.cardPanel, "vmSIM");
         });
 
-        this.frame.vmInterface.getInsertMoney().addActionListener(e ->
-            this.frame.vmInterface.updateButtonPanel(2));
+        this.frame.vmInterface.getInsertMoney().addActionListener(e ->{
+            // if insert money pressed in selection mode go to payment mode and viceversa
+            if(this.frame.vmInterface.getModeButtonPanel().equalsIgnoreCase("selection")) {
+                this.frame.vmInterface.updateButtonPanel(2);
+
+            } else if (this.frame.vmInterface.getModeButtonPanel().equalsIgnoreCase("payment")) {
+                //to do here create a lock payment and now if locked payment and pressed insertmoney it will receive paymment
+                //if()
+                //else
+                this.frame.vmInterface.updateButtonPanel(1);
+            }
+
+        });
 
 
         this.frame.vmInterface.getBack().addActionListener(e ->{

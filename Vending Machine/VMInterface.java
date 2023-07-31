@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.net.InetSocketAddress;
-import java.util.Set;
+//import java.net.InetSocketAddress;
+//import java.util.Set;
 
 
 
@@ -13,8 +13,8 @@ public class VMInterface extends JPanel{
     private CardLayout itemPanel;
     private JPanel itemPanelContainer;
     private String currMode = "Regular";            //TRACKER FOR WHICH MODE THE LAYOUT IS CURRENTLY ON
-    private ButtonPanel buttonPanel = new ButtonPanel();
-    private TextPanel textPanel = new TextPanel();
+    private final ButtonPanel buttonPanel = new ButtonPanel();
+    private final TextPanel textPanel = new TextPanel();
     private JButton toggleSpecial = new JButton();
     private JButton InsertMoney = new JButton();
     private JButton back = new JButton();
@@ -52,7 +52,7 @@ public class VMInterface extends JPanel{
         add(itemPanelContainer, gbc);
 
 
-        gbc.insets = new Insets(0,0,570,15);         // textPanel
+        gbc.insets = new Insets(0,0,570,19);         // textPanel
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 2;
         gbc.gridy = 0;
@@ -298,13 +298,14 @@ public class VMInterface extends JPanel{
 
     protected class TextPanel extends JPanel {
 
-        private JTextArea vmdisplay = new JTextArea(10, 40);
+        private final JTextArea vmdisplay = new JTextArea(10, 40);
         private JScrollPane scrollPane = new JScrollPane(vmdisplay);
 
         public TextPanel() {
             setLayout(new BorderLayout());
 
             vmdisplay.setLineWrap(true);
+            vmdisplay.setFont(new Font("consolas",Font.BOLD,16));
             vmdisplay.setBackground(new Color(98, 174, 239));
             scrollPane.setPreferredSize(new Dimension(625, 300));
 
@@ -316,7 +317,8 @@ public class VMInterface extends JPanel{
     }
 
     private class ButtonPanel extends JPanel {
-
+        private String currMode; // either payment || selection
+        private final JButton[] slotButtons = new JButton[9];
         private JPanel buttonPanel1 = new JPanel();
         private JPanel moneyPanel = new JPanel();
         private JPanel regbuttonPanel = new JPanel();
@@ -327,14 +329,84 @@ public class VMInterface extends JPanel{
         public ButtonPanel() {
             setLayout(new BorderLayout());
             setPreferredSize(new Dimension(625, 300));
-            setBackground(Color.GREEN);
+
+            currMode = "SELECTION";
 
             buttonPanel1.setLayout(menu);
+            buttonPanel1.setOpaque(false);
 
-            regbuttonPanel.setBackground(Color.BLUE);
+            regbuttonPanel.setLayout(new GridLayout(3,3));
+            regbuttonPanel.setOpaque(true);
+            regbuttonPanel.setBackground(new Color(87,99,104));
+
+
+            //regbuttonPanelrow1 = set
+
+            for(int i=0; i<9; i++){
+                slotButtons[i] = new JButton();
+            }
+
+            slotButtons[0].setIcon(scaleIMG("./VMResources/slot1.png",212,108));
+            slotButtons[0].setBorder(null);
+            slotButtons[0].setOpaque(false);
+            slotButtons[0].setContentAreaFilled(false);
+            regbuttonPanel.add(slotButtons[0]);
+
+            slotButtons[1].setIcon(scaleIMG("./VMResources/slot2.png",212,108));
+            slotButtons[1].setBorder(null);
+            slotButtons[1].setOpaque(false);
+            slotButtons[1].setContentAreaFilled(false);
+            regbuttonPanel.add(slotButtons[1]);
+
+            slotButtons[2].setIcon(scaleIMG("./VMResources/slot3.png",212,108));
+            slotButtons[2].setOpaque(false);
+            slotButtons[2].setContentAreaFilled(false);
+            slotButtons[2].setBorder(null);
+            regbuttonPanel.add(slotButtons[2]);
+
+            slotButtons[3].setIcon(scaleIMG("./VMResources/slot4.png",212,108));
+            slotButtons[3].setOpaque(false);
+            slotButtons[3].setContentAreaFilled(false);
+            slotButtons[3].setBorder(null);
+            regbuttonPanel.add(slotButtons[3]);
+
+            slotButtons[4].setIcon(scaleIMG("./VMResources/slot5.png",212,108));
+            slotButtons[4].setOpaque(false);
+            slotButtons[4].setContentAreaFilled(false);
+            slotButtons[4].setBorder(null);
+            regbuttonPanel.add(slotButtons[4]);
+
+
+            slotButtons[5].setIcon(scaleIMG("./VMResources/slot6.png",212,108));
+            slotButtons[5].setOpaque(false);
+            slotButtons[5].setContentAreaFilled(false);
+            slotButtons[5].setBorder(null);
+            regbuttonPanel.add(slotButtons[5]);
+
+            slotButtons[6].setIcon(scaleIMG("./VMResources/slot7.png",212,108));
+            slotButtons[6].setOpaque(false);
+            slotButtons[6].setContentAreaFilled(false);
+            slotButtons[6].setBorder(null);
+            regbuttonPanel.add(slotButtons[6]);
+
+            slotButtons[7].setIcon(scaleIMG("./VMResources/slot8.png",212,108));
+            slotButtons[7].setOpaque(false);
+            slotButtons[7].setContentAreaFilled(false);
+            slotButtons[7].setBorder(null);
+            regbuttonPanel.add(slotButtons[7]);
+
+            slotButtons[8].setIcon(scaleIMG("./VMResources/slot9.png",212,108));
+            slotButtons[8].setOpaque(false);
+            slotButtons[8].setContentAreaFilled(false);
+            slotButtons[8].setBorder(null);
+            regbuttonPanel.add(slotButtons[8]);
             buttonPanel1.add("buttonsMode",regbuttonPanel);
+
+
             moneyPanel.setBackground(Color.GREEN);
             buttonPanel1.add("moneyMode",moneyPanel);
+
+
             specbuttonPanel.setBackground(Color.GRAY);
             buttonPanel1.add("SpecialMode",specbuttonPanel);
 
@@ -344,9 +416,12 @@ public class VMInterface extends JPanel{
 
     public void updateButtonPanel(int choice){
         if(choice == 1){
-            buttonPanel.menu.show(buttonPanel.buttonPanel1, "buttonMode");
+            buttonPanel.currMode = "selection";
+            buttonPanel.menu.show(buttonPanel.buttonPanel1, "buttonsMode");
         } else if (choice == 2 ) {
+            buttonPanel.currMode = "payment";
             buttonPanel.menu.show(buttonPanel.buttonPanel1, "moneyMode");
+
         } else if (choice == 3) {
             buttonPanel.menu.show(buttonPanel.buttonPanel1, "SpecialMode");
         }
@@ -354,7 +429,7 @@ public class VMInterface extends JPanel{
 
     public void updateItemPanel(){
 
-        if(currMode == "Regular"){
+        if(currMode.equalsIgnoreCase("Regular")){
             itemPanel.show(itemPanelContainer, "Special");
             this.currMode = "Special";
         }
@@ -376,9 +451,10 @@ public class VMInterface extends JPanel{
         return toggleSpecial;
     }
 
-    public ButtonPanel buttonPanel(){
-        return buttonPanel;
+    public String getModeButtonPanel(){
+        return buttonPanel.currMode;
     }
+
 
 
 }
