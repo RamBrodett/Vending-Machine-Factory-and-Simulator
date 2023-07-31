@@ -12,9 +12,6 @@ public class VMInterface extends JPanel{
     private ButtonPanel buttonPanel = new ButtonPanel();
     private TextPanel textPanel = new TextPanel();
     private JButton InsertMoney = new JButton();
-    private CardLayout menu = new CardLayout();
-
-
 
     VMInterface(){
         setLayout(new GridBagLayout());
@@ -58,6 +55,7 @@ public class VMInterface extends JPanel{
         gbc.weighty = .9;
         InsertMoney.setPreferredSize(new Dimension(625,100));
         InsertMoney.setIcon(scaleIMG("./VMResources/moneyInsertBT.png",625,100));
+        InsertMoney.setPressedIcon(scaleIMG("./VMResources/moneyInsertBTclicked.png",625,100));
         InsertMoney.setBorder(null);
         InsertMoney.setContentAreaFilled(false);
         InsertMoney.setOpaque(false);
@@ -123,8 +121,8 @@ public class VMInterface extends JPanel{
             strwLabel.setOpaque(false);
             mngoLabel.setOpaque(false);
 
-            JPanel vnllPanel = createImagePanel(vnll, "Vanilla", 999, 999);
-            JPanel chcoPanel = createImagePanel(chco, "Chocolate", 999, 999);
+            JPanel vnllPanel = createImagePanel(vnll, "Vanilla", 230, 90);
+            JPanel chcoPanel = createImagePanel(chco, "Chocolate", 260, 90);
             JPanel mtchPanel = createImagePanel(mtch, "Matcha", 999, 999);
             JPanel chcpPanel = createImagePanel(chcp, "Choco Chips", 999, 999);
             JPanel crelPanel = createImagePanel(crel, "Cereals", 999, 999);
@@ -211,28 +209,49 @@ public class VMInterface extends JPanel{
         }
     }
 
-    protected class ButtonPanel extends JPanel {
+    private class ButtonPanel extends JPanel {
 
-        private JPanel buttonPanel = new JPanel();
+        private JPanel buttonPanel1 = new JPanel();
         private JPanel moneyPanel = new JPanel();
         private JPanel regbuttonPanel = new JPanel();
         private JPanel specbuttonPanel = new JPanel();
+        private JButton specialButton = new JButton();
+        private CardLayout menu = new CardLayout();
 
         public ButtonPanel() {
             setLayout(new BorderLayout());
             setPreferredSize(new Dimension(625, 300));
             setBackground(Color.GREEN);
 
-            buttonPanel.setLayout(menu);
+            buttonPanel1.setLayout(menu);
 
-            buttonPanel.add(moneyPanel);
+            regbuttonPanel.setBackground(Color.BLUE);
+            buttonPanel1.add("buttonsMode",regbuttonPanel);
+            moneyPanel.setBackground(Color.GREEN);
+            buttonPanel1.add("moneyMode",moneyPanel);
+            specbuttonPanel.setBackground(Color.GRAY);
+            buttonPanel1.add("SpecialMode",specbuttonPanel);
 
-            buttonPanel.add(regbuttonPanel);
-
-            buttonPanel.add(specbuttonPanel);
-
-            add(buttonPanel,BorderLayout.CENTER);
+            add(buttonPanel1,BorderLayout.CENTER);
         }
+    }
+
+    public void updateButtonPanel(int choice){
+        if(choice == 1){
+            buttonPanel.menu.show(buttonPanel.buttonPanel1, "buttonMode");
+        } else if (choice == 2 ) {
+            buttonPanel.menu.show(buttonPanel.buttonPanel1, "moneyMode");
+        } else if (choice == 3) {
+            buttonPanel.menu.show(buttonPanel.buttonPanel1, "SpecialMode");
+        }
+    }
+
+    public JButton getInsertMoney(){
+        return InsertMoney;
+    }
+
+    public ButtonPanel buttonPanel(){
+        return buttonPanel;
     }
 
 

@@ -4,7 +4,7 @@ import java.awt.*;
 public class VMGeneratorMenu extends JPanel {
 
     private ImageIcon bgIMG_genMenu = new ImageIcon("./VMResources/genBg.png");
-    private JFrame moneyInputFrame = new JFrame();
+    private JFrame moneyInputFrame;
     private JButton regVM = new JButton();
     private JButton specVM = new JButton();
     private JButton back = new JButton();
@@ -187,11 +187,8 @@ public class VMGeneratorMenu extends JPanel {
         }
         moneyInputFrame.setVisible(false);
         moneyInputFrame.dispose();
-    }
-    public void re_setButton(){
         back.setEnabled(true);
         regVM.setEnabled(true);
         specVM.setEnabled(true);
-
     }
 }

@@ -2,14 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame {
-    JFrame mainFrame;
-    JFrame moneyInputFrame;
-    JPanel cardPanel = new JPanel();
-    CardLayout menu = new CardLayout();
-    VMFMainMenu mainMenu = new VMFMainMenu();
-    VMGeneratorMenu generatorMenu = new VMGeneratorMenu();
-    VMFTestMenu testMenu = new VMFTestMenu();
-    VMInterface vmInterface = new VMInterface();
+    public JFrame mainFrame;
+    public JPanel cardPanel = new JPanel();
+    public CardLayout menu = new CardLayout();
+    public VMFMainMenu mainMenu = new VMFMainMenu();
+    public VMGeneratorMenu generatorMenu = new VMGeneratorMenu();
+    public VMFTestMenu testMenu = new VMFTestMenu();
+    public VMInterface vmInterface = new VMInterface();
 
     MainFrame(){
         this.mainFrame = new JFrame("YOU-G-ART FACTORY");
