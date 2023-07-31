@@ -175,6 +175,11 @@ public class VMGeneratorMenu extends JPanel {
     public JFrame getMoneyInputFrame(){
         return moneyInputFrame;
     }
+
+    public void setMoneyInputFrame(JFrame moneyInputFrame){
+        this.moneyInputFrame = moneyInputFrame;
+    }
+
     public void terminateMONEYINTERFACE(){
         for (int i = 0; i < denominationButtons.length; i++) {
             JSpinner spinner = denominationButtons[i];
