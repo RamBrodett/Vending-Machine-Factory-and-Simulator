@@ -73,7 +73,7 @@ public class VMFController{
                             mainView.generatorMenu.terminateMONEYINTERFACE();
                             mainView.generatorMenu.re_setButton();
                             mainView.generatorMenu.optionPane.showMessageDialog(null,
-                            "Successfully created Reular Vending Machine with initial" +
+                            "Successfully created Regular Vending Machine with initial" +
                                     " money: "+ currMachine.getmoney());
                             mainView.menu.show(mainView.cardPanel,"mainMenu"); // go back to main menu
                 });
