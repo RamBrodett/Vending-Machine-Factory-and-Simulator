@@ -52,7 +52,7 @@ public class VMInterface extends JPanel{
         add(itemPanelContainer, gbc);
 
 
-        gbc.insets = new Insets(0,0,570,0);         // textPanel
+        gbc.insets = new Insets(0,0,570,15);         // textPanel
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 2;
         gbc.gridy = 0;
@@ -67,7 +67,7 @@ public class VMInterface extends JPanel{
         InsertMoney.setBorder(null);
         InsertMoney.setContentAreaFilled(false);
         InsertMoney.setOpaque(false);
-        gbc.insets = new Insets(0,0,50,0);          // InsertMoney button
+        gbc.insets = new Insets(0,0,50,15);          // InsertMoney button
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 2;
         gbc.gridy = 0;
@@ -76,7 +76,7 @@ public class VMInterface extends JPanel{
         gbc.weighty = .9;
         add(InsertMoney, gbc);
 
-        gbc.insets = new Insets(375,0,0,0);         // buttonPanel
+        gbc.insets = new Insets(375,0,0,15);         // buttonPanel
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 2;
         gbc.gridy = 0;
@@ -107,7 +107,7 @@ public class VMInterface extends JPanel{
         toggleSpecial.setBorder(null);
         toggleSpecial.setContentAreaFilled(false);
         toggleSpecial.setOpaque(false);
-        gbc.insets = new Insets(890,0, 0,0);         // toggle button
+        gbc.insets = new Insets(890,0, 0,25);         // toggle button
         gbc.anchor = GridBagConstraints.EAST;
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
