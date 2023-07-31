@@ -8,14 +8,30 @@ import java.util.Set;
 public class VMInterface extends JPanel{
 
     private ImageIcon bgIMG_VMInterface = new ImageIcon("./VMResources/VMInterfaceBG.png");
-    private ItemPanel itemPanel = new ItemPanel();
+    private RegularItemPanel regItemPanel = new RegularItemPanel();
+    private SpecialItemPanel specialItemPanel = new SpecialItemPanel();
+    private CardLayout itemPanel;
+    private JPanel itemPanelContainer;
+    private String currMode = "Regular";            //TRACKER FOR WHICH MODE THE LAYOUT IS CURRENTLY ON
     private ButtonPanel buttonPanel = new ButtonPanel();
     private TextPanel textPanel = new TextPanel();
+    private JButton toggleSpecial = new JButton();
     private JButton InsertMoney = new JButton();
+    private JButton back = new JButton();
 
     VMInterface(){
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+
+        itemPanel = new CardLayout();
+        itemPanelContainer = new JPanel((itemPanel));
+        itemPanelContainer.setOpaque(false);
+
+        itemPanelContainer.add(regItemPanel, "Regular");
+
+        itemPanelContainer.add(specialItemPanel, "Special");
+        itemPanel.show(itemPanelContainer, "Toggle");
+
 
         JPanel filler1 = new JPanel();
         filler1.setOpaque(false);
@@ -26,15 +42,14 @@ public class VMInterface extends JPanel{
         gbc.weighty = 1;
         add(filler1, gbc);
 
-
         gbc.fill = GridBagConstraints.BOTH;                              // itemPanel
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.insets = new Insets(80,76, 127,0);
+        gbc.insets = new Insets(85,76, 127,30);
         gbc.gridheight = 4;         // make the itemPanel span all three rows
         gbc.weightx = .81;          // adjust the horizontal size for the itemPanel (0.6 means 60% of available space)
         gbc.weighty = .9;
-        add(itemPanel, gbc);
+        add(itemPanelContainer, gbc);
 
 
         gbc.insets = new Insets(0,0,570,0);         // textPanel
@@ -46,6 +61,12 @@ public class VMInterface extends JPanel{
         gbc.weighty = .9;
         add(textPanel, gbc);
 
+        InsertMoney.setPreferredSize(new Dimension(625,100));
+        InsertMoney.setIcon(scaleIMG("./VMResources/moneyInsertBT.png",625,100));
+        InsertMoney.setPressedIcon(scaleIMG("./VMResources/moneyInsertBTclicked.png",625,100));
+        InsertMoney.setBorder(null);
+        InsertMoney.setContentAreaFilled(false);
+        InsertMoney.setOpaque(false);
         gbc.insets = new Insets(0,0,50,0);          // InsertMoney button
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 2;
@@ -53,12 +74,6 @@ public class VMInterface extends JPanel{
         gbc.gridheight = 4;
         gbc.weightx = .18;
         gbc.weighty = .9;
-        InsertMoney.setPreferredSize(new Dimension(625,100));
-        InsertMoney.setIcon(scaleIMG("./VMResources/moneyInsertBT.png",625,100));
-        InsertMoney.setPressedIcon(scaleIMG("./VMResources/moneyInsertBTclicked.png",625,100));
-        InsertMoney.setBorder(null);
-        InsertMoney.setContentAreaFilled(false);
-        InsertMoney.setOpaque(false);
         add(InsertMoney, gbc);
 
         gbc.insets = new Insets(375,0,0,0);         // buttonPanel
@@ -70,7 +85,39 @@ public class VMInterface extends JPanel{
         gbc.weighty = .9;
         add(buttonPanel, gbc);
 
+        back.setIcon(scaleIMG("./VMResources/backBTnorm.png",391,91));
+        back.setRolloverIcon(scaleIMG("./VMResources/backBThover.png",391,91));
+        back.setPressedIcon(scaleIMG("./VMResources/backBTclicked.png",391,91));
+        back.setBorder(null);
+        back.setContentAreaFilled(false);
+        back.setOpaque(false);
+        gbc.insets = new Insets(890, 75, 0,0);         // back button
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 4;
+        gbc.weightx = .18;
+        gbc.weighty = .9;
+        add(back, gbc);
+
+        toggleSpecial.setIcon(scaleIMG("./VMResources/crtBTnorm.png",391,91));              //EDIT IMAGES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        toggleSpecial.setRolloverIcon(scaleIMG("./VMResources/crtBThover.png",391,91));
+        toggleSpecial.setPressedIcon(scaleIMG("./VMResources/crtBTclicked.png",391,91));
+        toggleSpecial.setBorder(null);
+        toggleSpecial.setContentAreaFilled(false);
+        toggleSpecial.setOpaque(false);
+        gbc.insets = new Insets(890,0, 0,0);         // toggle button
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 4;
+        gbc.weightx = .18;
+        gbc.weighty = .9;
+        add(toggleSpecial, gbc);
     }
+
 
 
 
@@ -87,7 +134,7 @@ public class VMInterface extends JPanel{
         return new ImageIcon(scaled);
     }
 
-    protected class ItemPanel extends JPanel{
+    protected class RegularItemPanel extends JPanel{
         ImageIcon vnll = scaleIMG("./VMResources/vanilla.png",150,150);         //NEED VALUES OF ITEMS HERE!!
         ImageIcon chco = scaleIMG("./VMResources/choco.png",150,150);
         ImageIcon mtch = scaleIMG("./VMResources/matcha.png",150,150);
@@ -108,7 +155,8 @@ public class VMInterface extends JPanel{
         JLabel strwLabel = new JLabel(strw);
         JLabel mngoLabel = new JLabel(mngo);
 
-        ItemPanel(){
+        RegularItemPanel
+                (){
             setOpaque(false);
             // to do: place the items in each spot and place slot num, price, calories and name pala
             vnllLabel.setOpaque(false);
@@ -141,6 +189,63 @@ public class VMInterface extends JPanel{
             add(raspPanel);
             add(strwPanel);
             add(mngoPanel);
+        }
+    }
+
+    protected class SpecialItemPanel extends JPanel{
+        ImageIcon triChco = scaleIMG("./VMResources/trichoco.png",150,150);         //NEED VALUES OF ITEMS HERE!!
+        ImageIcon vitamax = scaleIMG("./VMResources/vitamax.png",150,150);
+        ImageIcon strwDuo = scaleIMG("./VMResources/strwbDuo.png",150,150);
+        ImageIcon chcoDuo = scaleIMG("./VMResources/chcoDuo.png",150,150);
+        ImageIcon chcoMch = scaleIMG("./VMResources/chocoMatcha.png",150,150);
+        ImageIcon mngoChc = scaleIMG("./VMResources/mangoChoco.png",150,150);
+        ImageIcon brryCrn = scaleIMG("./VMResources/berrylicious.png",150,150);
+        ImageIcon rnbwYgr = scaleIMG("./VMResources/rainbow.png",150,150);
+        ImageIcon youGart = scaleIMG("./VMResources/yougart.png",150,150);
+
+        JLabel triChcoLabel = new JLabel(triChco);
+        JLabel vitamaxLabel = new JLabel(vitamax);
+        JLabel strwDuoLabel = new JLabel(strwDuo);
+        JLabel chcoDuoLabel = new JLabel(chcoDuo);
+        JLabel chcoMchLabel = new JLabel(chcoMch);
+        JLabel mngoChcLabel = new JLabel(mngoChc);
+        JLabel brryCrnLabel = new JLabel(brryCrn);
+        JLabel RnbwYgrLabel = new JLabel(rnbwYgr);
+        JLabel youGartLabel = new JLabel(youGart);
+
+        SpecialItemPanel(){
+            setOpaque(false);
+            // to do: place the items in each spot and place slot num, price, calories and name pala
+            triChcoLabel.setOpaque(false);
+            vitamaxLabel.setOpaque(false);
+            strwDuoLabel.setOpaque(false);
+            chcoDuoLabel.setOpaque(false);
+            chcoMchLabel.setOpaque(false);
+            mngoChcLabel.setOpaque(false);
+            brryCrnLabel.setOpaque(false);
+            RnbwYgrLabel.setOpaque(false);
+            youGartLabel.setOpaque(false);
+
+            JPanel triChcoPanel = createImagePanel(triChco, "Triple Chocolate", 230, 90);
+            JPanel vitamaxPanel = createImagePanel(vitamax, "Vitamax", 260, 90);
+            JPanel strwDuoPanel = createImagePanel(strwDuo, "Strawberry Duo", 999, 999);
+            JPanel chcoDuoPanel = createImagePanel(chcoDuo, "Choco Duo", 999, 999);
+            JPanel chcoMchPanel = createImagePanel(chcoMch, "ChocoMatcha Madness", 999, 999);
+            JPanel mngoChcPanel = createImagePanel(mngoChc, "Mixed Fruit Bits", 999, 999);
+            JPanel brryCrnPanel = createImagePanel(brryCrn, "Berrylicious Crunchies", 999, 999);
+            JPanel rnbwYgrPanel = createImagePanel(rnbwYgr, "Rainbow Yogurt", 999, 999);
+            JPanel youGartPanel = createImagePanel(youGart, "You-g-Art", 999, 999);
+
+            setLayout(new GridLayout(3,3));
+            add(triChcoPanel);
+            add(vitamaxPanel);
+            add(strwDuoPanel);
+            add(chcoDuoPanel);
+            add(chcoMchPanel);
+            add(mngoChcPanel);
+            add(brryCrnPanel);
+            add(rnbwYgrPanel);
+            add(youGartPanel);
         }
     }
 
@@ -185,6 +290,7 @@ public class VMInterface extends JPanel{
         panel.add(imageLabel, gbc);
 
         gbc.gridy = 1;
+        gbc.insets = new Insets(10,0,0,0);
         panel.add(textPanel, gbc);
 
         return panel;
@@ -246,8 +352,28 @@ public class VMInterface extends JPanel{
         }
     }
 
+    public void updateItemPanel(){
+
+        if(currMode == "Regular"){
+            itemPanel.show(itemPanelContainer, "Special");
+            this.currMode = "Special";
+        }
+        else{
+            itemPanel.show(itemPanelContainer, "Regular");
+            this.currMode = "Regular";
+        }
+    }
+
     public JButton getInsertMoney(){
         return InsertMoney;
+    }
+
+   public JButton getBack(){
+        return back;
+   }
+
+   public JButton getToggleSpecial(){
+        return toggleSpecial;
     }
 
     public ButtonPanel buttonPanel(){

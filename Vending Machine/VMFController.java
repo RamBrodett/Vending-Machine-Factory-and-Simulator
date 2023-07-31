@@ -26,7 +26,7 @@ public class VMFController {
             this.frame.generatorMenu.setMoneyInputFrame(new JFrame());
             if(currMachine != null){
                 int choice = JOptionPane.showConfirmDialog(null,"There is a vending machine" +
-                        " currently loaded, are you sure you want to overwrite it?", "Select an option",
+                                " currently loaded, are you sure you want to overwrite it?", "Select an option",
                         JOptionPane.YES_NO_CANCEL_OPTION);
                 if(choice == 0){
                     currMachine = null;
@@ -59,6 +59,7 @@ public class VMFController {
                 this.frame.testMenu.getVmImage().setIcon(this.frame.testMenu.scaleIMG(
                         "./VMResources/regVM.png",500,800));
                 this.frame.generatorMenu.moneyInterface();
+                this.frame.vmInterface.getToggleSpecial().setVisible(false);
             }catch (Exception error){
                 JOptionPane.showMessageDialog(null,"An error " +
                         "occured: " + error.getMessage()+ " Error");
@@ -73,6 +74,7 @@ public class VMFController {
                 this.frame.testMenu.getVmImage().setIcon(this.frame.testMenu.scaleIMG(
                         "./VMResources/specVM.png",500,800));
                 this.frame.generatorMenu.moneyInterface();
+                this.frame.vmInterface.getToggleSpecial().setVisible(true);
             }catch (Exception error){
                 JOptionPane.showMessageDialog(null,"An error " +
                         "occured: " + error.getMessage()+ " Error");
@@ -115,12 +117,22 @@ public class VMFController {
         });
 
         this.frame.vmInterface.getInsertMoney().addActionListener(e ->
-                this.frame.vmInterface.updateButtonPanel(2));
+            this.frame.vmInterface.updateButtonPanel(2));
+
+
+        this.frame.vmInterface.getBack().addActionListener(e ->{
+            this.frame.menu.show(this.frame.cardPanel, "VMTest");
+        });
+
+        this.frame.vmInterface.getToggleSpecial().addActionListener(e -> {
+            this.frame.vmInterface.updateItemPanel();
+        });
     }
 
     public void initializeProgram(){
         frame.menu.show(frame.cardPanel,"mainMenu");
     }
+
 
     private void updateMachineType(String type){
         machineType = type;
