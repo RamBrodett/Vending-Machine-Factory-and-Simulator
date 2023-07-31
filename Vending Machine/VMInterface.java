@@ -57,6 +57,10 @@ public class VMInterface extends JPanel{
         gbc.weightx = .18;
         gbc.weighty = .9;
         InsertMoney.setPreferredSize(new Dimension(625,100));
+        InsertMoney.setIcon(scaleIMG("./VMResources/moneyInsertBT.png",625,100));
+        InsertMoney.setBorder(null);
+        InsertMoney.setContentAreaFilled(false);
+        InsertMoney.setOpaque(false);
         add(InsertMoney, gbc);
 
         gbc.insets = new Insets(375,0,0,0);         // buttonPanel
@@ -210,13 +214,24 @@ public class VMInterface extends JPanel{
     protected class ButtonPanel extends JPanel {
 
         private JPanel buttonPanel = new JPanel();
+        private JPanel moneyPanel = new JPanel();
+        private JPanel regbuttonPanel = new JPanel();
+        private JPanel specbuttonPanel = new JPanel();
 
         public ButtonPanel() {
             setLayout(new BorderLayout());
-
             setPreferredSize(new Dimension(625, 300));
-
             setBackground(Color.GREEN);
+
+            buttonPanel.setLayout(menu);
+
+            buttonPanel.add(moneyPanel);
+
+            buttonPanel.add(regbuttonPanel);
+
+            buttonPanel.add(specbuttonPanel);
+
+            add(buttonPanel,BorderLayout.CENTER);
         }
     }
 
