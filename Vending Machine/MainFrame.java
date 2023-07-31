@@ -10,7 +10,6 @@ public class MainFrame {
     VMGeneratorMenu generatorMenu = new VMGeneratorMenu();
     VMFTestMenu testMenu = new VMFTestMenu();
     VMInterface vmInterface = new VMInterface();
-    public JOptionPane optionPane = new JOptionPane(); // for popup messages
 
     MainFrame(){
         this.mainFrame = new JFrame("YOU-G-ART FACTORY");

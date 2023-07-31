@@ -221,43 +221,4 @@ public class VMInterface extends JPanel{
     }
 
 
-
-
-
-//    protected class HumanInterfacePanel extends JPanel{
-//
-//        private JPanel displayPanel = new JPanel();
-//        private JPanel buttonPanel = new JPanel();
-//        private JTextArea vmdisplay = new JTextArea(10,40);
-//        private JScrollPane scrollPane = new JScrollPane(vmdisplay);
-//
-//        HumanInterfacePanel(){
-//            //fix here diko ma pwesto yung color blue na text area dapat nasa loob sya nung blue na display part
-////            setOpaque(false);
-//            setLayout(new GridLayout(2,1));
-//
-//
-//
-//            displayPanel.setLayout(new BorderLayout());
-//            displayPanel.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 0));
-//            displayPanel.add(buttonPanel, BorderLayout.SOUTH);
-//
-//            vmdisplay.setLineWrap(true);
-////            vmdisplay.setOpaque(false);
-//            vmdisplay.setBackground(new Color(98,174,239));
-//            scrollPane.setPreferredSize(new Dimension(500,300));
-//            scrollPane.setMinimumSize(new Dimension(500,300));
-//            scrollPane.setMaximumSize(new Dimension(500,300));
-//            scrollPane.setBackground(new Color(98,174,239));
-//
-//
-//            add(scrollPane);
-//
-//            buttonPanel.setBackground(Color.GREEN);
-//            add(buttonPanel);
-//        }
-//    }
-
-
-
 }

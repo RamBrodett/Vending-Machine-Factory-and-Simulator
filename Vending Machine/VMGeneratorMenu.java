@@ -8,10 +8,9 @@ public class VMGeneratorMenu extends JPanel {
     private JButton regVM = new JButton();
     private JButton specVM = new JButton();
     private JButton back = new JButton();
-    private JSpinner[] denominationButtons = new JSpinner[10];
+    private JSpinner[] denominationButtons;
     JButton exit = new JButton("EXIT");
     JButton set = new JButton("SET DENOMINATION");
-    public JOptionPane optionPane = new JOptionPane(); // for popup messages
 
 
     VMGeneratorMenu(){
@@ -97,6 +96,7 @@ public class VMGeneratorMenu extends JPanel {
         JPanel moneyPanel = new JPanel(new GridLayout(5,2));
         JPanel buttonpanel = new JPanel(new GridLayout(1,2));
         JPanel[] moneyTags = new JPanel[10];
+        denominationButtons = new JSpinner[10];
 
         JLabel label = new JLabel("Denomination Setter");
         label.setFont(new Font("Arial", Font.PLAIN, 18));
