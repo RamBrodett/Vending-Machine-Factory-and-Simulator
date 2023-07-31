@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VMFTestMenu extends JPanel {
-
+    private JLabel vmImage = new JLabel();
     private ImageIcon bgIMG_testMenu = new ImageIcon("./VMResources/testbg.png");
     private final JButton simVM = new JButton();
     private final JButton maintenanceVM = new JButton();
@@ -59,10 +59,11 @@ public class VMFTestMenu extends JPanel {
         gbc.gridy = 3;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         lPanel.add(back, gbc);
-
-
+//scaleIMG("./VMResources/specVM.png",500,800)
         JPanel placeHolder = new JPanel();          //TEMP PALCEHOLDER
-        placeHolder.setBackground(Color.darkGray);
+        //placeHolder.setBackground(Color.darkGray);
+        placeHolder.add(vmImage);
+        placeHolder.setOpaque(false);
         placeHolder.setPreferredSize(new Dimension(500,800));
         rPanel.add(placeHolder);
 
@@ -77,7 +78,7 @@ public class VMFTestMenu extends JPanel {
         g.drawImage(bgIMG_testMenu.getImage(),0,0,getWidth(),getHeight(),null);
     }
 
-    private ImageIcon scaleIMG(String strname, int width, int height) {
+    public ImageIcon scaleIMG(String strname, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(strname);
         Image raw = imageIcon.getImage();
         Image scaled = raw.getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -93,4 +94,9 @@ public class VMFTestMenu extends JPanel {
     public JButton getBackButton(){
         return back;
     }
+    public JLabel getVmImage(){
+        return vmImage;
+    }
+
+
 }

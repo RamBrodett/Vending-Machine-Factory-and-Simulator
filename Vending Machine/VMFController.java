@@ -56,6 +56,8 @@ public class VMFController {
             try{
                 currMachine = new VendingMachine();
                 updateMachineType("Regular");
+                this.frame.testMenu.getVmImage().setIcon(this.frame.testMenu.scaleIMG(
+                        "./VMResources/regVM.png",500,800));
                 this.frame.generatorMenu.moneyInterface();
             }catch (Exception error){
                 JOptionPane.showMessageDialog(null,"An error " +
@@ -63,10 +65,13 @@ public class VMFController {
             }
         });
 
+
         this.frame.generatorMenu.getSpecVM().addActionListener(e ->{
             try{
                 currMachine = new SpecialVM();
-                updateMachineType(" Special ");
+                updateMachineType("Special");
+                this.frame.testMenu.getVmImage().setIcon(this.frame.testMenu.scaleIMG(
+                        "./VMResources/specVM.png",500,800));
                 this.frame.generatorMenu.moneyInterface();
             }catch (Exception error){
                 JOptionPane.showMessageDialog(null,"An error " +
@@ -80,6 +85,7 @@ public class VMFController {
             JOptionPane.showMessageDialog(null,
                     "Successfully created "+ machineType +" Vending Machine with initial" +
                             " money: "+ currMachine.getmoney());
+            this.frame.menu.show(this.frame.cardPanel, "mainMenu");
         });
 
 
@@ -98,6 +104,7 @@ public class VMFController {
             JOptionPane.showMessageDialog(null,
                     "Successfully created "+ machineType +" Vending Machine with initial" +
                             " money: "+ currMachine.getmoney());
+            this.frame.menu.show(this.frame.cardPanel, "mainMenu");
         });
         //-----------------------------------------------------------
 
