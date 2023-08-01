@@ -118,6 +118,12 @@ public class VMFController {
             this.frame.menu.show(this.frame.cardPanel, "vmSIM");
         });
 
+        this.frame.testMenu.getMaintenanceVMButton().addActionListener(e -> {
+            this.frame.menu.show(this.frame.cardPanel, "VMmaintenance");
+        });
+        //-----------------------------------------------------------
+
+        // Interface Menu Buttons ----------------------------------------
         this.frame.vmInterface.getInsertMoney().addActionListener(e ->{
             // if insert money pressed in selection mode go to payment mode and viceversa
             if(this.frame.vmInterface.getModeButtonPanel().equalsIgnoreCase("selection")) {
@@ -144,7 +150,6 @@ public class VMFController {
 
         });
 
-
         this.frame.vmInterface.getBack().addActionListener(e ->{
             this.frame.menu.show(this.frame.cardPanel, "VMTest");
         });
@@ -156,6 +161,57 @@ public class VMFController {
         this.frame.vmInterface.moneyLockToggle().addItemListener(e->{
             if(e.getStateChange()==ItemEvent.SELECTED)this.frame.vmInterface.setLockMoney(true);
             else this.frame.vmInterface.setLockMoney(false);
+        });
+        //-----------------------------------------------------------
+
+        // Maintenance Menu Buttons ----------------------------------------
+        this.frame.maintenanceMenu.getBack().addActionListener(e -> {
+            this.frame.menu.show(this.frame.cardPanel, "VMTest");
+        });
+
+        this.frame.maintenanceMenu.getToggleSpecial().addActionListener(e -> {
+            this.frame.maintenanceMenu.updateItemPanel();
+        });
+
+        this.frame.maintenanceMenu.getRestockBtn().addActionListener(e -> {                                               //REPLENISH MONEY
+            if(!this.frame.maintenanceMenu.getCurrMode().equals("restock")) {
+                this.frame.maintenanceMenu.updateButtonPanel(1);
+            } else {
+                if (this.frame.maintenanceMenu.getMoneyLocked()) {
+                    currMachine.vmSetMoney(new Denomination(this.frame.maintenanceMenu.getValue(0),                 //NEED TO FIX PARA INCREMENT LANG SIYA
+                            this.frame.maintenanceMenu.getValue(1),
+                            this.frame.maintenanceMenu.getValue(2),
+                            this.frame.maintenanceMenu.getValue(3),
+                            this.frame.maintenanceMenu.getValue(4),
+                            this.frame.maintenanceMenu.getValue(5),
+                            this.frame.maintenanceMenu.getValue(6),
+                            this.frame.maintenanceMenu.getValue(7),
+                            this.frame.maintenanceMenu.getValue(8),
+                            this.frame.maintenanceMenu.getValue(9)));
+                    System.out.println("Money inserted: " + currMachine.getmoney());
+                    this.frame.maintenanceMenu.resetMoneyPanel();
+                }
+                this.frame.maintenanceMenu.updateButtonPanel(10);
+            }
+        });
+
+        this.frame.maintenanceMenu.moneyLockToggle().addItemListener(e->{
+            if(e.getStateChange()==ItemEvent.SELECTED)
+                this.frame.maintenanceMenu.setMoneyLocked(true);
+            else
+                this.frame.maintenanceMenu.setMoneyLocked(false);
+        });
+
+        this.frame.maintenanceMenu.getReplenishBtn().addActionListener(e -> {
+            this.frame.maintenanceMenu.updateButtonPanel(2);
+        });
+
+        this.frame.maintenanceMenu.getCollectBtn().addActionListener(e -> {
+            this.frame.maintenanceMenu.updateButtonPanel(3);
+        });
+
+        this.frame.maintenanceMenu.getEditPriceBtn().addActionListener(e -> {
+            this.frame.maintenanceMenu.updateButtonPanel(4);
         });
     }
 

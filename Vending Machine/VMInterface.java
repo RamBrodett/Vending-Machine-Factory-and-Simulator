@@ -105,7 +105,7 @@ public class VMInterface extends JPanel {
         gbc.weighty = .9;
         add(back, gbc);
 
-        toggleSpecial.setIcon(scaleIMG("./VMResources/specialsBTnorm.png", 391, 91));              //EDIT IMAGES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        toggleSpecial.setIcon(scaleIMG("./VMResources/specialsBTnorm.png", 391, 91));
         toggleSpecial.setRolloverIcon(scaleIMG("./VMResources/specialsBThover.png", 391, 91));
         toggleSpecial.setPressedIcon(scaleIMG("./VMResources/specialsBTclicked.png", 391, 91));
         toggleSpecial.setBorder(null);
@@ -505,7 +505,7 @@ public class VMInterface extends JPanel {
         return buttonPanel.moneyLocked;
     }
     public JCheckBox moneyLockToggle(){
-       return buttonPanel.setter;
+        return buttonPanel.setter;
     }
     public void setLockMoney (boolean bool){
         buttonPanel.moneyLocked = bool;
@@ -514,7 +514,7 @@ public class VMInterface extends JPanel {
     public String getModeButtonPanel(){
         return buttonPanel.currMode;
     }
-    public JTextArea getTextPane(){
+    public JTextArea getTextPanel(){
         return this.textPanel.vmdisplay;
     }
 
