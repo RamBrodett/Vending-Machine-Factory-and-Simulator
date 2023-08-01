@@ -349,20 +349,20 @@ public class VMInterface extends JPanel {
         itemLabel.setVerticalAlignment(SwingConstants.CENTER);
         itemLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
-        JLabel itemPrice = new JLabel(kCal + " cal.");
-        itemPrice.setHorizontalAlignment(SwingConstants.CENTER);
-        itemPrice.setVerticalAlignment(SwingConstants.CENTER);
-        itemPrice.setFont(new Font("Arial", Font.BOLD, 18));
-
-        JLabel itemCal = new JLabel(("PHP " + price));
+        JLabel itemCal = new JLabel(kCal + " cal.");
         itemCal.setHorizontalAlignment(SwingConstants.CENTER);
         itemCal.setVerticalAlignment(SwingConstants.CENTER);
         itemCal.setFont(new Font("Arial", Font.BOLD, 18));
 
+        JLabel itemPrice = new JLabel(("PHP " + price));
+        itemPrice.setHorizontalAlignment(SwingConstants.CENTER);
+        itemPrice.setVerticalAlignment(SwingConstants.CENTER);
+        itemPrice.setFont(new Font("Arial", Font.BOLD, 18));
+
         JPanel textPanel = new JPanel(new GridLayout(3, 1));
         textPanel.add(itemLabel);
-        textPanel.add(itemPrice);
         textPanel.add(itemCal);
+        textPanel.add(itemPrice);
 
         textPanel.setOpaque(false);
 
@@ -723,7 +723,14 @@ public class VMInterface extends JPanel {
             textArea.append(text);
         }
     }
+/*
+    public void setJpanelItemPanel(JPanel targetPanel,){
+        createImagePanel(itemIcon,itemName,)
 
+    }
+
+
+ */
 
 
 }

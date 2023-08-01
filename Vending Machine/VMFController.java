@@ -47,7 +47,6 @@ public class VMFController {
         initializeTestMenu();
         initializeVMInterface();
         initializeVMmaintenance();
-
         initializeSimulation();
 
     }

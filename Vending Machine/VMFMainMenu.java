@@ -52,7 +52,7 @@ public class VMFMainMenu extends JPanel {
         panelFiller6.setOpaque(false);
         panelFiller7.setOpaque(false);
 
-        createVM.setIcon(scaleIMG("./VMResources/crtBTorm.png",275,99));
+        createVM.setIcon(scaleIMG("./VMResources/crtBTnorm.png",275,99));
         createVM.setRolloverIcon(scaleIMG("./VMResources/crtBThover.png",275,99));
         createVM.setPressedIcon(scaleIMG("./VMResources/crtBTclicked.png",275,99));
         createVM.setBorder(null);

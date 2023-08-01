@@ -704,22 +704,6 @@ public class VendingMachine{
         System.out.println();
     }
 
-    /**
-     * Displays the simulation status of the Vending Machine.
-     * @param type is the type of what you want to display.
-     */
-    private void vmSimulationDisplay(int type){
-        if(type==1)
-        {
-            System.out.println("Starting emulation.....");
-            System.out.println("Vending Machine ready for testing.\n");
-        }
-        else if (type==2)
-        {
-            System.out.println("Terminating emulation.....");
-            System.out.println("Vending Machine terminated.\n");
-        }
-    }
 
     public Denomination getDenomination() { return this.denomination;}      /////////////NEWWW
     public float getTotalMoney(){
