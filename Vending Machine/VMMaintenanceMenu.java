@@ -110,6 +110,8 @@ public class VMMaintenanceMenu extends JPanel{
 
         buttonPanel.setBackground(new Color(87,99,104));
 
+
+
         itemPanel = new CardLayout();
         itemPanelContainer = new JPanel((itemPanel));
         itemPanelContainer.setOpaque(false);
@@ -209,8 +211,13 @@ public class VMMaintenanceMenu extends JPanel{
      */
     @Override
     protected void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(bgIMG_VMInterface.getImage(),0,0,getWidth(),getHeight(),null);
+        try{
+            super.paintComponent(g);
+            g.drawImage(bgIMG_VMInterface.getImage(),0,0,getWidth(),getHeight(),null);
+        } catch (Exception error){
+            JOptionPane.showMessageDialog(null,"Background image directory " +
+                    "is invalid: " + error.getMessage()+ " Error");
+        }
     }
 
     /**
@@ -464,7 +471,7 @@ public class VMMaintenanceMenu extends JPanel{
     /**
      * SubClass for Buttons' Panel GUI Components
      */
-    private class ButtonPanel extends JPanel {
+    protected class ButtonPanel extends JPanel {
 
         private String currMode; // restock | replenish | collect | edit price
         private boolean moneyLocked = false;
@@ -476,7 +483,8 @@ public class VMMaintenanceMenu extends JPanel{
         private JPanel replenishPanel = new JPanel(new BorderLayout());
         private JPanel moneySubPanel = new JPanel(new GridLayout(5, 2));
         private JPanel restockPanel = new JPanel();
-        private JPanel collectPanel = new JPanel();
+        private JPanel collectPanel = new JPanel(new GridBagLayout());
+        private final JButton collectBtn = new JButton();
         private JPanel editPricePanel = new JPanel();
         private CardLayout menu = new CardLayout();
 
@@ -540,7 +548,18 @@ public class VMMaintenanceMenu extends JPanel{
             restockPanel.setBackground(Color.GREEN);
             buttonPanel1.add("restockPanel",restockPanel);
 
-            collectPanel.setBackground(Color.MAGENTA);
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.CENTER;
+
+            collectBtn.setIcon(scaleIMG("./VMResources/collectBTnormal.png", 391, 91));
+            collectBtn.setRolloverIcon(scaleIMG("./VMResources/collectBThover.png", 391, 91));
+            collectBtn.setPressedIcon(scaleIMG("./VMResources/collectBTclicked.png", 391, 91));
+            collectBtn.setBorder(null);
+            collectBtn.setContentAreaFilled(false);
+            collectBtn.setOpaque(false);
+            collectBtn.setPreferredSize(new Dimension(391,91));
+            collectPanel.setBackground(new Color(87,99,104));
+            collectPanel.add(collectBtn, gbc);
             buttonPanel1.add("collectPanel",collectPanel);
 
             editPricePanel.setBackground(Color.YELLOW);
@@ -550,6 +569,10 @@ public class VMMaintenanceMenu extends JPanel{
             menu.show(buttonPanel1, "blank");
             currMode = "blank";
             add(buttonPanel1,BorderLayout.CENTER);
+        }
+
+        public JButton getCollectBtn(){
+            return collectBtn;
         }
     }
 
@@ -666,6 +689,10 @@ public class VMMaintenanceMenu extends JPanel{
      */
     public JCheckBox moneyLockToggle(){
         return buttonPanel.setter;
+    }
+
+    public ButtonPanel getButtonPanel(){
+        return this.buttonPanel;
     }
 
     public TextPanel getMoneyDisplay(){                 ////NNEWWWWWWWWWW

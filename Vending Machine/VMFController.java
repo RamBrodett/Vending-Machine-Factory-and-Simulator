@@ -266,6 +266,20 @@ public class VMFController {
             this.frame.maintenanceMenu.updateButtonPanel(3);
         });
 
+        this.frame.maintenanceMenu.getButtonPanel().getCollectBtn().addActionListener(e -> {
+            if (currMachine.getTotalMoney() != 0){
+                int choice = JOptionPane.showConfirmDialog(null,"Collecting P" +
+                                currMachine.getTotalMoney(), "Select an option",
+                        JOptionPane.YES_NO_OPTION);
+                if (choice == 0){
+                    currMachine.vmSetMoney(new Denomination());
+                    this.frame.maintenanceMenu.getMoneyDisplay().updateMoneyDisplay(0);
+                }
+            }
+            else JOptionPane.showMessageDialog(null,"Unable to collect money." +
+                    " Vending machine balance is 0.");
+        });
+
         this.frame.maintenanceMenu.getEditPriceBtn().addActionListener(e -> {
             this.frame.maintenanceMenu.resetButtonPanelBtns();
             this.frame.maintenanceMenu.updateButtonPanel(4);

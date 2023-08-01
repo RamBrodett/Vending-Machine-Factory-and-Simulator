@@ -5,7 +5,7 @@ public class VMFMainMenu extends JPanel {
     /**
      * Background image of the MainMenu.
      */
-    private ImageIcon bgIMG= new ImageIcon("./VMResources/mainbg.png");
+    private ImageIcon bgIMG = new ImageIcon("./VMResources/mainbg.png");
 
     /**
      * Button for creation of Vending Machine menu.
@@ -52,7 +52,7 @@ public class VMFMainMenu extends JPanel {
         panelFiller6.setOpaque(false);
         panelFiller7.setOpaque(false);
 
-        createVM.setIcon(scaleIMG("./VMResources/crtBTnorm.png",275,99));
+        createVM.setIcon(scaleIMG("./VMResources/crtBTorm.png",275,99));
         createVM.setRolloverIcon(scaleIMG("./VMResources/crtBThover.png",275,99));
         createVM.setPressedIcon(scaleIMG("./VMResources/crtBTclicked.png",275,99));
         createVM.setBorder(null);
@@ -102,8 +102,13 @@ public class VMFMainMenu extends JPanel {
      */
     @Override
     protected void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(bgIMG.getImage(),0,0,getWidth(),getHeight(),null);
+        try {
+            super.paintComponent(g);
+            g.drawImage(bgIMG.getImage(), 0, 0, getWidth(), getHeight(), null);
+        } catch (Exception error){
+            JOptionPane.showMessageDialog(null,"Background image directory " +
+                    "is invalid: " + error.getMessage()+ " Error");
+        }
     }
 
     /**
