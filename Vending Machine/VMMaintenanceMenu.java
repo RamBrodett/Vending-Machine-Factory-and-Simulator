@@ -27,7 +27,7 @@ public class VMMaintenanceMenu extends JPanel{
     private final JButton back = new JButton();;
 
     VMMaintenanceMenu(){
-        System.setOut(new PrintStream(new TextPane(textPanel.vmdisplay)));
+//        System.setOut(new PrintStream(new TextPane(textPanel.vmdisplay)));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -324,6 +324,7 @@ public class VMMaintenanceMenu extends JPanel{
             setLayout(new BorderLayout());
 
             vmdisplay.setLineWrap(true);
+            vmdisplay.setFont(new Font("consolas", Font.BOLD, 16));
             vmdisplay.setBackground(new Color(98, 174, 239));
             scrollPane.setPreferredSize(new Dimension(625, 300));
 
@@ -343,9 +344,9 @@ public class VMMaintenanceMenu extends JPanel{
         private final JCheckBox setter;
         private JPanel buttonPanel1 = new JPanel();
         private JPanel blankPanel = new JPanel();
-        private JPanel restockPanel = new JPanel(new BorderLayout());
+        private JPanel replenishPanel = new JPanel(new BorderLayout());
         private JPanel moneySubPanel = new JPanel(new GridLayout(5, 2));
-        private JPanel replenishPanel = new JPanel();
+        private JPanel restockPanel = new JPanel();
         private JPanel collectPanel = new JPanel();
         private JPanel editPricePanel = new JPanel();
         private CardLayout menu = new CardLayout();
@@ -396,15 +397,15 @@ public class VMMaintenanceMenu extends JPanel{
             denominationLabel.setHorizontalAlignment(SwingConstants.CENTER);
             setter.setText("Lock in Money");
             setter.setHorizontalAlignment(SwingConstants.CENTER);
-            restockPanel.add(denominationLabel, BorderLayout.NORTH);
+            replenishPanel.add(denominationLabel, BorderLayout.NORTH);
             moneySubPanel.setOpaque(false);
-            restockPanel.add(moneySubPanel, BorderLayout.CENTER);
-            restockPanel.add(setter, BorderLayout.SOUTH);
-            restockPanel.setBackground(Color.LIGHT_GRAY);
-            buttonPanel1.add("restockMode",restockPanel);
+            replenishPanel.add(moneySubPanel, BorderLayout.CENTER);
+            replenishPanel.add(setter, BorderLayout.SOUTH);
+            replenishPanel.setBackground(Color.LIGHT_GRAY);
+            buttonPanel1.add("replenishPanel",replenishPanel);
 
-            replenishPanel.setBackground(Color.GREEN);
-            buttonPanel1.add("replenishMode",replenishPanel);
+            restockPanel.setBackground(Color.GREEN);
+            buttonPanel1.add("restockPanel",restockPanel);
 
             collectPanel.setBackground(Color.MAGENTA);
             buttonPanel1.add("collectPanel",collectPanel);
@@ -414,28 +415,55 @@ public class VMMaintenanceMenu extends JPanel{
 
             buttonPanel1.add("blank", blankPanel);
             menu.show(buttonPanel1, "blank");
+            currMode = "blank";
             add(buttonPanel1,BorderLayout.CENTER);
         }
     }
 
     public void updateButtonPanel(int choice){
+
+        // 1    restock
+        // 2    replenish money
+        // 3    collect money
+        // 4    edit item price
+
         if(choice == 1){
-            buttonPanel.menu.show(buttonPanel.buttonPanel1, "restockMode");
-            buttonPanel.currMode = "restock";
+            if(buttonPanel.currMode.equals("restock")){
+                buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
+                buttonPanel.currMode = "blank";
+            } else {
+                buttonPanel.menu.show(buttonPanel.buttonPanel1, "restockPanel");
+                buttonPanel.currMode = "restock";
+            }
 
         } else if (choice == 2 ) {
-            buttonPanel.menu.show(buttonPanel.buttonPanel1, "replenishMode");
-            buttonPanel.currMode = "replenish";
+            if(buttonPanel.currMode.equals("replenish")){
+                buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
+                buttonPanel.currMode = "blank";
+            } else {
+                buttonPanel.menu.show(buttonPanel.buttonPanel1, "replenishPanel");
+                buttonPanel.currMode = "replenish";
+            }
 
         } else if (choice == 3) {
-            buttonPanel.menu.show(buttonPanel.buttonPanel1, "collectPanel");
-            buttonPanel.currMode = "collect";
+            if(buttonPanel.currMode.equals("collect")) {
+                buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
+                buttonPanel.currMode = "blank";
+            } else {
+                buttonPanel.menu.show(buttonPanel.buttonPanel1, "collectPanel");
+                buttonPanel.currMode = "collect";
+            }
 
         } else if (choice == 4) {
-            buttonPanel.menu.show(buttonPanel.buttonPanel1, "pricePanel");
-            buttonPanel.currMode = "edit price";
+            if(buttonPanel.currMode.equals("edit price")) {
+                buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
+                buttonPanel.currMode = "blank";
+            } else {
+                buttonPanel.menu.show(buttonPanel.buttonPanel1, "pricePanel");
+                buttonPanel.currMode = "edit price";
+            }
 
-        } else {
+        } else if (choice == 0) {
             buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
             buttonPanel.currMode = "blank";
         }
@@ -457,7 +485,7 @@ public class VMMaintenanceMenu extends JPanel{
             buttonPanel.denominationButtons[i].setValue(0);
         }
         buttonPanel.setter.setSelected(false);
-        updateButtonPanel(1);
+        updateButtonPanel(2);
     }
 
     public void setMoneyLocked(boolean bool){
@@ -500,8 +528,12 @@ public class VMMaintenanceMenu extends JPanel{
         return editPriceBtn;
     }
 
-    public String getCurrMode() {
-        return currMode;
+    public String getModeCurrMode() {
+        return buttonPanel.currMode;
+    }
+
+    public JTextArea getTextPanel(){
+        return this.textPanel.vmdisplay;
     }
 
     protected static class TextPane extends OutputStream {

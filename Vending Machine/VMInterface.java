@@ -23,7 +23,7 @@ public class VMInterface extends JPanel {
     private JButton back = new JButton();
 
     VMInterface() {
-        System.setOut(new PrintStream(new TextPane(textPanel.vmdisplay)));
+//        System.setOut(new PrintStream(new TextPane(textPanel.vmdisplay)));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
