@@ -635,6 +635,8 @@ public class VMMaintenanceMenu extends JPanel{
         private JPanel restockPanel = new JPanel();
         private JPanel collectPanel = new JPanel(new GridBagLayout());
         private final JButton collectBtn = new JButton();
+        private final JButton[] restockSlotButtons = new JButton[9];
+        private final JButton[] editPriceSlotButtons = new JButton[9];
         private JPanel editPricePanel = new JPanel();
         private CardLayout menu = new CardLayout();
 
@@ -644,7 +646,6 @@ public class VMMaintenanceMenu extends JPanel{
         public ButtonPanel() {
             setLayout(new BorderLayout());
             setPreferredSize(new Dimension(625, 300));
-            setBackground(Color.GREEN);
 
             buttonPanel1.setLayout(menu);
             blankPanel.setBackground(new Color(87,99,104));
@@ -695,7 +696,67 @@ public class VMMaintenanceMenu extends JPanel{
             replenishPanel.setBackground(Color.LIGHT_GRAY);
             buttonPanel1.add("replenishPanel",replenishPanel);
 
-            restockPanel.setBackground(Color.GREEN);
+            restockPanel.setLayout(new GridLayout(3, 3));
+            restockPanel.setOpaque(true);
+            restockPanel.setBackground(new Color(87, 99, 104));
+
+            for (int i = 0; i < 9; i++) {
+                restockSlotButtons[i] = new JButton();
+            }
+            restockSlotButtons[0].setIcon(scaleIMG("./VMResources/slot1.png", 212, 108));
+            restockSlotButtons[0].setBorder(null);
+            restockSlotButtons[0].setOpaque(false);
+            restockSlotButtons[0].setContentAreaFilled(false);
+            restockPanel.add(restockSlotButtons[0]);
+
+            restockSlotButtons[1].setIcon(scaleIMG("./VMResources/slot2.png", 212, 108));
+            restockSlotButtons[1].setBorder(null);
+            restockSlotButtons[1].setOpaque(false);
+            restockSlotButtons[1].setContentAreaFilled(false);
+            restockPanel.add(restockSlotButtons[1]);
+
+            restockSlotButtons[2].setIcon(scaleIMG("./VMResources/slot3.png", 212, 108));
+            restockSlotButtons[2].setOpaque(false);
+            restockSlotButtons[2].setContentAreaFilled(false);
+            restockSlotButtons[2].setBorder(null);
+            restockPanel.add(restockSlotButtons[2]);
+
+            restockSlotButtons[3].setIcon(scaleIMG("./VMResources/slot4.png", 212, 108));
+            restockSlotButtons[3].setOpaque(false);
+            restockSlotButtons[3].setContentAreaFilled(false);
+            restockSlotButtons[3].setBorder(null);
+            restockPanel.add(restockSlotButtons[3]);
+
+            restockSlotButtons[4].setIcon(scaleIMG("./VMResources/slot5.png", 212, 108));
+            restockSlotButtons[4].setOpaque(false);
+            restockSlotButtons[4].setContentAreaFilled(false);
+            restockSlotButtons[4].setBorder(null);
+            restockPanel.add(restockSlotButtons[4]);
+
+
+            restockSlotButtons[5].setIcon(scaleIMG("./VMResources/slot6.png", 212, 108));
+            restockSlotButtons[5].setOpaque(false);
+            restockSlotButtons[5].setContentAreaFilled(false);
+            restockSlotButtons[5].setBorder(null);
+            restockPanel.add(restockSlotButtons[5]);
+
+            restockSlotButtons[6].setIcon(scaleIMG("./VMResources/slot7.png", 212, 108));
+            restockSlotButtons[6].setOpaque(false);
+            restockSlotButtons[6].setContentAreaFilled(false);
+            restockSlotButtons[6].setBorder(null);
+            restockPanel.add(restockSlotButtons[6]);
+
+            restockSlotButtons[7].setIcon(scaleIMG("./VMResources/slot8.png", 212, 108));
+            restockSlotButtons[7].setOpaque(false);
+            restockSlotButtons[7].setContentAreaFilled(false);
+            restockSlotButtons[7].setBorder(null);
+            restockPanel.add(restockSlotButtons[7]);
+
+            restockSlotButtons[8].setIcon(scaleIMG("./VMResources/slot9.png", 212, 108));
+            restockSlotButtons[8].setOpaque(false);
+            restockSlotButtons[8].setContentAreaFilled(false);
+            restockSlotButtons[8].setBorder(null);
+            restockPanel.add(restockSlotButtons[8]);
             buttonPanel1.add("restockPanel",restockPanel);
 
             GridBagConstraints gbc = new GridBagConstraints();
@@ -712,7 +773,69 @@ public class VMMaintenanceMenu extends JPanel{
             collectPanel.add(collectBtn, gbc);
             buttonPanel1.add("collectPanel",collectPanel);
 
-            editPricePanel.setBackground(Color.YELLOW);
+            editPricePanel.setLayout(new GridLayout(3, 3));
+            editPricePanel.setOpaque(true);
+            editPricePanel.setBackground(new Color(87, 99, 104));
+
+            for (int i = 0; i < 9; i++) {
+                editPriceSlotButtons[i] = new JButton();
+            }
+            editPriceSlotButtons[0].setIcon(scaleIMG("./VMResources/slot1.png", 212, 108));
+            editPriceSlotButtons[0].setBorder(null);
+            editPriceSlotButtons[0].setOpaque(false);
+            editPriceSlotButtons[0].setContentAreaFilled(false);
+            editPricePanel.add(editPriceSlotButtons[0]);
+
+            editPriceSlotButtons[1].setIcon(scaleIMG("./VMResources/slot2.png", 212, 108));
+            editPriceSlotButtons[1].setBorder(null);
+            editPriceSlotButtons[1].setOpaque(false);
+            editPriceSlotButtons[1].setContentAreaFilled(false);
+            editPricePanel.add(editPriceSlotButtons[1]);
+
+            editPriceSlotButtons[2].setIcon(scaleIMG("./VMResources/slot3.png", 212, 108));
+            editPriceSlotButtons[2].setOpaque(false);
+            editPriceSlotButtons[2].setContentAreaFilled(false);
+            editPriceSlotButtons[2].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[2]);
+
+            editPriceSlotButtons[3].setIcon(scaleIMG("./VMResources/slot4.png", 212, 108));
+            editPriceSlotButtons[3].setOpaque(false);
+            editPriceSlotButtons[3].setContentAreaFilled(false);
+            editPriceSlotButtons[3].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[3]);
+
+            editPriceSlotButtons[4].setIcon(scaleIMG("./VMResources/slot5.png", 212, 108));
+            editPriceSlotButtons[4].setOpaque(false);
+            editPriceSlotButtons[4].setContentAreaFilled(false);
+            editPriceSlotButtons[4].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[4]);
+
+
+            editPriceSlotButtons[5].setIcon(scaleIMG("./VMResources/slot6.png", 212, 108));
+            editPriceSlotButtons[5].setOpaque(false);
+            editPriceSlotButtons[5].setContentAreaFilled(false);
+            editPriceSlotButtons[5].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[5]);
+
+            editPriceSlotButtons[6].setIcon(scaleIMG("./VMResources/slot7.png", 212, 108));
+            editPriceSlotButtons[6].setOpaque(false);
+            editPriceSlotButtons[6].setContentAreaFilled(false);
+            editPriceSlotButtons[6].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[6]);
+
+            editPriceSlotButtons[7].setIcon(scaleIMG("./VMResources/slot8.png", 212, 108));
+            editPriceSlotButtons[7].setOpaque(false);
+            editPriceSlotButtons[7].setContentAreaFilled(false);
+            editPriceSlotButtons[7].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[7]);
+
+            editPriceSlotButtons[8].setIcon(scaleIMG("./VMResources/slot9.png", 212, 108));
+            editPriceSlotButtons[8].setOpaque(false);
+            editPriceSlotButtons[8].setContentAreaFilled(false);
+            editPriceSlotButtons[8].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[8]);
+            buttonPanel1.add("editPricePanel",editPricePanel);
+
             buttonPanel1.add("pricePanel",editPricePanel);
 
             buttonPanel1.add("blank", blankPanel);
@@ -897,6 +1020,10 @@ public class VMMaintenanceMenu extends JPanel{
         return restockBtn;
     }
 
+    public JButton getRestockVMButtons(int index){
+        return buttonPanel.restockSlotButtons[index];
+    }
+
     /**
      * Gets the button for Replenishing money.
      * @return button for Replenishing money.
@@ -919,6 +1046,10 @@ public class VMMaintenanceMenu extends JPanel{
      */
     public JButton getEditPriceBtn() {
         return editPriceBtn;
+    }
+
+    public JButton getEditPriceVMButtons(int index){
+        return buttonPanel.editPriceSlotButtons[index];
     }
 
     /**
