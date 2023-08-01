@@ -30,19 +30,29 @@ public class VMFController {
         //stores the frame as Active Frame
         this.frame = frame;
 
-        //Go back to previous screen event Listener ---------------------------
-        ActionListener backToMainListener = e -> this.frame.menu.show(this.frame.cardPanel, "mainMenu");
-        ActionListener backToTestMenuListener = e -> this.frame.menu.show(this.frame.cardPanel, "VMTest");
-        //Back Buttons -------------------------------------------------
-        this.frame.generatorMenu.getBack().addActionListener(backToMainListener);
-        this.frame.testMenu.getBackButton().addActionListener(backToMainListener);
-        this.frame.maintenanceMenu.getBack().addActionListener(backToTestMenuListener);
-        this.frame.vmInterface.getBack().addActionListener(backToTestMenuListener);
+        initializeProgram();
 
-        //--------------------------------------------------------------
+    }
 
-        // Factory Main Menu Buttons -----------------------------------
+    /**
+     * Initializer of the start of the program.
+     */
+    private void initializeProgram(){
+        frame.menu.show(frame.cardPanel,"mainMenu");
 
+        //initialize Listeners
+        initializeMainMenu();
+        initializeGenMenu();
+        initializeBackMethod();
+        initializeTestMenu();
+        initializeVMInterface();
+        initializeVMmaintenance();
+
+        initializeSimulation();
+
+    }
+
+    private void initializeMainMenu(){
         this.frame.mainMenu.getCreateVMButton().addActionListener(e->{
             this.frame.generatorMenu.setMoneyInputFrame(new JFrame());
             if(currMachine != null){
@@ -69,9 +79,9 @@ public class VMFController {
             this.frame.mainFrame.setVisible(false);
             System.exit(0);
         });
-        //------------------------------------------------------------
+    }
 
-        // Generate Menu Buttons -------------------------------------
+    private void initializeGenMenu(){
 
         this.frame.generatorMenu.getRegVM().addActionListener(e->{
             try{
@@ -136,9 +146,21 @@ public class VMFController {
 
             this.frame.menu.show(this.frame.cardPanel, "mainMenu");
         });
-        //-----------------------------------------------------------
 
-        // Test Menu Buttons ----------------------------------------
+    }
+
+    private void initializeBackMethod(){
+        //Go back to previous screen event Listener ---------------------------
+        ActionListener backToMainListener = e -> this.frame.menu.show(this.frame.cardPanel, "mainMenu");
+        ActionListener backToTestMenuListener = e -> this.frame.menu.show(this.frame.cardPanel, "VMTest");
+        //Back Buttons -------------------------------------------------
+        this.frame.generatorMenu.getBack().addActionListener(backToMainListener);
+        this.frame.testMenu.getBackButton().addActionListener(backToMainListener);
+        this.frame.maintenanceMenu.getBack().addActionListener(backToTestMenuListener);
+        this.frame.vmInterface.getBack().addActionListener(backToTestMenuListener);
+    }
+
+    private void initializeTestMenu(){
         this.frame.testMenu.getSimulateVMButton().addActionListener(e ->{
             this.frame.mainFrame.setResizable(false);
             this.frame.menu.show(this.frame.cardPanel, "vmSIM");
@@ -149,9 +171,10 @@ public class VMFController {
             this.frame.menu.show(this.frame.cardPanel, "VMmaintenance");
             System.setOut(new PrintStream(new VMMaintenanceMenu.TextPane(this.frame.maintenanceMenu.getTextPanel())));
         });
-        //-----------------------------------------------------------
 
-        // Vending Machine Interface Menu Buttons -------------------
+    }
+
+    private void initializeVMInterface(){
         this.frame.vmInterface.getInsertMoney().addActionListener(e ->{
             // if insert money pressed in selection mode go to payment mode and viceversa
             if(this.frame.vmInterface.getModeButtonPanel().equalsIgnoreCase("selection")) {
@@ -190,9 +213,9 @@ public class VMFController {
             if(e.getStateChange()==ItemEvent.SELECTED)this.frame.vmInterface.setLockMoney(true); // true if selected
             else this.frame.vmInterface.setLockMoney(false); // false if deselected
         });
-        //-----------------------------------------------------------------
+    }
 
-        // Maintenance Menu Buttons ----------------------------------------
+    private void initializeVMmaintenance(){
 
         this.frame.maintenanceMenu.getToggleSpecial().addActionListener(e -> {      //
             this.frame.maintenanceMenu.updateItemPanel();
@@ -247,15 +270,53 @@ public class VMFController {
             this.frame.maintenanceMenu.resetButtonPanelBtns();
             this.frame.maintenanceMenu.updateButtonPanel(4);
         });
-
-        //------------------------------------------------------------------
     }
 
-    /**
-     * Initializer of the start of the program.
-     */
-    public void initializeProgram(){
-        frame.menu.show(frame.cardPanel,"mainMenu");
+    private void initializeSimulation(){
+        ActionListener a = e -> {
+            Object src = e.getSource();
+
+            if(currMachine.getTotalInsertedMoney()>0){
+                if(src ==  this.frame.vmInterface.getVMButtons(0)){
+                    this.currMachine.dispenseProduct(0);
+                }
+                else if(src == this.frame.vmInterface.getVMButtons(1)){
+                    this.currMachine.dispenseProduct(1);
+
+                }
+                else if(src == this.frame.vmInterface.getVMButtons(2)){
+                    this.currMachine.dispenseProduct(2);
+
+                }
+                else if (src == this.frame.vmInterface.getVMButtons(3)) {
+                    this.currMachine.dispenseProduct(3);
+
+                }
+                else if (src == this.frame.vmInterface.getVMButtons(4)) {
+                    this.currMachine.dispenseProduct(4);
+
+                }
+                else if (src == this.frame.vmInterface.getVMButtons(5)) {
+                    this.currMachine.dispenseProduct(5);
+
+                }
+                else if (src == this.frame.vmInterface.getVMButtons(6)) {
+                    this.currMachine.dispenseProduct(6);
+
+                }
+                else if (src == this.frame.vmInterface.getVMButtons(7)) {
+                    this.currMachine.dispenseProduct(7);
+
+                }
+                else if (src == this.frame.vmInterface.getVMButtons(8)) {
+                    this.currMachine.dispenseProduct(8);
+
+                }
+            }
+        };
+        for(int i = 0; i< 9; i++){
+            this.frame.vmInterface.getVMButtons(i).addActionListener(a);
+        }
     }
 
     /**
@@ -265,5 +326,6 @@ public class VMFController {
     private void updateMachineType(String type){
         machineType = type;
     }
+
 
 }

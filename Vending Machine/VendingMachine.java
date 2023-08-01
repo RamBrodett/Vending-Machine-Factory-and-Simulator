@@ -38,105 +38,141 @@ public class VendingMachine{
      *     informations.
      * </p>
      */
+    //!!!! USED!!!!!
     private void vmCreation(){
-        String[] products = {"Vanilla Yogurt","Chocolate Yogurt","Strawberry Yogurt",
-                "Matcha Yogurt", "Rasberry Yogurt","Mango Yoguort","Cold Mixed Fruit bits",
-                "Crunchy Cereals", "Belgian Choco bits"};
+        String[] products = {"Vanilla", "Chocolate", "Matcha", "Choco Chips", "Cereals",
+                "Mixed Fruit Bits", "Raspberry", "Starberry","Mango"};
 
         for (int i = 0; i < products.length; i++){
 
-            if(i<6)productSlots.add(i,new Slot(products[i],100,90,15));
+            if(i<4||i>6)productSlots.add(i,new Slot(products[i],100,90,15));
             else productSlots.add(i,new Slot(products[i],45,40,15));
         }
-        /* to be removed
-
-          for(int x=0; x<52;x++) System.out.print("═");
-        System.out.println("""
-
-                You may like to place your initial money in your
-                Vending Machine. You may do so by selecting the
-                denomination and quantity, or you may exit.""");
-        vmSetMoney(denominationFeedInterface());
-        double money = this.denomination.getTotalMoney();
-        System.out.println("Total Money: " + money);
-         */
     }
-
 
     /**
      * Providingng the machine a set of complete values for denomination.
      * @param denomination a set of values of diff denomination.
      */
+
+    //!!!!USED!!!!!
     public void vmSetMoney(Denomination denomination){
         this.denomination = denomination;
     }
 
-    // start of vending machine methods for overall features------------------------------------------------------------
+    //to do dapat lumalabas to sa text area yung blue na gilid ng vm
 
-    /**
-     *  Sets the product on slot.
-     * @param name name of the product.
-     * @param price price of the product.
-     * @param calories calories of the product.
-     * @param quantity quantity of the product.
-     * @param slotNo slot no you will the assign the product to.
-     *
-     */
-    public void setProduct(String name, double price, int calories, int quantity, int slotNo){
-        productSlots.set(slotNo, new Slot(name, price, calories, quantity));
+    public void displayTransactions(){
+        double totalProfit = 0;
+
+        System.out.printf("\n%-15s%s  %s %s\n", "Item", "Price", "Sold", "Profit");
+        for (int i = 0; i < 37; i++){
+            System.out.print("=");
+        }
+        System.out.println();
+        for (Slot productSlot : productSlots) {
+            if (productSlot.getNumProductsSold() > 0) {
+                System.out.printf("%-15s%-7.2f %-4d %-7.2f\n", productSlot.getBaseProductName(),
+                        productSlot.getBaseProductPrice(), productSlot.getNumProductsSold(),
+                        productSlot.getBaseProductPrice() * productSlot.getNumProductsSold());
+                totalProfit = productSlot.getBaseProductPrice() * productSlot.getNumProductsSold();
+            }
+        }
+        for (int i = 0; i < 37; i++){
+            System.out.print("=");
+        }
+
+        System.out.print("\nTotal: ");
+        System.out.printf("%-33.2f\n", totalProfit);
+        for (int i = 0; i < 37; i++){
+            System.out.print("=");
+        }
+        System.out.println(" ");
+    }
+
+    public void setInsertedMoney(Denomination denomination){
+        this.insertedMoney = denomination;
+    }
+
+
+    public void editItemPrice() {
+        /*
+        To DO :
+
+        Change item's Price
+         */
+
+    }
+
+    public void dispenseProduct(int index){
+        if(!(isSlotEmpty(index))){
+            if(productSlots.get(index).getBaseProductPrice()<= getTotalInsertedMoney()){
+                float change = (float) (getTotalInsertedMoney() - productSlots.get(index).getBaseProductPrice());
+                Denomination changeDenom = findDenomination(change,denomination);
+                if(!(changeDenom.getTotalMoney() - change != 0)){
+                    System.out.println("Transaction successful.");
+                    System.out.println("Dispensing " + productSlots.get(index).getBaseProductName());
+                    dispenser(index);
+                    addToDenomination(denomination,insertedMoney);
+                    differenceDenomination(denomination,changeDenom);
+                    insertedMoney = changeDenom;
+                    productSlots.get(index).setNumProductsSold(1);
+                    System.out.printf("Your change is %.2f\n",change);
+                    displayDenominations(changeDenom);
+                }
+                else System.out.println("Unable to give change. Unsuccessful transaction.\n");
+
+            }else System.out.println("Insufficient balance. Unsuccessful transaction.\n");
+
+        }else System.out.println("Sorry! Item is out of stock.\n");
+    }
+
+    public float getTotalInsertedMoney(){
+        return this.insertedMoney.getTotalMoney();
+    }
+
+    private void dispenser(int index){
+        productSlots.get(index).getProducts().remove(0);
+    }
+
+
+    public void addToDenomination(Denomination to, Denomination from){                         //add all denoms; to = from + to
+        to.setThousandPesoBill     (from.getThousandPesoBill());
+        to.setFiveHundredPesoBill  (from.getFiveHundredPesoBill());
+        to.setTwoHundredPesoBill   (from.getTwoHundredPesoBill());
+        to.setOneHundredPesoBill   (from.getOneHundredPesoBill());
+        to.setFiftyPesoBill        (from.getFiftyPesoBill());
+        to.setTwentyPesoBill       (from.getTwentyPesoBill());
+        to.setTwentyPesoCoin       (from.getTwentyPesoCoin());
+        to.setTenPesoCoin          (from.getTenPesoCoin());
+        to.setFivePesoCoin         (from.getFivePesoCoin());
+        to.setOnePesoCoin          (from.getOnePesoCoin());
     }
 
     /**
-     *  allows the authorized personel to set a product on a specific slot on vending machine.
-     * @param slotNumber specific location you want to store the product on.
-     * @param ifReplace is a boolean value to know if it is replacing an item or restocking.
+     * <p>
+     * Clears the values of each denomination in the 'x' object by setting them to zero.
+     * The result is stored in the same 'x' object.</p>
+     * @param x The denomination object to be cleared.
      */
-
-
-    // to do chnage to only restock and change price, and remove na yung dina need like scanner
-    public void setProductOnSlot(int slotNumber, boolean ifReplace){
-        Scanner scanner = new Scanner(System.in);
-
-        String name;
-        if (ifReplace) {
-            System.out.print("Product name: ");
-            name = scanner.nextLine();
-        }
-
-        else {
-            System.out.printf("Product Slot: %s\n", productSlots.get(slotNumber).getBaseProductName());
-            name = productSlots.get(slotNumber).getBaseProductName();
-        }
-
-        System.out.print("Product price : ");
-        double price = scanner.nextDouble();
-        System.out.print("Product calories : ");
-        int calories = scanner.nextInt();
-        int numofProducts;
-
-        if (ifReplace) {
-            do {
-                System.out.print("Enter product quantity (Max of 15pcs) : ");
-                numofProducts = scanner.nextInt();
-                scanner.nextLine();
-                if (numofProducts < 1 || numofProducts > 15)
-                    System.out.println("Enter a valid quantity");
-            } while (numofProducts < 1 || numofProducts > 15);
-            if (numofProducts > 0)
-                productSlots.get(slotNumber).setNumProductsSold(-productSlots.get(slotNumber).getNumProductsSold());    //sets amount sold to 0 upon restocking
-        }
-
-        else {
-            do {
-                System.out.println("Enter quantity to restock (Max of 15pcs): ");
-                numofProducts = scanner.nextInt();
-                numofProducts += productSlots.get(slotNumber).getProductQuantity();
-                if (numofProducts < 0 || numofProducts > 15)
-                    System.out.println("Enter a valid quantity");
-            } while (numofProducts < 0 || numofProducts > 15);
-        }
-        setProduct(name,price,calories,numofProducts,slotNumber);
+    private void clearDenomination(Denomination x){
+        x.setOnePesoCoin(-x.getOnePesoCoin());
+        x.setFivePesoCoin(-x.getFivePesoCoin());
+        x.setTenPesoCoin(-x.getTenPesoCoin());
+        x.setTwentyPesoCoin(-x.getTwentyPesoCoin());
+        x.setTwentyPesoBill(-x.getTwentyPesoBill());
+        x.setFiftyPesoBill(-x.getFiftyPesoBill());
+        x.setOneHundredPesoBill(-x.getOneHundredPesoBill());
+        x.setTwoHundredPesoBill(-x.getTwoHundredPesoBill());
+        x.setFiveHundredPesoBill(-x.getFiveHundredPesoBill());
+        x.setThousandPesoBill(-x.getThousandPesoBill());
     }
+
+
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+
+
 
     // user - vending transaction [simulation of using the vending machine]
 
@@ -147,6 +183,9 @@ public class VendingMachine{
      *  denomination for change, dispensing items and change.
      *</p>
      */
+
+    /*
+
     public void vendingMachineUserTransaction(){
         Scanner scanner = new Scanner(System.in);
         String decision;
@@ -157,8 +196,8 @@ public class VendingMachine{
         do{
             while(ongoingTransaction){
                 displayProducts(0); // 0 value since it is for display only not selection.
-                insertedMoney = denominationFeedInterface();
-                System.out.println("Total inserted money: " + insertedMoney.getTotalMoney());
+                //insertedMoney = denominationFeedInterface();
+               // System.out.println("Total inserted money: " + insertedMoney.getTotalMoney());
                 displayProducts(1); // 1 value since it is selection of item already.
                 int selected;
                 String confirm;
@@ -241,6 +280,8 @@ public class VendingMachine{
         vmSimulationDisplay(2);
     }
 
+     */
+
     //maintenance methods-----------------------------------------------------------------------
 
     /**
@@ -249,37 +290,7 @@ public class VendingMachine{
      *  It prompts the user to select a slot and either add new items or restock existing items.
      * </p>
      */
-    public void editItems() {
-        Scanner scanner = new Scanner(System.in);
-        int selected;
-        int temp1, temp2;
-        double temp3, temp4;
-        do {
-            displayProducts(3);
-            System.out.print("Select a slot to edit: ");
-            selected = scanner.nextInt();
 
-            if ((selected -1) != productSlots.size()) {
-                if (isSlotEmpty(selected - 1) || productSlots.get(selected - 1).getProductQuantity() == 0) {
-                    setProductOnSlot(selected-1,true);
-                }
-                else if (!(isSlotEmpty(selected - 1))) {
-                    temp1 = productSlots.get(selected-1).getProductQuantity();          //set temp vars for before restocking/editing
-                    temp2 = productSlots.get(selected-1).getNumProductsSold();
-                    temp3 = productSlots.get(selected-1).getBaseProductPrice();
-                    temp4 = productSlots.get(selected-1).getBaseProductCal();
-
-                    setProductOnSlot(selected - 1, false);
-
-                    productSlots.get(selected - 1).setOldProductQuantity(temp1);        //assign temp vars into old attributes for display
-                    productSlots.get(selected - 1).setOldProductsSold(temp2);
-                    productSlots.get(selected - 1).setBaseProductOldPrice(temp3);
-                    productSlots.get(selected - 1).setBaseProductOldCalories(temp4);
-                    productSlots.get(selected - 1).setEdited(true);
-                }
-            }
-        } while (selected != productSlots.size()+1);
-    }
 
     // boolean methods for vmstatus-------------------------------------------------------------
 
@@ -289,9 +300,7 @@ public class VendingMachine{
      * @return boolean value, returned true relates that slot is empty, otherwise, it is not empty.
      */
     private boolean isSlotEmpty(int slotNumber){
-        return (productSlots.get(slotNumber).getBaseProductName().equals("Empty")&&
-                productSlots.get(slotNumber).getBaseProductPrice()==-1&&
-                productSlots.get(slotNumber).getBaseProductCal()==-1);
+        return (productSlots.get(slotNumber).getProductQuantity()==0);
     }
 
     /**
@@ -315,6 +324,7 @@ public class VendingMachine{
      * @return a Denomination object representing the money fed into the vending machine.
      */
 
+    /*
     public Denomination denominationFeedInterface(){
         Scanner scanner = new Scanner(System.in);
         Denomination money = new Denomination();
@@ -375,10 +385,13 @@ public class VendingMachine{
         return money;
     }
 
+     */
+
     /**
      * Method to edit/collect the supply of money mounted on the machine.
      */
 
+    /*
     public void moneyBox(){
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -402,6 +415,8 @@ public class VendingMachine{
             }
         }
     }
+
+     */
 
     /**
      * This method looks for the appropriate denomination from the inventory.
@@ -668,38 +683,6 @@ public class VendingMachine{
      * @param from The denomination object containing the values to be added.
      */
 
-    public void addToDenomination(Denomination to, Denomination from){                         //add all denoms; to = from + to
-        to.setThousandPesoBill     (from.getThousandPesoBill());
-        to.setFiveHundredPesoBill  (from.getFiveHundredPesoBill());
-        to.setTwoHundredPesoBill   (from.getTwoHundredPesoBill());
-        to.setOneHundredPesoBill   (from.getOneHundredPesoBill());
-        to.setFiftyPesoBill        (from.getFiftyPesoBill());
-        to.setTwentyPesoBill       (from.getTwentyPesoBill());
-        to.setTwentyPesoCoin       (from.getTwentyPesoCoin());
-        to.setTenPesoCoin          (from.getTenPesoCoin());
-        to.setFivePesoCoin         (from.getFivePesoCoin());
-        to.setOnePesoCoin          (from.getOnePesoCoin());
-    }
-
-    /**
-     * <p>
-     * Clears the values of each denomination in the 'x' object by setting them to zero.
-     * The result is stored in the same 'x' object.</p>
-     * @param x The denomination object to be cleared.
-     */
-    private void clearDenomination(Denomination x){
-        x.setOnePesoCoin(-x.getOnePesoCoin());
-        x.setFivePesoCoin(-x.getFivePesoCoin());
-        x.setTenPesoCoin(-x.getTenPesoCoin());
-        x.setTwentyPesoCoin(-x.getTwentyPesoCoin());
-        x.setTwentyPesoBill(-x.getTwentyPesoBill());
-        x.setFiftyPesoBill(-x.getFiftyPesoBill());
-        x.setOneHundredPesoBill(-x.getOneHundredPesoBill());
-        x.setTwoHundredPesoBill(-x.getTwoHundredPesoBill());
-        x.setFiveHundredPesoBill(-x.getFiveHundredPesoBill());
-        x.setThousandPesoBill(-x.getThousandPesoBill());
-    }
-
     // display methods---------------------------------------------------------------------------------
     /**
      * <p>
@@ -739,14 +722,11 @@ public class VendingMachine{
     }
 
     public Denomination getDenomination() { return this.denomination;}      /////////////NEWWW
-    public int getTotalMoney(){
+    public float getTotalMoney(){
         return this.denomination.getTotalMoney();
     }
     public Denomination getInsertedMoney(){
         return this.insertedMoney;
-    }
-    public int getTotalInsertedMoney(){
-        return this.insertedMoney.getTotalMoney();
     }
 
     /**
@@ -797,39 +777,7 @@ public class VendingMachine{
      * </p>
      */
 
-    //to do dapat lumalabas to sa text area yung blue na gilid ng vm
 
-    public void displayTransactions(){
-        double totalProfit = 0;
-
-        System.out.printf("\n%-15s%s  %s %s\n", "Item", "Price", "Sold", "Profit");
-        for (int i = 0; i < 37; i++){
-            System.out.print("=");
-        }
-        System.out.println();
-        for (Slot productSlot : productSlots) {
-            if (productSlot.getNumProductsSold() > 0) {
-                System.out.printf("%-15s%-7.2f %-4d %-7.2f\n", productSlot.getBaseProductName(),
-                        productSlot.getBaseProductPrice(), productSlot.getNumProductsSold(),
-                        productSlot.getBaseProductPrice() * productSlot.getNumProductsSold());
-                totalProfit = productSlot.getBaseProductPrice() * productSlot.getNumProductsSold();
-            }
-        }
-        for (int i = 0; i < 37; i++){
-            System.out.print("=");
-        }
-
-        System.out.print("\nTotal: ");
-        System.out.printf("%-33.2f\n", totalProfit);
-        for (int i = 0; i < 37; i++){
-            System.out.print("=");
-        }
-        System.out.println(" ");
-    }
-
-    public void setInsertedMoney(Denomination denomination){
-        this.insertedMoney = denomination;
-    }
 
 
 }

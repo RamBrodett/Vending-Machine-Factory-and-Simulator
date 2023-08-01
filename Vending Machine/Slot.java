@@ -45,6 +45,10 @@ public class Slot {
         }
     }
 
+    public ArrayList<Product> getProducts(){
+        return products;
+    }
+
     /**
      * Gets the name of the base product.
      * @return the name of the base product.

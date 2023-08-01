@@ -679,6 +679,10 @@ public class VMInterface extends JPanel {
         return buttonPanel.currMode;
     }
 
+    public JButton getVMButtons(int index){
+        return buttonPanel.slotButtons[index];
+    }
+
     /**
      *Gets the textArea for display.
      * @return textArea for display.

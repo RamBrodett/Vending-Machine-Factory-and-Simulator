@@ -250,7 +250,7 @@ public class Denomination {
      * in attribute * its corresponding denomination.
      * @return Returns total money in the denomination.
      */
-    public int getTotalMoney(){
+    public float getTotalMoney(){
         return this.onePesoCoin + (this.fivePesoCoin * 5) + (this.tenPesoCoin * 10) +
              ((this.twentyPesoCoin + this.twentyPesoBill) * 20) + (this.fiftyPesoBill * 50) +
               (this.oneHundredPesoBill * 100) + (this.twoHundredPesoBill * 200) +
