@@ -2,28 +2,74 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintStream;
-//import java.net.InetSocketAddress;
-//import java.util.Set;
-
-
 
 public class VMInterface extends JPanel {
 
-    private ImageIcon bgIMG_VMInterface = new ImageIcon("./VMResources/VMInterfaceBG.png");
-    private RegularItemPanel regItemPanel = new RegularItemPanel();
-    private SpecialItemPanel specialItemPanel = new SpecialItemPanel();
-    private CardLayout itemPanel;
-    private JPanel itemPanelContainer;
-    private String currMode = "Regular";            //TRACKER FOR WHICH MODE THE LAYOUT IS CURRENTLY ON
-    private final ButtonPanel buttonPanel = new ButtonPanel();
-    private final TextPanel textPanel = new TextPanel();
-    private JButton toggleSpecial = new JButton();
-    private JButton InsertMoney = new JButton();
-    private JButton back = new JButton();
+    /**
+     * Background image of the VendingMachineInterface.
+     */
+    private final ImageIcon bgIMG_VMInterface = new ImageIcon("./VMResources/VMInterfaceBG.png");
 
+    /**
+     * Panel that contains Regular Items and its descriptions
+     */
+    private final RegularItemPanel regItemPanel = new RegularItemPanel();
+
+    /**
+     * Panel that contains Special Items and its descriptions
+     */
+    private final SpecialItemPanel specialItemPanel = new SpecialItemPanel();
+
+    /**
+     * Layout Manager Panel
+     */
+    private final CardLayout itemPanel;
+
+    /**
+     * Panel for product contatiner
+     */
+    private final JPanel itemPanelContainer;
+
+    /**
+     *  Holder for what vending Machine type is currently loaded
+     */
+    private String currMode = "Regular";            //TRACKER FOR WHICH MODE THE LAYOUT IS CURRENTLY ON
+
+    /**
+     *  Custom Panel for Button
+     */
+    private final ButtonPanel buttonPanel = new ButtonPanel();
+
+    /**
+     *  Custom Panel for text area
+     */
+    private final TextPanel textPanel = new TextPanel();
+
+    /**
+     *  Button for toggling special items display
+     *  <p>
+     *      Toggle button for displaying special
+     *      products. Needs to be a Special Vending Machine
+     *      to be available.
+     *  </p>
+     */
+    private final JButton toggleSpecial = new JButton();
+
+    /**
+     *
+     * Button for Inserting Money
+     */
+    private final JButton InsertMoney = new JButton();
+
+    /**
+     * Button for going back to previous menu.
+     */
+    private final JButton back = new JButton();
+
+    /**
+     * Initializations of the Vending Machine Interface Components.
+     */
     VMInterface() {
-//        System.setOut(new PrintStream(new TextPane(textPanel.vmdisplay)));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -122,12 +168,23 @@ public class VMInterface extends JPanel {
         add(toggleSpecial, gbc);
     }
 
+    /**
+     * The paint method that add graphics for the main panel.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(bgIMG_VMInterface.getImage(), 0, 0, getWidth(), getHeight(), null);
     }
 
+    /**
+     * For creating an Icon with custom dimension
+     * @param strname file name of the photo
+     * @param width  length from left side to right side
+     * @param height length from bottom to top
+     * @return ImageIcon
+     */
     private ImageIcon scaleIMG(String strname, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(strname);
         Image raw = imageIcon.getImage();
@@ -135,6 +192,9 @@ public class VMInterface extends JPanel {
         return new ImageIcon(scaled);
     }
 
+    /**
+     * SubClass for Regular Item Panel GUI Component
+     */
     protected class RegularItemPanel extends JPanel {
         ImageIcon vnll = scaleIMG("./VMResources/vanilla.png", 150, 150);         //NEED VALUES OF ITEMS HERE!!
         ImageIcon chco = scaleIMG("./VMResources/choco.png", 150, 150);
@@ -156,6 +216,9 @@ public class VMInterface extends JPanel {
         JLabel strwLabel = new JLabel(strw);
         JLabel mngoLabel = new JLabel(mngo);
 
+        /**
+         * Initialization of Regular panel Items
+         */
         RegularItemPanel
                 () {
             setOpaque(false);
@@ -193,6 +256,9 @@ public class VMInterface extends JPanel {
         }
     }
 
+    /**
+     * SubClass for Special Item Panel GUI Component
+     */
     protected class SpecialItemPanel extends JPanel {
         ImageIcon triChco = scaleIMG("./VMResources/trichoco.png", 150, 150);         //NEED VALUES OF ITEMS HERE!!
         ImageIcon vitamax = scaleIMG("./VMResources/vitamax.png", 150, 150);
@@ -214,6 +280,9 @@ public class VMInterface extends JPanel {
         JLabel RnbwYgrLabel = new JLabel(rnbwYgr);
         JLabel youGartLabel = new JLabel(youGart);
 
+        /**
+         * Initialization of Special panel Items
+         */
         SpecialItemPanel() {
             setOpaque(false);
             // to do: place the items in each spot and place slot num, price, calories and name pala
@@ -250,6 +319,14 @@ public class VMInterface extends JPanel {
         }
     }
 
+    /**
+     *  Sets the Image and Description of Product per slot
+     * @param icon image of the product.
+     * @param item name of the product.
+     * @param kCal kCal of the product.
+     * @param price price of the product.
+     * @return custom-imaged panel
+     */
     private JPanel createImagePanel(ImageIcon icon, String item, int kCal, double price) {  //USED IN ItemPanel
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -297,11 +374,17 @@ public class VMInterface extends JPanel {
         return panel;
     }
 
+    /**
+     * SubClass for TextArea GUI Panel Components.
+     */
     protected class TextPanel extends JPanel {
 
         private final JTextArea vmdisplay = new JTextArea(10, 40);
         private JScrollPane scrollPane = new JScrollPane(vmdisplay);
 
+        /**
+         * Initialization of TextArea.
+         */
         public TextPanel() {
             setLayout(new BorderLayout());
 
@@ -317,12 +400,16 @@ public class VMInterface extends JPanel {
         }
     }
 
+    /**
+     * SubClass for Buttons' Panel GUI Components
+     */
     private class ButtonPanel extends JPanel {
+        private CardLayout menu = new CardLayout();
         private boolean moneyLocked;
-        private final JCheckBox setter;
         private String currMode; // either payment || selection
-        private final JButton[] slotButtons = new JButton[9];
         public JSpinner[] denominationButtons;
+        private final JCheckBox setter;
+        private final JButton[] slotButtons = new JButton[9];
         private final JPanel[] moneyTags = new JPanel[10];
         private final JPanel buttonPanel1 = new JPanel();
         private JPanel moneyPanel = new JPanel(new BorderLayout());
@@ -330,8 +417,10 @@ public class VMInterface extends JPanel {
         private JPanel regbuttonPanel = new JPanel();
         private JPanel specbuttonPanel = new JPanel();
         private JButton specialButton = new JButton();
-        private CardLayout menu = new CardLayout();
 
+        /**
+         * Initialization of button gui components.
+         */
         public ButtonPanel() {
             setLayout(new BorderLayout());
             setPreferredSize(new Dimension(625, 300));
@@ -462,6 +551,15 @@ public class VMInterface extends JPanel {
         }
     }
 
+    /**
+     * Updates the mode of button panel
+     * <p>
+     *     Updates the type of button panel shown,
+     *     can be button mode for selecting items,
+     *     or can be money interface.
+     * </p>
+     * @param choice type of modes.
+     */
     public void updateButtonPanel(int choice) {
         if (choice == 1) {
             buttonPanel.currMode = "selection";
@@ -475,6 +573,14 @@ public class VMInterface extends JPanel {
         }
     }
 
+    /**
+     * Updates the mode of item panel
+     * <p>
+     *     Updates the type of button panel shown,
+     *     can be Regular mode of items,
+     *     or can be Special items.
+     * </p>
+     */
     public void updateItemPanel() {
 
         if (currMode.equalsIgnoreCase("Regular")) {
@@ -486,38 +592,80 @@ public class VMInterface extends JPanel {
         }
     }
 
+    /**
+     *Gets the button for Inserting Money.
+     * @return button for Inserting Money.
+     */
     public JButton getInsertMoney() {
         return InsertMoney;
     }
 
+    /**
+     *Gets the button for going Back.
+     * @return button for going Back.
+     */
     public JButton getBack() {
         return back;
     }
 
+    /**
+     * Gets the value of the indexed spinner button.
+     * @return  value of the indexed spinner button.
+     */
     public int getValue(int index) {
         return (int) buttonPanel.denominationButtons[index].getValue();
     }
 
+    /**
+     *Gets the button for toggling special products.
+     * @return button for toggling special products.
+     */
     public JButton getToggleSpecial() {
         return toggleSpecial;
     }
+
+    /**
+     * Gets the state of the checkbox.
+     * @return boolean value whether to set or not the values of spinner.
+     */
     public boolean getMoneyLocked(){
         return buttonPanel.moneyLocked;
     }
+
+    /**
+     *Gets the Checkbox for Setting Money.
+     * @return Checkbox for Setting Money.
+     */
     public JCheckBox moneyLockToggle(){
         return buttonPanel.setter;
     }
+
+    /**
+     *Sets the boolean value of whether the money is locked or not.
+     */
     public void setLockMoney (boolean bool){
         buttonPanel.moneyLocked = bool;
     }
 
+    /**
+     *Gets the current mode of the button panel
+     * @return String in relation to the mode.
+     */
     public String getModeButtonPanel(){
         return buttonPanel.currMode;
     }
+
+    /**
+     *Gets the textArea for display.
+     * @return textArea for display.
+     */
     public JTextArea getTextPanel(){
         return this.textPanel.vmdisplay;
     }
 
+    /**
+     * Resetter for money input panel once done setting.
+     */
     public void resetMoneyPanel(){
         for (int i = 0; i < 10; i++){
             buttonPanel.denominationButtons[i].setValue(0);
@@ -526,9 +674,11 @@ public class VMInterface extends JPanel {
         updateButtonPanel(1);
     }
 
-
+    /**
+     * SubClass for Textpane OutputStream redirection
+     */
     protected static class TextPane extends OutputStream {
-        private JTextArea textArea;
+        private final JTextArea textArea;
 
         public TextPane(JTextArea textArea) {
             this.textArea = textArea;

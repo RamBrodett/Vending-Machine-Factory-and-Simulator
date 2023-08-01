@@ -10,24 +10,88 @@ import java.util.Set;
 
 public class VMMaintenanceMenu extends JPanel{
 
+    /**
+     * Background image of the VendingMachineInterface.
+     */
     private ImageIcon bgIMG_VMInterface = new ImageIcon("./VMResources/VMInterfaceBG.png");
+
+    /**
+     * Panel that contains Regular Items and its descriptions
+     */
     private RegularItemPanel regItemPanel = new RegularItemPanel();
+
+    /**
+     * Panel that contains Special Items and its descriptions
+     */
     private SpecialItemPanel specialItemPanel = new SpecialItemPanel();
+
+
     private JPanel btnSelectPanel = new JPanel();
+
+    /**
+     * Layout Manager Panel
+     */
     private CardLayout itemPanel;
+
+    /**
+     * Panel for product contatiner
+     */
     private JPanel itemPanelContainer;
+
+    /**
+     *  Holder for what vending Machine type is currently loaded
+     */
     private String currMode = "Regular";            //TRACKER FOR WHICH MODE THE LAYOUT IS CURRENTLY ON
+
+    /**
+     *  Custom Panel for Button
+     */
     private ButtonPanel buttonPanel = new ButtonPanel();
+
+    /**
+     *  Custom Panel for text area.
+     */
     private TextPanel textPanel = new TextPanel();
+
+    /**
+     * Button for restocking products.
+     */
     private final JButton restockBtn = new JButton(scaleIMG("./VMResources/raspberry.png",100,100));
+
+    /**
+     * Button for Replenishin money.
+     */
     private final JButton replenishBtn = new JButton(scaleIMG("./VMResources/strawberry.png",100,100));
+
+    /**
+     * Button for Collecting Money
+     */
     private final JButton collectBtn = new JButton(scaleIMG("./VMResources/mango.png",100,100));
+
+    /**
+     * Button for editing price.
+     */
     private final JButton editPriceBtn = new JButton(scaleIMG("./VMResources/vanilla.png",100,100));
+
+    /**
+     *  Button for toggling special items display
+     *  <p>
+     *      Toggle button for displaying special
+     *      products. Needs to be a Special Vending Machine
+     *      to be available.
+     *  </p>
+     */
     private JButton toggleSpecial = new JButton();
+
+    /**
+     * Button for going back to previous menu.
+     */
     private final JButton back = new JButton();;
 
+    /**
+     * Initializations of the Vending Machine Maintenance Components.
+     */
     VMMaintenanceMenu(){
-//        System.setOut(new PrintStream(new TextPane(textPanel.vmdisplay)));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -132,14 +196,23 @@ public class VMMaintenanceMenu extends JPanel{
     }
 
 
-
-
+    /**
+     * The paint method that add graphics for the main panel.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(bgIMG_VMInterface.getImage(),0,0,getWidth(),getHeight(),null);
     }
 
+    /**
+     * For creating an Icon with custom dimension
+     * @param strname file name of the photo
+     * @param width  length from left side to right side
+     * @param height length from bottom to top
+     * @return ImageIcon
+     */
     private ImageIcon scaleIMG(String strname, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(strname);
         Image raw = imageIcon.getImage();
@@ -147,12 +220,19 @@ public class VMMaintenanceMenu extends JPanel{
         return new ImageIcon(scaled);
     }
 
+    /**
+     * Re-modifies Selection buttons
+     * @param button button for modification
+     */
     private void setupSelectionBtn(JButton button){
         button.setOpaque(false);
         button.setBorder(null);
         button.setContentAreaFilled(false);
     }
 
+    /**
+     * SubClass for Regular Item Panel GUI Component
+     */
     protected class RegularItemPanel extends JPanel{
         ImageIcon vnll = scaleIMG("./VMResources/vanilla.png",150,150);         //NEED VALUES OF ITEMS HERE!!
         ImageIcon chco = scaleIMG("./VMResources/choco.png",150,150);
@@ -174,6 +254,9 @@ public class VMMaintenanceMenu extends JPanel{
         JLabel strwLabel = new JLabel(strw);
         JLabel mngoLabel = new JLabel(mngo);
 
+        /**
+         * Initialization of Regular panel Items
+         */
         RegularItemPanel
                 (){
             setOpaque(false);
@@ -211,6 +294,9 @@ public class VMMaintenanceMenu extends JPanel{
         }
     }
 
+    /**
+     * SubClass for Special Item Panel GUI Component
+     */
     protected class SpecialItemPanel extends JPanel{
         ImageIcon triChco = scaleIMG("./VMResources/trichoco.png",150,150);         //NEED VALUES OF ITEMS HERE!!
         ImageIcon vitamax = scaleIMG("./VMResources/vitamax.png",150,150);
@@ -232,6 +318,9 @@ public class VMMaintenanceMenu extends JPanel{
         JLabel RnbwYgrLabel = new JLabel(rnbwYgr);
         JLabel youGartLabel = new JLabel(youGart);
 
+        /**
+         * Initialization of Special panel Items
+         */
         SpecialItemPanel(){
             setOpaque(false);
             // to do: place the items in each spot and place slot num, price, calories and name pala
@@ -267,6 +356,15 @@ public class VMMaintenanceMenu extends JPanel{
             add(youGartPanel);
         }
     }
+
+    /**
+     *  Sets the Image and Description of Product per slot
+     * @param icon image of the product.
+     * @param item name of the product.
+     * @param kCal kCal of the product.
+     * @param price price of the product.
+     * @return custom-imaged panel
+     */
 
     private JPanel createImagePanel(ImageIcon icon, String item, int kCal, double price) {  //USED IN ItemPanel
         JPanel panel = new JPanel(new GridBagLayout());
@@ -315,11 +413,17 @@ public class VMMaintenanceMenu extends JPanel{
         return panel;
     }
 
+    /**
+     * SubClass for TextArea GUI Panel Components.
+     */
     protected class TextPanel extends JPanel {
 
         private JTextArea vmdisplay = new JTextArea(10, 40);
         private JScrollPane scrollPane = new JScrollPane(vmdisplay);
 
+        /**
+         * Initialization of TextArea.
+         */
         public TextPanel() {
             setLayout(new BorderLayout());
 
@@ -335,6 +439,9 @@ public class VMMaintenanceMenu extends JPanel{
         }
     }
 
+    /**
+     * SubClass for Buttons' Panel GUI Components
+     */
     private class ButtonPanel extends JPanel {
 
         private String currMode; // restock | replenish | collect | edit price
@@ -351,6 +458,9 @@ public class VMMaintenanceMenu extends JPanel{
         private JPanel editPricePanel = new JPanel();
         private CardLayout menu = new CardLayout();
 
+        /**
+         * Initialization of button gui components.
+         */
         public ButtonPanel() {
             setLayout(new BorderLayout());
             setPreferredSize(new Dimension(625, 300));
@@ -420,6 +530,15 @@ public class VMMaintenanceMenu extends JPanel{
         }
     }
 
+    /**
+     * Updates the mode of button panel
+     * <p>
+     *     Updates the type of button panel shown,
+     *     can be button mode for selecting items,
+     *     or can be money interface.
+     * </p>
+     * @param choice type of modes.
+     */
     public void updateButtonPanel(int choice){
 
         // 1    restock
@@ -469,6 +588,14 @@ public class VMMaintenanceMenu extends JPanel{
         }
     }
 
+    /**
+     * Updates the mode of item panel
+     * <p>
+     *     Updates the type of button panel shown,
+     *     can be Regular mode of items,
+     *     or can be Special items.
+     * </p>
+     */
     public void updateItemPanel(){
         if(currMode == "Regular"){
             itemPanel.show(itemPanelContainer, "Special");
@@ -480,6 +607,10 @@ public class VMMaintenanceMenu extends JPanel{
         }
     }
 
+    /**
+     * Resetter for money input panel once done setting.
+     */
+
     public void resetMoneyPanel(){
         for (int i = 0; i < 10; i++){
             buttonPanel.denominationButtons[i].setValue(0);
@@ -488,54 +619,104 @@ public class VMMaintenanceMenu extends JPanel{
         updateButtonPanel(2);
     }
 
+    /**
+     *Sets the boolean value of whether the money is locked or not.
+     */
     public void setMoneyLocked(boolean bool){
         buttonPanel.moneyLocked = bool;
     }
 
+    /**
+     *Gets the Checkbox for Setting Money.
+     * @return Checkbox for Setting Money.
+     */
     public JCheckBox moneyLockToggle(){
         return buttonPanel.setter;
     }
 
+    /**
+     * Gets the state of the checkbox.
+     * @return boolean value whether to set or not the values of spinner.
+     */
     public boolean getMoneyLocked(){
         return buttonPanel.moneyLocked;
     }
 
+    /**
+     *Gets the button for going Back.
+     * @return button for going Back.
+     */
     public JButton getBack(){
         return back;
     }
 
+    /**
+     * Gets the value of the indexed spinner button.
+     * @return  value of the indexed spinner button.
+     */
     public int getValue(int index) {
         return (int) buttonPanel.denominationButtons[index].getValue();
     }
 
+    /**
+     *Gets the button for toggling special products.
+     * @return button for toggling special products.
+     */
     public JButton getToggleSpecial(){
         return toggleSpecial;
     }
 
+    /**
+     * Gets the button for restocking products.
+     * @return button for restocking products.
+     */
     public JButton getRestockBtn() {
         return restockBtn;
     }
 
+    /**
+     * Gets the button for Replenishing money.
+     * @return button for Replenishing money.
+     */
     public JButton getReplenishBtn() {
         return replenishBtn;
     }
 
+    /**
+     * Gets the collect money button.
+     * @return collect money button.
+     */
     public JButton getCollectBtn() {
         return collectBtn;
     }
 
+    /**
+     * Gets the edit price button.
+     * @return edit price button.
+     */
     public JButton getEditPriceBtn() {
         return editPriceBtn;
     }
 
+    /**
+     *Gets the current mode of the button panel
+     * @return String in relation to the mode.
+     */
     public String getModeCurrMode() {
         return buttonPanel.currMode;
     }
 
+    /**
+     *Gets the textArea for display.
+     * @return textArea for display.
+     */
     public JTextArea getTextPanel(){
         return this.textPanel.vmdisplay;
     }
 
+    /**
+     * SubClass for Textpane OutputStream redirection
+     */
     protected static class TextPane extends OutputStream {
         private JTextArea textArea;
 

@@ -2,12 +2,35 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VMFTestMenu extends JPanel {
-    private JLabel vmImage = new JLabel();
-    private ImageIcon bgIMG_testMenu = new ImageIcon("./VMResources/testbg.png");
+
+    /**
+     * Background image of the TestMenu.
+     */
+    private final ImageIcon bgIMG_testMenu = new ImageIcon("./VMResources/testbg.png");
+
+    /**
+     *  Holds the image of vending machine currently selected (can be [Regular || Special]).
+     */
+    private final JLabel vmImage = new JLabel();
+
+    /**
+     * Button for simulation of Vending Machine.
+     */
     private final JButton simVM = new JButton();
+
+    /**
+     * Button for creation of Vending Machine.
+     */
     private final JButton maintenanceVM = new JButton();
+
+    /**
+     * Button for going back to previous menu.
+     */
     private final JButton back = new JButton();
 
+    /**
+     * Initializations of the TestMenu Components.
+     */
     VMFTestMenu(){
         setLayout(new GridLayout(1,2));
         JPanel lPanel = new JPanel(new GridBagLayout());
@@ -59,9 +82,9 @@ public class VMFTestMenu extends JPanel {
         gbc.gridy = 3;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         lPanel.add(back, gbc);
-//scaleIMG("./VMResources/specVM.png",500,800)
+
         JPanel placeHolder = new JPanel();          //TEMP PALCEHOLDER
-        //placeHolder.setBackground(Color.darkGray);
+
         placeHolder.add(vmImage);
         placeHolder.setOpaque(false);
         placeHolder.setPreferredSize(new Dimension(500,800));
@@ -72,28 +95,59 @@ public class VMFTestMenu extends JPanel {
 
     }
 
+
+    /**
+     * The paint method that add graphics for the main panel.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(bgIMG_testMenu.getImage(),0,0,getWidth(),getHeight(),null);
     }
 
-    public ImageIcon scaleIMG(String strname, int width, int height) {
+    /**
+     * For creating an Icon with custom dimension
+     * @param strname file name of the photo
+     * @param width  length from left side to right side
+     * @param height length from bottom to top
+     * @return ImageIcon
+     */
+     public ImageIcon scaleIMG(String strname, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(strname);
         Image raw = imageIcon.getImage();
         Image scaled = raw.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(scaled);
     }
 
+    /**
+     * Gets the button of simulator.
+     * @return button of simulator.
+     */
     public JButton getSimulateVMButton() {
         return simVM;
     }
+
+    /**
+     * Gets the button of maintenance.
+     * @return button of maintenance.
+     */
     public JButton getMaintenanceVMButton(){
         return maintenanceVM;
     }
+
+    /**
+     * Gets the button for going back.
+     * @return button for going back.
+     */
     public JButton getBackButton(){
         return back;
     }
+
+    /**
+     * Gets the Image iconed in a Jlabel.
+     * @return Image iconed in a Jlabel.
+     */
     public JLabel getVmImage(){
         return vmImage;
     }

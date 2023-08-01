@@ -2,10 +2,31 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VMFMainMenu extends JPanel {
+    /**
+     * Background image of the MainMenu.
+     */
     private ImageIcon bgIMG= new ImageIcon("./VMResources/mainbg.png");
+
+    /**
+     * Button for creation of Vending Machine menu.
+     */
     private final JButton createVM = new JButton();
+
+    /**
+     * Button for testing of Vending Machine menu.
+     */
     private final JButton testVM = new JButton();
+
+    /**
+     * Button for terminating the program.
+     */
     private final JButton exitFactory = new JButton();
+
+
+    /**
+     * Initializations of the MainMenu Components.
+     */
+
     VMFMainMenu(){
         setLayout(new GridLayout(2,1));
 
@@ -73,16 +94,25 @@ public class VMFMainMenu extends JPanel {
 
         add(upperPanel);
         add(lowerPanel);
-
-
     }
 
+    /**
+     * The paint method that add graphics for the main panel.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(bgIMG.getImage(),0,0,getWidth(),getHeight(),null);
     }
 
+    /**
+     * For creating an Icon with custom dimension
+     * @param strname file name of the photo
+     * @param width  length from left side to right side
+     * @param height length from bottom to top
+     * @return ImageIcon
+     */
     private ImageIcon scaleIMG(String strname, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(strname);
         Image raw = imageIcon.getImage();
@@ -90,12 +120,26 @@ public class VMFMainMenu extends JPanel {
         return new ImageIcon(scaled);
     }
 
+    /**
+     * Gets the button of create VM menu
+     * @return button for create VM menu
+     */
     public JButton getCreateVMButton() {
         return createVM;
     }
+
+    /**
+     * Gets the button of test VM menu
+     * @return button for test VM menu
+     */
     public JButton getTestVMButton(){
         return testVM;
     }
+
+    /**
+     * Gets the button for exit factory
+     * @return button for exiting
+     */
     public JButton getExitFactoryButton(){
         return exitFactory;
     }

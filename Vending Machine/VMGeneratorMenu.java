@@ -3,16 +3,48 @@ import java.awt.*;
 
 public class VMGeneratorMenu extends JPanel {
 
-    private ImageIcon bgIMG_genMenu = new ImageIcon("./VMResources/genBg.png");
+    /**
+     * Holds the created separate frame for getting intial money.
+     */
     private JFrame moneyInputFrame;
-    private JButton regVM = new JButton();
-    private JButton specVM = new JButton();
-    private JButton back = new JButton();
-    private JSpinner[] denominationButtons;
+
+    /**
+     * Background image of the GeneratorMenu.
+     */
+    private final ImageIcon bgIMG_genMenu = new ImageIcon("./VMResources/genBg.png");
+
+    /**
+     * Button for creating regular Vending Machine.
+     */
+    private final JButton regVM = new JButton();
+    /**
+     * Button for creating special Vending Machine.
+     */
+    private final JButton specVM = new JButton();
+
+    /**
+     * Button for going back to the  previous Menu.
+     */
+    private final JButton back = new JButton();
+
+    /**
+     * Button for exiting the separate frame for money input.
+     */
     JButton exit = new JButton("EXIT");
+
+    /**
+     * Button for setting the money input.
+     */
     JButton set = new JButton("SET DENOMINATION");
 
+    /**
+     * Spinning buttons for quantities of different denomination input.
+     */
+    private JSpinner[] denominationButtons;
 
+    /**
+     * Initializations of the GeneratorMenu Components.
+     */
     VMGeneratorMenu(){
         setLayout(new GridLayout(3,1));
         JPanel upperPanel = new JPanel();
@@ -82,6 +114,9 @@ public class VMGeneratorMenu extends JPanel {
 
     }
 
+    /**
+     * Initialization of the separate window Money interface
+     */
     public void moneyInterface(){
         back.setEnabled(false);
         regVM.setEnabled(false);
@@ -142,48 +177,16 @@ public class VMGeneratorMenu extends JPanel {
 
     }
 
-    @Override
-    protected void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(bgIMG_genMenu.getImage(),0,0,getWidth(),getHeight(),null);
-    }
-
-    private ImageIcon scaleIMG(String strname, int width, int height) {
-        ImageIcon imageIcon = new ImageIcon(strname);
-        Image raw = imageIcon.getImage();
-        Image scaled = raw.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(scaled);
-    }
-
-    public JButton getRegVM(){
-        return regVM;
-    }
-    public JButton getSpecVM(){
-        return specVM;
-    }
-    public JButton getBack(){
-        return back;
-    }
-    public int getValue(int index){
-        return (int) denominationButtons[index].getValue();
-    }
-    public JButton getSet(){
-        return set;
-    }
-    public JButton getExit(){
-        return exit;
-    }
-    public JFrame getMoneyInputFrame(){
-        return moneyInputFrame;
-    }
-
-    public void setMoneyInputFrame(JFrame moneyInputFrame){
-        this.moneyInputFrame = moneyInputFrame;
-    }
-
+    /**
+     * Process for terminating the separate money interfacce window
+     * <p>
+     *     Resets specific button to its intial state, and resets
+     *     the spinners back to zero for next use. Lastly, disposes
+     *     the resources used in the creation of that frame.
+     * </p>
+     */
     public void terminateMONEYINTERFACE(){
-        for (int i = 0; i < denominationButtons.length; i++) {
-            JSpinner spinner = denominationButtons[i];
+        for (JSpinner spinner : denominationButtons) {
             spinner.setValue(0); // Reset each spinner to zero
         }
         moneyInputFrame.setVisible(false);
@@ -191,5 +194,84 @@ public class VMGeneratorMenu extends JPanel {
         back.setEnabled(true);
         regVM.setEnabled(true);
         specVM.setEnabled(true);
+    }
+
+    /**
+     * The paint method that add graphics for the main panel.
+     * @param g the <code>Graphics</code> object to protect
+     */
+    @Override
+    protected void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(bgIMG_genMenu.getImage(),0,0,getWidth(),getHeight(),null);
+    }
+
+    /**
+     * For creating an Icon with custom dimension
+     * @param strname file name of the photo
+     * @param width  length from left side to right side
+     * @param height length from bottom to top
+     * @return ImageIcon
+     */
+    private ImageIcon scaleIMG(String strname, int width, int height) {
+        ImageIcon imageIcon = new ImageIcon(strname);
+        Image raw = imageIcon.getImage();
+        Image scaled = raw.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaled);
+    }
+
+    /**
+     * Gets the button for creating regular Vending Machine.
+     * @return  button for creating regular Vending Machine.
+     */
+    public JButton getRegVM(){
+        return regVM;
+    }
+
+    /**
+     * Gets the button for creating special Vending Machine.
+     * @return  button for creating special Vending Machine.
+     */
+    public JButton getSpecVM(){
+        return specVM;
+    }
+
+    /**
+     * Gets the button for going back to previous menu.
+     * @return  button for going back to previous menu.
+     */
+    public JButton getBack(){
+        return back;
+    }
+
+    /**
+     * Gets the value of the indexed spinner button.
+     * @return  value of the indexed spinner button.
+     */
+    public int getValue(int index){
+        return (int) denominationButtons[index].getValue();
+    }
+
+    /**
+     * Gets the button for setting the money input.
+     * @return  button for setting the money input.
+     */
+    public JButton getSet(){
+        return set;
+    }
+
+    /**
+     * Gets the button for exiting the money input.
+     * @return  button for exiting the money input.
+     */
+    public JButton getExit(){
+        return exit;
+    }
+
+    /**
+     * sets the frame for money input.
+     */
+    public void setMoneyInputFrame(JFrame moneyInputFrame){
+        this.moneyInputFrame = moneyInputFrame;
     }
 }

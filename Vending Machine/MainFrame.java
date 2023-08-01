@@ -2,17 +2,49 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame {
-    JFrame mainFrame;
-    JFrame moneyInputFrame;
-    JPanel cardPanel = new JPanel();
-    CardLayout menu = new CardLayout();
-    VMFMainMenu mainMenu = new VMFMainMenu();
-    VMGeneratorMenu generatorMenu = new VMGeneratorMenu();
-    VMFTestMenu testMenu = new VMFTestMenu();
-    VMMaintenanceMenu maintenanceMenu = new VMMaintenanceMenu();
-    VMInterface vmInterface = new VMInterface();
-    public JOptionPane optionPane = new JOptionPane(); // for popup messages
 
+    /**
+     * Main Frame of the GUI.
+     */
+    JFrame mainFrame;
+
+    /**
+     *  Main Panel that will hold panels of different menu.
+     */
+    JPanel cardPanel = new JPanel();
+
+    /**
+     * Layout for the mainPanel.
+     */
+    CardLayout menu = new CardLayout();
+
+    /**
+     * Instance of MainMenu Panel.
+     */
+    VMFMainMenu mainMenu = new VMFMainMenu();
+
+    /**
+     * Instance of GeneratorMenu Panel.
+     */
+    VMGeneratorMenu generatorMenu = new VMGeneratorMenu();
+
+    /**
+     * Instance of Test Menu Panel.
+     */
+    VMFTestMenu testMenu = new VMFTestMenu();
+    /**
+     *  Instance of Maintenance Menu Panel.
+     */
+    VMMaintenanceMenu maintenanceMenu = new VMMaintenanceMenu();
+
+    /**
+     *   Instance of Vending Machine interface Panel.
+     */
+    VMInterface vmInterface = new VMInterface();
+
+    /**
+     * Initialization of MainFrame Components.
+     */
     MainFrame(){
         this.mainFrame = new JFrame("YOU-G-ART FACTORY");
         mainFrame.setSize(1920,1080);

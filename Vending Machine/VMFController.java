@@ -1,25 +1,43 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.io.FileNotFoundException;
 import java.io.PrintStream;
-
 
 public class VMFController {
 
+    /**
+     * Holder for the current Vending Machine (Model) created.
+     */
     private VendingMachine currMachine;
+    /**
+     * Saves what type of Vending Machine is currently created.
+     */
+
     private String machineType;
+
+    /**
+     * Holder for the Active-frame (View) instance created.
+     */
     private final MainFrame frame;
 
+
+    /**
+     * This initializes what operations shall take place when a Listener received an event.
+     *
+     * @param frame is the instance of Jframe passed by a driver.
+     */
     VMFController(MainFrame frame){
+        //stores the frame as Active Frame
         this.frame = frame;
 
-        //Action Listeners
-
+        //Go back to previous screen event Listener ---------------------------
         ActionListener backToMainListener = e -> this.frame.menu.show(this.frame.cardPanel, "mainMenu");
+        ActionListener backToTestMenuListener = e -> this.frame.menu.show(this.frame.cardPanel, "VMTest");
         //Back Buttons -------------------------------------------------
         this.frame.generatorMenu.getBack().addActionListener(backToMainListener);
         this.frame.testMenu.getBackButton().addActionListener(backToMainListener);
+        this.frame.maintenanceMenu.getBack().addActionListener(backToTestMenuListener);
+        this.frame.vmInterface.getBack().addActionListener(backToTestMenuListener);
 
         //--------------------------------------------------------------
 
@@ -68,7 +86,6 @@ public class VMFController {
                         "occured: " + error.getMessage()+ " Error");
             }
         });
-
 
         this.frame.generatorMenu.getSpecVM().addActionListener(e ->{
             try{
@@ -125,7 +142,7 @@ public class VMFController {
         });
         //-----------------------------------------------------------
 
-        // Interface Menu Buttons ----------------------------------------
+        // Vending Machine Interface Menu Buttons -------------------
         this.frame.vmInterface.getInsertMoney().addActionListener(e ->{
             // if insert money pressed in selection mode go to payment mode and viceversa
             if(this.frame.vmInterface.getModeButtonPanel().equalsIgnoreCase("selection")) {
@@ -152,24 +169,17 @@ public class VMFController {
 
         });
 
-        this.frame.vmInterface.getBack().addActionListener(e ->{
-            this.frame.menu.show(this.frame.cardPanel, "VMTest");
-        });
-
         this.frame.vmInterface.getToggleSpecial().addActionListener(e -> {
             this.frame.vmInterface.updateItemPanel();
         });
 
         this.frame.vmInterface.moneyLockToggle().addItemListener(e->{
-            if(e.getStateChange()==ItemEvent.SELECTED)this.frame.vmInterface.setLockMoney(true);
-            else this.frame.vmInterface.setLockMoney(false);
+            if(e.getStateChange()==ItemEvent.SELECTED)this.frame.vmInterface.setLockMoney(true); // true if selected
+            else this.frame.vmInterface.setLockMoney(false); // false if deselected
         });
-        //-----------------------------------------------------------
+        //-----------------------------------------------------------------
 
         // Maintenance Menu Buttons ----------------------------------------
-        this.frame.maintenanceMenu.getBack().addActionListener(e -> {               //back
-            this.frame.menu.show(this.frame.cardPanel, "VMTest");
-        });
 
         this.frame.maintenanceMenu.getToggleSpecial().addActionListener(e -> {      //
             this.frame.maintenanceMenu.updateItemPanel();
@@ -180,12 +190,8 @@ public class VMFController {
         });
 
         this.frame.maintenanceMenu.moneyLockToggle().addItemListener(e->{
-            if(e.getStateChange()==ItemEvent.SELECTED) {
-                this.frame.maintenanceMenu.setMoneyLocked(true);
-            }
-            else {
-                this.frame.maintenanceMenu.setMoneyLocked(false);
-            }
+            if(e.getStateChange()==ItemEvent.SELECTED) this.frame.maintenanceMenu.setMoneyLocked(true);
+            else this.frame.maintenanceMenu.setMoneyLocked(false);
         });
 
         this.frame.maintenanceMenu.getReplenishBtn().addActionListener(e -> {
@@ -217,16 +223,23 @@ public class VMFController {
         this.frame.maintenanceMenu.getEditPriceBtn().addActionListener(e -> {
             this.frame.maintenanceMenu.updateButtonPanel(4);
         });
+
+        //------------------------------------------------------------------
     }
 
+    /**
+     * Initializer of the start of the program.
+     */
     public void initializeProgram(){
         frame.menu.show(frame.cardPanel,"mainMenu");
     }
 
+    /**
+     * updates the curr machine type.
+     * @param type String relating to what type of machine
+     */
     private void updateMachineType(String type){
         machineType = type;
     }
-
-
 
 }
