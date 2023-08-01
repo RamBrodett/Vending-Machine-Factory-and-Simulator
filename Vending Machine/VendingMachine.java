@@ -62,6 +62,12 @@ public class VendingMachine{
 
     //to do dapat lumalabas to sa text area yung blue na gilid ng vm
 
+    /**
+     * <p>
+     * Displays the transactions made in the Vending Machine.
+     * Shows the items sold, their prices, the quantity sold, and the corresponding profit.
+     * </p>
+     */
     public void displayTransactions(){
         double totalProfit = 0;
 
@@ -138,6 +144,14 @@ public class VendingMachine{
     }
 
 
+    /**
+     * <p>
+     * Adds the values of each denomination in the 'from' object to the corresponding values in the 'to' object.
+     * The result is stored in the 'to' object.
+     * </p>
+     * @param to   The denomination object where the values will be added.
+     * @param from The denomination object containing the values to be added.
+     */
     public void addToDenomination(Denomination to, Denomination from){                         //add all denoms; to = from + to
         to.setThousandPesoBill     (from.getThousandPesoBill());
         to.setFiveHundredPesoBill  (from.getFiveHundredPesoBill());
@@ -170,130 +184,6 @@ public class VendingMachine{
         x.setThousandPesoBill(-x.getThousandPesoBill());
     }
 
-
-
-    // --------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-    // user - vending transaction [simulation of using the vending machine]
-
-    /**
-     *<p>
-     *   Simulates Transaction method of the vending machine, utilizes method to receive money from user,
-     *  provide choice for the buyer along with the nutrition fact calories, calculate needed
-     *  denomination for change, dispensing items and change.
-     *</p>
-     */
-
-    /*
-
-    public void vendingMachineUserTransaction(){
-        Scanner scanner = new Scanner(System.in);
-        String decision;
-        boolean ongoingTransaction = true;
-
-        vmSimulationDisplay(1);
-
-        do{
-            while(ongoingTransaction){
-                displayProducts(0); // 0 value since it is for display only not selection.
-                //insertedMoney = denominationFeedInterface();
-               // System.out.println("Total inserted money: " + insertedMoney.getTotalMoney());
-                displayProducts(1); // 1 value since it is selection of item already.
-                int selected;
-                String confirm;
-                do {
-                    System.out.print("Selected item: ");
-                    selected = scanner.nextInt();
-                    scanner.nextLine();
-                    if ((selected < 1 || selected > productSlots.size())) System.out.println("Select a valid item");
-                } while ((selected < 1 || selected > productSlots.size()) && (selected - 1) != productSlots.size());
-
-                if ((selected-1) == productSlots.size()) {
-                    clearDenomination(insertedMoney);
-                    ongoingTransaction = false;
-                }
-
-                else if (!isSlotEmpty(selected - 1)) {
-
-                    int change = insertedMoney.getTotalMoney() - (int) productSlots.get(selected - 1).getBaseProductPrice(); //money of user - price
-                    Denomination changeDenom = findDenomination(change, denomination);
-
-                    if ((!isSlotStocked(selected - 1))) {
-                        System.out.println("Sorry! Item is out of stock.\n");
-                    }
-
-                    else if(changeDenom.getTotalMoney() - change != 0) {  //if true, then change isn't possible
-                        System.out.println("Unable to give change. Unsuccessful transaction.\n");
-                    }
-                    else if (insertedMoney.getTotalMoney() < productSlots.get(selected - 1).getBaseProductPrice()) {
-                        System.out.println("Insufficient balance. Unsuccessful transaction.\n");
-                    }
-                    else {
-                        do {
-                            System.out.println(productSlots.get(selected-1).getBaseProductName() + " has " +
-                                    productSlots.get(selected-1).getBaseProductCal() + "Calories");
-                            System.out.println("\nBuying \"" + productSlots.get(selected-1).getBaseProductName() +
-                                    "\" for " + productSlots.get(selected-1).getBaseProductPrice() + "...");
-                            System.out.print("Confirm purchase: ");
-                            confirm = scanner.nextLine();
-
-                            if (!(confirm.equalsIgnoreCase("yes")) && // to continue asking while answer is
-                                    !(confirm.equalsIgnoreCase("no")))   // neither yes nor no.
-                                System.out.println("type yes or no only.");
-                        } while (!(confirm.equalsIgnoreCase("yes"))&& !(confirm.equalsIgnoreCase("no")));
-
-                        if (confirm.equalsIgnoreCase("yes")){
-                            addToDenomination(denomination, insertedMoney);     //transfer money from inserted to VM
-                            differenceDenomination(denomination, changeDenom);   //remove change from VM
-                            insertedMoney = changeDenom;                        //money of user = change
-                            productSlots.get(selected-1).setProductQuantity(-1);
-                            productSlots.get(selected-1).setNumProductsSold(1);
-                            System.out.printf("Purchase successful! Your change is %3.2f\n", (double) change);
-                            displayDenominations(changeDenom);
-                        }
-
-                        else
-                            System.out.println("Cancelling transaction...");
-                    }
-                }
-
-                else if (isSlotEmpty(selected - 1)){
-                    System.out.print("Invalid input! Slot is empty.\n\n");
-                }
-                ongoingTransaction = false;
-            }
-
-            System.out.println("Do you want to make transactions again?");
-            do {
-                System.out.print("Input: ");
-                decision = scanner.nextLine();
-
-                if(!(decision.equalsIgnoreCase("yes"))&& // to continue asking while answer is
-                        !(decision.equalsIgnoreCase("no")))   // neither yes nor no.
-                    System.out.println("type yes or no only.");
-                else if(decision.equalsIgnoreCase("yes"))
-                    ongoingTransaction = true;
-
-            }while(!(decision.equalsIgnoreCase("yes"))&& !(decision.equalsIgnoreCase("no")));
-        }while(decision.equalsIgnoreCase("yes"));
-
-        vmSimulationDisplay(2);
-    }
-
-     */
-
-    //maintenance methods-----------------------------------------------------------------------
-
-    /**
-     * <p>
-     *  This method allows the user to edit the items in the vending machine.
-     *  It prompts the user to select a slot and either add new items or restock existing items.
-     * </p>
-     */
-
-
     // boolean methods for vmstatus-------------------------------------------------------------
 
     /**
@@ -318,107 +208,6 @@ public class VendingMachine{
     // methods for money related calculations and processes and transaction subprocesses--------------------------------
 
     //interface for feeding the machine with money
-
-    /**
-     * <p>
-     *     This method prompts the user to supply money denominations.
-     * </p>
-     * @return a Denomination object representing the money fed into the vending machine.
-     */
-
-    /*
-    public Denomination denominationFeedInterface(){
-        Scanner scanner = new Scanner(System.in);
-        Denomination money = new Denomination();
-        int choice;
-        moneyDisplay();
-        do{
-            do {
-                System.out.print("Select a denomination to supply: ");
-                choice = scanner.nextInt();
-            }while(choice<1||(choice>11&&choice!=88));
-            switch (choice){
-                case 1 -> {
-                    System.out.print("1 PHP coin qty: ");
-                    money.setOnePesoCoin(scanner.nextInt());
-                }
-                case 2 -> {
-                    System.out.print("5 PHP coin qty: ");
-                    money.setFivePesoCoin(scanner.nextInt());
-                }
-                case 3 -> {
-                    System.out.print("10 PHP coin qty: ");
-                    money.setTenPesoCoin(scanner.nextInt());
-                }
-                case 4 -> {
-                    System.out.print("20 PHP coin qty: ");
-                    money.setTwentyPesoCoin(scanner.nextInt());
-                }
-                case 5 -> {
-                    System.out.print("20 PHP bill qty: ");
-                    money.setTwentyPesoBill(scanner.nextInt());
-
-                }
-                case 6 -> {
-                    System.out.print("50 PHP bill qty: ");
-                    money.setFiftyPesoBill(scanner.nextInt());
-                }
-                case 7 -> {
-                    System.out.print("100 PHP bill qty: ");
-                    money.setOneHundredPesoBill(scanner.nextInt());
-
-                }
-                case 8 -> {
-                    System.out.print("200 PHP bill qty: ");
-                    money.setTwoHundredPesoBill(scanner.nextInt());
-
-                }
-                case 9 -> {
-                    System.out.print("500 PHP bill qty: ");
-                    money.setFiveHundredPesoBill(scanner.nextInt());
-
-                }
-                case 10 -> {
-                    System.out.print("1000 PHP bill qty: ");
-                    money.setThousandPesoBill(scanner.nextInt());
-                }
-            }
-        }while(choice != 88);
-        return money;
-    }
-
-     */
-
-    /**
-     * Method to edit/collect the supply of money mounted on the machine.
-     */
-
-    /*
-    public void moneyBox(){
-        Scanner scanner = new Scanner(System.in);
-        int choice;
-        do{
-            System.out.print("Input: ");
-            choice=scanner.nextInt();
-        }while(choice<1||choice>3);
-        switch (choice){
-            case 1 ->{
-                System.out.println("Collecting payment...");
-                System.out.println("Payment collected");
-                System.out.println("Total Money Collected: " + denomination.getTotalMoney());
-                clearDenomination(denomination);
-            }
-            case 2 ->{
-                addToDenomination(denomination,denominationFeedInterface());
-                System.out.println("Money replenished");
-            }
-            case 3 ->{
-                // exit case
-            }
-        }
-    }
-
-     */
 
     /**
      * This method looks for the appropriate denomination from the inventory.
@@ -676,36 +465,7 @@ public class VendingMachine{
     }
 
 
-    /**
-     * <p>
-     * Adds the values of each denomination in the 'from' object to the corresponding values in the 'to' object.
-     * The result is stored in the 'to' object.
-     * </p>
-     * @param to   The denomination object where the values will be added.
-     * @param from The denomination object containing the values to be added.
-     */
-
     // display methods---------------------------------------------------------------------------------
-    /**
-     * <p>
-     * Displays the representation of money in the console.
-     * Shows a table with coin and bill denominations, along with their corresponding codes.</p>
-     */
-    public void moneyDisplay(){
-        for(int i=0; i<52;i++)
-            System.out.print("═");
-        System.out.printf("\n%-20s  %-20s [88] Exit\n", "Coins","Bills");
-        System.out.printf("[1] %-16s | [5] %-20s\n","1 PHP", "20 PHP");
-        System.out.printf("[2] %-16s | [6] %-20s\n","5 PHP", "50 PHP");
-        System.out.printf("[3] %-16s | [7] %-20s\n","10 PHP", "100 PHP");
-        System.out.printf("[4] %-16s | [8] %-20s\n","20 PHP", "200 PHP");
-        System.out.printf("%-20s | [9] %-20s\n"," ", "500 PHP");
-        System.out.printf("%-20s | [10] %-20s\n"," ", "1000 PHP");
-        for(int i=0; i<52;i++)
-            System.out.print("═");
-        System.out.println();
-    }
-
 
     public Denomination getDenomination() { return this.denomination;}      /////////////NEWWW
     public float getTotalMoney(){
@@ -756,12 +516,6 @@ public class VendingMachine{
     }
 
 
-    /**
-     * <p>
-     * Displays the transactions made in the Vending Machine.
-     * Shows the items sold, their prices, the quantity sold, and the corresponding profit.
-     * </p>
-     */
 
 
 
