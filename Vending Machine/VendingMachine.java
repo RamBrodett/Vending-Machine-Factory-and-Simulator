@@ -64,7 +64,7 @@ public class VendingMachine{
 
 
     /**
-     * Proving the machine a set of complete values for denomination.
+     * Providingng the machine a set of complete values for denomination.
      * @param denomination a set of values of diff denomination.
      */
     public void vmSetMoney(Denomination denomination){
@@ -668,7 +668,7 @@ public class VendingMachine{
      * @param from The denomination object containing the values to be added.
      */
 
-    private void addToDenomination(Denomination to, Denomination from){                         //add all denoms; to = from + to
+    public void addToDenomination(Denomination to, Denomination from){                         //add all denoms; to = from + to
         to.setThousandPesoBill     (from.getThousandPesoBill());
         to.setFiveHundredPesoBill  (from.getFiveHundredPesoBill());
         to.setTwoHundredPesoBill   (from.getTwoHundredPesoBill());
@@ -738,10 +738,14 @@ public class VendingMachine{
         }
     }
 
-    public int getmoney(){
+    public Denomination getDenomination() { return this.denomination;}      /////////////NEWWW
+    public int getTotalMoney(){
         return this.denomination.getTotalMoney();
     }
-    public int getInsertedmoney(){
+    public Denomination getInsertedMoney(){
+        return this.insertedMoney;
+    }
+    public int getTotalInsertedMoney(){
         return this.insertedMoney.getTotalMoney();
     }
 
@@ -825,7 +829,7 @@ public class VendingMachine{
 
     public void setInsertedMoney(Denomination denomination){
         this.insertedMoney = denomination;
-
     }
+
 
 }

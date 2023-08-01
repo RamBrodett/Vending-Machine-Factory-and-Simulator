@@ -51,27 +51,29 @@ public class VMMaintenanceMenu extends JPanel{
     /**
      *  Custom Panel for text area.
      */
-    private TextPanel textPanel = new TextPanel();
+    private TextPanel textPanel = new TextPanel("Big");
+
+    private final TextPanel moneyDisplay = new TextPanel("Small"); //////////NEWWWWWWWWWWW
 
     /**
      * Button for restocking products.
      */
-    private final JButton restockBtn = new JButton(scaleIMG("./VMResources/raspberry.png",100,100));
+    private final JButton restockBtn = new JButton(scaleIMG("./VMResources/restockItem.png",100,100));
 
     /**
-     * Button for Replenishin money.
+     * Button for Replenishing money.
      */
-    private final JButton replenishBtn = new JButton(scaleIMG("./VMResources/strawberry.png",100,100));
+    private final JButton replenishBtn = new JButton(scaleIMG("./VMResources/replenishMoney.png",100,100));
 
     /**
      * Button for Collecting Money
      */
-    private final JButton collectBtn = new JButton(scaleIMG("./VMResources/mango.png",100,100));
+    private final JButton collectBtn = new JButton(scaleIMG("./VMResources/collectMoney.png",100,100));
 
     /**
      * Button for editing price.
      */
-    private final JButton editPriceBtn = new JButton(scaleIMG("./VMResources/vanilla.png",100,100));
+    private final JButton editPriceBtn = new JButton(scaleIMG("./VMResources/editPrice.png",100,100));
 
     /**
      *  Button for toggling special items display
@@ -106,6 +108,7 @@ public class VMMaintenanceMenu extends JPanel{
         btnSelectPanel.add(editPriceBtn);
         btnSelectPanel.setOpaque(false);
 
+        buttonPanel.setBackground(new Color(87,99,104));
 
         itemPanel = new CardLayout();
         itemPanelContainer = new JPanel((itemPanel));
@@ -178,6 +181,10 @@ public class VMMaintenanceMenu extends JPanel{
         gbc.weighty = .9;
         add(back, gbc);
 
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(890, 48, 0, 0);         // back button
+        add(moneyDisplay, gbc);
+
         toggleSpecial.setIcon(scaleIMG("./VMResources/specialsBTnorm.png", 391, 91));
         toggleSpecial.setRolloverIcon(scaleIMG("./VMResources/specialsBThover.png", 391, 91));
         toggleSpecial.setPressedIcon(scaleIMG("./VMResources/specialsBTclicked.png", 391, 91));
@@ -197,7 +204,7 @@ public class VMMaintenanceMenu extends JPanel{
 
 
     /**
-     * The paint method that add graphics for the main panel.
+     * The paint method that adds graphics for the main panel.
      * @param g the <code>Graphics</code> object to protect
      */
     @Override
@@ -418,26 +425,41 @@ public class VMMaintenanceMenu extends JPanel{
      */
     protected class TextPanel extends JPanel {
 
-        private JTextArea vmdisplay = new JTextArea(10, 40);
+        private final JTextArea vmdisplay = new JTextArea(10, 40);
+        private TextField moneyDisplay = new TextField();
         private JScrollPane scrollPane = new JScrollPane(vmdisplay);
 
         /**
          * Initialization of TextArea.
          */
-        public TextPanel() {
+        public TextPanel(String type) {
             setLayout(new BorderLayout());
 
             vmdisplay.setLineWrap(true);
             vmdisplay.setFont(new Font("consolas", Font.BOLD, 16));
             vmdisplay.setBackground(new Color(98, 174, 239));
-            scrollPane.setPreferredSize(new Dimension(625, 300));
 
-            scrollPane.setBackground(new Color(98, 174, 239));
-            scrollPane.setBorder(null);
+            if (type.equals("Big")) {
+                this.scrollPane.setPreferredSize(new Dimension(625, 300));
+                this.scrollPane.setBackground(new Color(98, 174, 239));
+                this.scrollPane.setBorder(null);
+                add(scrollPane);
+            }
+            else if(type.equals("Small")){
+                this.moneyDisplay.setPreferredSize(new Dimension(235,75));
+                this.moneyDisplay.setEditable(false);
+                this.moneyDisplay.setFont(new Font("consolas", Font.BOLD,60));
+                updateMoneyDisplay(0);
 
-            add(scrollPane);
+                add(moneyDisplay, BorderLayout.CENTER);
+            }
+        }
+
+        public void updateMoneyDisplay(double money){
+            this.moneyDisplay.setText("P" + money);
         }
     }
+
 
     /**
      * SubClass for Buttons' Panel GUI Components
@@ -467,7 +489,8 @@ public class VMMaintenanceMenu extends JPanel{
             setBackground(Color.GREEN);
 
             buttonPanel1.setLayout(menu);
-            blankPanel.setOpaque(false);
+            blankPanel.setBackground(new Color(87,99,104));
+            blankPanel.setOpaque(true);
 
             denominationButtons = new JSpinner[10];
             for (int i = 0; i < 10; i++) {
@@ -551,6 +574,7 @@ public class VMMaintenanceMenu extends JPanel{
                 buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
                 buttonPanel.currMode = "blank";
             } else {
+                restockBtn.setIcon(scaleIMG("./VMResources/restockItemSelected.png",100,100));
                 buttonPanel.menu.show(buttonPanel.buttonPanel1, "restockPanel");
                 buttonPanel.currMode = "restock";
             }
@@ -560,6 +584,7 @@ public class VMMaintenanceMenu extends JPanel{
                 buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
                 buttonPanel.currMode = "blank";
             } else {
+                replenishBtn.setIcon(scaleIMG("./VMResources/replenishMoneySelected.png",100,100));
                 buttonPanel.menu.show(buttonPanel.buttonPanel1, "replenishPanel");
                 buttonPanel.currMode = "replenish";
             }
@@ -569,6 +594,7 @@ public class VMMaintenanceMenu extends JPanel{
                 buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
                 buttonPanel.currMode = "blank";
             } else {
+                collectBtn.setIcon(scaleIMG("./VMResources/collectMoneySelected.png",100,100));
                 buttonPanel.menu.show(buttonPanel.buttonPanel1, "collectPanel");
                 buttonPanel.currMode = "collect";
             }
@@ -578,6 +604,7 @@ public class VMMaintenanceMenu extends JPanel{
                 buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
                 buttonPanel.currMode = "blank";
             } else {
+                editPriceBtn.setIcon(scaleIMG("./VMResources/editPriceSelected.png",100,100));
                 buttonPanel.menu.show(buttonPanel.buttonPanel1, "pricePanel");
                 buttonPanel.currMode = "edit price";
             }
@@ -586,6 +613,13 @@ public class VMMaintenanceMenu extends JPanel{
             buttonPanel.menu.show(buttonPanel.buttonPanel1, "blank");
             buttonPanel.currMode = "blank";
         }
+    }
+
+    public void resetButtonPanelBtns(){
+        restockBtn.setIcon(scaleIMG("./VMResources/restockItem.png",100,100));
+        replenishBtn.setIcon(scaleIMG("./VMResources/replenishMoney.png",100,100));
+        collectBtn.setIcon(scaleIMG("./VMResources/collectMoney.png",100,100));
+        editPriceBtn.setIcon(scaleIMG("./VMResources/editPrice.png",100,100));
     }
 
     /**
@@ -632,6 +666,10 @@ public class VMMaintenanceMenu extends JPanel{
      */
     public JCheckBox moneyLockToggle(){
         return buttonPanel.setter;
+    }
+
+    public TextPanel getMoneyDisplay(){                 ////NNEWWWWWWWWWW
+        return moneyDisplay;
     }
 
     /**

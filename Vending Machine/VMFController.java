@@ -124,7 +124,16 @@ public class VMFController {
             this.frame.generatorMenu.terminateMONEYINTERFACE();
             JOptionPane.showMessageDialog(null,
                     "Successfully created "+ machineType +" Vending Machine with initial" +
-                            " money: "+ currMachine.getmoney());
+                            " money: "+ currMachine.getTotalMoney());
+
+            currMachine.setInsertedMoney(new Denomination());                //RESET ALL MONEY
+
+            this.frame.vmInterface.getTextPanel().setText(null);             //RESET ALL TRANSACTION PROCESS TEXT
+            this.frame.maintenanceMenu.getTextPanel().setText(null);
+
+            this.frame.vmInterface.getMoneyDisplay().updateMoneyDisplay(0);  //RESET ALL MONEY DISPLAYS
+            this.frame.maintenanceMenu.getMoneyDisplay().updateMoneyDisplay(currMachine.getTotalMoney());
+
             this.frame.menu.show(this.frame.cardPanel, "mainMenu");
         });
         //-----------------------------------------------------------
@@ -151,7 +160,8 @@ public class VMFController {
             } else if (this.frame.vmInterface.getModeButtonPanel().equalsIgnoreCase("payment")) {
                 //to do here create a lock payment and now if locked payment and pressed insertmoney it will receive paymment
                 if(this.frame.vmInterface.getMoneyLocked()){
-                    currMachine.setInsertedMoney(new Denomination(this.frame.vmInterface.getValue(0),
+                    Denomination moneyToAdd = new Denomination(
+                            this.frame.vmInterface.getValue(0),
                             this.frame.vmInterface.getValue(1),
                             this.frame.vmInterface.getValue(2),
                             this.frame.vmInterface.getValue(3),
@@ -160,8 +170,11 @@ public class VMFController {
                             this.frame.vmInterface.getValue(6),
                             this.frame.vmInterface.getValue(7),
                             this.frame.vmInterface.getValue(8),
-                            this.frame.vmInterface.getValue(9)));
-                    System.out.println("Money inserted: " + currMachine.getInsertedmoney());
+                            this.frame.vmInterface.getValue(9));
+
+                    currMachine.addToDenomination(currMachine.getInsertedMoney(), moneyToAdd);
+                    System.out.println("Money inserted: " + moneyToAdd.getTotalMoney());
+                    this.frame.vmInterface.getMoneyDisplay().updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                     this.frame.vmInterface.resetMoneyPanel();
                 }
                 else this.frame.vmInterface.updateButtonPanel(1);
@@ -186,7 +199,8 @@ public class VMFController {
         });
 
         this.frame.maintenanceMenu.getRestockBtn().addActionListener(e -> {         //RESTOCK ITEMS
-                this.frame.maintenanceMenu.updateButtonPanel(1);
+            this.frame.maintenanceMenu.resetButtonPanelBtns();
+            this.frame.maintenanceMenu.updateButtonPanel(1);
         });
 
         this.frame.maintenanceMenu.moneyLockToggle().addItemListener(e->{
@@ -196,10 +210,12 @@ public class VMFController {
 
         this.frame.maintenanceMenu.getReplenishBtn().addActionListener(e -> {
             if (!this.frame.maintenanceMenu.getModeCurrMode().equals("replenish")) {
+                this.frame.maintenanceMenu.resetButtonPanelBtns();
                 this.frame.maintenanceMenu.updateButtonPanel(2);
             }else if(this.frame.maintenanceMenu.getModeCurrMode().equals("replenish")) {
                 if (this.frame.maintenanceMenu.getMoneyLocked()) {
-                    currMachine.vmSetMoney(new Denomination(this.frame.maintenanceMenu.getValue(0),                 //NEED TO FIX PARA INCREMENT LANG SIYA
+                    Denomination denomToAdd = new Denomination(
+                            this.frame.maintenanceMenu.getValue(0),
                             this.frame.maintenanceMenu.getValue(1),
                             this.frame.maintenanceMenu.getValue(2),
                             this.frame.maintenanceMenu.getValue(3),
@@ -208,19 +224,27 @@ public class VMFController {
                             this.frame.maintenanceMenu.getValue(6),
                             this.frame.maintenanceMenu.getValue(7),
                             this.frame.maintenanceMenu.getValue(8),
-                            this.frame.maintenanceMenu.getValue(9)));
-                    System.out.println("Money inserted: " + currMachine.getmoney());
+                            this.frame.maintenanceMenu.getValue(9));
+
+                    currMachine.addToDenomination(currMachine.getDenomination(), denomToAdd);
+                    System.out.println("Money inserted: " + denomToAdd.getTotalMoney());
+                    this.frame.maintenanceMenu.getMoneyDisplay().updateMoneyDisplay(currMachine.getTotalMoney());
+                    this.frame.maintenanceMenu.resetButtonPanelBtns();
                     this.frame.maintenanceMenu.resetMoneyPanel();
-                } else
+                } else {
+                    this.frame.maintenanceMenu.resetButtonPanelBtns();
                     this.frame.maintenanceMenu.updateButtonPanel(2);
+                }
             }
         });
 
         this.frame.maintenanceMenu.getCollectBtn().addActionListener(e -> {
+            this.frame.maintenanceMenu.resetButtonPanelBtns();
             this.frame.maintenanceMenu.updateButtonPanel(3);
         });
 
         this.frame.maintenanceMenu.getEditPriceBtn().addActionListener(e -> {
+            this.frame.maintenanceMenu.resetButtonPanelBtns();
             this.frame.maintenanceMenu.updateButtonPanel(4);
         });
 

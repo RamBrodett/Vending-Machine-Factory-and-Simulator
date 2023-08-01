@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 
 public class VMInterface extends JPanel {
-
     /**
      * Background image of the VendingMachineInterface.
      */
@@ -43,7 +43,9 @@ public class VMInterface extends JPanel {
     /**
      *  Custom Panel for text area
      */
-    private final TextPanel textPanel = new TextPanel();
+    private final TextPanel textPanel = new TextPanel("Big");
+
+    private final TextPanel moneyDisplay = new TextPanel("Small");  /////////////////////NEW
 
     /**
      *  Button for toggling special items display
@@ -150,6 +152,10 @@ public class VMInterface extends JPanel {
         gbc.weightx = .18;
         gbc.weighty = .9;
         add(back, gbc);
+
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(890, 48, 0, 0);         // back button
+        add(moneyDisplay, gbc);
 
         toggleSpecial.setIcon(scaleIMG("./VMResources/specialsBTnorm.png", 391, 91));
         toggleSpecial.setRolloverIcon(scaleIMG("./VMResources/specialsBThover.png", 391, 91));
@@ -380,23 +386,37 @@ public class VMInterface extends JPanel {
     protected class TextPanel extends JPanel {
 
         private final JTextArea vmdisplay = new JTextArea(10, 40);
+        private TextField moneyDisplay = new TextField();
         private JScrollPane scrollPane = new JScrollPane(vmdisplay);
 
         /**
          * Initialization of TextArea.
          */
-        public TextPanel() {
+        public TextPanel(String type) {
             setLayout(new BorderLayout());
 
             vmdisplay.setLineWrap(true);
             vmdisplay.setFont(new Font("consolas", Font.BOLD, 16));
             vmdisplay.setBackground(new Color(98, 174, 239));
-            scrollPane.setPreferredSize(new Dimension(625, 300));
 
-            scrollPane.setBackground(new Color(98, 174, 239));
-            scrollPane.setBorder(null);
+            if (type.equals("Big")) {
+                this.scrollPane.setPreferredSize(new Dimension(625, 300));
+                this.scrollPane.setBackground(new Color(98, 174, 239));
+                this.scrollPane.setBorder(null);
+                add(scrollPane);
+            }
+            else if(type.equals("Small")){
+                this.moneyDisplay.setPreferredSize(new Dimension(235,75));
+                this.moneyDisplay.setEditable(false);
+                this.moneyDisplay.setFont(new Font("consolas", Font.BOLD,60));
+                updateMoneyDisplay(0);
 
-            add(scrollPane);
+                add(moneyDisplay, BorderLayout.CENTER);
+            }
+        }
+
+        public void updateMoneyDisplay(double money){
+            this.moneyDisplay.setText("P" + money);
         }
     }
 
@@ -590,6 +610,10 @@ public class VMInterface extends JPanel {
             itemPanel.show(itemPanelContainer, "Regular");
             this.currMode = "Regular";
         }
+    }
+
+    public TextPanel getMoneyDisplay(){
+        return moneyDisplay;
     }
 
     /**
