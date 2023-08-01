@@ -246,7 +246,7 @@ public class VMMaintenanceMenu extends JPanel{
     }
 
     //    HOW TO CHANGE PRICE:        this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(index,newPrice);
-
+    //    HOW TO EDIT IMAGE VIS:      this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(index,bool);
     /**
      * SubClass for Regular Item Panel GUI Component
      */
@@ -313,15 +313,15 @@ public class VMMaintenanceMenu extends JPanel{
             gbc.gridy = 0;
             gbc.weighty = .8;
             gbc.anchor = GridBagConstraints.CENTER;
-            vnllPanel.add(createImagePanel(vnll, "Vanilla", 230),gbc);
-            chcoPanel.add(createImagePanel(chco, "Chocolate", 260),gbc);
-            mtchPanel.add(createImagePanel(mtch, "Matcha", 999),gbc);
-            chcpPanel.add(createImagePanel(chcp, "Choco Chips", 999),gbc);
-            crelPanel.add(createImagePanel(crel, "Cereals", 999),gbc);
-            mxftPanel.add(createImagePanel(mxft, "Mixed Fruit Bits", 999),gbc);
-            raspPanel.add(createImagePanel(rasp, "Raspberry", 999),gbc);
-            strwPanel.add(createImagePanel(strw, "Strawberry", 999),gbc);
-            mngoPanel.add(createImagePanel(mngo, "Mango", 999),gbc);
+            vnllPanel.add(createImagePanel(vnllLabel, "Vanilla", 230),gbc);
+            chcoPanel.add(createImagePanel(chcoLabel, "Chocolate", 260),gbc);
+            mtchPanel.add(createImagePanel(mtchLabel, "Matcha", 999),gbc);
+            chcpPanel.add(createImagePanel(chcpLabel, "Choco Chips", 999),gbc);
+            crelPanel.add(createImagePanel(crelLabel, "Cereals", 999),gbc);
+            mxftPanel.add(createImagePanel(mxftLabel, "Mixed Fruit Bits", 999),gbc);
+            raspPanel.add(createImagePanel(raspLabel, "Raspberry", 999),gbc);
+            strwPanel.add(createImagePanel(strwLabel, "Strawberry", 999),gbc);
+            mngoPanel.add(createImagePanel(mngoLabel, "Mango", 999),gbc);
 
             vnllPanel.setOpaque(false);
             chcoPanel.setOpaque(false);
@@ -381,6 +381,20 @@ public class VMMaintenanceMenu extends JPanel{
                 case 6 -> raspLabelPrice.setText("P" + newPrice);
                 case 7 -> strwLabelPrice.setText("P" + newPrice);
                 case 8 -> mngoLabelPrice.setText("P" + newPrice);
+            }
+        }
+
+        public void updateImageVis(int index, boolean bool){
+            switch (index){
+                case 0 -> vnllLabelPrice.setVisible(bool);
+                case 1 -> chcoLabelPrice.setVisible(bool);
+                case 2 -> mtchLabelPrice.setVisible(bool);
+                case 3 -> chcpLabelPrice.setVisible(bool);
+                case 4 -> crelLabelPrice.setVisible(bool);
+                case 5 -> mxftLabelPrice.setVisible(bool);
+                case 6 -> raspLabelPrice.setVisible(bool);
+                case 7 -> strwLabelPrice.setVisible(bool);
+                case 8 -> mngoLabelPrice.setVisible(bool);
             }
         }
     }
@@ -450,15 +464,15 @@ public class VMMaintenanceMenu extends JPanel{
             gbc.gridy = 0;
             gbc.weighty = 0.8;
             gbc.anchor = GridBagConstraints.CENTER;
-            triChcoPanel.add(createImagePanel(triChco, "Triple Chocolate", 230),gbc);
-            vitamaxPanel.add(createImagePanel(vitamax, "Vitamax", 260),gbc);
-            strwDuoPanel.add(createImagePanel(strwDuo, "Strawberry Duo", 999),gbc);
-            chcoDuoPanel.add(createImagePanel(chcoDuo, "Choco Duos", 999),gbc);
-            chcoMchPanel.add(createImagePanel(chcoMch, "ChocoMatcha Madness", 999),gbc);
-            mngoChcPanel.add(createImagePanel(mngoChc, "Mango Chocolate Glazed", 999),gbc);
-            brryCrnPanel.add(createImagePanel(brryCrn, "Berrylicious Crunchies", 999),gbc);
-            rnbwYgrPanel.add(createImagePanel(rnbwYgr, "Rainbow Yogurt", 999),gbc);
-            youGartPanel.add(createImagePanel(youGart, "You-g-Art", 999),gbc);
+            triChcoPanel.add(createImagePanel(triChcoLabel, "Triple Chocolate", 230),gbc);
+            vitamaxPanel.add(createImagePanel(vitamaxLabel, "Vitamax", 260),gbc);
+            strwDuoPanel.add(createImagePanel(strwDuoLabel, "Strawberry Duo", 999),gbc);
+            chcoDuoPanel.add(createImagePanel(chcoDuoLabel, "Choco Duos", 999),gbc);
+            chcoMchPanel.add(createImagePanel(chcoMchLabel, "ChocoMatcha Madness", 999),gbc);
+            mngoChcPanel.add(createImagePanel(mngoChcLabel, "Mango Chocolate Glazed", 999),gbc);
+            brryCrnPanel.add(createImagePanel(brryCrnLabel, "Berrylicious Crunchies", 999),gbc);
+            rnbwYgrPanel.add(createImagePanel(rnbwYgrLabel, "Rainbow Yogurt", 999),gbc);
+            youGartPanel.add(createImagePanel(youGartLabel, "You-g-Art", 999),gbc);
 
             triChcoPanel.setOpaque(false);
             vitamaxPanel.setOpaque(false);
@@ -520,6 +534,20 @@ public class VMMaintenanceMenu extends JPanel{
                 case 8 -> youGartLabelPrice.setText("P" + newPrice);
             }
         }
+
+        public void updateImageVis (int index, boolean bool){
+            switch (index){
+                case 0 -> triChcoLabelPrice.setVisible(bool);
+                case 1 -> vitamaxLabelPrice.setVisible(bool);
+                case 2 -> strwDuoLabelPrice.setVisible(bool);
+                case 3 -> chcoDuoLabelPrice.setVisible(bool);
+                case 4 -> chcoMchLabelPrice.setVisible(bool);
+                case 5 -> mngoChcLabelPrice.setVisible(bool);
+                case 6 -> brryCrnLabelPrice.setVisible(bool);
+                case 7 -> rnbwYgrLabelPrice.setVisible(bool);
+                case 8 -> youGartLabelPrice.setVisible(bool);
+            }
+        }
     }
 
     private void setupCaption(JLabel label){
@@ -531,18 +559,17 @@ public class VMMaintenanceMenu extends JPanel{
 
     /**
      *  Sets the Image and Description of Product per slot
-     * @param icon image of the product.
+     * @param imageLabel image of the product.
      * @param item name of the product.
      * @param kCal kCal of the product.
      * @return custom-imaged panel
      */
-    private JPanel createImagePanel(ImageIcon icon, String item, int kCal) {  //USED IN ItemPanel
+    private JPanel createImagePanel(JLabel imageLabel, String item, int kCal) {  //USED IN ItemPanel
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         panel.setOpaque(false);
 
-        // JLabel for the image
-        JLabel imageLabel = new JLabel(icon);
+        // JLabel for item image
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
 
@@ -635,6 +662,8 @@ public class VMMaintenanceMenu extends JPanel{
         private JPanel restockPanel = new JPanel();
         private JPanel collectPanel = new JPanel(new GridBagLayout());
         private final JButton collectBtn = new JButton();
+        private final JButton[] restockSlotButtons = new JButton[9];
+        private final JButton[] editPriceSlotButtons = new JButton[9];
         private JPanel editPricePanel = new JPanel();
         private CardLayout menu = new CardLayout();
 
@@ -644,7 +673,6 @@ public class VMMaintenanceMenu extends JPanel{
         public ButtonPanel() {
             setLayout(new BorderLayout());
             setPreferredSize(new Dimension(625, 300));
-            setBackground(Color.GREEN);
 
             buttonPanel1.setLayout(menu);
             blankPanel.setBackground(new Color(87,99,104));
@@ -695,7 +723,67 @@ public class VMMaintenanceMenu extends JPanel{
             replenishPanel.setBackground(Color.LIGHT_GRAY);
             buttonPanel1.add("replenishPanel",replenishPanel);
 
-            restockPanel.setBackground(Color.GREEN);
+            restockPanel.setLayout(new GridLayout(3, 3));
+            restockPanel.setOpaque(true);
+            restockPanel.setBackground(new Color(87, 99, 104));
+
+            for (int i = 0; i < 9; i++) {
+                restockSlotButtons[i] = new JButton();
+            }
+            restockSlotButtons[0].setIcon(scaleIMG("./VMResources/slot1.png", 212, 108));
+            restockSlotButtons[0].setBorder(null);
+            restockSlotButtons[0].setOpaque(false);
+            restockSlotButtons[0].setContentAreaFilled(false);
+            restockPanel.add(restockSlotButtons[0]);
+
+            restockSlotButtons[1].setIcon(scaleIMG("./VMResources/slot2.png", 212, 108));
+            restockSlotButtons[1].setBorder(null);
+            restockSlotButtons[1].setOpaque(false);
+            restockSlotButtons[1].setContentAreaFilled(false);
+            restockPanel.add(restockSlotButtons[1]);
+
+            restockSlotButtons[2].setIcon(scaleIMG("./VMResources/slot3.png", 212, 108));
+            restockSlotButtons[2].setOpaque(false);
+            restockSlotButtons[2].setContentAreaFilled(false);
+            restockSlotButtons[2].setBorder(null);
+            restockPanel.add(restockSlotButtons[2]);
+
+            restockSlotButtons[3].setIcon(scaleIMG("./VMResources/slot4.png", 212, 108));
+            restockSlotButtons[3].setOpaque(false);
+            restockSlotButtons[3].setContentAreaFilled(false);
+            restockSlotButtons[3].setBorder(null);
+            restockPanel.add(restockSlotButtons[3]);
+
+            restockSlotButtons[4].setIcon(scaleIMG("./VMResources/slot5.png", 212, 108));
+            restockSlotButtons[4].setOpaque(false);
+            restockSlotButtons[4].setContentAreaFilled(false);
+            restockSlotButtons[4].setBorder(null);
+            restockPanel.add(restockSlotButtons[4]);
+
+
+            restockSlotButtons[5].setIcon(scaleIMG("./VMResources/slot6.png", 212, 108));
+            restockSlotButtons[5].setOpaque(false);
+            restockSlotButtons[5].setContentAreaFilled(false);
+            restockSlotButtons[5].setBorder(null);
+            restockPanel.add(restockSlotButtons[5]);
+
+            restockSlotButtons[6].setIcon(scaleIMG("./VMResources/slot7.png", 212, 108));
+            restockSlotButtons[6].setOpaque(false);
+            restockSlotButtons[6].setContentAreaFilled(false);
+            restockSlotButtons[6].setBorder(null);
+            restockPanel.add(restockSlotButtons[6]);
+
+            restockSlotButtons[7].setIcon(scaleIMG("./VMResources/slot8.png", 212, 108));
+            restockSlotButtons[7].setOpaque(false);
+            restockSlotButtons[7].setContentAreaFilled(false);
+            restockSlotButtons[7].setBorder(null);
+            restockPanel.add(restockSlotButtons[7]);
+
+            restockSlotButtons[8].setIcon(scaleIMG("./VMResources/slot9.png", 212, 108));
+            restockSlotButtons[8].setOpaque(false);
+            restockSlotButtons[8].setContentAreaFilled(false);
+            restockSlotButtons[8].setBorder(null);
+            restockPanel.add(restockSlotButtons[8]);
             buttonPanel1.add("restockPanel",restockPanel);
 
             GridBagConstraints gbc = new GridBagConstraints();
@@ -712,7 +800,69 @@ public class VMMaintenanceMenu extends JPanel{
             collectPanel.add(collectBtn, gbc);
             buttonPanel1.add("collectPanel",collectPanel);
 
-            editPricePanel.setBackground(Color.YELLOW);
+            editPricePanel.setLayout(new GridLayout(3, 3));
+            editPricePanel.setOpaque(true);
+            editPricePanel.setBackground(new Color(87, 99, 104));
+
+            for (int i = 0; i < 9; i++) {
+                editPriceSlotButtons[i] = new JButton();
+            }
+            editPriceSlotButtons[0].setIcon(scaleIMG("./VMResources/slot1.png", 212, 108));
+            editPriceSlotButtons[0].setBorder(null);
+            editPriceSlotButtons[0].setOpaque(false);
+            editPriceSlotButtons[0].setContentAreaFilled(false);
+            editPricePanel.add(editPriceSlotButtons[0]);
+
+            editPriceSlotButtons[1].setIcon(scaleIMG("./VMResources/slot2.png", 212, 108));
+            editPriceSlotButtons[1].setBorder(null);
+            editPriceSlotButtons[1].setOpaque(false);
+            editPriceSlotButtons[1].setContentAreaFilled(false);
+            editPricePanel.add(editPriceSlotButtons[1]);
+
+            editPriceSlotButtons[2].setIcon(scaleIMG("./VMResources/slot3.png", 212, 108));
+            editPriceSlotButtons[2].setOpaque(false);
+            editPriceSlotButtons[2].setContentAreaFilled(false);
+            editPriceSlotButtons[2].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[2]);
+
+            editPriceSlotButtons[3].setIcon(scaleIMG("./VMResources/slot4.png", 212, 108));
+            editPriceSlotButtons[3].setOpaque(false);
+            editPriceSlotButtons[3].setContentAreaFilled(false);
+            editPriceSlotButtons[3].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[3]);
+
+            editPriceSlotButtons[4].setIcon(scaleIMG("./VMResources/slot5.png", 212, 108));
+            editPriceSlotButtons[4].setOpaque(false);
+            editPriceSlotButtons[4].setContentAreaFilled(false);
+            editPriceSlotButtons[4].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[4]);
+
+
+            editPriceSlotButtons[5].setIcon(scaleIMG("./VMResources/slot6.png", 212, 108));
+            editPriceSlotButtons[5].setOpaque(false);
+            editPriceSlotButtons[5].setContentAreaFilled(false);
+            editPriceSlotButtons[5].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[5]);
+
+            editPriceSlotButtons[6].setIcon(scaleIMG("./VMResources/slot7.png", 212, 108));
+            editPriceSlotButtons[6].setOpaque(false);
+            editPriceSlotButtons[6].setContentAreaFilled(false);
+            editPriceSlotButtons[6].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[6]);
+
+            editPriceSlotButtons[7].setIcon(scaleIMG("./VMResources/slot8.png", 212, 108));
+            editPriceSlotButtons[7].setOpaque(false);
+            editPriceSlotButtons[7].setContentAreaFilled(false);
+            editPriceSlotButtons[7].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[7]);
+
+            editPriceSlotButtons[8].setIcon(scaleIMG("./VMResources/slot9.png", 212, 108));
+            editPriceSlotButtons[8].setOpaque(false);
+            editPriceSlotButtons[8].setContentAreaFilled(false);
+            editPriceSlotButtons[8].setBorder(null);
+            editPricePanel.add(editPriceSlotButtons[8]);
+            buttonPanel1.add("editPricePanel",editPricePanel);
+
             buttonPanel1.add("pricePanel",editPricePanel);
 
             buttonPanel1.add("blank", blankPanel);
@@ -897,6 +1047,10 @@ public class VMMaintenanceMenu extends JPanel{
         return restockBtn;
     }
 
+    public JButton getRestockVMButtons(int index){
+        return buttonPanel.restockSlotButtons[index];
+    }
+
     /**
      * Gets the button for Replenishing money.
      * @return button for Replenishing money.
@@ -919,6 +1073,10 @@ public class VMMaintenanceMenu extends JPanel{
      */
     public JButton getEditPriceBtn() {
         return editPriceBtn;
+    }
+
+    public JButton getEditPriceVMButtons(int index){
+        return buttonPanel.editPriceSlotButtons[index];
     }
 
     /**

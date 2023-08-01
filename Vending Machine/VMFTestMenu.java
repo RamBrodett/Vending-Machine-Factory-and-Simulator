@@ -102,8 +102,13 @@ public class VMFTestMenu extends JPanel {
      */
     @Override
     protected void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(bgIMG_testMenu.getImage(),0,0,getWidth(),getHeight(),null);
+        try{
+            super.paintComponent(g);
+            g.drawImage(bgIMG_testMenu.getImage(),0,0,getWidth(),getHeight(),null);
+        } catch (Exception error){
+            JOptionPane.showMessageDialog(null,"Background image directory " +
+                    "is invalid: " + error.getMessage()+ " Error");
+    }
     }
 
     /**
@@ -113,7 +118,7 @@ public class VMFTestMenu extends JPanel {
      * @param height length from bottom to top
      * @return ImageIcon
      */
-     public ImageIcon scaleIMG(String strname, int width, int height) {
+    public ImageIcon scaleIMG(String strname, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(strname);
         Image raw = imageIcon.getImage();
         Image scaled = raw.getScaledInstance(width, height, Image.SCALE_SMOOTH);
