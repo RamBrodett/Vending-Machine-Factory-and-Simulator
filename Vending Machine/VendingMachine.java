@@ -104,27 +104,29 @@ public class VendingMachine{
 
     }
 
-    public void dispenseProduct(int index){
+    public boolean dispenseProduct(int index){
         if(!(isSlotEmpty(index))){
             if(productSlots.get(index).getBaseProductPrice()<= getTotalInsertedMoney()){
-                float change = (float) (getTotalInsertedMoney() - productSlots.get(index).getBaseProductPrice());
+                float change = (float) (getTotalInsertedMoney() - productSlots.get(index).getBaseProductPrice()); // needed change
+                addToDenomination(denomination,insertedMoney);
                 Denomination changeDenom = findDenomination(change,denomination);
                 if(!(changeDenom.getTotalMoney() - change != 0)){
                     System.out.println("Transaction successful.");
                     System.out.println("Dispensing " + productSlots.get(index).getBaseProductName());
                     dispenser(index);
-                    addToDenomination(denomination,insertedMoney);
                     differenceDenomination(denomination,changeDenom);
                     insertedMoney = changeDenom;
                     productSlots.get(index).setNumProductsSold(1);
                     System.out.printf("Your change is %.2f\n",change);
                     displayDenominations(changeDenom);
+                    return true;
                 }
                 else System.out.println("Unable to give change. Unsuccessful transaction.\n");
 
             }else System.out.println("Insufficient balance. Unsuccessful transaction.\n");
 
         }else System.out.println("Sorry! Item is out of stock.\n");
+        return false;
     }
 
     public float getTotalInsertedMoney(){
