@@ -44,6 +44,13 @@ public class Slot {
             products.add(i,baseProduct);
         }
     }
+    public Slot(String name, int calories,int qnty){
+        this.numProductsSold = 0;
+        baseProduct = new Product(name,0,calories);
+        for(int i = 0; i< qnty; i++){
+            products.add(i,baseProduct);
+        }
+    }
 
     public ArrayList<Product> getProducts(){
         return products;

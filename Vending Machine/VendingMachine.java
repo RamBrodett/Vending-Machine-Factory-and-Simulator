@@ -13,9 +13,10 @@ import java.util.ArrayList;
  * @version 07/1/2023
  */
 public class VendingMachine{
-    private Denomination denomination;
-    private final ArrayList<Slot> productSlots;
-    private Denomination insertedMoney;
+    protected Denomination denomination;
+
+    protected final ArrayList<Slot> productSlots;
+    protected Denomination insertedMoney;
 
     /**
      * Constructor for Vending Machine. Makes instances of the subclass it needs.
@@ -110,7 +111,7 @@ public class VendingMachine{
 
     }
 
-    public boolean dispenseProduct(int index){
+    public boolean dispenseProduct(int index, int c){
         if(!(isSlotEmpty(index))){
             if(productSlots.get(index).getBaseProductPrice()<= getTotalInsertedMoney()){
                 float change = (float) (getTotalInsertedMoney() - productSlots.get(index).getBaseProductPrice()); // needed change
@@ -139,7 +140,7 @@ public class VendingMachine{
         return this.insertedMoney.getTotalMoney();
     }
 
-    private void dispenser(int index){
+    protected void dispenser(int index){
         productSlots.get(index).getProducts().remove(0);
     }
 
@@ -191,7 +192,7 @@ public class VendingMachine{
      * @param slotNumber specific location you want to check.
      * @return boolean value, returned true relates that slot is empty, otherwise, it is not empty.
      */
-    private boolean isSlotEmpty(int slotNumber){
+    protected boolean isSlotEmpty(int slotNumber){
         return (productSlots.get(slotNumber).getProductQuantity()==0);
     }
 
@@ -216,7 +217,7 @@ public class VendingMachine{
      * @return a Denomination object representing the appropriate set of money the machine can produce for change.
      */
 
-    private Denomination findDenomination(float money, Denomination inventory) {                  //give money in denominations based on available denoms
+    protected Denomination findDenomination(float money, Denomination inventory) {                  //give money in denominations based on available denoms
         Denomination moneyDenom = new Denomination();                                           //will have denominations of the change
 
         if (money >= 1000) {                                                                     //makes sure variable change is above 1000
@@ -451,7 +452,7 @@ public class VendingMachine{
      * @param subtrahend The denomination object containing the values to be subtracted from the 'minuend'.
      */
 
-    private void differenceDenomination(Denomination minuend, Denomination subtrahend){
+    protected void differenceDenomination(Denomination minuend, Denomination subtrahend){
         minuend.setThousandPesoBill     (-subtrahend.getThousandPesoBill());
         minuend.setFiveHundredPesoBill  (-subtrahend.getFiveHundredPesoBill());
         minuend.setTwoHundredPesoBill   (-subtrahend.getTwoHundredPesoBill());
@@ -480,7 +481,7 @@ public class VendingMachine{
      * @param money The Denomination object representing the money to be displayed.
      */
 
-    private void displayDenominations(Denomination money){
+    protected void displayDenominations(Denomination money){
         System.out.printf("%-5s| %s\n", "Amt.", "Denomination");
         if (money.getThousandPesoBill() > 0){
             System.out.printf("%4d | %s\n", money.getThousandPesoBill(), "1000 PHP");

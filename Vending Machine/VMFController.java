@@ -301,47 +301,76 @@ public class VMFController {
 
             if(currMachine.getTotalInsertedMoney()>0){
                 if(src ==  this.frame.vmInterface.getVMButtons(0)){
-                    if(this.currMachine.dispenseProduct(0))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        currMachine.dispenseProduct(0,2);
+                    }
+                    else if(this.currMachine.dispenseProduct(0,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                 }
                 else if(src == this.frame.vmInterface.getVMButtons(1)){
-                    if(this.currMachine.dispenseProduct(1))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        currMachine.dispenseProduct(1,2);
+                    }
+                    else if(this.currMachine.dispenseProduct(1,1)){
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+                    }
+
                 }
                 else if(src == this.frame.vmInterface.getVMButtons(2)){
-                    if(this.currMachine.dispenseProduct(2))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        currMachine.dispenseProduct(2,2);
+                    }
+                    else if(this.currMachine.dispenseProduct(2,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(3)) {
-                    if(this.currMachine.dispenseProduct(3))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        currMachine.dispenseProduct(3,2);
+                    }
+                    else if(this.currMachine.dispenseProduct(3,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(4)) {
-                    if(this.currMachine.dispenseProduct(4))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        currMachine.dispenseProduct(4,2);
+                    }
+                    else if(this.currMachine.dispenseProduct(4,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(5)) {
-                    if(this.currMachine.dispenseProduct(5))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        currMachine.dispenseProduct(5,2);
+                    }
+                    else if(this.currMachine.dispenseProduct(5,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(6)) {
-                    if(this.currMachine.dispenseProduct(6))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        currMachine.dispenseProduct(6,2);
+                    }
+                    else if(this.currMachine.dispenseProduct(6,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(7)) {
-                    if(this.currMachine.dispenseProduct(7))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        currMachine.dispenseProduct(7,2);
+                    }
+                    else  if(this.currMachine.dispenseProduct(7,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(8)) {
-                    if(this.currMachine.dispenseProduct(8))
+                    if (this.frame.vmInterface.getCurrMode().equals("Special")){
+
+                    }
+                    else if(this.currMachine.dispenseProduct(8,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                 }

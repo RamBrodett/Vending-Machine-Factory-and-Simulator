@@ -30,6 +30,7 @@ public class VMInterface extends JPanel {
      */
     private final JPanel itemPanelContainer;
 
+
     /**
      *  Holder for what vending Machine type is currently loaded
      */
@@ -887,6 +888,10 @@ public class VMInterface extends JPanel {
         updateButtonPanel(1);
     }
 
+    public String getCurrMode() {
+        return currMode;
+    }
+
     /**
      * SubClass for Textpane OutputStream redirection
      */
@@ -908,6 +913,8 @@ public class VMInterface extends JPanel {
             textArea.append(text);
         }
     }
+
+
 /*
     public void setJpanelItemPanel(JPanel targetPanel,){
         createImagePanel(itemIcon,itemName,)
