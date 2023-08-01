@@ -103,14 +103,15 @@ public class VMGeneratorMenu extends JPanel {
         namingPanel.add(label);
 
         for(int i=0; i<10; i++){
-            SpinnerNumberModel moneyRoll = new SpinnerNumberModel();
-            moneyRoll.setMinimum(0);
-            moneyRoll.setValue(0);
-            denominationButtons[i] = new JSpinner(moneyRoll);
-            denominationButtons[i].setPreferredSize(new Dimension(80,60));
+            SpinnerNumberModel moneyModel = new SpinnerNumberModel();
+            moneyModel.setMinimum(0);
+            moneyModel.setValue(0);
+            denominationButtons[i] = new JSpinner(moneyModel);
+            denominationButtons[i].setPreferredSize(new Dimension(140,70));
             ((JSpinner.DefaultEditor) denominationButtons[i].getEditor()).getTextField().setEditable(false);
             moneyTags[i] = new JPanel();
             JLabel valueHolder = new JLabel();
+            valueHolder.setFont(new Font("consolas",Font.BOLD,21));
             moneyTags[i].setLayout(new FlowLayout());
             moneyTags[i].add(denominationButtons[i]);
             switch (i){

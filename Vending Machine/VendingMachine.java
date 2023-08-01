@@ -741,6 +741,9 @@ public class VendingMachine{
     public int getmoney(){
         return this.denomination.getTotalMoney();
     }
+    public int getInsertedmoney(){
+        return this.insertedMoney.getTotalMoney();
+    }
 
     /**
      * Displays the denominations and amounts of money in the 'money' object .
@@ -818,6 +821,11 @@ public class VendingMachine{
             System.out.print("=");
         }
         System.out.println(" ");
+    }
+
+    public void setInsertedMoney(Denomination denomination){
+        this.insertedMoney = denomination;
+
     }
 
 }

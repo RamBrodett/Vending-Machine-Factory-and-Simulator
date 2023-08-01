@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 
 public class VMFController {
@@ -122,9 +125,21 @@ public class VMFController {
 
             } else if (this.frame.vmInterface.getModeButtonPanel().equalsIgnoreCase("payment")) {
                 //to do here create a lock payment and now if locked payment and pressed insertmoney it will receive paymment
-                //if()
-                //else
-                this.frame.vmInterface.updateButtonPanel(1);
+                if(this.frame.vmInterface.getMoneyLocked()){
+                    currMachine.setInsertedMoney(new Denomination(this.frame.vmInterface.getValue(0),
+                            this.frame.vmInterface.getValue(1),
+                            this.frame.vmInterface.getValue(2),
+                            this.frame.vmInterface.getValue(3),
+                            this.frame.vmInterface.getValue(4),
+                            this.frame.vmInterface.getValue(5),
+                            this.frame.vmInterface.getValue(6),
+                            this.frame.vmInterface.getValue(7),
+                            this.frame.vmInterface.getValue(8),
+                            this.frame.vmInterface.getValue(9)));
+                    System.out.println("Money inserted: " + currMachine.getInsertedmoney());
+                    this.frame.vmInterface.resetMoneyPanel();
+                }
+                else this.frame.vmInterface.updateButtonPanel(1);
             }
 
         });
@@ -137,15 +152,21 @@ public class VMFController {
         this.frame.vmInterface.getToggleSpecial().addActionListener(e -> {
             this.frame.vmInterface.updateItemPanel();
         });
+
+        this.frame.vmInterface.moneyLockToggle().addItemListener(e->{
+            if(e.getStateChange()==ItemEvent.SELECTED)this.frame.vmInterface.setLockMoney(true);
+            else this.frame.vmInterface.setLockMoney(false);
+        });
     }
 
     public void initializeProgram(){
         frame.menu.show(frame.cardPanel,"mainMenu");
     }
 
-
     private void updateMachineType(String type){
         machineType = type;
     }
+
+
 
 }
