@@ -211,8 +211,13 @@ public class VMMaintenanceMenu extends JPanel{
      */
     @Override
     protected void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(bgIMG_VMInterface.getImage(),0,0,getWidth(),getHeight(),null);
+        try{
+            super.paintComponent(g);
+            g.drawImage(bgIMG_VMInterface.getImage(),0,0,getWidth(),getHeight(),null);
+        } catch (Exception error){
+            JOptionPane.showMessageDialog(null,"Background image directory " +
+                    "is invalid: " + error.getMessage()+ " Error");
+        }
     }
 
     /**
