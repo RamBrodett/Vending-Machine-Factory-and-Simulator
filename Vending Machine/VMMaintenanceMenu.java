@@ -246,7 +246,7 @@ public class VMMaintenanceMenu extends JPanel{
     }
 
     //    HOW TO CHANGE PRICE:        this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(index,newPrice);
-
+    //    HOW TO EDIT IMAGE VIS:      this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(index,bool);
     /**
      * SubClass for Regular Item Panel GUI Component
      */
@@ -313,15 +313,15 @@ public class VMMaintenanceMenu extends JPanel{
             gbc.gridy = 0;
             gbc.weighty = .8;
             gbc.anchor = GridBagConstraints.CENTER;
-            vnllPanel.add(createImagePanel(vnll, "Vanilla", 230),gbc);
-            chcoPanel.add(createImagePanel(chco, "Chocolate", 260),gbc);
-            mtchPanel.add(createImagePanel(mtch, "Matcha", 999),gbc);
-            chcpPanel.add(createImagePanel(chcp, "Choco Chips", 999),gbc);
-            crelPanel.add(createImagePanel(crel, "Cereals", 999),gbc);
-            mxftPanel.add(createImagePanel(mxft, "Mixed Fruit Bits", 999),gbc);
-            raspPanel.add(createImagePanel(rasp, "Raspberry", 999),gbc);
-            strwPanel.add(createImagePanel(strw, "Strawberry", 999),gbc);
-            mngoPanel.add(createImagePanel(mngo, "Mango", 999),gbc);
+            vnllPanel.add(createImagePanel(vnllLabel, "Vanilla", 230),gbc);
+            chcoPanel.add(createImagePanel(chcoLabel, "Chocolate", 260),gbc);
+            mtchPanel.add(createImagePanel(mtchLabel, "Matcha", 999),gbc);
+            chcpPanel.add(createImagePanel(chcpLabel, "Choco Chips", 999),gbc);
+            crelPanel.add(createImagePanel(crelLabel, "Cereals", 999),gbc);
+            mxftPanel.add(createImagePanel(mxftLabel, "Mixed Fruit Bits", 999),gbc);
+            raspPanel.add(createImagePanel(raspLabel, "Raspberry", 999),gbc);
+            strwPanel.add(createImagePanel(strwLabel, "Strawberry", 999),gbc);
+            mngoPanel.add(createImagePanel(mngoLabel, "Mango", 999),gbc);
 
             vnllPanel.setOpaque(false);
             chcoPanel.setOpaque(false);
@@ -381,6 +381,20 @@ public class VMMaintenanceMenu extends JPanel{
                 case 6 -> raspLabelPrice.setText("P" + newPrice);
                 case 7 -> strwLabelPrice.setText("P" + newPrice);
                 case 8 -> mngoLabelPrice.setText("P" + newPrice);
+            }
+        }
+
+        public void updateImageVis(int index, boolean bool){
+            switch (index){
+                case 0 -> vnllLabelPrice.setVisible(bool);
+                case 1 -> chcoLabelPrice.setVisible(bool);
+                case 2 -> mtchLabelPrice.setVisible(bool);
+                case 3 -> chcpLabelPrice.setVisible(bool);
+                case 4 -> crelLabelPrice.setVisible(bool);
+                case 5 -> mxftLabelPrice.setVisible(bool);
+                case 6 -> raspLabelPrice.setVisible(bool);
+                case 7 -> strwLabelPrice.setVisible(bool);
+                case 8 -> mngoLabelPrice.setVisible(bool);
             }
         }
     }
@@ -450,15 +464,15 @@ public class VMMaintenanceMenu extends JPanel{
             gbc.gridy = 0;
             gbc.weighty = 0.8;
             gbc.anchor = GridBagConstraints.CENTER;
-            triChcoPanel.add(createImagePanel(triChco, "Triple Chocolate", 230),gbc);
-            vitamaxPanel.add(createImagePanel(vitamax, "Vitamax", 260),gbc);
-            strwDuoPanel.add(createImagePanel(strwDuo, "Strawberry Duo", 999),gbc);
-            chcoDuoPanel.add(createImagePanel(chcoDuo, "Choco Duos", 999),gbc);
-            chcoMchPanel.add(createImagePanel(chcoMch, "ChocoMatcha Madness", 999),gbc);
-            mngoChcPanel.add(createImagePanel(mngoChc, "Mango Chocolate Glazed", 999),gbc);
-            brryCrnPanel.add(createImagePanel(brryCrn, "Berrylicious Crunchies", 999),gbc);
-            rnbwYgrPanel.add(createImagePanel(rnbwYgr, "Rainbow Yogurt", 999),gbc);
-            youGartPanel.add(createImagePanel(youGart, "You-g-Art", 999),gbc);
+            triChcoPanel.add(createImagePanel(triChcoLabel, "Triple Chocolate", 230),gbc);
+            vitamaxPanel.add(createImagePanel(vitamaxLabel, "Vitamax", 260),gbc);
+            strwDuoPanel.add(createImagePanel(strwDuoLabel, "Strawberry Duo", 999),gbc);
+            chcoDuoPanel.add(createImagePanel(chcoDuoLabel, "Choco Duos", 999),gbc);
+            chcoMchPanel.add(createImagePanel(chcoMchLabel, "ChocoMatcha Madness", 999),gbc);
+            mngoChcPanel.add(createImagePanel(mngoChcLabel, "Mango Chocolate Glazed", 999),gbc);
+            brryCrnPanel.add(createImagePanel(brryCrnLabel, "Berrylicious Crunchies", 999),gbc);
+            rnbwYgrPanel.add(createImagePanel(rnbwYgrLabel, "Rainbow Yogurt", 999),gbc);
+            youGartPanel.add(createImagePanel(youGartLabel, "You-g-Art", 999),gbc);
 
             triChcoPanel.setOpaque(false);
             vitamaxPanel.setOpaque(false);
@@ -520,6 +534,20 @@ public class VMMaintenanceMenu extends JPanel{
                 case 8 -> youGartLabelPrice.setText("P" + newPrice);
             }
         }
+
+        public void updateImageVis (int index, boolean bool){
+            switch (index){
+                case 0 -> triChcoLabelPrice.setVisible(bool);
+                case 1 -> vitamaxLabelPrice.setVisible(bool);
+                case 2 -> strwDuoLabelPrice.setVisible(bool);
+                case 3 -> chcoDuoLabelPrice.setVisible(bool);
+                case 4 -> chcoMchLabelPrice.setVisible(bool);
+                case 5 -> mngoChcLabelPrice.setVisible(bool);
+                case 6 -> brryCrnLabelPrice.setVisible(bool);
+                case 7 -> rnbwYgrLabelPrice.setVisible(bool);
+                case 8 -> youGartLabelPrice.setVisible(bool);
+            }
+        }
     }
 
     private void setupCaption(JLabel label){
@@ -531,18 +559,17 @@ public class VMMaintenanceMenu extends JPanel{
 
     /**
      *  Sets the Image and Description of Product per slot
-     * @param icon image of the product.
+     * @param imageLabel image of the product.
      * @param item name of the product.
      * @param kCal kCal of the product.
      * @return custom-imaged panel
      */
-    private JPanel createImagePanel(ImageIcon icon, String item, int kCal) {  //USED IN ItemPanel
+    private JPanel createImagePanel(JLabel imageLabel, String item, int kCal) {  //USED IN ItemPanel
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         panel.setOpaque(false);
 
-        // JLabel for the image
-        JLabel imageLabel = new JLabel(icon);
+        // JLabel for item image
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
 
