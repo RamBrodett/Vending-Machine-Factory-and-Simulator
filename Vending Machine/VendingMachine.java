@@ -13,9 +13,17 @@ import java.util.ArrayList;
  * @version 07/1/2023
  */
  public class VendingMachine{
+    /**
+     * Denomination of money the machine has.
+     */
     protected Denomination denomination;
-    protected final ArrayList<Slot> productsSold;
+    /**
+     * Slots of the product
+     */
     protected final ArrayList<Slot> productSlots;
+    /**
+     * Inserted money for transaction
+     */
     protected Denomination insertedMoney;
 
     /**
@@ -24,7 +32,6 @@ import java.util.ArrayList;
 
     public VendingMachine(){
         this.productSlots = new ArrayList<>(); //Create VENDING MACHINE PRODUCT SLOTS
-        this.productsSold = new ArrayList<>(); //Create VENDING MACHINE SOLD ITEMS
         this.denomination = new Denomination(); //Create MONEY
         this.insertedMoney = new Denomination(); // create
         vmCreation();                   //call process prompts in vending machine creation
@@ -49,11 +56,11 @@ import java.util.ArrayList;
 
             if(i<3||i>5) {
                 productSlots.add(i, new Slot(products[i], 100, 90, 15));
-                productsSold.add(i, new Slot(products[i], 100, 90, 0));
+                //productsSold.add(i, new Slot(products[i], 100, 90, 0));
             }
             else {
                 productSlots.add(i, new Slot(products[i], 45, 40, 15));
-                productsSold.add(i, new Slot(products[i], 45, 40, 0));
+                //productsSold.add(i, new Slot(products[i], 45, 40, 0));
             }
         }
     }
@@ -114,11 +121,21 @@ import java.util.ArrayList;
         System.out.println(" ");
     }
 
+    /**
+     * Sets a money intro to Inserted money holder.
+     * @param denomination denominations of money.
+     */
     public void setInsertedMoney(Denomination denomination){
         this.insertedMoney = denomination;
     }
 
 
+    /**
+     * Product dispenser
+     * @param index index is the index of the item.
+     * @param c c is case type (ignore c in Regular, it only matters in Special)
+     * @return boolean value, will set to true if dispense take place.
+     */
     public boolean dispenseProduct(int index, int c){
         if(!(isSlotEmpty(index))){
             if(productSlots.get(index).getBaseProductPrice()<= getTotalInsertedMoney()){                          // if insert money is more than or equal to price
@@ -143,17 +160,32 @@ import java.util.ArrayList;
         return false;
     }
 
+    /**
+     * Gets the total Inserted value.
+     * @return total inserted money.
+     */
     public float getTotalInsertedMoney(){
         return this.insertedMoney.getTotalMoney();
     }
 
 
+    /**
+     * Dispense helper
+     * <p>
+     *    it will emulate the dispense of the item, destroy products dispensed
+     * </p>
+     * @param index index of the product.
+     */
     protected void dispenser(int index){
         productSlots.get(index).setNumProductsSold(1);
         productSlots.get(index).getProducts().remove(0);
     }
 
-
+    /**
+     * Edits the price on an item display.
+     * @param index index of the item.
+     * @return returns the user input price.
+     */
     public double editPriceInput(int index){
         double userInput;
         int itemNum = index + 1;
@@ -172,6 +204,12 @@ import java.util.ArrayList;
                     "\" to P" + userInput + "...");
         return userInput;
     }
+
+    /**
+     * Restocking of items.
+     * @param index index of the item.
+     * @return desired qty to add to the item .
+     */
 
     public int restockInput(int index){
         int userInput;
@@ -194,6 +232,10 @@ import java.util.ArrayList;
         return userInput;
     }
 
+    /**
+     * Restocking of items special items.
+     * @param results ArrayList for passing the results of restocking.
+     */
     public void restockInput(ArrayList<Integer> results) {
         JPanel dropdownPanel = new JPanel();
         JPanel amtPanel = new JPanel();
@@ -288,24 +330,6 @@ import java.util.ArrayList;
         to.setOnePesoCoin          (from.getOnePesoCoin());
     }
 
-    /**
-     * <p>
-     * Clears the values of each denomination in the 'x' object by setting them to zero.
-     * The result is stored in the same 'x' object.</p>
-     * @param x The denomination object to be cleared.
-     */
-    private void clearDenomination(Denomination x){
-        x.setOnePesoCoin(-x.getOnePesoCoin());
-        x.setFivePesoCoin(-x.getFivePesoCoin());
-        x.setTenPesoCoin(-x.getTenPesoCoin());
-        x.setTwentyPesoCoin(-x.getTwentyPesoCoin());
-        x.setTwentyPesoBill(-x.getTwentyPesoBill());
-        x.setFiftyPesoBill(-x.getFiftyPesoBill());
-        x.setOneHundredPesoBill(-x.getOneHundredPesoBill());
-        x.setTwoHundredPesoBill(-x.getTwoHundredPesoBill());
-        x.setFiveHundredPesoBill(-x.getFiveHundredPesoBill());
-        x.setThousandPesoBill(-x.getThousandPesoBill());
-    }
 
     // boolean methods for vmstatus-------------------------------------------------------------
 
@@ -317,16 +341,6 @@ import java.util.ArrayList;
     protected boolean isSlotEmpty(int slotNumber){
         return (productSlots.get(slotNumber).getProductQuantity()==0);
     }
-
-    /**
-     * Method that checks the slot if it is stocked with products.
-     * @param slotNumber specific location you want to check on.
-     * @return boolean value, returned true relates that slot is empty, otherwise, it is not empty.
-     */
-    private boolean isSlotStocked(int slotNumber){
-        return(productSlots.get(slotNumber).getProductQuantity() > 0);
-    }
-
 
     // methods for money related calculations and processes and transaction subprocesses--------------------------------
 
@@ -481,10 +495,19 @@ import java.util.ArrayList;
 
     // display methods---------------------------------------------------------------------------------
 
+    /**
+     * for getting the denomination in the machine.
+     * @return denomination of money.
+     */
     public Denomination getDenomination() { return this.denomination;}      /////////////NEWWW
     public float getTotalMoney(){
         return this.denomination.getTotalMoney();
     }
+
+    /**
+     * Getter for inserted money.
+     * @return denomination type of money.
+     */
     public Denomination getInsertedMoney(){
         return this.insertedMoney;
     }
@@ -528,6 +551,7 @@ import java.util.ArrayList;
         }
         System.out.println("");
     }
+
 
     public boolean customProductChecker(int i) {
         return false;

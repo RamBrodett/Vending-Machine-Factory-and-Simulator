@@ -13,21 +13,25 @@ import java.util.ArrayList;
  * @version 07/1/2023
  */
 public class Slot {
+    /**
+     * number of products sold
+     */
     private int numProductsSold;
+    /**
+     * number of special products sold
+     */
     private int specProductsSold;
-    private int oldProductQuantity;
-    private Product baseProduct;
-    private ArrayList<Product> products = new ArrayList<>();
-    private boolean isEdited;
 
     /**
-     * Constructs a new Slot object with default values.
+     * base product is for assignment of what type of item this slot will hold.
      */
+    private Product baseProduct;
 
-    Slot(){
-        this.numProductsSold = 0;
-        baseProduct = new Product();
-    }
+    /**
+     * quantity of the products in this slot.
+     */
+    private ArrayList<Product> products = new ArrayList<>();
+
 
     /**
      * Constructs a new Slot object with the specified parameters.
@@ -44,6 +48,13 @@ public class Slot {
             products.add(i,baseProduct);
         }
     }
+
+    /**
+     * Constructor for new slot
+     * @param name name to be used by the item
+     * @param calories calories of the item
+     * @param qnty number of the products in slot.
+     */
     public Slot(String name, int calories,int qnty){
         this.numProductsSold = 0;
         baseProduct = new Product(name,0,calories);
@@ -52,11 +63,20 @@ public class Slot {
         }
     }
 
+    /**
+     * for editing item price
+     * @param itemNewPrice price to be used.
+     */
+
     public void editItemPrice(float itemNewPrice) {
         baseProduct.setPrice(itemNewPrice);
 
     }
 
+    /**
+     * Getter for the products
+     * @return products
+     */
     public ArrayList<Product> getProducts(){
         return products;
     }
@@ -78,29 +98,6 @@ public class Slot {
         return baseProduct.getPrice();
     }
 
-    /**
-     * Gets the old price of the base product.
-     * @return the old price of the base product.
-     */
-    public double getBaseProductOldPrice(){
-        return baseProduct.getOldPrice();
-    }
-
-    /**
-     * Gets the calories of the base product.
-     * @return the calories of the base product
-     */
-    public double getBaseProductCal(){
-        return baseProduct.getCalories();
-    }
-
-    /**
-     * Gets the old calories of the base product.
-     * @return the old calories of the base product
-     */
-    public double getBaseProductOldCal(){
-        return baseProduct.getOldCalories();
-    }
 
     /**
      * Gets the quantity of products in the slot.
@@ -131,42 +128,6 @@ public class Slot {
 
 
     /**
-     * Gets the old product quantity in the slot.
-     * @return the old product quantity in the slot
-     */
-
-    public int getOldProductQuantity() {
-        return oldProductQuantity;
-    }
-
-
-    /**
-     * Checks if the slot has been edited.
-     * @return true if the slot has been edited, false otherwise
-     */
-    public boolean isEdited() {
-        return isEdited;
-    }
-
-    /**
-     * Sets the old price of the base product.
-     * @param oldPrice the old price to set
-     */
-
-    public void setBaseProductOldPrice(double oldPrice) {
-        baseProduct.setOldPrice((int) oldPrice);
-    }
-
-    /**
-     * Sets the old calories of the base product.
-     * @param oldCalories the old calories to set
-     */
-
-    public void setBaseProductOldCalories(double oldCalories){
-        baseProduct.setOldCalories((int)oldCalories);
-    }
-
-    /**
      * Sets the number of products sold from the slot.
      * @param numProductsSold the number of products sold to set
      */
@@ -175,31 +136,15 @@ public class Slot {
         this.numProductsSold += numProductsSold;
     }
 
+
     /**
-     * Sets the number of old products sold from the slot.
-     * @param oldProductsSold the number of old products sold to set
+     * Sets the number of special item product sold.
+     * @param specProductsSold number of special products sold
      */
     public void setSpecProductsSold(int specProductsSold) {
         this.specProductsSold += specProductsSold;
     }
 
-    /**
-     * Sets the old product quantity in the slot.
-     * @param oldProductQuantity the old product quantity to set
-     */
-
-    public void setOldProductQuantity(int oldProductQuantity) {
-        this.oldProductQuantity = oldProductQuantity;
-    }
-
-    /**
-     * Sets whether the slot has been edited or not.
-     * @param isEdited true if the slot has been edited, false otherwise
-     */
-
-    public void setEdited (boolean isEdited){
-        this.isEdited = isEdited;
-    }
 
     /**
      * Sets the quantity of products in the slot.

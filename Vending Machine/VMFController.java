@@ -21,6 +21,10 @@ public class VMFController {
      */
     private final MainFrame frame;
 
+
+    /**
+     * Holder for the found index.
+     */
     private int foundIndex;
 
 
@@ -54,6 +58,9 @@ public class VMFController {
 
     }
 
+    /**
+     * Initializes Main Menu Components and controlls interaction of user to manipulate display.
+     */
     private void initializeMainMenu(){
         this.frame.mainMenu.getCreateVMButton().addActionListener(e->{
             this.frame.generatorMenu.setMoneyInputFrame(new JFrame());
@@ -83,6 +90,9 @@ public class VMFController {
         });
     }
 
+    /**
+     * Initializes Generating Menu Components and controlls interaction of user to manipulate display.
+     */
     private void initializeGenMenu(){
 
         this.frame.generatorMenu.getRegVM().addActionListener(e->{
@@ -151,6 +161,9 @@ public class VMFController {
 
     }
 
+    /**
+     * Initializes back controlls interaction of user to manipulate display.
+     */
     private void initializeBackMethod(){
         //Go back to previous screen event Listener ---------------------------
         ActionListener backToMainListener = e -> this.frame.menu.show(this.frame.cardPanel, "mainMenu");
@@ -172,6 +185,9 @@ public class VMFController {
         this.frame.vmInterface.getBack().addActionListener(backToTestMenuListener);
     }
 
+    /**
+     * Initializes Test Menu Components and controlls interaction of user to manipulate display.
+     */
     private void initializeTestMenu(){
         this.frame.testMenu.getSimulateVMButton().addActionListener(e ->{
             this.frame.mainFrame.setResizable(false);
@@ -191,6 +207,9 @@ public class VMFController {
 
     }
 
+    /**
+     * Initializes Vending Machine Interface Components and controlls interaction of user to manipulate display.
+     */
     private void initializeVMInterface(){
         this.frame.vmInterface.getInsertMoney().addActionListener(e ->{
             // if insert money pressed in selection mode go to payment mode and viceversa
@@ -232,6 +251,9 @@ public class VMFController {
         });
     }
 
+    /**
+     * Initializes Vending Machine Maintenance Interface Components and controlls interaction of user to manipulate display.
+     */
     private void initializeVMmaintenance(){
 
         this.frame.maintenanceMenu.getToggleSpecial().addActionListener(e -> {      //TOGGLE ITEM PANEL
@@ -595,6 +617,10 @@ public class VMFController {
 
     }
 
+
+    /**
+     * Structure for the listeners of buttons for vending machine simulation
+     */
     private void initializeSimulation(){
 
         ActionListener a = e -> {
@@ -873,6 +899,10 @@ public class VMFController {
         return false;
     }
 
+    /**
+     * Checks if there atleast one combination of items for custom
+     * @return boolean value to know if the process should take place.
+     */
     private boolean isthereCombination(){
         boolean base =false;
         boolean sauce = false;

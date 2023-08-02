@@ -46,6 +46,9 @@ public class VMInterface extends JPanel {
      */
     private final TextPanel textPanel = new TextPanel("Big");
 
+    /**
+     * Money display to know the total inserted money.
+     */
     private final TextPanel moneyDisplay = new TextPanel("Small");  /////////////////////NEW
 
     /**
@@ -69,14 +72,33 @@ public class VMInterface extends JPanel {
      */
     private final JButton back = new JButton();
 
-
+    /**
+     * Button for the item selection lock in Custom create yogurts.
+     */
     private final JButton selectCustom = new JButton("Select");
 
+    /**
+     * Dropdown for selection of base of yogurt for customs
+     */
     private JComboBox<String> baseDropdown = new JComboBox<>();
+    /**
+     * Dropdown for selection of sauce of yogurt for customs
+     */
     private JComboBox<String> sauceDropdown = new JComboBox<>();
+    /**
+     * Dropdown for selection of toppings of yogurt for customs
+     */
     private JComboBox<String> toppingDropdown = new JComboBox<>();
 
+    /**
+     * For Jdialog frame owning, inheriting the frame of button panel as its
+     * parent
+     */
     Window window = SwingUtilities.windowForComponent(buttonPanel);
+
+    /**
+     * JDialog holder
+     */
     private JDialog dialog;
 
 
@@ -186,14 +208,26 @@ public class VMInterface extends JPanel {
         add(toggleSpecial, gbc);
     }
 
+    /**
+     * Getter for Select button
+     * @return button for select.
+     */
     public JButton getSelectCustom() {
         return selectCustom;
     }
 
+    /**
+     * Getter for Dialog
+     * @return dialog
+     */
     public JDialog getDialog() {
         return dialog;
     }
 
+    /**
+     * Interface for the custom creation of items.
+     * @param slots Arraylist of the slots that contains products.
+     */
     public void yougArtFrame(ArrayList<Slot> slots){
 
         dialog = new JDialog((Frame) window,"Pick your own You-g-Art",true);
@@ -228,18 +262,37 @@ public class VMInterface extends JPanel {
 
     }
 
+    /**
+     * Getter for the base dropdown of yogurt.
+     * @return the base dropdown.
+     */
     public JComboBox<String> getBaseDropdown() {
         return baseDropdown;
     }
 
+    /**
+     * Getter for the sauce dropdown of yogurt.
+     * @return the sauce dropdown.
+     */
     public JComboBox<String> getSauceDropdown() {
         return sauceDropdown;
     }
 
+    /**
+     * Getter for the toppings dropdown of yogurt.
+     * @return the topping dropdown.
+     */
     public JComboBox<String> getToppingDropdown() {
         return toppingDropdown;
     }
 
+    /**
+     * Updates the availablity of items on dropdown
+     * @param base base of the yogurt dropdown
+     * @param sauce sauce of the yogurt dropdown
+     * @param topps toppings of the yogurt dropdown
+     * @param slots slots that contains the items.
+     */
     private void updateDropdown(JComboBox<String> base,JComboBox<String> sauce,JComboBox<String> topps,ArrayList<Slot> slots ){
         base.removeAllItems();
         sauce.removeAllItems();
@@ -622,7 +675,10 @@ public class VMInterface extends JPanel {
     }
 
 
-
+    /**
+     * Setups the styling of texts
+     * @param label the text label to be modified.
+     */
     private void setupCaption(JLabel label){
         label.setOpaque(false);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -909,14 +965,27 @@ public class VMInterface extends JPanel {
         }
     }
 
+    /**
+     * Gets the money display text panel.
+     * @return the text panel
+     */
+
     public TextPanel getMoneyDisplay(){
         return moneyDisplay;
     }
 
+    /**
+     * Panel for regular item display.
+     * @return regular item panel display
+     */
     public RegularItemPanel getRegItemPanel(){
         return regItemPanel;
     }
 
+    /**
+     * Panel for special item display.
+     * @return special item panel display
+     */
     public SpecialItemPanel getSpecialItemPanel(){
         return specialItemPanel;
     }
@@ -984,6 +1053,11 @@ public class VMInterface extends JPanel {
         return buttonPanel.currMode;
     }
 
+    /**
+     * Gets the buttons for slots.
+     * @param index index of the item.
+     * @return buttons for slots.
+     */
     public JButton getVMButtons(int index){
         return buttonPanel.slotButtons[index];
     }
@@ -1007,6 +1081,10 @@ public class VMInterface extends JPanel {
         updateButtonPanel(1);
     }
 
+    /**
+     * Gets the string text of current mode.
+     * @return
+     */
     public String getCurrMode() {
         return currMode;
     }
@@ -1033,16 +1111,5 @@ public class VMInterface extends JPanel {
             textArea.append(text);
         }
     }
-
-
-/*
-    public void setJpanelItemPanel(JPanel targetPanel,){
-        createImagePanel(itemIcon,itemName,)
-
-    }
-
-
- */
-
 
 }

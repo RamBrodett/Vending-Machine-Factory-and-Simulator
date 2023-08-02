@@ -72,6 +72,19 @@ public class Denomination {
         setThousandPesoBill(0);
     }
 
+    /**
+     * Creation of defined nuber of denomination of Philippine peso.
+     * @param onePHP 1 pesos qty
+     * @param fivePHP 5 pesos qty
+     * @param tenPHP 10 pesos qty
+     * @param twentyCPHP  20 pesos  coin qty
+     * @param twentyBPHP 20 pesos bill qty
+     * @param fiftyPHP 50 pesos bill qty
+     * @param oneHPHP 100 pesos bill qty
+     * @param twoHPHP 200 pesos bill qty
+     * @param fiveHPHP 500 pesos bill qty
+     * @param oneKPHP 1000 pesos bill qty
+     */
     Denomination(int onePHP, int fivePHP, int tenPHP, int twentyCPHP, int twentyBPHP,
                  int fiftyPHP, int oneHPHP, int twoHPHP, int fiveHPHP, int oneKPHP){
         setOnePesoCoin(onePHP);

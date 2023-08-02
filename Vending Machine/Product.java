@@ -14,15 +14,21 @@
 
 
 public class Product {
+    /**
+     * Name of the product.
+     */
     private final String name;
 
+    /**
+     * Price of the item.
+     */
     private double price;
 
-    private double oldPrice;
-
+    /**
+     * Calories of tthe item.
+     */
     private int calories;
 
-    private int oldCalories;
 
     /**
      * Default constructor for the Product class.
@@ -68,11 +74,7 @@ public class Product {
      */
     public double getPrice(){return this.price;}
 
-    /**
-     * Returns the old price of the product.
-     * @return the old price of the product
-     */
-    public double getOldPrice(){return this.oldPrice;}
+
 
     /**
      * Returns the calories of the product.
@@ -80,13 +82,6 @@ public class Product {
      */
     public int getCalories(){return this.calories;}
 
-    /**
-     * Returns the old calories of the product.
-     * @return the old calories of the product
-     */
-    public int getOldCalories() {
-        return oldCalories;
-    }
 
     /**
      * Sets the calories of the product.
@@ -94,13 +89,6 @@ public class Product {
      */
     public void setCalories(int calories){this.calories = calories;}
 
-    /**
-     * Sets the old calories of the product.
-     * @param oldCalories the old calories to set for the product
-     */
-    public void setOldCalories(int oldCalories) {
-        this.oldCalories = oldCalories;
-    }
 
     /**
      * Sets the price of the product.
@@ -115,8 +103,5 @@ public class Product {
      * @param oldPrice the old price to set for the product
      */
 
-    public void setOldPrice(int oldPrice){
-        this.oldPrice = oldPrice;
-    }
 
 }

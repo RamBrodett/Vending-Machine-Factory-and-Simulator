@@ -27,7 +27,9 @@ public class VMMaintenanceMenu extends JPanel{
      */
     private SpecialItemPanel specialItemPanel = new SpecialItemPanel();
 
-
+    /**
+     *  Panel for select button
+     */
     private JPanel btnSelectPanel = new JPanel();
 
     /**
@@ -55,8 +57,15 @@ public class VMMaintenanceMenu extends JPanel{
      */
     private TextPanel textPanel = new TextPanel("Big");
 
+    /**
+     * Panel for money display.
+     */
+
     private final TextPanel moneyDisplay = new TextPanel("Small"); //////////NEWWWWWWWWWWW
 
+    /**
+     * Panel for displaying transaction history.
+     */
     private TextPanel transacHistory = new TextPanel("Big");
 
     /**
@@ -591,6 +600,10 @@ public class VMMaintenanceMenu extends JPanel{
         }
     }
 
+    /**
+     * Sets the style for text.
+     * @param label Text the will be styled.
+     */
     private void setupCaption(JLabel label){
         label.setOpaque(false);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -998,6 +1011,9 @@ public class VMMaintenanceMenu extends JPanel{
         }
     }
 
+    /**
+     * Resetting button icons
+     */
     public void resetButtonPanelBtns(){
         restockBtn.setIcon(scaleIMG("./VMResources/restockItem.png",100,100));
         replenishBtn.setIcon(scaleIMG("./VMResources/replenishMoney.png",100,100));
@@ -1051,20 +1067,34 @@ public class VMMaintenanceMenu extends JPanel{
         return buttonPanel.setter;
     }
 
+    /**
+     * Gets the custom button panel.
+     * @return button panel
+     */
     public ButtonPanel getButtonPanel(){
         return this.buttonPanel;
     }
 
+    /**
+     * Gets the text panel for money display.
+     * @return text panel for money display.
+     */
     public TextPanel getMoneyDisplay(){                 ////NNEWWWWWWWWWW
         return moneyDisplay;
     }
 
-
-
+    /**
+     * Gets the regular Item Panel.
+     * @return regular Item Panel.
+     */
     public RegularItemPanel getRegItemPanel(){
         return regItemPanel;
     }
 
+    /**
+     * gets the special item panel.
+     * @return special item panel.
+     */
     public SpecialItemPanel getSpecialItemPanel(){
         return specialItemPanel;
     }
@@ -1109,6 +1139,11 @@ public class VMMaintenanceMenu extends JPanel{
         return restockBtn;
     }
 
+    /**
+     * Gets the restock button.
+     * @param index index of the button slot.
+     * @return the restock button
+     */
     public JButton getRestockVMButtons(int index){
         return buttonPanel.restockSlotButtons[index];
     }
@@ -1137,6 +1172,11 @@ public class VMMaintenanceMenu extends JPanel{
         return editPriceBtn;
     }
 
+    /**
+     * Gets the edit price button
+     * @param index index of the price slot button
+     * @return return the indexed button for repricing.
+     */
     public JButton getEditPriceVMButtons(int index){
         return buttonPanel.editPriceSlotButtons[index];
     }
@@ -1149,10 +1189,18 @@ public class VMMaintenanceMenu extends JPanel{
         return buttonPanel.currMode;
     }
 
+    /**
+     * get the string type of current mode item panel.
+     * @return string type of current mode item panel.
+     */
     public String getCurrMode() {
         return this.currMode;
     }
 
+    /**
+     * get the display for transaction history.
+     * @return display for transatiion history.
+     */
     public JTextArea getTransacHistoryPanel(){
         return transacHistory.vmdisplay;
     }

@@ -2,17 +2,32 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 /**
- * Special class to be implemented later on.
+ * Special type of vending machine.
  */
 public class SpecialVM extends VendingMachine {
+    /**
+     * Counter of sold specials
+     */
     int specialsSold = 0;
 
+    /**
+     *  sauces reference for the yogurt.
+     */
     private String[] sauce = {"Chocolate Sauce", "Strawberry Sauce", "Caramel Sauce"};
+    /**
+     * Extra Toppings reference not included in the original vending machine.
+     */
     private String[] toppings = {"Rainbow Sprinkle"};
 
+    /**
+     * Container for the special prices
+     */
     private float[] specialPrices = {150,150,150,150,150,150,150,150,150};
 
 
+    /**
+     * Constructor for the instane of vending machine adding the other special ingredients
+     */
     public SpecialVM(){
         super();
         //0-8 is occupied by individual items
@@ -28,6 +43,12 @@ public class SpecialVM extends VendingMachine {
 
     //methods specific to this file to be implemented later...
 
+    /**
+     * Product dispenser for special vending machine.
+     * @param index index is the index of the item.
+     * @param c c is case type (ignore c in Regular, it only matters in Special)
+     * @return
+     */
     @Override
     public boolean dispenseProduct(int index, int c){
         switch (c){
@@ -128,6 +149,10 @@ public class SpecialVM extends VendingMachine {
         return false;
     }
 
+    /**
+     * Remover of the ingredients of the dispensed items.
+     * @param index index of the item to be removed
+     */
     private void removeSpecialItem(int index){
         switch (index) {
 
@@ -178,6 +203,12 @@ public class SpecialVM extends VendingMachine {
      "9 Chocolate Sauce", "10 Strawberry Sauce", "11 Caramel Sauce", "12 Rainbow Sprinkle"
      */
 
+
+    /**
+     * Checker for the ingredients needed for custom products.
+     * @param index index of the item being checked.
+     * @return boolean if ingredients are available.
+     */
     public boolean customProductChecker(int index){
         if((index == 0) && ((productSlots.get(1).getProductQuantity() > 0) &&
                 (productSlots.get(9).getProductQuantity()>0)&&
@@ -227,6 +258,11 @@ public class SpecialVM extends VendingMachine {
         return false;
     }
 
+    /**
+     * Transaction process for the special items.
+     * @param price price of the item being dispensed.
+     * @param name name of the custom product
+     */
     private void transaction(float price,String name){
         if(price <= getTotalInsertedMoney()){
             float change = (float) (getTotalInsertedMoney()-price);
@@ -319,6 +355,12 @@ public class SpecialVM extends VendingMachine {
 
     }
 
+    /**
+     * Transacation process for the custom product.
+     * @param base selected base of the yogurt
+     * @param top selected toppings of the yogurt
+     * @param sauce selected sauce of the yogurt
+     */
     public void youGartTransaction(Slot base, Slot top, Slot sauce){
         if(specialPrices[8] <= getTotalInsertedMoney()){
             float change = (float) (getTotalInsertedMoney()-specialPrices[8]);
@@ -344,25 +386,13 @@ public class SpecialVM extends VendingMachine {
         }
     }
 
+    /**
+     * Setter of new price for special product.
+     * @param index index of the old price to be changed
+     * @param newPrice price to used
+     */
     public void setNewSpecialPrice(int index, float newPrice){
         specialPrices[index] = newPrice;
-    }
-
-
-    private void updateDropdown(JComboBox<String> base, JComboBox<String> sauce, JComboBox<String> topps, ArrayList<Slot> slots ){
-        base.removeAllItems();
-        sauce.removeAllItems();
-        topps.removeAllItems();
-
-        for (int i=0; i<13;i++){
-            if(!(slots.get(i).getProducts().isEmpty()) && i<3|| (i>5&&i<9)){
-                base.addItem(slots.get(i).getBaseProductName());
-            }
-            else if(!(slots.get(i).getProducts().isEmpty()) && ((i>2 && i<6)||i==12)){
-                topps.addItem(slots.get(i).getBaseProductName());
-            }
-            else sauce.addItem(slots.get(i).getBaseProductName());
-        }
     }
 
 }
