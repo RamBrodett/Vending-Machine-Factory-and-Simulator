@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Special class to be implemented later on.
  */
@@ -184,7 +182,8 @@ public class SpecialVM extends VendingMachine {
                     "5 Mixed Fruit Bits", "6 Raspberry", "7 Starberry","8 Mango"
      "9 Chocolate Sauce", "10 Strawberry Sauce", "11 Caramel Sauce", "12 Rainbow Sprinkle"
      */
-    private boolean customProductChecker(int index){
+    @Override
+    public boolean customProductChecker(int index){
         if((index == 0) && ((productSlots.get(1).getProductQuantity() > 0) &&
                 (productSlots.get(9).getProductQuantity()>0)&&
                 (productSlots.get(3).getProductQuantity()>0))){
