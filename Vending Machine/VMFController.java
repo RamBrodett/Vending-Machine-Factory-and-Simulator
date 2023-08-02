@@ -316,12 +316,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                      specialVM.setNewSpecialPrice(0, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(0,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(0,newPrice);
                 }
                 else {
                     this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(0, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(0,newPrice);
                     currMachine.productSlots.get(0).editItemPrice((float) newPrice);
                 }
-
 
             }
 
@@ -331,9 +332,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                     specialVM.setNewSpecialPrice(1, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(1,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(1,newPrice);
                 }
-                else
-                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(1,newPrice);
+                else {
+                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(1, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(1,newPrice);
+                    currMachine.productSlots.get(1).editItemPrice((float) newPrice);
+                }
             }
 
             else if(src == this.frame.maintenanceMenu.getEditPriceVMButtons(2)){       //3
@@ -342,9 +347,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                     specialVM.setNewSpecialPrice(2, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(2,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(2,newPrice);
                 }
-                else
-                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(2,newPrice);
+                else {
+                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(2, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(2,newPrice);
+                    currMachine.productSlots.get(2).editItemPrice((float) newPrice);
+                }
             }
 
             else if (src == this.frame.maintenanceMenu.getEditPriceVMButtons(3)){       //4
@@ -353,9 +362,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                     specialVM.setNewSpecialPrice(3, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(3,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(3,newPrice);
                 }
-                else
-                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(3,newPrice);
+                else {
+                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(3, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(3,newPrice);
+                    currMachine.productSlots.get(3).editItemPrice((float) newPrice);
+                }
             }
 
             else if (src == this.frame.maintenanceMenu.getEditPriceVMButtons(4)){       //5
@@ -364,9 +377,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                     specialVM.setNewSpecialPrice(4, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(4,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(4,newPrice);
                 }
-                else
-                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(4,newPrice);
+                else {
+                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(4, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(4,newPrice);
+                    currMachine.productSlots.get(4).editItemPrice((float) newPrice);
+                }
             }
 
             else if (src == this.frame.maintenanceMenu.getEditPriceVMButtons(5)){       //6
@@ -375,9 +392,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                     specialVM.setNewSpecialPrice(5, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(5,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(5,newPrice);
                 }
-                else
-                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(5,newPrice);
+                else {
+                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(5, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(5,newPrice);
+                    currMachine.productSlots.get(5).editItemPrice((float) newPrice);
+                }
             }
 
             else if (src == this.frame.maintenanceMenu.getEditPriceVMButtons(6)){       //7
@@ -386,9 +407,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                     specialVM.setNewSpecialPrice(6, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(6,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(6,newPrice);
                 }
-                else
-                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(6,newPrice);
+                else {
+                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(6, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(6,newPrice);
+                    currMachine.productSlots.get(6).editItemPrice((float) newPrice);
+                }
             }
 
             else if (src == this.frame.maintenanceMenu.getEditPriceVMButtons(7)){       //8
@@ -397,9 +422,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                     specialVM.setNewSpecialPrice(7, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(7,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(7,newPrice);
                 }
-                else
-                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(7,newPrice);
+                else {
+                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(7, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(7,newPrice);
+                    currMachine.productSlots.get(7).editItemPrice((float) newPrice);
+                }
             }
 
             else if (src == this.frame.maintenanceMenu.getEditPriceVMButtons(8)){      //9
@@ -408,9 +437,13 @@ public class VMFController {
                     SpecialVM specialVM = (SpecialVM) currMachine;
                     specialVM.setNewSpecialPrice(8, (float) newPrice);
                     this.frame.maintenanceMenu.getSpecialItemPanel().updateItemPrice(8,newPrice);
+                    this.frame.vmInterface.getSpecialItemPanel().updateItemPrice(8,newPrice);
                 }
-                else
-                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(8,newPrice);
+                else {
+                    this.frame.maintenanceMenu.getRegItemPanel().updateItemPrice(8, newPrice);
+                    this.frame.vmInterface.getRegItemPanel().updateItemPrice(8,newPrice);
+                    currMachine.productSlots.get(8).editItemPrice((float) newPrice);
+                }
             }
 
         };
@@ -720,52 +753,51 @@ public class VMFController {
                     this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(8,
                             currMachine.productSlots.get(8).getProductQuantity());
                 }
+
                 this.frame.maintenanceMenu.getMoneyDisplay().
                         updateMoneyDisplay(currMachine.getTotalMoney());
 
-                SpecialVM specialVM = (SpecialVM) currMachine;
 
                 this.frame.vmInterface.getSpecialItemPanel().updateImageVis(0,
-                        specialVM.customProductChecker(0));
+                        currMachine.customProductChecker(0));
                 this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(0,
-                        specialVM.customProductChecker(0));
+                        currMachine.customProductChecker(0));
 
                 this.frame.vmInterface.getSpecialItemPanel().updateImageVis(1,
-                        specialVM.customProductChecker(1));
+                        currMachine.customProductChecker(1));
                 this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(1,
-                        specialVM.customProductChecker(1));
+                        currMachine.customProductChecker(1));
 
                 this.frame.vmInterface.getSpecialItemPanel().updateImageVis(2,
-                        specialVM.customProductChecker(2));
+                        currMachine.customProductChecker(2));
                 this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(2,
-                        specialVM.customProductChecker(2));
+                        currMachine.customProductChecker(2));
 
                 this.frame.vmInterface.getSpecialItemPanel().updateImageVis(3,
-                        specialVM.customProductChecker(3));
+                        currMachine.customProductChecker(3));
                 this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(3,
-                        specialVM.customProductChecker(3));
+                        currMachine.customProductChecker(3));
 
                 this.frame.vmInterface.getSpecialItemPanel().updateImageVis(4,
-                        specialVM.customProductChecker(4));
+                        currMachine.customProductChecker(4));
                 this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(4,
-                        specialVM.customProductChecker(4));
+                        currMachine.customProductChecker(4));
 
                 this.frame.vmInterface.getSpecialItemPanel().updateImageVis(5,
-                        specialVM.customProductChecker(5));
+                        currMachine.customProductChecker(5));
                 this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(5,
-                        specialVM.customProductChecker(5));
+                        currMachine.customProductChecker(5));
 
                 this.frame.vmInterface.getSpecialItemPanel().updateImageVis(6,
-                        specialVM.customProductChecker(6));
+                        currMachine.customProductChecker(6));
 
                 this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(6,
-                        specialVM.customProductChecker(6));
+                        currMachine.customProductChecker(6));
 
                 this.frame.vmInterface.getSpecialItemPanel().updateImageVis(7,
-                        specialVM.customProductChecker(7));
+                        currMachine.customProductChecker(7));
                 this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(7,
-                        specialVM.customProductChecker(7));
-
+                        currMachine.customProductChecker(7));
 
             }
         };

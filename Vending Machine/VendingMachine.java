@@ -521,9 +521,7 @@ import java.util.ArrayList;
         System.out.println("");
     }
 
-
-
-
-
-
+    public boolean customProductChecker(int i) {
+        return false;
+    }
 }
