@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
 /**
  * Special class to be implemented later on.
  */
@@ -307,7 +310,8 @@ public class SpecialVM extends VendingMachine {
 
             }else System.out.println("Unable to give change. Unsuccessful transaction.\n");
 
-        }System.out.println("Insufficient balance. Unsuccessful transaction.\n");
+        }
+        else System.out.println("Insufficient balance. Unsuccessful transaction.\n");
 
     }
 
@@ -338,6 +342,23 @@ public class SpecialVM extends VendingMachine {
 
     public void setNewSpecialPrice(int index, float newPrice){
         specialPrices[index] = newPrice;
+    }
+
+
+    private void updateDropdown(JComboBox<String> base, JComboBox<String> sauce, JComboBox<String> topps, ArrayList<Slot> slots ){
+        base.removeAllItems();
+        sauce.removeAllItems();
+        topps.removeAllItems();
+
+        for (int i=0; i<13;i++){
+            if(!(slots.get(i).getProducts().isEmpty()) && i<3|| (i>5&&i<9)){
+                base.addItem(slots.get(i).getBaseProductName());
+            }
+            else if(!(slots.get(i).getProducts().isEmpty()) && ((i>2 && i<6)||i==12)){
+                topps.addItem(slots.get(i).getBaseProductName());
+            }
+            else sauce.addItem(slots.get(i).getBaseProductName());
+        }
     }
 
 }

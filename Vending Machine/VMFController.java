@@ -599,8 +599,6 @@ public class VMFController {
             if(currMachine.getTotalInsertedMoney()>0){
                 if(src ==  this.frame.vmInterface.getVMButtons(0)){             //trichoco
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
-
-
                         currMachine.dispenseProduct(0,2);
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
@@ -742,7 +740,9 @@ public class VMFController {
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(8)) {
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
-                        this.frame.vmInterface.yougArtFrame(currMachine.productSlots);
+                        if(isthereCombination()) {
+                            this.frame.vmInterface.yougArtFrame(currMachine.productSlots);
+                        }
 
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
@@ -868,6 +868,31 @@ public class VMFController {
         }
         return false;
     }
+
+    private boolean isthereCombination(){
+        boolean base =false;
+        boolean sauce = false;
+        boolean toppings = false;
+
+        for (int i=0; i<13;i++){
+            //check bases
+            if(!(currMachine.productSlots.get(i).getProducts().isEmpty()) && i<3|| (i>5&&i<9)){
+                base = true;
+            }
+            //check toppings
+            else if(!(currMachine.productSlots.get(i).getProducts().isEmpty()) && ((i>2 && i<6)||i==12)){
+                sauce = true;
+            }
+            //check sauces
+            else if (!(currMachine.productSlots.get(i).getProducts().isEmpty())){
+                toppings = true;
+            }
+        }
+        if(base && sauce && toppings) return true;
+
+        return false;
+    }
+
 
 
 }
