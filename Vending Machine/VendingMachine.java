@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
  public class VendingMachine{
     protected Denomination denomination;
-
+    protected final ArrayList<Slot> productsSold;
     protected final ArrayList<Slot> productSlots;
     protected Denomination insertedMoney;
 
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
     public VendingMachine(){
         this.productSlots = new ArrayList<>(); //Create VENDING MACHINE PRODUCT SLOTS
+        this.productsSold = new ArrayList<>(); //Create VENDING MACHINE SOLD ITEMS
         this.denomination = new Denomination(); //Create MONEY
         this.insertedMoney = new Denomination(); // create
         vmCreation();                   //call process prompts in vending machine creation
@@ -46,8 +47,14 @@ import java.util.ArrayList;
 
         for (int i = 0; i < products.length; i++){
 
-            if(i<3||i>5)productSlots.add(i,new Slot(products[i],100,90,15));
-            else productSlots.add(i,new Slot(products[i],45,40,15));
+            if(i<3||i>5) {
+                productSlots.add(i, new Slot(products[i], 100, 90, 15));
+                productsSold.add(i, new Slot(products[i], 100, 90, 0));
+            }
+            else {
+                productSlots.add(i, new Slot(products[i], 45, 40, 15));
+                productsSold.add(i, new Slot(products[i], 45, 40, 0));
+            }
         }
     }
 
@@ -140,7 +147,10 @@ import java.util.ArrayList;
         return this.insertedMoney.getTotalMoney();
     }
 
+
     protected void dispenser(int index){
+        productsSold.get(index).setProductQuantity(1);
+        productsSold.get(index).setNumProductsSold(1);
         productSlots.get(index).getProducts().remove(0);
     }
 
