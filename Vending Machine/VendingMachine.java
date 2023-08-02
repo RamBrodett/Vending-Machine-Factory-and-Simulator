@@ -42,7 +42,7 @@ public class VendingMachine{
     //!!!! USED!!!!!
     private void vmCreation(){
         String[] products = {"Vanilla", "Chocolate", "Matcha", "Choco Chips", "Cereals",
-                "Mixed Fruit Bits", "Raspberry", "Starberry","Mango"};
+                "Mixed Fruit Bits", "Raspberry", "Strawberry","Mango"};
 
         for (int i = 0; i < products.length; i++){
 
@@ -336,7 +336,7 @@ public class VendingMachine{
      *  Product Displays
      * @param typeOfDisplay is the kind it should be used for, either Selection, Menu, Maintenance.
      */
-
+/*
     public void displayProducts(int typeOfDisplay){
         int i;
         int totalSales = 0;
@@ -441,6 +441,8 @@ public class VendingMachine{
             System.out.print("═");
         System.out.println(" ");
     }
+
+ */
 
     /**
      * <p>

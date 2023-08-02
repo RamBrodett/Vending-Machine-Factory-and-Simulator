@@ -6,17 +6,18 @@ import java.util.ArrayList;
 public class SpecialVM extends VendingMachine {
     int specialsSold = 0;
 
+    String[] sauce = {"Chocolate Sauce", "Strawberry Sauce", "Caramel Sauce"};
+    String[] toppings = {"Rainbow Sprinkle"};
+
 
     public SpecialVM(){
         super();
-        String[] sauce = {"Chocolate Sauce", "Strawberry Sauce", "Caramel Sauce"};
-        String[] toppings = {"Rainbow Sprinkle"};
-        //0-8 is occupied by yogurt
+        //0-8 is occupied by individual items
         for(int i = 9; i<13; i++){
             if(i < 12){
-                productSlots.add(new Slot(sauce[i-9],15,15));
+                productSlots.add(new Slot(sauce[i-9],15,15)); // add sauces on 9-11th index
             }
-            else productSlots.add(new Slot(toppings[i-12],10,15));
+            else productSlots.add(new Slot(toppings[i-12],10,15)); // add rainbow sprinkle on 12th index
         }
     }
 
@@ -238,6 +239,73 @@ public class SpecialVM extends VendingMachine {
             addToDenomination(denomination,insertedMoney);
             Denomination changeDenom = findDenomination(change,denomination);
             if(!(changeDenom.getTotalMoney()-change!=0)){
+                switch (name){
+                    case "Triple Chocolate" ->{
+                        System.out.println("Preparing Special Pre-set Yogurt");
+                        System.out.println("Dispensing cup ...");
+                        System.out.println("Adding " + productSlots.get(1).getBaseProductName()+" yogurt ...");
+                        System.out.println("Dispensing " + productSlots.get(9).getBaseProductName()+" ...");
+                        System.out.println("Dispensing " + productSlots.get(3).getBaseProductName()+" ...");
+                        System.out.println("Yogurt done");
+                    }
+                    case "VitaMax" ->{
+                        System.out.println("Preparing Special Pre-set Yogurt");
+                        System.out.println("Dispensing cup ...");
+                        System.out.println("Adding " + productSlots.get(0).getBaseProductName()+" yogurt ...");
+                        System.out.println("Dispensing " + productSlots.get(5).getBaseProductName()+" ...");
+                        System.out.println("Dispensing " + productSlots.get(4).getBaseProductName()+" ...");
+                        System.out.println("Yogurt done");
+                    }
+                    case "Strawberry Duo" ->{
+                        System.out.println("Preparing Special Pre-set Yogurt");
+                        System.out.println("Dispensing cup ...");
+                        System.out.println("Adding 1/2 " + productSlots.get(0).getBaseProductName()+" yogurt ...");
+                        System.out.println("Adding 1/2 " + productSlots.get(7).getBaseProductName()+" yogurt ...");
+                        System.out.println("Dispensing " + productSlots.get(10).getBaseProductName()+" ...");
+                        System.out.println("Yogurt done");
+                    }
+                    case "ChocoDuos" ->{
+                        System.out.println("Preparing Special Pre-set Yogurt");
+                        System.out.println("Dispensing cup ...");
+                        System.out.println("Adding 1/2 " + productSlots.get(0).getBaseProductName()+" yogurt ...");
+                        System.out.println("Adding 1/2" + productSlots.get(1).getBaseProductName()+" yogurt ...");
+                        System.out.println("Dispensing " + productSlots.get(9).getBaseProductName()+" ...");
+                        System.out.println("Yogurt done");
+
+                    }
+                    case "ChocoMatcha Madness" ->{
+                        System.out.println("Preparing Special Pre-set Yogurt");
+                        System.out.println("Dispensing cup ...");
+                        System.out.println("Adding " + productSlots.get(2).getBaseProductName()+" yogurt ...");
+                        System.out.println("Dispensing " + productSlots.get(9).getBaseProductName()+" ...");
+                        System.out.println("Dispensing " + productSlots.get(3).getBaseProductName()+" ...");
+                        System.out.println("Yogurt done");
+
+                    }
+                    case "Mango Chocolate Glazed" ->{
+                        System.out.println("Preparing Special Pre-set Yogurt");
+                        System.out.println("Dispensing cup ...");
+                        System.out.println("Adding " + productSlots.get(8).getBaseProductName()+" yogurt ...");
+                        System.out.println("Dispensing " + productSlots.get(9).getBaseProductName()+" ...");
+                        System.out.println("Yogurt done");
+
+                    }
+                    case "Berrylicious Crunchies" ->{
+                        System.out.println("Preparing Special Pre-set Yogurt");
+                        System.out.println("Dispensing cup ...");
+                        System.out.println("Adding " + productSlots.get(6).getBaseProductName()+" yogurt ...");
+                        System.out.println("Dispensing " + productSlots.get(4).getBaseProductName()+" ...");
+                        System.out.println("Yogurt done");
+
+                    }
+                    case "Rainbow Yogurt" ->{
+                        System.out.println("Preparing Special Pre-set Yogurt");
+                        System.out.println("Dispensing cup ...");
+                        System.out.println("Adding " + productSlots.get(0).getBaseProductName()+" yogurt ...");
+                        System.out.println("Dispensing " + productSlots.get(12).getBaseProductName()+" ...");
+                        System.out.println("Yogurt done");
+                    }
+                }
                 System.out.println("Transaction successful.");
                 System.out.println("Dispensing " + name);
                 differenceDenomination(denomination,changeDenom);
