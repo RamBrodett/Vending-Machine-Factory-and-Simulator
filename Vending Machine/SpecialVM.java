@@ -67,6 +67,9 @@ public class SpecialVM extends VendingMachine {
                             productSlots.get(index).setNumProductsSold(1);
                             System.out.printf("Your change is %.2f\n",change);
                             displayDenominations(changeDenom);
+                            if(index<=8){
+                                productSlots.get(index).setNumProductsSold(-1);
+                            }
                             return true;
                         }
                         else System.out.println("Unable to give change. Unsuccessful transaction.\n");
