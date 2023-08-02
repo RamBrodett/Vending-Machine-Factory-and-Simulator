@@ -293,6 +293,44 @@ public class VMFController {
             this.frame.maintenanceMenu.resetButtonPanelBtns();
             this.frame.maintenanceMenu.updateButtonPanel(4);
         });
+
+        ActionListener a = e -> {
+            Object src = e.getSource();
+            if (src == this.frame.maintenanceMenu.getRestockVMButtons(0)) {                //vanilla
+                currMachine.productSlots.get(0).setProductQuantity(currMachine.restockInput(0));
+
+            } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(1)) {         //choco
+                currMachine.productSlots.get(1).setProductQuantity(currMachine.restockInput(1));
+
+            } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(2)) {         //matcha
+                currMachine.productSlots.get(2).setProductQuantity(currMachine.restockInput(2));
+
+            } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(3)) {       //choco chips
+                currMachine.productSlots.get(3).setProductQuantity(currMachine.restockInput(3));
+
+            } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(4)) {       //cereals
+                currMachine.productSlots.get(4).setProductQuantity(currMachine.restockInput(4));
+
+            } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(5)) {       //mixed fruit bits
+                currMachine.productSlots.get(5).setProductQuantity(currMachine.restockInput(5));
+
+            } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(6)) {       //raspberry
+                currMachine.productSlots.get(6).setProductQuantity(currMachine.restockInput(6));
+
+            } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(7)) {       //strawberry
+                currMachine.productSlots.get(7).setProductQuantity(currMachine.restockInput(7));
+
+            } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(8)) {       //mango
+                currMachine.productSlots.get(8).setProductQuantity(currMachine.restockInput(8));
+
+            }
+            this.frame.maintenanceMenu.getMoneyDisplay().
+                    updateMoneyDisplay(currMachine.getTotalMoney());
+        };
+        for (int i = 0; i < 9; i++) {
+            this.frame.maintenanceMenu.getRestockVMButtons(i).addActionListener(a);
+        }
+
     }
 
     private void initializeSimulation(){
@@ -399,6 +437,7 @@ public class VMFController {
             this.frame.vmInterface.getVMButtons(i).addActionListener(a);
         }
     }
+
 
     /**
      * updates the curr machine type.
