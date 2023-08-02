@@ -872,6 +872,8 @@ public class VMMaintenanceMenu extends JPanel{
             add(buttonPanel1,BorderLayout.CENTER);
         }
 
+
+
         public JButton getCollectBtn(){
             return collectBtn;
         }
@@ -889,9 +891,9 @@ public class VMMaintenanceMenu extends JPanel{
     public void updateButtonPanel(int choice){
 
         // 1    restock
-        // 2    replenish money
-        // 3    collect money
-        // 4    edit item price
+        // 2    replenish
+        // 3    collect
+        // 4    edit price
 
         if(choice == 1){
             if(buttonPanel.currMode.equals("restock")){
@@ -1086,6 +1088,10 @@ public class VMMaintenanceMenu extends JPanel{
      */
     public String getModeCurrMode() {
         return buttonPanel.currMode;
+    }
+
+    public String getCurrMode() {
+        return this.currMode;
     }
 
     /**

@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -144,6 +145,24 @@ public class VendingMachine{
         productSlots.get(index).getProducts().remove(0);
     }
 
+    public int restockInput(int index){
+        int userInput;
+        do {
+            userInput = Integer.parseInt(JOptionPane.showInputDialog(null, "Current Quantity: " +
+                            productSlots.get(index).getProducts().size() + "\nAmount to Restock: ",
+                    "Restocking \"" + productSlots.get(index).getBaseProductName() + "\""
+                    , JOptionPane.QUESTION_MESSAGE));
+
+            if (userInput + productSlots.get(index).getProductQuantity() > 15){
+                JOptionPane.showMessageDialog(null, "Items can only have a maximum stock of 15!");
+            } else if (userInput< 0) {
+                JOptionPane.showMessageDialog(null, "Please input a positive integer.");
+            }
+        } while (userInput + productSlots.get(index).getProductQuantity() > 15 ||
+                userInput < 0);
+
+        return userInput;
+    }
 
     /**
      * <p>
