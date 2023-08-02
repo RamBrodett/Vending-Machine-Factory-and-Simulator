@@ -53,7 +53,7 @@ public class SpecialVM extends VendingMachine {
 
             }
             case 2 ->{
-                if(index==8){
+                if(index==8){   ///////CUSTOM ITEM
 
                 }else
                     switch (index){
@@ -61,61 +61,69 @@ public class SpecialVM extends VendingMachine {
                             if(customProductChecher(0)){
                                 String special = "Triple Chocolate";
                                 transaction(150,special);
+                                removeSpecialItem(0);
                                 return true;
-                            }
+                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
                         }
                         case 1 -> {
                             if(customProductChecher(1)){
                                 String special = "VitaMax";
                                 transaction(150,special);
+                                removeSpecialItem(1);
                                 return true;
-                            }
+                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
 
                         }
                         case 2 -> {
                             if(customProductChecher(2)){
                                 String special = "Strawberry Duo";
                                 transaction(150,special);
+                                removeSpecialItem(2);
                                 return true;
-                            }
+                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
                         }
                         case 3 -> {
                             if(customProductChecher(3)){
                                 String special = "ChocoDuos";
                                 transaction(150,special);
+                                removeSpecialItem(3);
                                 return true;
-                            }
+                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
                         }
                         case 4 -> {
                             if(customProductChecher(4)){
                                 String special = "ChocoMatcha Madness";
                                 transaction(150,special);
+                                removeSpecialItem(4);
                                 return true;
-                            }
+                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
 
                         }
                         case 5 -> {
                             if(customProductChecher(5)){
                                 String special = "Mango Chocolate Glazed";
                                 transaction(150,special);
+                                removeSpecialItem(5);
                                 return true;
-                            }
+                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
 
                         }
                         case 6 -> {
                             if(customProductChecher(6)){
                                 String special = "Berrylicious Crunchies";
                                 transaction(150,special);
+                                removeSpecialItem(6);
                                 return true;
-                            }
+                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
 
                         }
                         case 7 -> {
                             if(customProductChecher(7)){
                                 String special = "Rainbow Yogurt";
                                 transaction(150,special);
+                                removeSpecialItem(7);
                                 return true;
-                            }
+                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
                         }
                     }
 
@@ -125,6 +133,51 @@ public class SpecialVM extends VendingMachine {
 
         return false;
     }
+
+    private void removeSpecialItem(int index){
+        switch (index) {
+
+            case 0 -> {
+                dispenser(1);
+                dispenser(9);
+                dispenser(3);
+            }
+            case 1 -> {
+                dispenser(0);
+                dispenser(5);
+                dispenser(4);
+            }
+            case 2 -> {
+                dispenser(0);
+                dispenser(7);
+                dispenser(10);
+
+            }
+            case 3 -> {
+                dispenser(0);
+                dispenser(1);
+                dispenser(9);
+            }
+            case 4 -> {
+                dispenser(2);
+                dispenser(9);
+                dispenser(3);
+            }
+            case 5 -> {
+                dispenser(8);
+                dispenser(9);
+            }
+            case 6 -> {
+                dispenser(6);
+                dispenser(4);
+            }
+            case 7 -> {
+                dispenser(0);
+                dispenser(12);
+            }
+        }
+    }
+
 /*
 " 0 Vanilla", " 1 Chocolate", " 2 Matcha", " 3 Choco Chips", " 4 Cereals",
                 "5 Mixed Fruit Bits", "6 Raspberry", "7 Starberry","8 Mango"
@@ -195,7 +248,7 @@ public class SpecialVM extends VendingMachine {
                 return true;
             }else System.out.println("Insufficient balance. Unsuccessful transaction.\n");
 
-        } System.out.println("Sorry! Ingredients needed are out of stock.\n");
+        }
 
         return false;
    }

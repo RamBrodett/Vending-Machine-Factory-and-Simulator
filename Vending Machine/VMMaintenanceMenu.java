@@ -384,7 +384,8 @@ public class VMMaintenanceMenu extends JPanel{
             }
         }
 
-        public void updateImageVis(int index, boolean bool){
+        public void updateImageVis (int index, int productQty){
+            boolean bool = productQty > 0;
             switch (index){
                 case 0 -> vnllLabelPrice.setVisible(bool);
                 case 1 -> chcoLabelPrice.setVisible(bool);
@@ -537,15 +538,15 @@ public class VMMaintenanceMenu extends JPanel{
 
         public void updateImageVis (int index, boolean bool){
             switch (index){
-                case 0 -> triChcoLabelPrice.setVisible(bool);
-                case 1 -> vitamaxLabelPrice.setVisible(bool);
-                case 2 -> strwDuoLabelPrice.setVisible(bool);
-                case 3 -> chcoDuoLabelPrice.setVisible(bool);
-                case 4 -> chcoMchLabelPrice.setVisible(bool);
-                case 5 -> mngoChcLabelPrice.setVisible(bool);
-                case 6 -> brryCrnLabelPrice.setVisible(bool);
-                case 7 -> rnbwYgrLabelPrice.setVisible(bool);
-                case 8 -> youGartLabelPrice.setVisible(bool);
+                case 0 -> triChcoLabel.setVisible(bool);
+                case 1 -> vitamaxLabel.setVisible(bool);
+                case 2 -> strwDuoLabel.setVisible(bool);
+                case 3 -> chcoDuoLabel.setVisible(bool);
+                case 4 -> chcoMchLabel.setVisible(bool);
+                case 5 -> mngoChcLabel.setVisible(bool);
+                case 6 -> brryCrnLabel.setVisible(bool);
+                case 7 -> rnbwYgrLabel.setVisible(bool);
+                case 8 -> youGartLabel.setVisible(bool);
             }
         }
     }

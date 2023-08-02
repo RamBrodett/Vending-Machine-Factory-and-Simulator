@@ -113,9 +113,9 @@ public class VendingMachine{
 
     public boolean dispenseProduct(int index, int c){
         if(!(isSlotEmpty(index))){
-            if(productSlots.get(index).getBaseProductPrice()<= getTotalInsertedMoney()){
+            if(productSlots.get(index).getBaseProductPrice()<= getTotalInsertedMoney()){                          // if insert money is more than or equal to price
                 float change = (float) (getTotalInsertedMoney() - productSlots.get(index).getBaseProductPrice()); // needed change
-                addToDenomination(denomination,insertedMoney);
+                addToDenomination(denomination,insertedMoney);                                                    // add inserted to vm money
                 Denomination changeDenom = findDenomination(change,denomination);
                 if(!(changeDenom.getTotalMoney() - change != 0)){
                     System.out.println("Transaction successful.");
