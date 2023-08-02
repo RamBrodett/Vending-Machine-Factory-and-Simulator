@@ -47,7 +47,7 @@ public class VendingMachine{
 
         for (int i = 0; i < products.length; i++){
 
-            if(i<3||i>5)productSlots.add(i,new Slot(products[i],100,90,0));
+            if(i<3||i>5)productSlots.add(i,new Slot(products[i],100,90,15));
             else productSlots.add(i,new Slot(products[i],45,40,15));
         }
     }
