@@ -78,27 +78,37 @@ import java.util.ArrayList;
      */
     public void displayTransactions(){
         double totalProfit = 0;
+        int specSold = 0;
 
-        System.out.printf("\n%-15s%s  %s %s\n", "Item", "Price", "Sold", "Profit");
-        for (int i = 0; i < 37; i++){
+        System.out.printf("\n%-20s%s    %s      %s\n", "Item", "Price", "Sold", "Profit");
+        for (int i = 0; i < 57; i++){
             System.out.print("=");
         }
         System.out.println();
         for (Slot productSlot : productSlots) {
             if (productSlot.getNumProductsSold() > 0) {
-                System.out.printf("%-15s%-7.2f %-4d %-7.2f\n", productSlot.getBaseProductName(),
+                System.out.printf("%-20s%-7.2f  %-4d        %-7.2f\n", productSlot.getBaseProductName(),
                         productSlot.getBaseProductPrice(), productSlot.getNumProductsSold(),
                         productSlot.getBaseProductPrice() * productSlot.getNumProductsSold());
-                totalProfit = productSlot.getBaseProductPrice() * productSlot.getNumProductsSold();
+
+                specSold +=productSlot.getSpecProductsSold();
+                totalProfit += productSlot.getBaseProductPrice() * productSlot.getNumProductsSold();
             }
         }
-        for (int i = 0; i < 37; i++){
+
+        if (specSold > 0)
+            System.out.printf("%-20s%-7.2f  %-4d        %-7.2f\n", "Pre-set Yogurt Fee",
+                50.0, specSold, specSold * 50.0);
+
+        totalProfit += specSold * 50;
+
+        for (int i = 0; i < 57; i++){
             System.out.print("=");
         }
 
         System.out.print("\nTotal: ");
         System.out.printf("%-33.2f\n", totalProfit);
-        for (int i = 0; i < 37; i++){
+        for (int i = 0; i < 57; i++){
             System.out.print("=");
         }
         System.out.println(" ");
@@ -121,7 +131,6 @@ import java.util.ArrayList;
                     dispenser(index);
                     differenceDenomination(denomination,changeDenom);
                     insertedMoney = changeDenom;
-                    productSlots.get(index).setNumProductsSold(1);
                     System.out.printf("Your change is %.2f\n",change);
                     displayDenominations(changeDenom);
                     return true;
@@ -140,8 +149,7 @@ import java.util.ArrayList;
 
 
     protected void dispenser(int index){
-        productsSold.get(index).setProductQuantity(1);
-        productsSold.get(index).setNumProductsSold(1);
+        productSlots.get(index).setNumProductsSold(1);
         productSlots.get(index).getProducts().remove(0);
     }
 

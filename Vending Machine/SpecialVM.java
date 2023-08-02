@@ -241,6 +241,7 @@ public class SpecialVM extends VendingMachine {
                         System.out.println("Dispensing " + productSlots.get(9).getBaseProductName()+" ...");
                         System.out.println("Dispensing " + productSlots.get(3).getBaseProductName()+" ...");
                         System.out.println("Yogurt done");
+                        productSlots.get(1).setSpecProductsSold(1);
                     }
                     case "VitaMax" ->{
                         System.out.println("Preparing Special Pre-set Yogurt");
@@ -249,6 +250,7 @@ public class SpecialVM extends VendingMachine {
                         System.out.println("Dispensing " + productSlots.get(5).getBaseProductName()+" ...");
                         System.out.println("Dispensing " + productSlots.get(4).getBaseProductName()+" ...");
                         System.out.println("Yogurt done");
+                        productSlots.get(0).setSpecProductsSold(1);
                     }
                     case "Strawberry Duo" ->{
                         System.out.println("Preparing Special Pre-set Yogurt");
@@ -257,6 +259,7 @@ public class SpecialVM extends VendingMachine {
                         System.out.println("Adding 1/2 " + productSlots.get(7).getBaseProductName()+" yogurt ...");
                         System.out.println("Dispensing " + productSlots.get(10).getBaseProductName()+" ...");
                         System.out.println("Yogurt done");
+                        productSlots.get(0).setSpecProductsSold(1);
                     }
                     case "ChocoDuos" ->{
                         System.out.println("Preparing Special Pre-set Yogurt");
@@ -265,7 +268,7 @@ public class SpecialVM extends VendingMachine {
                         System.out.println("Adding 1/2" + productSlots.get(1).getBaseProductName()+" yogurt ...");
                         System.out.println("Dispensing " + productSlots.get(9).getBaseProductName()+" ...");
                         System.out.println("Yogurt done");
-
+                        productSlots.get(0).setSpecProductsSold(1);
                     }
                     case "ChocoMatcha Madness" ->{
                         System.out.println("Preparing Special Pre-set Yogurt");
@@ -274,7 +277,7 @@ public class SpecialVM extends VendingMachine {
                         System.out.println("Dispensing " + productSlots.get(9).getBaseProductName()+" ...");
                         System.out.println("Dispensing " + productSlots.get(3).getBaseProductName()+" ...");
                         System.out.println("Yogurt done");
-
+                        productSlots.get(9).setSpecProductsSold(1);
                     }
                     case "Mango Chocolate Glazed" ->{
                         System.out.println("Preparing Special Pre-set Yogurt");
@@ -282,7 +285,7 @@ public class SpecialVM extends VendingMachine {
                         System.out.println("Adding " + productSlots.get(8).getBaseProductName()+" yogurt ...");
                         System.out.println("Dispensing " + productSlots.get(9).getBaseProductName()+" ...");
                         System.out.println("Yogurt done");
-
+                        productSlots.get(8).setSpecProductsSold(1);
                     }
                     case "Berrylicious Crunchies" ->{
                         System.out.println("Preparing Special Pre-set Yogurt");
@@ -290,7 +293,7 @@ public class SpecialVM extends VendingMachine {
                         System.out.println("Adding " + productSlots.get(6).getBaseProductName()+" yogurt ...");
                         System.out.println("Dispensing " + productSlots.get(4).getBaseProductName()+" ...");
                         System.out.println("Yogurt done");
-
+                        productSlots.get(6).setSpecProductsSold(1);
                     }
                     case "Rainbow Yogurt" ->{
                         System.out.println("Preparing Special Pre-set Yogurt");
@@ -298,6 +301,7 @@ public class SpecialVM extends VendingMachine {
                         System.out.println("Adding " + productSlots.get(0).getBaseProductName()+" yogurt ...");
                         System.out.println("Dispensing " + productSlots.get(12).getBaseProductName()+" ...");
                         System.out.println("Yogurt done");
+                        productSlots.get(0).setSpecProductsSold(1);
                     }
                 }
                 System.out.println("Transaction successful.");

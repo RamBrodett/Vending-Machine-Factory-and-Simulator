@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class Slot {
     private int numProductsSold;
-    private int oldProductsSold;
-    private  int oldProductQuantity;
+    private int specProductsSold;
+    private int oldProductQuantity;
     private Product baseProduct;
     private ArrayList<Product> products = new ArrayList<>();
     private boolean isEdited;
@@ -125,8 +125,8 @@ public class Slot {
      * @return the number of old products sold from the slot
      */
 
-    public int getOldProductsSold() {
-        return oldProductsSold;
+    public int getSpecProductsSold() {
+        return specProductsSold;
     }
 
 
@@ -179,8 +179,8 @@ public class Slot {
      * Sets the number of old products sold from the slot.
      * @param oldProductsSold the number of old products sold to set
      */
-    public void setOldProductsSold(int oldProductsSold) {
-        this.oldProductsSold = oldProductsSold;
+    public void setSpecProductsSold(int specProductsSold) {
+        this.specProductsSold += specProductsSold;
     }
 
     /**

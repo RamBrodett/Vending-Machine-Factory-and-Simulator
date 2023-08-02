@@ -57,6 +57,8 @@ public class VMMaintenanceMenu extends JPanel{
 
     private final TextPanel moneyDisplay = new TextPanel("Small"); //////////NEWWWWWWWWWWW
 
+    private TextPanel transacHistory = new TextPanel("Big");
+
     /**
      * Button for restocking products.
      */
@@ -112,6 +114,8 @@ public class VMMaintenanceMenu extends JPanel{
 
         buttonPanel.setBackground(new Color(87,99,104));
 
+        buttonPanel.getButtonPanel1().add("blank", transacHistory);
+        updateButtonPanel(0);
 
 
         itemPanel = new CardLayout();
@@ -677,16 +681,16 @@ public class VMMaintenanceMenu extends JPanel{
             }
         }
 
-        public void updateVMdisplay(ArrayList<Slot> productsSold){
+        public void updateVMdisplay(ArrayList<Slot> productSlots){
             String transaction = "";
             double profit = 0;
 
-            for (int i = 0; i < productsSold.size(); i++){
-                if (productsSold.get(i).getProductQuantity() > 0)
-                    transaction = transaction + productsSold.get(i).getBaseProductName() +
-                        " | P" + productsSold.get(i).getBaseProductPrice() + "\n";
+            for (int i = 0; i < productSlots.size(); i++){
+                if (productSlots.get(i).getNumProductsSold() > 0)
+                    transaction = transaction + productSlots.get(i).getBaseProductName() +
+                        " | P" + productSlots.get(i).getBaseProductPrice() + "\n";
 
-                profit += productsSold.get(i).getBaseProductPrice() * productsSold.get(i).
+                profit += productSlots.get(i).getBaseProductPrice() * productSlots.get(i).
                         getNumProductsSold();
             }
 
@@ -723,8 +727,6 @@ public class VMMaintenanceMenu extends JPanel{
         private final JButton[] editPriceSlotButtons = new JButton[9];
         private JPanel editPricePanel = new JPanel();
         private CardLayout menu = new CardLayout();
-
-        private TextPanel transacHistory = new TextPanel("Big");
 
         /**
          * Initialization of button gui components.
@@ -922,16 +924,12 @@ public class VMMaintenanceMenu extends JPanel{
             editPricePanel.add(editPriceSlotButtons[8]);
             buttonPanel1.add("pricePanel",editPricePanel);
 
-            buttonPanel1.add("blank", transacHistory);
-            menu.show(buttonPanel1, "blank");
-            currMode = "blank";
             add(buttonPanel1,BorderLayout.CENTER);
         }
 
-        public void updateTransacHistory(ArrayList<Slot> productsSold){
-            this.transacHistory.updateVMdisplay(productsSold);
+        public JPanel getButtonPanel1() {
+            return buttonPanel1;
         }
-
 
         public JButton getCollectBtn(){
             return collectBtn;
@@ -1061,6 +1059,8 @@ public class VMMaintenanceMenu extends JPanel{
         return moneyDisplay;
     }
 
+
+
     public RegularItemPanel getRegItemPanel(){
         return regItemPanel;
     }
@@ -1151,6 +1151,10 @@ public class VMMaintenanceMenu extends JPanel{
 
     public String getCurrMode() {
         return this.currMode;
+    }
+
+    public JTextArea getTransacHistoryPanel(){
+        return transacHistory.vmdisplay;
     }
 
     /**

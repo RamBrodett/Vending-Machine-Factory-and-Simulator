@@ -180,8 +180,12 @@ public class VMFController {
         });
 
         this.frame.testMenu.getMaintenanceVMButton().addActionListener(e -> {
-            this.frame.maintenanceMenu.getButtonPanel().updateTransacHistory(currMachine.productsSold);
+//            this.frame.maintenanceMenu.getButtonPanel().updateTransacHistory(currMachine.productsSold);
             this.frame.menu.show(this.frame.cardPanel, "VMmaintenance");
+            System.setOut(new PrintStream(new VMMaintenanceMenu.TextPane(this.frame.maintenanceMenu.getTransacHistoryPanel())));
+            this.frame.maintenanceMenu.getTransacHistoryPanel().selectAll();
+            this.frame.maintenanceMenu.getTransacHistoryPanel().replaceSelection("");
+            currMachine.displayTransactions();
             System.setOut(new PrintStream(new VMMaintenanceMenu.TextPane(this.frame.maintenanceMenu.getTextPanel())));
         });
 
