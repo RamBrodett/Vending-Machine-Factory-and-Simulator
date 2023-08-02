@@ -25,7 +25,6 @@ public class SpecialVM extends VendingMachine {
 
     //methods specific to this file to be implemented later...
 
-
     @Override
     public boolean dispenseProduct(int index, int c){
         switch (c){
@@ -54,82 +53,73 @@ public class SpecialVM extends VendingMachine {
 
             }
             case 2 ->{
-                if(index==8){   ///////CUSTOM ITEM
-
-                }else
-                    switch (index){
-                        case 0 -> {
-                            if(customProductChecker(0)){
-                                String special = "Triple Chocolate";
-                                transaction(specialPrices[0],special);
-                                removeSpecialItem(0);
-                                return true;
-                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
-                        }
-                        case 1 -> {
-                            if(customProductChecker(1)){
-                                String special = "VitaMax";
-                                transaction(specialPrices[1],special);
-                                removeSpecialItem(1);
-                                return true;
-                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
-
-                        }
-                        case 2 -> {
-                            if(customProductChecker(2)){
-                                String special = "Strawberry Duo";
-                                transaction(specialPrices[2],special);
-                                removeSpecialItem(2);
-                                return true;
-                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
-                        }
-                        case 3 -> {
-                            if(customProductChecker(3)){
-                                String special = "ChocoDuos";
-                                transaction(specialPrices[3],special);
-                                removeSpecialItem(3);
-                                return true;
-                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
-                        }
-                        case 4 -> {
-                            if(customProductChecker(4)){
-                                String special = "ChocoMatcha Madness";
-                                transaction(specialPrices[4],special);
-                                removeSpecialItem(4);
-                                return true;
-                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
-
-                        }
-                        case 5 -> {
-                            if(customProductChecker(5)){
-                                String special = "Mango Chocolate Glazed";
-                                transaction(specialPrices[5],special);
-                                removeSpecialItem(5);
-                                return true;
-                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
-
-                        }
-                        case 6 -> {
-                            if(customProductChecker(6)){
-                                String special = "Berrylicious Crunchies";
-                                transaction(specialPrices[6],special);
-                                removeSpecialItem(6);
-                                return true;
-                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
-
-                        }
-                        case 7 -> {
-                            if(customProductChecker(7)){
-                                String special = "Rainbow Yogurt";
-                                transaction(specialPrices[7],special);
-                                removeSpecialItem(7);
-                                return true;
-                            } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
-                        }
+                switch (index){
+                    case 0 -> {
+                        if(customProductChecker(0)){
+                            String special = "Triple Chocolate";
+                            transaction(specialPrices[0],special);
+                            removeSpecialItem(0);
+                            return true;
+                        } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
                     }
-
+                    case 1 -> {
+                        if(customProductChecker(1)){
+                            String special = "VitaMax";
+                            transaction(specialPrices[1],special);
+                            removeSpecialItem(1);
+                            return true;
+                        } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
+                    }
+                    case 2 -> {
+                        if(customProductChecker(2)){
+                            String special = "Strawberry Duo";
+                            transaction(specialPrices[2],special);
+                            removeSpecialItem(2);
+                            return true;
+                        } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
+                    }
+                    case 3 -> {
+                        if(customProductChecker(3)){
+                            String special = "ChocoDuos";
+                            transaction(specialPrices[3],special);
+                            removeSpecialItem(3);
+                            return true;
+                        } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
+                    }
+                    case 4 -> {
+                        if(customProductChecker(4)){
+                            String special = "ChocoMatcha Madness";
+                            transaction(specialPrices[4],special);
+                            removeSpecialItem(4);
+                            return true;
+                        } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
+                    }
+                    case 5 -> {
+                        if(customProductChecker(5)){
+                            String special = "Mango Chocolate Glazed";
+                            transaction(specialPrices[5],special);
+                            removeSpecialItem(5);
+                            return true;
+                        } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
+                    }
+                    case 6 -> {
+                        if(customProductChecker(6)){
+                            String special = "Berrylicious Crunchies";
+                            transaction(specialPrices[6],special);
+                            removeSpecialItem(6);
+                            return true;
+                        } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
+                    }
+                    case 7 -> {
+                        if(customProductChecker(7)){
+                            String special = "Rainbow Yogurt";
+                            transaction(specialPrices[7],special);
+                            removeSpecialItem(7);
+                            return true;
+                        } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
+                    }
+                }
             }
-
         }
 
         return false;
@@ -234,7 +224,7 @@ public class SpecialVM extends VendingMachine {
         return false;
     }
 
-    private boolean transaction(float price,String name){
+    private void transaction(float price,String name){
         if(price <= getTotalInsertedMoney()){
             float change = (float) (getTotalInsertedMoney()-price);
             addToDenomination(denomination,insertedMoney);
@@ -314,12 +304,36 @@ public class SpecialVM extends VendingMachine {
                 specialsSold++;
                 System.out.printf("Your change is %.2f\n",change);
                 displayDenominations(changeDenom);
-                return true;
+
+            }else System.out.println("Unable to give change. Unsuccessful transaction.\n");
+
+        }System.out.println("Insufficient balance. Unsuccessful transaction.\n");
+
+    }
+
+    public void youGartTransaction(Slot base, Slot top, Slot sauce){
+        if(specialPrices[8] <= getTotalInsertedMoney()){
+            float change = (float) (getTotalInsertedMoney()-specialPrices[8]);
+            addToDenomination(denomination,insertedMoney);
+            Denomination changeDenom = findDenomination(change,denomination);
+            if(!(changeDenom.getTotalMoney()-change!=0)){
+                System.out.println("Preparing custom Yogurt");
+                System.out.println("Dispensing cup ...");
+                System.out.println("Adding " + base.getBaseProductName()+ " yogurt ...");
+                System.out.println("Dispensing " +sauce.getBaseProductName()+" ...");
+                System.out.println("Dispensing " + top.getBaseProductName() +" ...");
+                System.out.println("You-g-Art done");
+
+                System.out.println("Transaction successful.");
+                System.out.println("Dispensing You-g-Art");
+                differenceDenomination(denomination,changeDenom);
+                insertedMoney = changeDenom;
+                specialsSold++;
+                System.out.printf("Your change is %.2f\n",change);
+                displayDenominations(changeDenom);
             }else System.out.println("Insufficient balance. Unsuccessful transaction.\n");
 
         }
-
-        return false;
     }
 
     public void setNewSpecialPrice(int index, float newPrice){

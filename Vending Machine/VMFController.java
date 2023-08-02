@@ -21,6 +21,8 @@ public class VMFController {
      */
     private final MainFrame frame;
 
+    private int foundIndex;
+
 
     /**
      * This initializes what operations shall take place when a Listener received an event.
@@ -590,6 +592,7 @@ public class VMFController {
     }
 
     private void initializeSimulation(){
+
         ActionListener a = e -> {
             Object src = e.getSource();
 
@@ -723,8 +726,6 @@ public class VMFController {
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(7)) {       //rainbow
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
-
-
                         currMachine.dispenseProduct(7,2);
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
@@ -741,6 +742,8 @@ public class VMFController {
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(8)) {
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
+                        this.frame.vmInterface.yougArtFrame(currMachine.productSlots);
+
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                     }
@@ -801,9 +804,42 @@ public class VMFController {
 
             }
         };
+
+        ActionListener b = select -> {
+            Object subSrc = select.getSource();
+            if(this.frame.vmInterface.getSelectCustom()==subSrc){
+                String[] selectedProducts ={(String)this.frame.vmInterface.
+                        getBaseDropdown().getSelectedItem(),
+                        (String)this.frame.vmInterface.getSauceDropdown().getSelectedItem(),
+                        (String) this.frame.vmInterface.getToppingDropdown().getSelectedItem()
+                };
+                // look for the indices
+                int[] indices = new int[3];
+                if(indexFinder(selectedProducts[0])){
+                    indices[0] = foundIndex;
+                    if (indexFinder(selectedProducts[1])){
+                        indices[1] = foundIndex;
+                        if (indexFinder(selectedProducts[2]))
+                            indices[2] = foundIndex;
+                    }
+                }
+                SpecialVM specialVM = (SpecialVM) currMachine;
+
+                specialVM.youGartTransaction(this.currMachine.productSlots.get(indices[0]),
+                        this.currMachine.productSlots.get(indices[1]),
+                        this.currMachine.productSlots.get(indices[2]));
+
+                this.currMachine.productSlots.get(indices[0]).getProducts().remove(0);
+                this.currMachine.productSlots.get(indices[1]).getProducts().remove(0);
+                this.currMachine.productSlots.get(indices[2]).getProducts().remove(0);
+                this.frame.vmInterface.getDialog().dispose();
+            }
+
+        };
         for(int i = 0; i< 9; i++){
             this.frame.vmInterface.getVMButtons(i).addActionListener(a);
         }
+        this.frame.vmInterface.getSelectCustom().addActionListener(b);
     }
 
 
@@ -813,6 +849,24 @@ public class VMFController {
      */
     private void updateMachineType(String type){
         machineType = type;
+    }
+
+    /**
+     * Finds index of an item given the name.
+     * @param name name of an item/
+     * @return returns true if found.
+     */
+    private boolean indexFinder(String name){
+        int index = 0;
+
+        for (Slot slot : this.currMachine.productSlots){
+            if(slot.getBaseProductName().equalsIgnoreCase(name)){
+                this.foundIndex=index;
+                return true;
+            }
+            index++;
+        }
+        return false;
     }
 
 

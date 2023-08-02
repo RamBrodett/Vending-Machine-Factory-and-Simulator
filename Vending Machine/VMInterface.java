@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class VMInterface extends JPanel {
     /**
@@ -68,6 +68,17 @@ public class VMInterface extends JPanel {
      * Button for going back to previous menu.
      */
     private final JButton back = new JButton();
+
+
+    private final JButton selectCustom = new JButton("Select");
+
+    private JComboBox<String> baseDropdown = new JComboBox<>();
+    private JComboBox<String> sauceDropdown = new JComboBox<>();
+    private JComboBox<String> toppingDropdown = new JComboBox<>();
+
+    Window window = SwingUtilities.windowForComponent(buttonPanel);
+    private JDialog dialog;
+
 
     /**
      * Initializations of the Vending Machine Interface Components.
@@ -173,6 +184,76 @@ public class VMInterface extends JPanel {
         gbc.weightx = .18;
         gbc.weighty = .9;
         add(toggleSpecial, gbc);
+    }
+
+    public JButton getSelectCustom() {
+        return selectCustom;
+    }
+
+    public JDialog getDialog() {
+        return dialog;
+    }
+
+    public void yougArtFrame(ArrayList<Slot> slots){
+
+        dialog = new JDialog((Frame) window,"Pick your own You-g-Art",true);
+
+        dialog.setSize(new Dimension(400, 300) );
+        dialog.setLayout(new GridLayout(4,1));
+        JPanel dialogPanel1 = new JPanel(new FlowLayout());
+        JPanel dialogPanel2 = new JPanel(new FlowLayout());
+        JPanel dialogPanel3 = new JPanel(new FlowLayout());
+        JPanel dialogPanel4 = new JPanel(new FlowLayout());
+
+
+        JLabel yogurtBase = new JLabel("You-g-Art Base: ");
+        JLabel yogurtSauce = new JLabel("You-g-Art Sauce: ");
+        JLabel yogurtTopps = new JLabel("You-g-Art Toppings: ");
+
+        updateDropdown(baseDropdown,sauceDropdown,toppingDropdown,slots);
+
+        dialogPanel1.add(yogurtBase);
+        dialogPanel1.add(baseDropdown);
+        dialogPanel2.add(yogurtSauce);
+        dialogPanel2.add(sauceDropdown);
+        dialogPanel3.add(yogurtTopps);
+        dialogPanel3.add(toppingDropdown);
+        dialogPanel4.add(selectCustom);
+
+        dialog.add(dialogPanel1);
+        dialog.add(dialogPanel2);
+        dialog.add(dialogPanel3);
+        dialog.add(dialogPanel4);
+        dialog.setVisible(true);
+
+    }
+
+    public JComboBox<String> getBaseDropdown() {
+        return baseDropdown;
+    }
+
+    public JComboBox<String> getSauceDropdown() {
+        return sauceDropdown;
+    }
+
+    public JComboBox<String> getToppingDropdown() {
+        return toppingDropdown;
+    }
+
+    private void updateDropdown(JComboBox<String> base,JComboBox<String> sauce,JComboBox<String> topps,ArrayList<Slot> slots ){
+        base.removeAllItems();
+        sauce.removeAllItems();
+        topps.removeAllItems();
+
+        for (int i=0; i<13;i++){
+            if(!(slots.get(i).getProducts().isEmpty()) && i<3|| (i>5&&i<9)){
+                base.addItem(slots.get(i).getBaseProductName());
+            }
+            else if(!(slots.get(i).getProducts().isEmpty()) && ((i>2 && i<6)||i==12)){
+                topps.addItem(slots.get(i).getBaseProductName());
+            }
+            else sauce.addItem(slots.get(i).getBaseProductName());
+        }
     }
 
     /**
@@ -929,6 +1010,7 @@ public class VMInterface extends JPanel {
     public String getCurrMode() {
         return currMode;
     }
+
 
     /**
      * SubClass for Textpane OutputStream redirection
