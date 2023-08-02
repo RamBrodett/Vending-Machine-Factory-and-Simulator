@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel for test menu, contains necessary ui initialization for testing.
+ */
 public class VMFTestMenu extends JPanel {
 
     /**

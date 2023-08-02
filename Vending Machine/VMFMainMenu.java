@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel for the Main menu holds all components with relation to the main menu.
+ */
 public class VMFMainMenu extends JPanel {
     /**
      * Background image of the MainMenu.

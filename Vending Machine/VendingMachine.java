@@ -500,6 +500,11 @@ import java.util.ArrayList;
      * @return denomination of money.
      */
     public Denomination getDenomination() { return this.denomination;}      /////////////NEWWW
+
+    /**
+     * Gets the total value of money  in float form
+     * @return total value of money float.
+     */
     public float getTotalMoney(){
         return this.denomination.getTotalMoney();
     }
@@ -552,6 +557,11 @@ import java.util.ArrayList;
         System.out.println("");
     }
 
+    /**
+     * Checks the custom product ingredients
+     * @param i for indexing
+     * @return return boolean if product is available
+     */
 
     public boolean customProductChecker(int i) {
         return false;

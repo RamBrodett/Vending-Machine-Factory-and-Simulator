@@ -47,7 +47,7 @@ public class SpecialVM extends VendingMachine {
      * Product dispenser for special vending machine.
      * @param index index is the index of the item.
      * @param c c is case type (ignore c in Regular, it only matters in Special)
-     * @return
+     * @return boolean if dispense taok place.
      */
     @Override
     public boolean dispenseProduct(int index, int c){

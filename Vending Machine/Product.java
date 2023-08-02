@@ -77,20 +77,6 @@ public class Product {
 
 
     /**
-     * Returns the calories of the product.
-     * @return the calories of the product
-     */
-    public int getCalories(){return this.calories;}
-
-
-    /**
-     * Sets the calories of the product.
-     * @param calories the calories to set for the product
-     */
-    public void setCalories(int calories){this.calories = calories;}
-
-
-    /**
      * Sets the price of the product.
      * @param price the price to set for the product
      */

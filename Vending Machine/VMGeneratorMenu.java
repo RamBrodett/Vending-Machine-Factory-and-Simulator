@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel for Generator, contains necessary ui initialization for creating vending machine.
+ */
 public class VMGeneratorMenu extends JPanel {
 
     /**

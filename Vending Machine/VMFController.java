@@ -4,6 +4,11 @@ import java.awt.event.ItemEvent;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+
+/**
+ * act as bridger of Model, human, and Ui
+ * Controlls what happen on the model and ui.
+ */
 public class VMFController {
 
     /**

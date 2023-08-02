@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * Vending Maching Interface for simulation
+ */
 public class VMInterface extends JPanel {
     /**
      * Background image of the VendingMachineInterface.

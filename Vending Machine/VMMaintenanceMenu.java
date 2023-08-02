@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Set;
 
 
-
+/**
+ * Panel for main menu, contains necessary ui initialization for selection what to do.
+ */
 public class VMMaintenanceMenu extends JPanel{
 
     /**
@@ -723,15 +725,41 @@ public class VMMaintenanceMenu extends JPanel{
      * SubClass for Buttons' Panel GUI Components
      */
     protected class ButtonPanel extends JPanel {
-
+        /**
+         * UI COMPONENT FOR CURRENT MODE
+         */
         private String currMode; // restock | replenish | collect | edit price
+        /**
+         * UI COMPONENT FOR CHECKING IF MONEY IS LOCKED
+         */
         private boolean moneyLocked = false;
+        /**
+         * UI COMPONENT FOR SPINNERS IN GETIING MONEY INPUT
+         */
         public JSpinner[] denominationButtons;
+        /**
+         * UI COMPONENT FOR PANELLING MONEY INTERFACE
+         */
         private final JPanel[] moneyTags = new JPanel[10];
+        /**
+         * UI COMPONENT FOR CHECKBOX SETTER OF MONEY
+         */
         private final JCheckBox setter;
+        /**
+         * UI COMPONENT FOR BUTTON PANEL
+         */
         private JPanel buttonPanel1 = new JPanel();
+        /**
+         * UI COMPONENT FOR FILLER PANEL
+         */
         private JPanel blankPanel = new JPanel();
+        /**
+         * UI COMPONENT FOR REPLENISH MODE PANEL
+         */
         private JPanel replenishPanel = new JPanel(new BorderLayout());
+        /**
+         * UI COMPONENT FOR MONEY PANEL
+         */
         private JPanel moneySubPanel = new JPanel(new GridLayout(5, 2));
         private JPanel restockPanel = new JPanel();
         private JPanel collectPanel = new JPanel(new GridBagLayout());

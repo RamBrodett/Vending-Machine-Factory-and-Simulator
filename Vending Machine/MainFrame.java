@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * MainFrame for view.
+ */
+
 public class MainFrame {
 
     /**
