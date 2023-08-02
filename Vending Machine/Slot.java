@@ -52,6 +52,11 @@ public class Slot {
         }
     }
 
+    public void editItemPrice(float itemNewPrice) {
+        baseProduct.setPrice(itemNewPrice);
+
+    }
+
     public ArrayList<Product> getProducts(){
         return products;
     }

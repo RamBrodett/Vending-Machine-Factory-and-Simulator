@@ -106,7 +106,7 @@ public class Product {
      * Sets the price of the product.
      * @param price the price to set for the product
      */
-    public void setPrice(int price){
+    public void setPrice(float price){
         this.price = price;
     }
 

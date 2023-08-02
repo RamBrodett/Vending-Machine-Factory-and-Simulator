@@ -102,15 +102,6 @@ import java.util.ArrayList;
     }
 
 
-    public void editItemPrice() {
-        /*
-        To DO :
-
-        Change item's Price
-         */
-
-    }
-
     public boolean dispenseProduct(int index, int c){
         if(!(isSlotEmpty(index))){
             if(productSlots.get(index).getBaseProductPrice()<= getTotalInsertedMoney()){                          // if insert money is more than or equal to price
@@ -144,9 +135,6 @@ import java.util.ArrayList;
         productSlots.get(index).getProducts().remove(0);
     }
 
-    public boolean customProductChecker(int index){
-        return false;
-    };
 
     public double editPriceInput(int index){
         double userInput;
@@ -448,117 +436,6 @@ import java.util.ArrayList;
         return moneyDenom;
     }
 
-    /**
-     *  Product Displays
-     * @param typeOfDisplay is the kind it should be used for, either Selection, Menu, Maintenance.
-     */
-/*
-    public void displayProducts(int typeOfDisplay){
-        int i;
-        int totalSales = 0;
-//        typeOfDisplay (equivalent)
-//        1       display to customer
-//        2       selection
-//        3       maintenance
-
-        if (typeOfDisplay == 0) { // for product display to customer
-            for(int x=0; x<50;x++)
-                System.out.print("═");
-            System.out.println();
-            System.out.printf("%-4s %s%4s%s\n",
-                    " ","P R O D U C T"," ","D I S P L A Y");
-        }
-
-        else if (typeOfDisplay == 3){
-            for(int x=0; x<50;x++)
-                System.out.print("═");
-            System.out.println();
-            System.out.printf("%12s %s %s\n",
-                    " ","Conducting","Maintenance...");
-        }
-        for(int x=0; x<50;x++)
-            System.out.print("═");
-        System.out.println();
-
-        if (typeOfDisplay == 3){
-            System.out.printf("%4s%-14s%6s %9s%5s%s  %s\n", "", "Item", "Stock", "Price", "", "Sold", "Cal.");
-        }
-        for(i=0; i<productSlots.size();i++){
-            System.out.printf("[%d] %-14s",i+1,productSlots.get(i).getBaseProductName());
-
-            if (typeOfDisplay == 0 && productSlots.get(i).getBaseProductPrice() != -1){
-                double price = productSlots.get(i).getBaseProductPrice();
-                System.out.printf("%6.2f ", price);
-            }
-
-            else if (typeOfDisplay == 3){
-
-
-                System.out.print(" ");
-
-                if (!isSlotEmpty(i)) {
-                    if(productSlots.get(i).isEdited()) {
-                        System.out.printf("%2d>%-2d %6.2f>%-6.2f%2d>%-2d %3d>%-3d\n", productSlots.get(i).getOldProductQuantity(),
-                                productSlots.get(i).getProductQuantity(), productSlots.get(i).getBaseProductOldPrice(),
-                                productSlots.get(i).getBaseProductPrice(), productSlots.get(i).getOldProductsSold(),
-                                productSlots.get(i).getNumProductsSold(), (int)productSlots.get(i).getBaseProductOldCal(),
-                                (int)productSlots.get(i).getBaseProductCal());
-                    }
-
-                    else {
-                        System.out.printf("%-9d %-9.2f %-5d %-4d\n", productSlots.get(i).getProductQuantity(),
-                                productSlots.get(i).getBaseProductPrice(), productSlots.get(i).getNumProductsSold(),
-                                (int) productSlots.get(i).getBaseProductCal());
-                    }
-                }
-                else {
-                    if (i+1 < 10)
-                        System.out.print("  ");
-                    else
-                        System.out.print(" ");
-                    System.out.printf("-%9s-%8s--%4s-\n", "", "", "");
-                }
-
-            }
-
-            else {
-                System.out.printf("%6s ", "");
-            }
-
-
-
-            if ((i+1)%2==0 && typeOfDisplay != 3)
-                System.out.println(" ");
-        }
-
-        if(typeOfDisplay==1 || typeOfDisplay == 3) // for display selection
-            System.out.printf("[%d] Exit Selection.",i+1);
-
-        if (typeOfDisplay == 3){
-            System.out.println("");
-            for (int x = 0; x < 50; x++){
-                System.out.print("_");
-            }
-
-            for (int x = 0; x < productSlots.size(); x++){
-                if (!(isSlotEmpty(x))) {
-                    if (productSlots.get(x).isEdited())
-                        totalSales += productSlots.get(x).getBaseProductOldPrice() * productSlots.get(x).getOldProductsSold();
-                    else
-                        totalSales += productSlots.get(x).getBaseProductPrice() * productSlots.get(x).getNumProductsSold();
-                }
-            }
-
-            System.out.printf("\nTotal Sales: %6.2f", (double) totalSales);
-        }
-
-        System.out.println(" ");
-        for(int x=0; x<50;x++)
-            System.out.print("═");
-        System.out.println(" ");
-    }
-
- */
 
     /**
      * <p>
