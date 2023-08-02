@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  * @author Luke Regalado
  * @version 07/1/2023
  */
-public class VendingMachine{
+ public class VendingMachine{
     protected Denomination denomination;
 
     protected final ArrayList<Slot> productSlots;
@@ -145,6 +144,29 @@ public class VendingMachine{
         productSlots.get(index).getProducts().remove(0);
     }
 
+    public boolean customProductChecker(int index){
+        return false;
+    };
+
+    public double editPriceInput(int index){
+        double userInput;
+        int itemNum = index + 1;
+        do {
+            userInput = Double.parseDouble(JOptionPane.showInputDialog(null, "Current Price: " +
+                            productSlots.get(index).getBaseProductPrice() + "\nNew Price: ",
+                    "Editing price of Item " + itemNum + "...", JOptionPane.QUESTION_MESSAGE));
+
+            if (userInput < 0) {
+                JOptionPane.showMessageDialog(null, "Please input a positive integer.");
+            }
+        } while (userInput < 0);
+
+        if (userInput > 0)
+            System.out.println("Edited price of  \"" + productSlots.get(index).getBaseProductName() +
+                    "\" to P" + userInput + "...");
+        return userInput;
+    }
+
     public int restockInput(int index){
         int userInput;
         do {
@@ -161,6 +183,8 @@ public class VendingMachine{
         } while (userInput + productSlots.get(index).getProductQuantity() > 15 ||
                 userInput < 0);
 
+        if (userInput > 0)
+            System.out.println("Stocked " + userInput + " piece[s] of \"" + productSlots.get(index).getBaseProductName() + "\"...");
         return userInput;
     }
 

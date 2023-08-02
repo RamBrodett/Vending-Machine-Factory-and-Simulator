@@ -277,7 +277,6 @@ public class VMInterface extends JPanel {
             strwPanel.add(createImagePanel(strwLabel, "Strawberry", 999),gbc);
             mngoPanel.add(createImagePanel(mngoLabel, "Mango", 999),gbc);
 
-
             vnllPanel.setOpaque(false);
             chcoPanel.setOpaque(false);
             mtchPanel.setOpaque(false);
@@ -342,15 +341,24 @@ public class VMInterface extends JPanel {
         public void updateImageVis (int index, int productQty){
             boolean bool = productQty > 0;
             switch (index){
-                case 0 -> {if (!bool) vnllLabel.setIcon(scaleIMG("./VMResources/vanillaBNW.png",150,150));}
-                case 1 -> {if (!bool) chcoLabel.setIcon(scaleIMG("./VMResources/chocoBNW.png",150,150));}
-                case 2 -> {if (!bool) mtchLabel.setIcon(scaleIMG("./VMResources/matchaBNW.png",150,150));}
-                case 3 -> {if (!bool) chcpLabel.setIcon(scaleIMG("./VMResources/chocochipBNW.png",150,150));}
-                case 4 -> {if (!bool) crelLabel.setIcon(scaleIMG("./VMResources/cerealBNW.png",150,150));}
-                case 5 -> {if (!bool) mxftLabel.setIcon(scaleIMG("./VMResources/mixedFruitBNW.png",150,150));}
-                case 6 -> {if (!bool) raspLabel.setIcon(scaleIMG("./VMResources/raspberryBNW.png",150,150));}
-                case 7 -> {if (!bool) strwLabel.setIcon(scaleIMG("./VMResources/strawberryBNW.png",150,150));}
-                case 8 -> {if (!bool) mngoLabel.setIcon(scaleIMG("./VMResources/mangoBNW.png",150,150));}
+                case 0 -> {if (!bool) vnllLabel.setIcon(scaleIMG("./VMResources/vanillaBNW.png",150,150));
+                else vnllLabel.setIcon(scaleIMG("./VMResources/vanilla.png",150,150));}
+                case 1 -> {if (!bool) chcoLabel.setIcon(scaleIMG("./VMResources/chocoBNW.png",150,150));
+                else chcoLabel.setIcon(scaleIMG("./VMResources/choco.png",150,150));}
+                case 2 -> {if (!bool) mtchLabel.setIcon(scaleIMG("./VMResources/matchaBNW.png",150,150));
+                else mtchLabel.setIcon(scaleIMG("./VMResources/matcha.png",150,150));}
+                case 3 -> {if (!bool) chcpLabel.setIcon(scaleIMG("./VMResources/chocochipBNW.png",150,150));
+                else chcpLabel.setIcon(scaleIMG("./VMResources/chocochip.png",150,150));}
+                case 4 -> {if (!bool) crelLabel.setIcon(scaleIMG("./VMResources/cerealBNW.png",150,150));
+                else crelLabel.setIcon(scaleIMG("./VMResources/cereal.png",150,150));}
+                case 5 -> {if (!bool) mxftLabel.setIcon(scaleIMG("./VMResources/mixedFruitBNW.png",150,150));
+                else mxftLabel.setIcon(scaleIMG("./VMResources/mixedFruit.png",150,150));}
+                case 6 -> {if (!bool) raspLabel.setIcon(scaleIMG("./VMResources/raspberryBNW.png",150,150));
+                else raspLabel.setIcon(scaleIMG("./VMResources/raspberry.png",150,150));}
+                case 7 -> {if (!bool) strwLabel.setIcon(scaleIMG("./VMResources/strawberryBNW.png",150,150));
+                else strwLabel.setIcon(scaleIMG("./VMResources/strawberry.png",150,150));}
+                case 8 -> {if (!bool) mngoLabel.setIcon(scaleIMG("./VMResources/mangoBNW.png",150,150));
+                else mngoLabel.setIcon(scaleIMG("./VMResources/mango.png",150,150));}
             }
         }
     }
@@ -379,15 +387,15 @@ public class VMInterface extends JPanel {
         JLabel rnbwYgrLabel = new JLabel(rnbwYgr);
         JLabel youGartLabel = new JLabel(youGart);
 
-        JLabel triChcoLabelPrice = new JLabel("P100");
-        JLabel vitamaxLabelPrice = new JLabel("P100");
-        JLabel strwDuoLabelPrice = new JLabel("P100");
-        JLabel chcoDuoLabelPrice = new JLabel("P100");
-        JLabel chcoMchLabelPrice = new JLabel("P100");
-        JLabel mngoChcLabelPrice = new JLabel("P100");
-        JLabel brryCrnLabelPrice = new JLabel("P100");
-        JLabel rnbwYgrLabelPrice = new JLabel("P100");
-        JLabel youGartLabelPrice = new JLabel("P100");
+        JLabel triChcoLabelPrice = new JLabel("P150.0");
+        JLabel vitamaxLabelPrice = new JLabel("P150.0");
+        JLabel strwDuoLabelPrice = new JLabel("P150.0");
+        JLabel chcoDuoLabelPrice = new JLabel("P150.0");
+        JLabel chcoMchLabelPrice = new JLabel("P150.0");
+        JLabel mngoChcLabelPrice = new JLabel("P150.0");
+        JLabel brryCrnLabelPrice = new JLabel("P150.0");
+        JLabel rnbwYgrLabelPrice = new JLabel("P150.0");
+        JLabel youGartLabelPrice = new JLabel("P150.0");
 
         /**
          * Initialization of Special panel Items
@@ -491,18 +499,43 @@ public class VMInterface extends JPanel {
             }
         }
 
-        public void updateImageVis (int index, int productQty){
-            boolean bool = productQty > 0;
+        public void updateImageVis (int index, boolean bool){
             switch (index){
-                case 0 -> triChcoLabel.setVisible(bool);
-                case 1 -> vitamaxLabel.setVisible(bool);
-                case 2 -> strwDuoLabel.setVisible(bool);
-                case 3 -> chcoDuoLabel.setVisible(bool);
-                case 4 -> chcoMchLabel.setVisible(bool);
-                case 5 -> mngoChcLabel.setVisible(bool);
-                case 6 -> brryCrnLabel.setVisible(bool);
-                case 7 -> rnbwYgrLabel.setVisible(bool);
-                case 8 -> youGartLabel.setVisible(bool);
+                case 0 -> {
+                    if (bool) triChcoLabel.setIcon(scaleIMG("./VMResources/trichoco.png", 150, 150));
+                    else triChcoLabel.setIcon(scaleIMG("./VMResources/trichocoBNW.png", 150, 150));
+                }
+                case 1 -> {
+                    if (bool) vitamaxLabel.setIcon(scaleIMG("./VMResources/vitamax.png", 150, 150));
+                    else vitamaxLabel.setIcon(scaleIMG("./VMResources/vitamaxBNW.png", 150, 150));
+                }
+                case 2 -> {
+                    if (bool) strwDuoLabel.setIcon(scaleIMG("./VMResources/strwbDuo.png", 150, 150));
+                    else strwDuoLabel.setIcon(scaleIMG("./VMResources/strwbDuoBNW.png", 150, 150));
+                }
+                case 3 -> {
+                    if (bool) chcoDuoLabel.setIcon(scaleIMG("./VMResources/chcoDuo.png", 150, 150));
+                    else chcoDuoLabel.setIcon(scaleIMG("./VMResources/chcoDuoBNW.png", 150, 150));
+                }
+                case 4 -> {
+                    if (bool) chcoMchLabel.setIcon(scaleIMG("./VMResources/chocoMatcha.png", 150, 150));
+                    else chcoMchLabel.setIcon(scaleIMG("./VMResources/chocoMatchaBNW.png", 150, 150));
+                }
+                case 5 -> {
+                    if (bool) mngoChcLabel.setIcon(scaleIMG("./VMResources/mangoChoco.png", 150, 150));
+                    else mngoChcLabel.setIcon(scaleIMG("./VMResources/mangoChocoBNW.png", 150, 150));
+                }
+                case 6 -> {
+                    if (bool) brryCrnLabel.setIcon(scaleIMG("./VMResources/berrylicious.png", 150, 150));
+                    else brryCrnLabel.setIcon(scaleIMG("./VMResources/berryliciousBNW.png", 150, 150));
+                }
+                case 7 -> {
+                    if (bool) rnbwYgrLabel.setIcon(scaleIMG("./VMResources/rainbow.png", 150, 150));
+                    else rnbwYgrLabel.setIcon(scaleIMG("./VMResources/rainbowBNW.png", 150, 150));
+                }
+                case 8 -> {if (bool) youGartLabel.setIcon(scaleIMG("./VMResources/yougart.png",150,150));
+                else youGartLabel.setIcon(scaleIMG("./VMResources/yougartBNW.png",150,150));
+                }
             }
         }
     }
