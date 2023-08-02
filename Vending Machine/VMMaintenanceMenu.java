@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 import java.util.Set;
 
 
@@ -655,6 +656,7 @@ public class VMMaintenanceMenu extends JPanel{
         public TextPanel(String type) {
             setLayout(new BorderLayout());
 
+            vmdisplay.setEditable(false);
             vmdisplay.setLineWrap(true);
             vmdisplay.setFont(new Font("consolas", Font.BOLD, 16));
             vmdisplay.setBackground(new Color(98, 174, 239));
@@ -673,6 +675,25 @@ public class VMMaintenanceMenu extends JPanel{
 
                 add(moneyDisplay, BorderLayout.CENTER);
             }
+        }
+
+        public void updateVMdisplay(ArrayList<Slot> productsSold){
+            String transaction = "";
+            double profit = 0;
+
+            for (int i = 0; i < productsSold.size(); i++){
+                if (productsSold.get(i).getProductQuantity() > 0)
+                    transaction = transaction + productsSold.get(i).getBaseProductName() +
+                        " | P" + productsSold.get(i).getBaseProductPrice() + "\n";
+
+                profit += productsSold.get(i).getBaseProductPrice() * productsSold.get(i).
+                        getNumProductsSold();
+            }
+
+            transaction = transaction + "\n\nPROFIT: P" + profit;
+
+
+            vmdisplay.setText(transaction);
         }
 
         public void updateMoneyDisplay(double money){
@@ -702,6 +723,8 @@ public class VMMaintenanceMenu extends JPanel{
         private final JButton[] editPriceSlotButtons = new JButton[9];
         private JPanel editPricePanel = new JPanel();
         private CardLayout menu = new CardLayout();
+
+        private TextPanel transacHistory = new TextPanel("Big");
 
         /**
          * Initialization of button gui components.
@@ -899,12 +922,15 @@ public class VMMaintenanceMenu extends JPanel{
             editPricePanel.add(editPriceSlotButtons[8]);
             buttonPanel1.add("pricePanel",editPricePanel);
 
-            buttonPanel1.add("blank", blankPanel);
+            buttonPanel1.add("blank", transacHistory);
             menu.show(buttonPanel1, "blank");
             currMode = "blank";
             add(buttonPanel1,BorderLayout.CENTER);
         }
 
+        public void updateTransacHistory(ArrayList<Slot> productsSold){
+            this.transacHistory.updateVMdisplay(productsSold);
+        }
 
 
         public JButton getCollectBtn(){
