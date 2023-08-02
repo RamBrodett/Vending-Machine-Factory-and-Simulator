@@ -47,7 +47,7 @@ public class VendingMachine{
 
         for (int i = 0; i < products.length; i++){
 
-            if(i<3||i>5)productSlots.add(i,new Slot(products[i],100,90,15));
+            if(i<3||i>5)productSlots.add(i,new Slot(products[i],100,90,0));
             else productSlots.add(i,new Slot(products[i],45,40,15));
         }
     }
@@ -149,7 +149,7 @@ public class VendingMachine{
         int userInput;
         do {
             userInput = Integer.parseInt(JOptionPane.showInputDialog(null, "Current Quantity: " +
-                            productSlots.get(index).getProducts().size() + "\nAmount to Restock: ",
+                            productSlots.get(index).getProductQuantity() + "\nAmount to Restock: ",
                     "Restocking \"" + productSlots.get(index).getBaseProductName() + "\""
                     , JOptionPane.QUESTION_MESSAGE));
 
@@ -162,6 +162,79 @@ public class VendingMachine{
                 userInput < 0);
 
         return userInput;
+    }
+
+    public void restockInput(ArrayList<Integer> results) {
+        JPanel dropdownPanel = new JPanel();
+        JPanel amtPanel = new JPanel();
+        JPanel promptPanel = new JPanel();
+        promptPanel.setLayout(new BoxLayout(promptPanel, BoxLayout.Y_AXIS));
+
+        String[] unsellables = {
+                "Chocolate Sauce   | " + productSlots.get(9).getProductQuantity() + "x",
+                "Strawberry Sauce | " + productSlots.get(10).getProductQuantity() + "x",
+                "Caramel Sauce      | " + productSlots.get(11).getProductQuantity() + "x",
+                "Rainbow Sprinkle  | " + productSlots.get(12).getProductQuantity() + "x"};
+        JComboBox<String> itemDropdown = new JComboBox<>(unsellables);
+
+        JLabel itemLabel = new JLabel("Item: ");
+        JLabel amtLabel = new JLabel("Restock: ");
+        dropdownPanel.add(itemLabel);
+        dropdownPanel.add(itemDropdown);
+
+        JTextField amtRestock = new JTextField(5);
+        amtPanel.add(amtLabel);
+        amtPanel.add(amtRestock);
+
+        promptPanel.add(dropdownPanel);
+        promptPanel.add(amtPanel);
+
+        String selectedItem = "";
+        int qty = 0;
+        int itemIndex = 9;
+        int exit = 0;
+        do {
+            int choice = JOptionPane.showConfirmDialog(null, promptPanel, "Restocking unsellable items...",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (choice == JOptionPane.OK_OPTION){
+                selectedItem = (String) itemDropdown.getSelectedItem();
+                qty = Integer.parseInt(amtRestock.getText());
+
+                if (selectedItem.equals(unsellables[0])){
+                    itemIndex = 9;
+                }
+                if (selectedItem.equals(unsellables[1])){
+                    itemIndex = 10;
+                }
+                if (selectedItem.equals(unsellables[2])){
+                    itemIndex = 11;
+                }
+                if (selectedItem.equals(unsellables[3])){
+                    itemIndex = 12;
+                }
+
+                if (qty + productSlots.get(itemIndex).getProductQuantity() > 15 || qty < 0){
+                    if (qty + productSlots.get(itemIndex).getProductQuantity() > 15) {
+                        JOptionPane.showMessageDialog(null, "Items can only have a maximum stock of 15!");
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Please input a positive integer.");
+                    }
+                    qty = 0;
+                }
+                else {
+                    exit = 1;
+                }
+            }
+
+            else if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION)
+                exit = 1;
+
+        } while (exit != 1);
+
+        results.add(itemIndex);
+        results.add(qty);
     }
 
     /**

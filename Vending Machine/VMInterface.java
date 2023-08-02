@@ -277,6 +277,7 @@ public class VMInterface extends JPanel {
             strwPanel.add(createImagePanel(strwLabel, "Strawberry", 999),gbc);
             mngoPanel.add(createImagePanel(mngoLabel, "Mango", 999),gbc);
 
+
             vnllPanel.setOpaque(false);
             chcoPanel.setOpaque(false);
             mtchPanel.setOpaque(false);
@@ -341,15 +342,15 @@ public class VMInterface extends JPanel {
         public void updateImageVis (int index, int productQty){
             boolean bool = productQty > 0;
             switch (index){
-                case 0 -> vnllLabelPrice.setVisible(bool);
-                case 1 -> chcoLabelPrice.setVisible(bool);
-                case 2 -> mtchLabelPrice.setVisible(bool);
-                case 3 -> chcpLabelPrice.setVisible(bool);
-                case 4 -> crelLabelPrice.setVisible(bool);
-                case 5 -> mxftLabelPrice.setVisible(bool);
-                case 6 -> raspLabelPrice.setVisible(bool);
-                case 7 -> strwLabelPrice.setVisible(bool);
-                case 8 -> mngoLabelPrice.setVisible(bool);
+                case 0 -> {if (!bool) vnllLabel.setIcon(scaleIMG("./VMResources/vanillaBNW.png",150,150));}
+                case 1 -> {if (!bool) chcoLabel.setIcon(scaleIMG("./VMResources/chocoBNW.png",150,150));}
+                case 2 -> {if (!bool) mtchLabel.setIcon(scaleIMG("./VMResources/matchaBNW.png",150,150));}
+                case 3 -> {if (!bool) chcpLabel.setIcon(scaleIMG("./VMResources/chocochipBNW.png",150,150));}
+                case 4 -> {if (!bool) crelLabel.setIcon(scaleIMG("./VMResources/cerealBNW.png",150,150));}
+                case 5 -> {if (!bool) mxftLabel.setIcon(scaleIMG("./VMResources/mixedFruitBNW.png",150,150));}
+                case 6 -> {if (!bool) raspLabel.setIcon(scaleIMG("./VMResources/raspberryBNW.png",150,150));}
+                case 7 -> {if (!bool) strwLabel.setIcon(scaleIMG("./VMResources/strawberryBNW.png",150,150));}
+                case 8 -> {if (!bool) mngoLabel.setIcon(scaleIMG("./VMResources/mangoBNW.png",150,150));}
             }
         }
     }
@@ -490,7 +491,8 @@ public class VMInterface extends JPanel {
             }
         }
 
-        public void updateImageVis (int index, boolean bool){
+        public void updateImageVis (int index, int productQty){
+            boolean bool = productQty > 0;
             switch (index){
                 case 0 -> triChcoLabel.setVisible(bool);
                 case 1 -> vitamaxLabel.setVisible(bool);
@@ -504,6 +506,8 @@ public class VMInterface extends JPanel {
             }
         }
     }
+
+
 
     private void setupCaption(JLabel label){
         label.setOpaque(false);

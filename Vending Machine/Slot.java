@@ -134,6 +134,7 @@ public class Slot {
         return oldProductQuantity;
     }
 
+
     /**
      * Checks if the slot has been edited.
      * @return true if the slot has been edited, false otherwise
@@ -203,20 +204,13 @@ public class Slot {
 
     public boolean setProductQuantity(int productQuantity) {
         boolean success = false;
-        if (productQuantity < 0){
-            for(int i = 1; i > productQuantity;i++ ){
-                products.remove(baseProduct);
+        if (products.size() + productQuantity <= 15) { //setting max capacity of 15;
+            for (int i = 0; i < productQuantity; i++) {
+                products.add(baseProduct);
             }
+            success = true;
         }
 
-        else {
-            if (products.size() + productQuantity <= 15) { //setting max capacity of 15;
-                for (int i = products.size(); i < products.size() + productQuantity; i++) {
-                    products.add(i, baseProduct);
-                }
-                success = true;
-            }
-        }
         return  success;
     }
 }

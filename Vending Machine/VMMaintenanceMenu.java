@@ -387,15 +387,15 @@ public class VMMaintenanceMenu extends JPanel{
         public void updateImageVis (int index, int productQty){
             boolean bool = productQty > 0;
             switch (index){
-                case 0 -> vnllLabelPrice.setVisible(bool);
-                case 1 -> chcoLabelPrice.setVisible(bool);
-                case 2 -> mtchLabelPrice.setVisible(bool);
-                case 3 -> chcpLabelPrice.setVisible(bool);
-                case 4 -> crelLabelPrice.setVisible(bool);
-                case 5 -> mxftLabelPrice.setVisible(bool);
-                case 6 -> raspLabelPrice.setVisible(bool);
-                case 7 -> strwLabelPrice.setVisible(bool);
-                case 8 -> mngoLabelPrice.setVisible(bool);
+                case 0 -> vnllLabel.setIcon(scaleIMG("./VMResources/vanillaBNW.png",150,150));
+                case 1 -> chcoLabel.setIcon(scaleIMG("./VMResources/chocoBNW.png",150,150));
+                case 2 -> mtchLabel.setIcon(scaleIMG("./VMResources/matchaBNW.png",150,150));
+                case 3 -> chcpLabel.setIcon(scaleIMG("./VMResources/chocochip.BNWpng",150,150));
+                case 4 -> crelLabel.setIcon(scaleIMG("./VMResources/cerealBNW.png",150,150));
+                case 5 -> mxftLabel.setIcon(scaleIMG("./VMResources/mixedFruitBNW.png",150,150));
+                case 6 -> raspLabel.setIcon(scaleIMG("./VMResources/raspberryBNW.png",150,150));
+                case 7 -> strwLabel.setIcon(scaleIMG("./VMResources/strawberryBNW.png",150,150));
+                case 8 -> mngoLabel.setIcon(scaleIMG("./VMResources/mangoBNW.png",150,150));
             }
         }
     }
@@ -536,7 +536,8 @@ public class VMMaintenanceMenu extends JPanel{
             }
         }
 
-        public void updateImageVis (int index, boolean bool){
+        public void updateImageVis (int index, int productQty){
+            boolean bool = productQty > 0;
             switch (index){
                 case 0 -> triChcoLabel.setVisible(bool);
                 case 1 -> vitamaxLabel.setVisible(bool);

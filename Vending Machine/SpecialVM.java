@@ -59,7 +59,7 @@ public class SpecialVM extends VendingMachine {
                 }else
                     switch (index){
                         case 0 -> {
-                            if(customProductChecher(0)){
+                            if(customProductChecker(0)){
                                 String special = "Triple Chocolate";
                                 transaction(150,special);
                                 removeSpecialItem(0);
@@ -67,7 +67,7 @@ public class SpecialVM extends VendingMachine {
                             } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
                         }
                         case 1 -> {
-                            if(customProductChecher(1)){
+                            if(customProductChecker(1)){
                                 String special = "VitaMax";
                                 transaction(150,special);
                                 removeSpecialItem(1);
@@ -76,7 +76,7 @@ public class SpecialVM extends VendingMachine {
 
                         }
                         case 2 -> {
-                            if(customProductChecher(2)){
+                            if(customProductChecker(2)){
                                 String special = "Strawberry Duo";
                                 transaction(150,special);
                                 removeSpecialItem(2);
@@ -84,7 +84,7 @@ public class SpecialVM extends VendingMachine {
                             } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
                         }
                         case 3 -> {
-                            if(customProductChecher(3)){
+                            if(customProductChecker(3)){
                                 String special = "ChocoDuos";
                                 transaction(150,special);
                                 removeSpecialItem(3);
@@ -92,7 +92,7 @@ public class SpecialVM extends VendingMachine {
                             } else System.out.println("Sorry! Ingredients needed are out of stock.\n");
                         }
                         case 4 -> {
-                            if(customProductChecher(4)){
+                            if(customProductChecker(4)){
                                 String special = "ChocoMatcha Madness";
                                 transaction(150,special);
                                 removeSpecialItem(4);
@@ -101,7 +101,7 @@ public class SpecialVM extends VendingMachine {
 
                         }
                         case 5 -> {
-                            if(customProductChecher(5)){
+                            if(customProductChecker(5)){
                                 String special = "Mango Chocolate Glazed";
                                 transaction(150,special);
                                 removeSpecialItem(5);
@@ -110,7 +110,7 @@ public class SpecialVM extends VendingMachine {
 
                         }
                         case 6 -> {
-                            if(customProductChecher(6)){
+                            if(customProductChecker(6)){
                                 String special = "Berrylicious Crunchies";
                                 transaction(150,special);
                                 removeSpecialItem(6);
@@ -119,7 +119,7 @@ public class SpecialVM extends VendingMachine {
 
                         }
                         case 7 -> {
-                            if(customProductChecher(7)){
+                            if(customProductChecker(7)){
                                 String special = "Rainbow Yogurt";
                                 transaction(150,special);
                                 removeSpecialItem(7);
@@ -179,12 +179,12 @@ public class SpecialVM extends VendingMachine {
         }
     }
 
-/*
-" 0 Vanilla", " 1 Chocolate", " 2 Matcha", " 3 Choco Chips", " 4 Cereals",
-                "5 Mixed Fruit Bits", "6 Raspberry", "7 Starberry","8 Mango"
- "9 Chocolate Sauce", "10 Strawberry Sauce", "11 Caramel Sauce", "12 Rainbow Sprinkle"
- */
-    private boolean customProductChecher(int index){
+    /*
+    " 0 Vanilla", " 1 Chocolate", " 2 Matcha", " 3 Choco Chips", " 4 Cereals",
+                    "5 Mixed Fruit Bits", "6 Raspberry", "7 Starberry","8 Mango"
+     "9 Chocolate Sauce", "10 Strawberry Sauce", "11 Caramel Sauce", "12 Rainbow Sprinkle"
+     */
+    private boolean customProductChecker(int index){
         if((index == 0) && ((productSlots.get(1).getProductQuantity() > 0) &&
                 (productSlots.get(9).getProductQuantity()>0)&&
                 (productSlots.get(3).getProductQuantity()>0))){
@@ -233,7 +233,7 @@ public class SpecialVM extends VendingMachine {
         return false;
     }
 
-   private boolean transaction(float price,String name){
+    private boolean transaction(float price,String name){
         if(price <= getTotalInsertedMoney()){
             float change = (float) (getTotalInsertedMoney()-price);
             addToDenomination(denomination,insertedMoney);
@@ -319,6 +319,6 @@ public class SpecialVM extends VendingMachine {
         }
 
         return false;
-   }
+    }
 
 }

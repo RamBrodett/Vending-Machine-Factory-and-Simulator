@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 public class VMFController {
 
@@ -226,8 +227,15 @@ public class VMFController {
 
     private void initializeVMmaintenance(){
 
-        this.frame.maintenanceMenu.getToggleSpecial().addActionListener(e -> {      //
-            this.frame.maintenanceMenu.updateItemPanel();
+        this.frame.maintenanceMenu.getToggleSpecial().addActionListener(e -> {      //TOGGLE ITEM PANEL
+            if (this.frame.maintenanceMenu.getModeCurrMode().equals("restock")) {   //FOR SPECIAL RESTOCK
+                ArrayList<Integer> results = new ArrayList<>(); // index 0 - index || index 1 - qty
+                currMachine.restockInput(results);
+                currMachine.productSlots.get(results.get(0)).setProductQuantity(results.get(1));
+            }
+
+            else
+                this.frame.maintenanceMenu.updateItemPanel();
         });
 
         this.frame.maintenanceMenu.getRestockBtn().addActionListener(e -> {         //RESTOCK ITEMS
@@ -294,34 +302,70 @@ public class VMFController {
             this.frame.maintenanceMenu.updateButtonPanel(4);
         });
 
-        ActionListener a = e -> {
+        ActionListener a = e -> {                                                                //RESTOCK RVM
             Object src = e.getSource();
             if (src == this.frame.maintenanceMenu.getRestockVMButtons(0)) {                //vanilla
                 currMachine.productSlots.get(0).setProductQuantity(currMachine.restockInput(0));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(0,
+                        currMachine.productSlots.get(0).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(0,
+                        currMachine.productSlots.get(0).getProductQuantity());
 
             } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(1)) {         //choco
                 currMachine.productSlots.get(1).setProductQuantity(currMachine.restockInput(1));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(1,
+                        currMachine.productSlots.get(1).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(1,
+                        currMachine.productSlots.get(1).getProductQuantity());
 
             } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(2)) {         //matcha
                 currMachine.productSlots.get(2).setProductQuantity(currMachine.restockInput(2));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(2,
+                        currMachine.productSlots.get(2).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(2,
+                        currMachine.productSlots.get(2).getProductQuantity());
 
             } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(3)) {       //choco chips
                 currMachine.productSlots.get(3).setProductQuantity(currMachine.restockInput(3));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(3,
+                        currMachine.productSlots.get(3).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(3,
+                        currMachine.productSlots.get(3).getProductQuantity());
 
             } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(4)) {       //cereals
                 currMachine.productSlots.get(4).setProductQuantity(currMachine.restockInput(4));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(4,
+                        currMachine.productSlots.get(4).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(4,
+                        currMachine.productSlots.get(4).getProductQuantity());
 
             } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(5)) {       //mixed fruit bits
                 currMachine.productSlots.get(5).setProductQuantity(currMachine.restockInput(5));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(5,
+                        currMachine.productSlots.get(5).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(5,
+                        currMachine.productSlots.get(5).getProductQuantity());
 
             } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(6)) {       //raspberry
                 currMachine.productSlots.get(6).setProductQuantity(currMachine.restockInput(6));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(6,
+                        currMachine.productSlots.get(6).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(6,
+                        currMachine.productSlots.get(6).getProductQuantity());
 
             } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(7)) {       //strawberry
                 currMachine.productSlots.get(7).setProductQuantity(currMachine.restockInput(7));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(7,
+                        currMachine.productSlots.get(7).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(7,
+                        currMachine.productSlots.get(7).getProductQuantity());
 
             } else if (src == this.frame.maintenanceMenu.getRestockVMButtons(8)) {       //mango
                 currMachine.productSlots.get(8).setProductQuantity(currMachine.restockInput(8));
+                this.frame.vmInterface.getRegItemPanel().updateImageVis(8,
+                        currMachine.productSlots.get(8).getProductQuantity());
+                this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(8,
+                        currMachine.productSlots.get(8).getProductQuantity());
 
             }
             this.frame.maintenanceMenu.getMoneyDisplay().
@@ -347,6 +391,11 @@ public class VMFController {
                     else if(this.currMachine.dispenseProduct(0,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(0,
+                            currMachine.productSlots.get(0).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(0,
+                            currMachine.productSlots.get(0).getProductQuantity());
                 }
                 else if(src == this.frame.vmInterface.getVMButtons(1)){         //vitamax
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
@@ -359,6 +408,10 @@ public class VMFController {
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
                     }
 
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(1,
+                            currMachine.productSlots.get(1).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(1,
+                            currMachine.productSlots.get(1).getProductQuantity());
                 }
                 else if(src == this.frame.vmInterface.getVMButtons(2)){         //strawb duo
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
@@ -369,6 +422,11 @@ public class VMFController {
                     else if(this.currMachine.dispenseProduct(2,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(2,
+                            currMachine.productSlots.get(2).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(2,
+                            currMachine.productSlots.get(2).getProductQuantity());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(3)) {       //choco duo
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
@@ -379,6 +437,11 @@ public class VMFController {
                     else if(this.currMachine.dispenseProduct(3,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(3,
+                            currMachine.productSlots.get(3).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(3,
+                            currMachine.productSlots.get(3).getProductQuantity());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(4)) {       //chocomatcha
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
@@ -389,6 +452,12 @@ public class VMFController {
                     else if(this.currMachine.dispenseProduct(4,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(4,
+                            currMachine.productSlots.get(4).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(4,
+                            currMachine.productSlots.get(4).getProductQuantity());
+
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(5)) {       //mango choco
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
@@ -399,6 +468,11 @@ public class VMFController {
                     else if(this.currMachine.dispenseProduct(5,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(5,
+                            currMachine.productSlots.get(5).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(5,
+                            currMachine.productSlots.get(5).getProductQuantity());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(6)) {       //berrylicious
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
@@ -409,6 +483,11 @@ public class VMFController {
                     else if(this.currMachine.dispenseProduct(6,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(6,
+                            currMachine.productSlots.get(6).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(6,
+                            currMachine.productSlots.get(6).getProductQuantity());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(7)) {       //rainbow
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
@@ -419,6 +498,11 @@ public class VMFController {
                     else  if(this.currMachine.dispenseProduct(7,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(7,
+                            currMachine.productSlots.get(7).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(7,
+                            currMachine.productSlots.get(7).getProductQuantity());
                 }
                 else if (src == this.frame.vmInterface.getVMButtons(8)) {
                     if (this.frame.vmInterface.getCurrMode().equals("Special")){
@@ -428,9 +512,20 @@ public class VMFController {
                     else if(this.currMachine.dispenseProduct(8,1))
                         this.frame.vmInterface.getMoneyDisplay().
                                 updateMoneyDisplay(currMachine.getTotalInsertedMoney());
+
+                    this.frame.vmInterface.getRegItemPanel().updateImageVis(8,
+                            currMachine.productSlots.get(8).getProductQuantity());
+                    this.frame.maintenanceMenu.getRegItemPanel().updateImageVis(8,
+                            currMachine.productSlots.get(8).getProductQuantity());
                 }
                 this.frame.maintenanceMenu.getMoneyDisplay().
                         updateMoneyDisplay(currMachine.getTotalMoney());
+
+//                this.frame.vmInterface.getSpecialItemPanel().updateImageVis(8,
+//                        currMachine.productSlots.get(8).getProductQuantity());
+//                this.frame.maintenanceMenu.getSpecialItemPanel().updateImageVis(8,
+//                        currMachine.productSlots.get(8).getProductQuantity());
+
             }
         };
         for(int i = 0; i< 9; i++){
